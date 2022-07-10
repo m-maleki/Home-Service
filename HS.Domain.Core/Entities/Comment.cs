@@ -8,5 +8,6 @@ namespace HS.Domain.Core.Entities
         public string? Body { get; set; }
         public int Score { get; set; }
         public int ExpertId { get; set; }
+        public Expert? Expert { get; set; }
     }
 }

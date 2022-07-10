@@ -13,8 +13,9 @@ namespace HS.Domain.Core.Entities
         public string? Address { get; set; }
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
-        List<Specialty>? Specialties { get; set; }
-        List<Order>? Orders { get; set; }
+        public List<Specialty>? Specialties { get; set; }
+        public List<Suggestion>? Suggestion { get; set; }
+        public List<Comment>? Comments { get; set; }
         public bool IsDeleted { get; set; } = false;
 
     }

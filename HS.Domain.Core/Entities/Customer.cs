@@ -12,6 +12,7 @@
         public DateTime Birthday { get; set; }
         public bool IsDeleted { get; set; } = false;
         public DateTime RegisterDate { get; set; } = DateTime.Now;
+        public List<Order>? Orders { get; set; }
 
     }
 }

@@ -14,8 +14,8 @@ namespace HS.Domain.Core.Entities
         public double Price { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public HomeServiceCategory? HomeServiceCategory { get; set; }
-        public Specialty? Specialty { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public Order? Orders { get; set; }
 
     }
 }

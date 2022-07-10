@@ -11,25 +11,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Infrastructure", "02.Inf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.Endpoint", "03.Endpoint", "{F2F9ECEF-1672-43B7-876B-1504A65C83E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{B9E99968-D136-4646-A347-A113F2A3C34F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Framework.csproj", "{B9E99968-D136-4646-A347-A113F2A3C34F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4B288D2B-F889-4B26-951B-AE0753564AB1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{CE29AA6A-53C4-41B6-83DE-C3B6A097F17F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Domain.Core", "HS.Domain.Core\HS.Domain.Core.csproj", "{75425209-3608-4DF5-8CDC-5C54C148AED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.Core", "HS.Domain.Core\HS.Domain.Core.csproj", "{75425209-3608-4DF5-8CDC-5C54C148AED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Domain.Services", "HS.Domain.Services\HS.Domain.Services.csproj", "{41690AF1-37D0-4719-8724-CEE3E03C1766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.Services", "HS.Domain.Services\HS.Domain.Services.csproj", "{41690AF1-37D0-4719-8724-CEE3E03C1766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Domain.AppServices", "HS.Domain.AppServices\HS.Domain.AppServices.csproj", "{2D1CBA3A-0861-4E67-AE72-1D764C847878}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.AppServices", "HS.Domain.AppServices\HS.Domain.AppServices.csproj", "{2D1CBA3A-0861-4E67-AE72-1D764C847878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Infrastructures.Database.Repos.Ef", "HS.Infrastructures.Database.Repos.Ef\HS.Infrastructures.Database.Repos.Ef.csproj", "{A65BB68B-CFEE-42FC-8160-550D406D575D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Infrastructures.Database.Repos.Ef", "HS.Infrastructures.Database.Repos.Ef\HS.Infrastructures.Database.Repos.Ef.csproj", "{A65BB68B-CFEE-42FC-8160-550D406D575D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Infrastructures.Database.SqlServer", "HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj", "{A3242EBA-52A3-4461-8256-604F70106F61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Infrastructures.Database.SqlServer", "HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj", "{A3242EBA-52A3-4461-8256-604F70106F61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.EndPoints.Api", "HS.EndPoints.Api\HS.EndPoints.Api.csproj", "{BBC75A4F-B997-418B-8BEC-AED556FFCBB7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.EndPoints.RazorPages.ShopUI", "HS.EndPoints.RazorPages.ShopUI\HS.EndPoints.RazorPages.ShopUI.csproj", "{9ADD4D08-EE17-425F-A9FF-3BE29B1D27E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.EndPoints.RazorPages.ShopUI", "HS.EndPoints.RazorPages.ShopUI\HS.EndPoints.RazorPages.ShopUI.csproj", "{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,14 +59,10 @@ Global
 		{A3242EBA-52A3-4461-8256-604F70106F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3242EBA-52A3-4461-8256-604F70106F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3242EBA-52A3-4461-8256-604F70106F61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBC75A4F-B997-418B-8BEC-AED556FFCBB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBC75A4F-B997-418B-8BEC-AED556FFCBB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBC75A4F-B997-418B-8BEC-AED556FFCBB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBC75A4F-B997-418B-8BEC-AED556FFCBB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9ADD4D08-EE17-425F-A9FF-3BE29B1D27E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9ADD4D08-EE17-425F-A9FF-3BE29B1D27E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9ADD4D08-EE17-425F-A9FF-3BE29B1D27E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9ADD4D08-EE17-425F-A9FF-3BE29B1D27E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,8 +76,7 @@ Global
 		{2D1CBA3A-0861-4E67-AE72-1D764C847878} = {CE29AA6A-53C4-41B6-83DE-C3B6A097F17F}
 		{A65BB68B-CFEE-42FC-8160-550D406D575D} = {9DC875A0-7002-4304-A0D6-446C62D21FB1}
 		{A3242EBA-52A3-4461-8256-604F70106F61} = {9DC875A0-7002-4304-A0D6-446C62D21FB1}
-		{BBC75A4F-B997-418B-8BEC-AED556FFCBB7} = {F2F9ECEF-1672-43B7-876B-1504A65C83E8}
-		{9ADD4D08-EE17-425F-A9FF-3BE29B1D27E9} = {F2F9ECEF-1672-43B7-876B-1504A65C83E8}
+		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D} = {F2F9ECEF-1672-43B7-876B-1504A65C83E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64535C2D-064D-4635-B967-1B4BCF9D0DAF}
