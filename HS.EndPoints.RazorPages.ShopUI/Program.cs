@@ -1,16 +1,38 @@
 
 using HS.Infrastructures.Database.SqlServer.Common;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account";
+});
+
 var connectionString = builder.Configuration.GetConnectionString("HSConnection") ?? throw new InvalidOperationException("Connection string 'HSConnection' not found.");
 
 builder.Services.AddDbContext<HSDbContext>(options =>
-    options.UseSqlServer(connectionString)); ;
+    options.UseSqlServer(connectionString)); 
 
+builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+    options=>
+    {
+        options.SignIn.RequireConfirmedEmail = false;
+        options.SignIn.RequireConfirmedPhoneNumber = false;
+
+        options.Password.RequireDigit=false;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+
+    }
+    )
+    .AddEntityFrameworkStores<HSDbContext>();
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+     .AddRazorRuntimeCompilation();
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddMvc();
 
@@ -28,7 +50,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

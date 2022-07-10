@@ -1,11 +1,18 @@
 ﻿using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HS.Infrastructures.Database.SqlServer.Common
 {
-    public class HSDbContext :DbContext
+    public class AppUser : IdentityUser<int>
     {
+
+    }
+
+    public class HSDbContext :IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>
+    {
+
         public HSDbContext(DbContextOptions<HSDbContext> options) : base(options)
         {
          

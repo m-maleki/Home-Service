@@ -1,0 +1,37 @@
+﻿@page
+@model HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages.ForgetModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "بازیابی رمز عبور";
+}
+
+<div class="col-md-12">
+    <p class="text-center m-t-30 m-b-40">
+        <i class="icon-lock-open border img-circle font-xxxlg p-20"></i>
+    </p>
+    <h2 class="text-center">بازیابی رمز عبور</h2>
+    <hr>
+
+    <form id="forget-form" method="POST" action="#">
+        <div class="form-group">
+            <label class="sr-only control-label" for="email">آدرس ایمیل</label>
+            <div class="input-group round">
+                <span class="input-group-addon">
+                    <i class="icon-envelope"></i>
+                </span>
+                <input type="email" class="form-control round ltr text-left" id="email" name="email" placeholder="مثال:info@site.com" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info btn-round btn-block m-t-20" name="signup" value="Sign up">
+                <i class="icon-envelope-letter"></i>
+                ارسال ایمیل بازیابی
+            </button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+<script src="~/assets/js/pages/forget.js"></script>
+}
+
+<!-- END PAGE JAVASCRIPT -->

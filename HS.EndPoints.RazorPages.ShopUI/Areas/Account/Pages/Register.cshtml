@@ -1,0 +1,72 @@
+﻿@page
+@model HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages.RegisterModel
+@{
+        Layout = "_Layout";
+        ViewBag.Title = "ثبت نام در سایت";
+}
+
+<div class="col-md-12">
+    <p class="text-center m-t-30 m-b-40">
+        <i class="icon-user-following border img-circle font-xxxlg p-20"></i>
+    </p>
+    <h2 class="text-center m-b-20">ایجاد حساب کاربری</h2>
+    <hr>
+
+    <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+        <div asp-validation-summary="All" class="text-danger"> </div>
+
+        <div class="form-group">
+            <label for="email" class="sr-only">آدرس ایمیل</label>
+            <div class="input-group round">
+                <span class="input-group-addon">
+                    <i class="icon-envelope"></i>
+                </span>
+                <input id="email" class="form-control  ltr text-left" type="email" name="email" required>
+            </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
+        <div class="form-group">
+            <label for="password" class="sr-only">کلمه عبور</label>
+            <div class="input-group round">
+                <span class="input-group-addon">
+                    <i class="icon-key"></i>
+                </span>
+                <input type="password" class="form-control round ltr text-left" id="password" name="password" required>
+                <span asp-validation="password"></span>
+
+            </div><!-- /.input-group-->
+        </div><!-- /.form-group -->
+        <div class="form-group">
+            <label for="password" class="sr-only">تکرار کلمه عبور</label>
+
+            <div class="input-group round">
+                <span class="input-group-addon">
+                    <i class="icon-key"></i>
+                </span>
+                <input type="password" class="form-control round  ltr text-left" id="ConfirmPassword" name="ConfirmPassword" required>
+                <span asp-validation="ConfirmPassword"></span>
+
+            </div><!-- /.input-group-->
+        </div><!-- /.form-group -->
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-info btn-round btn-block" name="signup" value="Sign up">
+                <i class="icon-check"></i>
+                ثبت نام
+            </button>
+        </div><!-- /.form-group -->
+    </form>
+
+    <hr class="m-b-30">
+    <a asp-page="/Forget" class="btn btn-default btn-round btn-block m-b-10">
+        <i class="icon-refresh font-lg"></i>
+        بازیابی رمز  عبور
+    </a>
+    <a asp-page="/Login" class="btn btn-default btn-round btn-block">
+        <i class="icon-user-follow font-lg"></i>
+        ثبت نام کرده اید؟ وارد شوید!
+    </a>
+</div>
+@section Scripts{
+   <script src="~/assets/js/pages/register.js"></script>
+}
+
