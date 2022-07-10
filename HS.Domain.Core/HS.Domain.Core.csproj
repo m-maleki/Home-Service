@@ -7,24 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BaseData\Dtos\" />
-    <Folder Include="BaseData\Contracts\" />
-    <Folder Include="BaseData\Enums\" />
-    <Folder Include="Customer\Contracts\AppService\" />
-    <Folder Include="Customer\Contracts\Repositories\" />
-    <Folder Include="Customer\Contracts\Services\" />
-    <Folder Include="Customer\Dtos\" />
-    <Folder Include="Customer\Enums\" />
-    <Folder Include="Expert\Contracts\AppService\" />
-    <Folder Include="Expert\Contracts\Repositories\" />
-    <Folder Include="Expert\Contracts\Services\" />
-    <Folder Include="Expert\Dtos\" />
-    <Folder Include="Expert\Enums\" />
-    <Folder Include="HomeService\Contracts\AppService\" />
-    <Folder Include="HomeService\Contracts\Repositories\" />
-    <Folder Include="HomeService\Contracts\Services\" />
-    <Folder Include="HomeService\Dtos\" />
-    <Folder Include="HomeService\Enums\" />
+    <Folder Include="Contracts\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>
