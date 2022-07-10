@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj" />
+  </ItemGroup>
+
 </Project>

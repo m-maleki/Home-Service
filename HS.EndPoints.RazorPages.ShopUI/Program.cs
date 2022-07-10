@@ -11,7 +11,8 @@ builder.Services.AddDbContext<HSDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddMvc();
 
 var app = builder.Build();
 

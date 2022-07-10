@@ -21,13 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.Core", "HS.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.Services", "HS.Domain.Services\HS.Domain.Services.csproj", "{41690AF1-37D0-4719-8724-CEE3E03C1766}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.AppServices", "HS.Domain.AppServices\HS.Domain.AppServices.csproj", "{2D1CBA3A-0861-4E67-AE72-1D764C847878}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Infrastructures.Database.Repos.Ef", "HS.Infrastructures.Database.Repos.Ef\HS.Infrastructures.Database.Repos.Ef.csproj", "{A65BB68B-CFEE-42FC-8160-550D406D575D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.ApplicationServices", "HS.Domain.AppServices\HS.Domain.ApplicationServices.csproj", "{2D1CBA3A-0861-4E67-AE72-1D764C847878}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Infrastructures.Database.SqlServer", "HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj", "{A3242EBA-52A3-4461-8256-604F70106F61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.EndPoints.RazorPages.ShopUI", "HS.EndPoints.RazorPages.ShopUI\HS.EndPoints.RazorPages.ShopUI.csproj", "{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.EndPoints.RazorPages.ShopUI", "HS.EndPoints.RazorPages.ShopUI\HS.EndPoints.RazorPages.ShopUI.csproj", "{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Infrastructures.Database.Repos.Ef", "HS.Infrastructures.Database.Repos.Ef\HS.Infrastructures.Database.Repos.Ef.csproj", "{BA3528A7-CA9D-48F1-9062-AA83F9DFE8A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,6 @@ Global
 		{2D1CBA3A-0861-4E67-AE72-1D764C847878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D1CBA3A-0861-4E67-AE72-1D764C847878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D1CBA3A-0861-4E67-AE72-1D764C847878}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A65BB68B-CFEE-42FC-8160-550D406D575D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A65BB68B-CFEE-42FC-8160-550D406D575D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A65BB68B-CFEE-42FC-8160-550D406D575D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A65BB68B-CFEE-42FC-8160-550D406D575D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3242EBA-52A3-4461-8256-604F70106F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3242EBA-52A3-4461-8256-604F70106F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3242EBA-52A3-4461-8256-604F70106F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +59,10 @@ Global
 		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA3528A7-CA9D-48F1-9062-AA83F9DFE8A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA3528A7-CA9D-48F1-9062-AA83F9DFE8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA3528A7-CA9D-48F1-9062-AA83F9DFE8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA3528A7-CA9D-48F1-9062-AA83F9DFE8A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,9 +74,9 @@ Global
 		{75425209-3608-4DF5-8CDC-5C54C148AED8} = {4B288D2B-F889-4B26-951B-AE0753564AB1}
 		{41690AF1-37D0-4719-8724-CEE3E03C1766} = {CE29AA6A-53C4-41B6-83DE-C3B6A097F17F}
 		{2D1CBA3A-0861-4E67-AE72-1D764C847878} = {CE29AA6A-53C4-41B6-83DE-C3B6A097F17F}
-		{A65BB68B-CFEE-42FC-8160-550D406D575D} = {9DC875A0-7002-4304-A0D6-446C62D21FB1}
 		{A3242EBA-52A3-4461-8256-604F70106F61} = {9DC875A0-7002-4304-A0D6-446C62D21FB1}
 		{D91B2D6F-5E58-4007-A7F2-D8C4B937994D} = {F2F9ECEF-1672-43B7-876B-1504A65C83E8}
+		{BA3528A7-CA9D-48F1-9062-AA83F9DFE8A3} = {9DC875A0-7002-4304-A0D6-446C62D21FB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64535C2D-064D-4635-B967-1B4BCF9D0DAF}
