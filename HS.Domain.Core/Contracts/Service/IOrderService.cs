@@ -12,7 +12,8 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Order> Get(int Id);
         Task<List<Order>> Get();
         Task Create(Order entity);
-        Task<bool> Exists(int Id);
         Task Update(Order entity);
+        Task EnsureExists(int Id);
+        Task EnsureDoesNotExist(int Id);
     }
 }

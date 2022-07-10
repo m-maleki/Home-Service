@@ -12,8 +12,10 @@ namespace HS.Domain.Core.Contracts.Service
         Task<HomeService> Get(int Id);
         Task<List<HomeService>> Get();
         Task Create(HomeService entity);
-        Task<bool> Exists(int Id);
-        Task<bool> Exists(string Name);
+        Task EnsureExists(int Id);
+        Task EnsureExists(string Name);
+        Task EnsureDoesNotExist(int Id);
+        Task EnsureDoesNotExist(string Name);
         Task Update(HomeService entity);
     }
 }

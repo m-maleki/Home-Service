@@ -13,9 +13,11 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Customer> Get(int Id);
         Task<List<Customer>> Get();
         Task Create(Customer entity);
-        Task<bool> Exists(int Id);
-        Task<bool> Exists(string Firstname , string LastName);
-        Task Exists(string PhoneNumber);
         Task Update(Customer entity);
+        Task EnsureExists(int Id);
+        Task EnsureExists(string PhoneNumber);
+        Task EnsureDoesNotExist(int Id);
+        Task EnsureDoesNotExist(string PhoneNumber);
+
     }
 }

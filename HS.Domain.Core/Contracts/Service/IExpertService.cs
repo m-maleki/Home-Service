@@ -13,9 +13,10 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Expert> Get(int Id);
         Task<List<Expert>> Get();
         Task Create(Expert entity);
-        Task<bool> Exists(int Id);
-        Task<bool> Exists(string Firstname, string LastName);
-        Task Exists(string PhoneNumber);
         Task Update(Expert entity);
+        Task EnsureExists(int Id);
+        Task EnsureExists(string PhoneNumber);
+        Task EnsureDoesNotExist(int Id);
+        Task EnsureDoesNotExist(string PhoneNumber);
     }
 }

@@ -7,8 +7,8 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Image> Get(int Id);
         Task<List<Image>> Get();
         Task Create(Image entity);
-        Task<bool> Exists(int Id);
-        Task<bool> Exists(string Name);
+        Task EnsureExists(int Id);
+        Task EnsureDoesNotExist(int Id);
         Task Update(Image entity);
     }
 }

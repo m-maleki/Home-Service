@@ -12,8 +12,10 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Specialty> Get(int Id);
         Task<List<Specialty>> Get();
         Task Create(Specialty entity);
-        Task<bool> Exists(int Id);
-        Task<bool> Exists(string Name);
         Task Update(Specialty entity);
+        Task EnsureExists(int Id);
+        Task EnsureExists(string Name);
+        Task EnsureDoesNotExist(int Id);
+        Task EnsureDoesNotExist(string Name);
     }
 }

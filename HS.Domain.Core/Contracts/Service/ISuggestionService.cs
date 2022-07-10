@@ -12,7 +12,9 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Suggestion> Get(int Id);
         Task<List<Suggestion>> Get();
         Task Create(Suggestion entity);
-        Task<bool> Exists(int Id);
         Task Update(Suggestion entity);
+        Task EnsureExists(int Id);
+        Task EnsureDoesNotExist(int Id);
+
     }
 }

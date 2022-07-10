@@ -13,7 +13,8 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Comment> Get(int Id);
         Task<List<Comment>> Get();
         Task Create(Comment entity);
-        Task<bool> Exists(int Id);
+        Task EnsureExists(int Id);
+        Task EnsureDoesNotExist(int Id);
         Task Update(Comment entity);
     }
 }
