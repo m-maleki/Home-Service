@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework\Framework.csproj" />
+    <ProjectReference Include="..\HS.Domain.Core\HS.Domain.Core.csproj" />
+    <ProjectReference Include="..\HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

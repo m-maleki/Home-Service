@@ -1,5 +1,4 @@
-﻿using Framework.Infrastructure;
-using HS.Domain.Core.Contracts.Repository;
+﻿using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Entities;
 using HS.Infrastructures.Database.SqlServer.Common;
 

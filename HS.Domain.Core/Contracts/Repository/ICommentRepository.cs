@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HS.Domain.Core.Entities;
 
 namespace HS.Domain.Core.Contracts.Repository
 {
-    public interface ICommentRepository
+    public interface ICommentRepository : IRepository<Comment>
     {
     }
 }
