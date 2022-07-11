@@ -1,17 +1,22 @@
 
+using HS.Domain.Core.Contracts.Repository;
+using HS.Infrastructures.Database.Repos.Ef.AutoMapper;
+using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account";
 });
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMapping)));
 
 var connectionString = builder.Configuration.GetConnectionString("HSConnection") ?? throw new InvalidOperationException("Connection string 'HSConnection' not found.");
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 builder.Services.AddDbContext<HSDbContext>(options =>
     options.UseSqlServer(connectionString)); 
@@ -33,7 +38,6 @@ builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
 builder.Services.AddRazorPages()
      .AddRazorRuntimeCompilation();
 
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddMvc();
 
 var app = builder.Build();

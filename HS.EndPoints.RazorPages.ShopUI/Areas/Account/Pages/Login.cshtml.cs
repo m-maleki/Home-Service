@@ -1,3 +1,4 @@
+using HS.Domain.Core.Contracts.Repository;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,17 +13,21 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
     {
         private readonly UserManager<IdentityUser<int>> _userManager;
         private readonly SignInManager<IdentityUser<int>> _signInManager;
+        private readonly ICommentRepository _commentRepository;
 
         public LoginModel(UserManager<IdentityUser<int>> userManager,
-            SignInManager<IdentityUser<int>> signInManager)
+            SignInManager<IdentityUser<int>> signInManager,
+            ICommentRepository commentRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _commentRepository = commentRepository;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-           // await _signInManager.SignOutAsync();
+            var records =await _commentRepository.Get();
+            var t = await _commentRepository.Get(2);
         }
 
         public async Task OnPostLogout()
