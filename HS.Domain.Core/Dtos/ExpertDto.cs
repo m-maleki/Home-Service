@@ -1,7 +1,13 @@
-﻿using System;
-namespace HS.Domain.Core.Entities
+﻿using HS.Domain.Core.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HS.Domain.Core.Dtos
 {
-    public class Expert
+    public class ExpertDto
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
@@ -13,11 +19,8 @@ namespace HS.Domain.Core.Entities
         public string? Address { get; set; }
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
-        public DateTime RegisterDate { get; set; } = DateTime.Now;
         public List<Specialty>? Specialties { get; set; }
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
-        public bool IsDeleted { get; set; } = false;
-
     }
 }

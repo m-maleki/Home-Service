@@ -1,8 +1,14 @@
-﻿using HS.Domain.Core.Entities;
+﻿using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 
 namespace HS.Domain.Core.Contracts.Repository
 {
-    public interface ICustomerRepository : IRepository<Customer>
+    public interface ICustomerRepository 
     {
+        Task<CustomerDto> GetBy(int id);
+        Task<CustomerDto> GetBy(string mobileNumber);
+        Task<List<CustomerDto>> GetAll();
+        Task Create(CustomerDto entity);
+        Task Update(CustomerDto entity);
     }
 }

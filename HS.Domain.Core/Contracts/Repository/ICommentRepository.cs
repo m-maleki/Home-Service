@@ -6,8 +6,8 @@ namespace HS.Domain.Core.Contracts.Repository
 {
     public interface ICommentRepository 
     {
-        Task<CommentDto> Get(int Id);
-        Task<List<CommentDto>> Get();
+        Task<CommentDto> GetBy(int id);
+        Task<List<CommentDto>> GetAll();
         Task Create(CommentDto entity);
         Task Update(CommentDto entity);
     }

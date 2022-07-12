@@ -10,7 +10,7 @@ namespace Framework.Utilities
 {
     public static class PersianDateExtensionMethods
     {
-        private static CultureInfo _Culture;
+        private static CultureInfo? _Culture;
         public static CultureInfo GetPersianCulture()
         {
             if (_Culture == null)
@@ -35,11 +35,11 @@ namespace Framework.Utilities
                 formatInfo.FirstDayOfWeek = DayOfWeek.Saturday;
                 System.Globalization.Calendar cal = new PersianCalendar();
 
-                FieldInfo fieldInfo = _Culture.GetType().GetField("calendar", BindingFlags.NonPublic | BindingFlags.Instance);
+                FieldInfo? fieldInfo = _Culture.GetType().GetField("calendar", BindingFlags.NonPublic | BindingFlags.Instance);
                 if (fieldInfo != null)
                     fieldInfo.SetValue(_Culture, cal);
 
-                FieldInfo info = formatInfo.GetType().GetField("calendar", BindingFlags.NonPublic | BindingFlags.Instance);
+                FieldInfo? info = formatInfo.GetType().GetField("calendar", BindingFlags.NonPublic | BindingFlags.Instance);
                 if (info != null)
                     info.SetValue(formatInfo, cal);
 
