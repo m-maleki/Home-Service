@@ -64,7 +64,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdentityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,6 +87,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<int>(type: "int", nullable: false),
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -106,6 +108,19 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HomeServiceCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Specialties",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specialties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -237,25 +252,6 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Specialties",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExpertId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Specialties", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Specialties_Experts_ExpertId",
-                        column: x => x.ExpertId,
-                        principalTable: "Experts",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "HomeServices",
                 columns: table => new
                 {
@@ -277,6 +273,30 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         column: x => x.HomeServiceCategoryId,
                         principalTable: "HomeServiceCategories",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExpertSpecialty",
+                columns: table => new
+                {
+                    ExpertsId = table.Column<int>(type: "int", nullable: false),
+                    SpecialtiesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExpertSpecialty", x => new { x.ExpertsId, x.SpecialtiesId });
+                    table.ForeignKey(
+                        name: "FK_ExpertSpecialty_Experts_ExpertsId",
+                        column: x => x.ExpertsId,
+                        principalTable: "Experts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExpertSpecialty_Specialties_SpecialtiesId",
+                        column: x => x.SpecialtiesId,
+                        principalTable: "Specialties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -404,6 +424,11 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 column: "ExpertId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExpertSpecialty_SpecialtiesId",
+                table: "ExpertSpecialty",
+                column: "SpecialtiesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_HomeServices_HomeServiceCategoryId",
                 table: "HomeServices",
                 column: "HomeServiceCategoryId");
@@ -423,11 +448,6 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 table: "Orders",
                 column: "HomeServiceId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Specialties_ExpertId",
-                table: "Specialties",
-                column: "ExpertId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Suggestions_ExpertId",
@@ -461,10 +481,10 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Images");
+                name: "ExpertSpecialty");
 
             migrationBuilder.DropTable(
-                name: "Specialties");
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Suggestions");
@@ -474,6 +494,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Specialties");
 
             migrationBuilder.DropTable(
                 name: "Experts");

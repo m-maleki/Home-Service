@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HS.Infrastructures.Database.SqlServer.Migrations
 {
     [DbContext(typeof(HSDbContext))]
-    [Migration("20220710130820_init")]
+    [Migration("20220713102725_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,21 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ExpertSpecialty", b =>
+                {
+                    b.Property<int>("ExpertsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpecialtiesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExpertsId", "SpecialtiesId");
+
+                    b.HasIndex("SpecialtiesId");
+
+                    b.ToTable("ExpertSpecialty");
+                });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Comment", b =>
                 {
@@ -48,7 +63,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     b.HasIndex("ExpertId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Customer", b =>
@@ -67,6 +82,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdentityId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -88,7 +106,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Expert", b =>
@@ -126,12 +144,15 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("ProfileImgUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Experts");
+                    b.ToTable("Experts", (string)null);
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.HomeService", b =>
@@ -167,7 +188,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     b.HasIndex("HomeServiceCategoryId");
 
-                    b.ToTable("HomeServices");
+                    b.ToTable("HomeServices", (string)null);
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.HomeServiceCategory", b =>
@@ -246,7 +267,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.HasIndex("HomeServiceId")
                         .IsUnique();
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Specialty", b =>
@@ -257,15 +278,10 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ExpertId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExpertId");
 
                     b.ToTable("Specialties");
                 });
@@ -506,6 +522,21 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ExpertSpecialty", b =>
+                {
+                    b.HasOne("HS.Domain.Core.Entities.Expert", null)
+                        .WithMany()
+                        .HasForeignKey("ExpertsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HS.Domain.Core.Entities.Specialty", null)
+                        .WithMany()
+                        .HasForeignKey("SpecialtiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HS.Domain.Core.Entities.Comment", b =>
                 {
                     b.HasOne("HS.Domain.Core.Entities.Expert", "Expert")
@@ -528,16 +559,18 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Image", b =>
                 {
-                    b.HasOne("HS.Domain.Core.Entities.Order", null)
+                    b.HasOne("HS.Domain.Core.Entities.Order", "Order")
                         .WithMany("Images")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Order", b =>
                 {
-                    b.HasOne("HS.Domain.Core.Entities.Customer", null)
+                    b.HasOne("HS.Domain.Core.Entities.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -549,14 +582,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("HomeService");
-                });
+                    b.Navigation("Customer");
 
-            modelBuilder.Entity("HS.Domain.Core.Entities.Specialty", b =>
-                {
-                    b.HasOne("HS.Domain.Core.Entities.Expert", null)
-                        .WithMany("Specialties")
-                        .HasForeignKey("ExpertId");
+                    b.Navigation("HomeService");
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Suggestion", b =>
@@ -637,8 +665,6 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
             modelBuilder.Entity("HS.Domain.Core.Entities.Expert", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Specialties");
 
                     b.Navigation("Suggestion");
                 });
