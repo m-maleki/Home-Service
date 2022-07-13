@@ -1,9 +1,9 @@
 using HS.Domain.Core.Contracts.Repository;
 using HS.EndPoints.RazorPages.ShopUI.Model;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
 {
@@ -26,8 +26,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
 
         public async Task OnGet()
         {
-            var records =await _commentRepository.Get();
-            var t = await _commentRepository.Get(2);
+
         }
 
         public async Task OnPostLogout()
@@ -36,17 +35,22 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
             // redirecto to homepage
         }
 
+        [ValidateRecaptcha]
+        [HttpPost]
         public async Task OnPostLogin(LoginViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RemomberMe, false);
                 if (result.Succeeded)
                 {
-                    LocalRedirect("~/");
+                       Redirect("~/Admin/");
                 }
-                ModelState.AddModelError(string.Empty, "خطا در ورود به سایت");
+                ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است *");
             }
+            OnGet();
+
         }
     }
 }

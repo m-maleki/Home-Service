@@ -1,4 +1,5 @@
-﻿namespace HS.Domain.Core.Entities
+﻿
+namespace HS.Domain.Core.Entities
 {
     public class Customer
     {
@@ -13,6 +14,6 @@
         public bool IsDeleted { get; set; } = false;
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public List<Order>? Orders { get; set; }
-
+        public int IdentityId { get; set; }
     }
 }

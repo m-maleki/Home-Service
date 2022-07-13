@@ -6,6 +6,7 @@ using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,8 @@ builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
     {
         options.SignIn.RequireConfirmedEmail = false;
         options.SignIn.RequireConfirmedPhoneNumber = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireUppercase = false;
 
         options.Password.RequireDigit=false;
         options.Password.RequiredLength = 8;
@@ -37,8 +40,15 @@ builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
 // Add services to the container.
 builder.Services.AddRazorPages()
      .AddRazorRuntimeCompilation();
+builder.Services.AddMvc()
+    .AddSessionStateTempDataProvider();
+builder.Services.AddSession();
 
-builder.Services.AddMvc();
+builder.Services.AddRecaptcha(new RecaptchaOptions
+{
+    SiteKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+    SecretKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+});
 
 var app = builder.Build();
 
@@ -49,6 +59,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

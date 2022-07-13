@@ -1,0 +1,110 @@
+﻿@page
+@model HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages.UserManagementModel
+@{
+    ViewData["Title"] = "Home Service - User Management";
+}
+<a class="btn btn-success curve " style="float:right" data-bs-toggle="modal" data-bs-target="#createBrand">تعریف کاربر جدید</a>
+<br />
+<br />
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <thead>
+        <tr>
+            <th>شناسه کاربری</th>
+            <th>نام کاربری</th>
+            <th>آدرس ایمیل</th>
+            <th>نقش کاربر</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model.users != null)
+         @foreach (var item in Model.users)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Role</td>
+
+                    <td>
+                        <form method="get">
+                            <div class="portlet-body">
+                                <input type="hidden" name="id" id="id" value="@item.Id">
+                                <button type="submit" asp-page="/Access/Create" class="btn btn-primary curve">ویرایش</button>
+                                <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve">حذف</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+
+
+<div class="modal fade" id="createBrand" tabindex="-1" role="dialog" aria-labelledby="createBrandLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">ثبت کاربر جدید</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+                    <div asp-validation-summary="All" class="text-danger"> </div>
+
+                    <label for="Role">نوع کاربر</label>
+                    <select name="Role" required
+                            class="form-control"
+                            asp-items="Model.roles">
+                    </select>
+
+                    <div class="form-group">
+                        <label for="email" class="sr-only">آدرس ایمیل</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-envelope"></i>
+                            </span>
+                            <input id="email" class="form-control  ltr text-left" type="email" name="email" required>
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label for="password" class="sr-only">کلمه عبور</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-key"></i>
+                            </span>
+                            <input type="password" class="form-control round ltr text-left" id="password" name="password" required>
+                            <span asp-validation="password"></span>
+
+                        </div><!-- /.input-group-->
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <label for="password" class="sr-only">تکرار کلمه عبور</label>
+
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-key"></i>
+                            </span>
+                            <input type="password" class="form-control round  ltr text-left" id="ConfirmPassword" name="ConfirmPassword" required>
+                            <span asp-validation="ConfirmPassword"></span>
+
+                        </div><!-- /.input-group-->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-round btn-block" name="signup" value="Sign up">
+                            <i class="icon-check"></i>
+                            ثبت نام
+                        </button>
+                    </div><!-- /.form-group -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

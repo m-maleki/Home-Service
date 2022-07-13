@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HS.EndPoints.RazorPages.ShopUI.Pages
+namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 {
-
     [Authorize]
     public class IndexModel : PageModel
     {
         public void OnGet()
         {
+
         }
     }
 }

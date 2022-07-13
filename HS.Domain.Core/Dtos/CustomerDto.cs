@@ -13,5 +13,6 @@ namespace HS.Domain.Core.Dtos
         public string? Address { get; set; }
         public DateTime Birthday { get; set; }
         public List<Order>? Orders { get; set; }
+        public int IdentityId { get; set; }
     }
 }

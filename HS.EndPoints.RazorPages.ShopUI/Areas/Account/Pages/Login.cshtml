@@ -1,4 +1,5 @@
 ﻿@page
+
 @model HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages.LoginModel
 @{
     Layout = "_Layout";
@@ -11,8 +12,8 @@
     </p>
 
     <h2 class="text-center m-b-20">ورود به سایت</h2>
-    <hr>
     <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Login" method="post">
+        <div style="text-align: center;" asp-validation-summary="All" class="text-danger" center"> </div>
         <div class="form-group">
             <label for="email" class="sr-only">آدرس ایمیل</label>
             <div class="input-group round">
@@ -34,11 +35,17 @@
             </div><!-- /.input-group -->
         </div><!-- /.form-group -->
         <p>
-            <button type="submit" class="btn btn-info btn-round btn-block">
-                <i class="icon-paper-plane font-lg"></i>
-                ورود به سایت
-            </button>
+
         </p>
+        <br>
+        <center>
+                <recaptcha/>
+        </center>
+
+        <button type="submit" class="btn btn-info btn-round btn-block">
+            <i class="icon-paper-plane font-lg"></i>
+            ورود به سایت
+        </button>
     </form>
     <hr class="m-b-30">
     <a asp-page="/Forget" class="btn btn-default btn-round btn-block m-b-10">
@@ -52,7 +59,10 @@
 </div>
 
 @section Scripts{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <recaptcha-script jquery-validation="false" />
     <script src="~/assets/js/pages/login.js"></script>
 }
-
 
