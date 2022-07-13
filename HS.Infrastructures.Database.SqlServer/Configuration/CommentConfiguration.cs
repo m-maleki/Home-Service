@@ -13,8 +13,7 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.ToTable("Comments");
             builder.HasOne(x => x.Expert)
                 .WithMany(x => x.Comments)
-                .HasForeignKey(x => x.ExpertId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(x => x.ExpertId);
         }
     }
 }

@@ -20,6 +20,6 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
         [DataType(DataType.Password)]
         [Display(Name = "رمز عبور")]
         public string ConfirmPassword { get; set; }
-        public string Role { get; set; }
+       // public string Role { get; set; }
     }
 }

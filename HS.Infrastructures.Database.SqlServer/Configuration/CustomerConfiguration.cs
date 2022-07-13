@@ -17,8 +17,9 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.ToTable("Customers");
             builder.HasMany(x => x.Orders)
                 .WithOne(x => x.Customer)
-                .HasForeignKey(x => x.CustomerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(x => x.CustomerId);
+
+            builder.HasOne(x => x.ApplicationUser).WithOne(x => x.Customer);
         }
     }
 }

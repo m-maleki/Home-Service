@@ -11,8 +11,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Configuration
             builder.HasKey(x => x.Id);
             builder.ToTable("HomeServices");
             builder.HasOne(x => x.Orders)
-                .WithOne(x => x.HomeService)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithOne(x => x.HomeService);
         }
     }
 }

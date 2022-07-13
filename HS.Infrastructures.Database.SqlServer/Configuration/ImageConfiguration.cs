@@ -17,8 +17,7 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.HasKey(x => x.Id);
             builder.HasOne(x => x.Order)
                 .WithMany(x => x.Images)
-                .HasForeignKey(x => x.OrderId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(x => x.OrderId);
         }
     }
 }

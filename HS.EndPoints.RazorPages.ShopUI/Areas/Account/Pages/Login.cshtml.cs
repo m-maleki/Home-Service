@@ -1,4 +1,5 @@
 using HS.Domain.Core.Contracts.Repository;
+using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,12 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
     [Area("Account")]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<IdentityUser<int>> _userManager;
-        private readonly SignInManager<IdentityUser<int>> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ICommentRepository _commentRepository;
 
-        public LoginModel(UserManager<IdentityUser<int>> userManager,
-            SignInManager<IdentityUser<int>> signInManager,
+        public LoginModel(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             ICommentRepository commentRepository)
         {
             _userManager = userManager;

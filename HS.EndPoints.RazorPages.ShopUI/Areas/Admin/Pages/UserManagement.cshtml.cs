@@ -59,7 +59,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                   var test =await _userManager.AddToRoleAsync(user, model.Role);
+                  // var test =await _userManager.AddToRoleAsync(user, model.Role);
                     OnGet();
                 }
                 else

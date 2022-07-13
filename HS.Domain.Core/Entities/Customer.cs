@@ -1,4 +1,5 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity;
+
 namespace HS.Domain.Core.Entities
 {
     public class Customer
@@ -14,6 +15,7 @@ namespace HS.Domain.Core.Entities
         public bool IsDeleted { get; set; } = false;
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public List<Order>? Orders { get; set; }
-        public int IdentityId { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
+        public int ApplicationUserId { get; set; }
     }
 }

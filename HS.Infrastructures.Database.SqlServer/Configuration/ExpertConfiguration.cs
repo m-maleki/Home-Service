@@ -13,13 +13,14 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
 
             builder.HasMany(x => x.Comments)
                    .WithOne(x => x.Expert)
-                   .HasForeignKey(x => x.ExpertId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .HasForeignKey(x => x.ExpertId);
 
             builder.HasMany(x => x.Suggestion)
                 .WithOne(x => x.Expert)
-                .HasForeignKey(x => x.ExpertId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(x => x.ExpertId);
+
+            builder.HasOne(x => x.ApplicationUser).WithOne(x => x.Expert);
+
         }
     }
 }

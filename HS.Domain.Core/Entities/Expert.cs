@@ -18,6 +18,8 @@ namespace HS.Domain.Core.Entities
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public ApplicationUser? ApplicationUser { get; set; }
+        public int ApplicationUserId { get; set; }
 
     }
 }

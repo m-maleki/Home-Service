@@ -16,8 +16,7 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.ToTable("Specialties");
             builder.HasKey(x => x.Id);
 
-            builder.HasMany(x => x.Experts)
-                .WithMany(x => x.Specialties);
+            builder.HasMany(x => x.Experts).WithMany(x => x.Specialties);
         }
     }
 }

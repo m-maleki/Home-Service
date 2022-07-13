@@ -1,5 +1,6 @@
 
 using HS.Domain.Core.Contracts.Repository;
+using HS.Domain.Core.Entities;
 using HS.Infrastructures.Database.Repos.Ef.AutoMapper;
 using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using HS.Infrastructures.Database.SqlServer.Common;
@@ -22,7 +23,7 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddDbContext<HSDbContext>(options =>
     options.UseSqlServer(connectionString)); 
 
-builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(
     options=>
     {
         options.SignIn.RequireConfirmedEmail = false;
@@ -37,18 +38,14 @@ builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
     }
     )
     .AddEntityFrameworkStores<HSDbContext>();
-// Add services to the container.
+
 builder.Services.AddRazorPages()
      .AddRazorRuntimeCompilation();
 builder.Services.AddMvc()
     .AddSessionStateTempDataProvider();
 builder.Services.AddSession();
 
-builder.Services.AddRecaptcha(new RecaptchaOptions
-{
-    SiteKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
-    SecretKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
-});
+
 
 var app = builder.Build();
 

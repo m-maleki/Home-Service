@@ -17,8 +17,7 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.HasKey(x => x.Id);
 
             builder.HasMany(x => x.HomeServices)
-                .WithOne(x => x.HomeServiceCategory)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithOne(x => x.HomeServiceCategory);
         }
     }
 }

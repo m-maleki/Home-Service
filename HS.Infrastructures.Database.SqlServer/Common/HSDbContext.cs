@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HS.Infrastructures.Database.SqlServer.Common
 {
-    //public class AppUser : IdentityUser<int>
-    //{
+    public class AppUser : IdentityUser<int>
+    {
 
-    //}
+    }
 
-    public class HSDbContext :IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>
+    public class HSDbContext :IdentityDbContext<ApplicationUser, IdentityRole<int>,int>
     {
 
         public HSDbContext(DbContextOptions<HSDbContext> options) : base(options)
@@ -22,7 +22,6 @@ namespace HS.Infrastructures.Database.SqlServer.Common
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new HomeServiceCategoryConfiguration());
             builder.ApplyConfiguration(new HomeServiceConfiguration());
@@ -34,6 +33,7 @@ namespace HS.Infrastructures.Database.SqlServer.Common
             builder.ApplyConfiguration(new OrderConfiguration());
             builder.ApplyConfiguration(new ImageConfiguration());
             builder.ApplyConfiguration(new OrderConfiguration());
+            base.OnModelCreating(builder);
 
         }
 

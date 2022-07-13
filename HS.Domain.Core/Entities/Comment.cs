@@ -1,4 +1,7 @@
 ﻿
+
+
+
 namespace HS.Domain.Core.Entities
 {
     public class Comment
@@ -9,5 +12,6 @@ namespace HS.Domain.Core.Entities
         public int Score { get; set; }
         public int ExpertId { get; set; }
         public Expert? Expert { get; set; }
+
     }
 }

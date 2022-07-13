@@ -15,11 +15,6 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
         {
             builder.ToTable("Suggestions");
             builder.HasKey(x => x.Id);
-
-            builder.HasOne(x => x.Order)
-                .WithMany(x => x.Suggestions)
-                .HasForeignKey(x => x.OrderId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace HS.Domain.Core.Entities
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public Customer? Customer { get; set; }
         public int HomeServiceId { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public OrderStatusEnum Status { get; set; }

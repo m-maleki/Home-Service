@@ -1,3 +1,4 @@
+using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,12 +10,12 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
     [Area("Account")]
     public class RegisterModel : PageModel
     {
-        private readonly UserManager<IdentityUser<int>> _userManager;
-        private readonly SignInManager<IdentityUser<int>> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole<int>> _roleManager;
 
-        public RegisterModel(UserManager<IdentityUser<int>> userManager,
-            SignInManager<IdentityUser<int>> signInManager,
+        public RegisterModel(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole<int>> roleManager)
         {
             _userManager = userManager;
@@ -33,10 +34,15 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser<int>
+                Expert expert = new Expert {
+                    Address = model.Password
+                };
+                var user = new ApplicationUser
                 {
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    Expert = expert
+
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

@@ -1,7 +1,9 @@
-﻿namespace HS.Domain.Core.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HS.Domain.Core.Entities
 {
     public class Suggestion
-    {
+    { 
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int ExpertId { get; set; }
