@@ -1,11 +1,11 @@
 ﻿using HS.Domain.Core.Entities;
-using System;
 
 namespace HS.Domain.Core.Dtos
 {
     public class ExpertDto
     {
-        public int Id { get; set; }
+        #region Properties
+        public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Biography { get; set; }
@@ -15,8 +15,13 @@ namespace HS.Domain.Core.Dtos
         public string? Address { get; set; }
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
+        public Guid IdentityId { get; set; }
+
+        #endregion Properties
+        #region Navigation properties
         public List<Specialty>? Specialties { get; set; }
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
+        #endregion Navigation properties
     }
 }

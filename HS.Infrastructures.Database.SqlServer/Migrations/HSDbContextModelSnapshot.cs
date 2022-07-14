@@ -24,8 +24,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             modelBuilder.Entity("ExpertSpecialty", b =>
                 {
-                    b.Property<int>("ExpertsId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ExpertsId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SpecialtiesId")
                         .HasColumnType("int");
@@ -39,11 +39,10 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             modelBuilder.Entity("HS.Domain.Core.Entities.ApplicationUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newsequentialid()");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -116,8 +115,11 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ExpertId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
@@ -134,17 +136,15 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
@@ -180,17 +180,15 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Expert", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Biography")
                         .HasColumnType("nvarchar(max)");
@@ -299,11 +297,17 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("Alt")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
@@ -323,11 +327,14 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("HomeServiceId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
@@ -353,12 +360,39 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SpecialtyCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpecialtyCategoryId");
+
+                    b.ToTable("Specialties", (string)null);
+                });
+
+            modelBuilder.Entity("HS.Domain.Core.Entities.SpecialtyCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specialties", (string)null);
+                    b.ToTable("SpecialtyCategories", (string)null);
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Suggestion", b =>
@@ -372,10 +406,13 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<DateTime>("DurationOfWork")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ExpertId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ExpertId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsAccept")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
@@ -396,13 +433,12 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("Suggestions", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newsequentialid()");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -426,7 +462,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -440,8 +476,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -450,7 +486,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -464,8 +500,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -474,7 +510,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -485,8 +521,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -495,13 +531,13 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -510,10 +546,10 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -616,6 +652,17 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Navigation("HomeService");
                 });
 
+            modelBuilder.Entity("HS.Domain.Core.Entities.Specialty", b =>
+                {
+                    b.HasOne("HS.Domain.Core.Entities.SpecialtyCategory", "SpecialtyCategory")
+                        .WithMany("Specialties")
+                        .HasForeignKey("SpecialtyCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SpecialtyCategory");
+                });
+
             modelBuilder.Entity("HS.Domain.Core.Entities.Suggestion", b =>
                 {
                     b.HasOne("HS.Domain.Core.Entities.Expert", "Expert")
@@ -635,16 +682,16 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("HS.Domain.Core.Entities.ApplicationUser", null)
                         .WithMany()
@@ -653,7 +700,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("HS.Domain.Core.Entities.ApplicationUser", null)
                         .WithMany()
@@ -662,9 +709,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -677,7 +724,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("HS.Domain.Core.Entities.ApplicationUser", null)
                         .WithMany()
@@ -720,6 +767,11 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("Suggestions");
+                });
+
+            modelBuilder.Entity("HS.Domain.Core.Entities.SpecialtyCategory", b =>
+                {
+                    b.Navigation("Specialties");
                 });
 #pragma warning restore 612, 618
         }

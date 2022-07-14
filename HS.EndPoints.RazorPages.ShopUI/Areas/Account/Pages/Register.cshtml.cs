@@ -12,11 +12,11 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole<int>> _roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
         public RegisterModel(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole<int>> roleManager)
+            RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -30,7 +30,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
             //var assignRole = await _userManager.AddToRoleAsync(new IdentityUser<int>("Admin"), "AdminRole");
         }
 
-        public async Task OnPostCreate(RegisterViewModel model)
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -49,16 +49,18 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    LocalRedirect("~/");
+                    return LocalRedirect("~/Admin/");
                 }
                 else
                 {
                     foreach (var item in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, item.Description);
+                        return default;
                     }
                 }
             }
+            return default;
         }
     }
 }

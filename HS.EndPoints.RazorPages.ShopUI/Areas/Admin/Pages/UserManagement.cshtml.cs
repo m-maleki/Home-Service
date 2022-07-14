@@ -1,3 +1,4 @@
+using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +11,15 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 {
     public class UserManagementModel : PageModel
     {
-        private readonly SignInManager<IdentityUser<int>> _signInManager;
-        private readonly UserManager<IdentityUser<int>> _userManager;
-        private readonly RoleManager<IdentityRole<int>> _roleManager;
+        //private readonly SignInManager<IdentityUser<Guid>> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
         public List<UserViewModel> users;
         public List<SelectListItem> roles;
-        public UserManagementModel(UserManager<IdentityUser<int>> userManager, SignInManager<IdentityUser<int>> signInManager, RoleManager<IdentityRole<int>> roleManager)
+        public UserManagementModel(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _roleManager = roleManager;
         }
 
@@ -39,7 +39,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             }).ToListAsync();
         }
 
-        public async Task OnPostDelete(int id)
+        public async Task OnPostDelete(Guid id)
         {
             var user = await _userManager.Users.Where(x => x.Id == id).SingleAsync();
            await _userManager.DeleteAsync(user);
@@ -50,7 +50,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser<int>
+                var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email

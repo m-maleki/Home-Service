@@ -21,7 +21,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public async Task<List<ExpertDto>> GetAll()
           => _mapper.Map<List<ExpertDto>>(await _context.Experts.ToListAsync());
 
-        public async Task<ExpertDto> GetBy(int id)
+        public async Task<ExpertDto> GetBy(Guid id)
           => await _mapper.ProjectTo<ExpertDto>(_context.Experts).Where(x => x.Id == id).SingleOrDefaultAsync();
 
         public async Task<ExpertDto> GetBy(string mobileNumber)

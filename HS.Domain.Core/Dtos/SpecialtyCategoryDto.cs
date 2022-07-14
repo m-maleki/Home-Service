@@ -2,18 +2,14 @@
 
 namespace HS.Domain.Core.Dtos
 {
-    public class HomeServiceDto
+    public class SpecialtyCategoryDto
     {
         #region Properties
         public int Id { get; set; }
         public string? Name { get; set; }
-        public string? Description { get; set; }
-        public string? ImgUrl { get; set; }
-        public double Price { get; set; }
         #endregion Properties
         #region Navigation properties
-        public HomeServiceCategory? HomeServiceCategory { get; set; }
-        public Order? Orders { get; set; }
+        public List<Specialty>? Specialties { get; set; }
         #endregion Navigation properties
     }
 }

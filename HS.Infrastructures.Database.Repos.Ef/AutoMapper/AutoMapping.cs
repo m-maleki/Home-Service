@@ -14,6 +14,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
         public AutoMapping()
         {
          CreateMap<HomeServiceCategory, HomeServiceCategoryDto>();
+         CreateMap<SpecialtyCategory, SpecialtyCategoryDto>();
          CreateMap<HomeService, HomeServiceDto>();
          CreateMap<Suggestion, SuggestionDto>();
          CreateMap<Specialty, SpecialtyDto>();

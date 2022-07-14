@@ -5,7 +5,7 @@ namespace HS.Domain.Core.Contracts.Repository
 {
     public interface ICustomerRepository 
     {
-        Task<CustomerDto> GetBy(int id);
+        Task<CustomerDto> GetBy(Guid id);
         Task<CustomerDto> GetBy(string mobileNumber);
         Task<List<CustomerDto>> GetAll();
         Task Create(CustomerDto entity);

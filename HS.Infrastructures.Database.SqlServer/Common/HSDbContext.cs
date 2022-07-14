@@ -12,7 +12,7 @@ namespace HS.Infrastructures.Database.SqlServer.Common
 
     }
 
-    public class HSDbContext :IdentityDbContext<ApplicationUser, IdentityRole<int>,int>
+    public class HSDbContext :IdentityDbContext<ApplicationUser, IdentityRole<Guid>,Guid>
     {
 
         public HSDbContext(DbContextOptions<HSDbContext> options) : base(options)
@@ -22,7 +22,16 @@ namespace HS.Infrastructures.Database.SqlServer.Common
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<ApplicationUser>(b =>
+            {
+                b.Property(u => u.Id).HasDefaultValueSql("newsequentialid()");
+            });
 
+            builder.Entity<IdentityRole<Guid>>(b =>
+            {
+                b.Property(u => u.Id).HasDefaultValueSql("newsequentialid()");
+            });
+            
             builder.ApplyConfiguration(new HomeServiceCategoryConfiguration());
             builder.ApplyConfiguration(new HomeServiceConfiguration());
             builder.ApplyConfiguration(new SuggestionConfiguration());
@@ -33,6 +42,7 @@ namespace HS.Infrastructures.Database.SqlServer.Common
             builder.ApplyConfiguration(new OrderConfiguration());
             builder.ApplyConfiguration(new ImageConfiguration());
             builder.ApplyConfiguration(new OrderConfiguration());
+            builder.ApplyConfiguration(new SpecialtyCategoryConfiguration());
             base.OnModelCreating(builder);
 
         }
@@ -41,6 +51,8 @@ namespace HS.Infrastructures.Database.SqlServer.Common
         public DbSet<HomeService> HomeServices { get; set; } = null!;
         public DbSet<Suggestion> Suggestions { get; set; } = null!;
         public DbSet<Specialty> Specialties { get; set; } = null!;
+        public DbSet<SpecialtyCategory> SpecialtyCategories { get; set; } = null!;
+    
         public DbSet<Customer> Customers { get; set; } = null!;
         public DbSet<Comment> Comments { get; set; } = null!;
         public  DbSet<Expert> Experts { get; set; } = null!;

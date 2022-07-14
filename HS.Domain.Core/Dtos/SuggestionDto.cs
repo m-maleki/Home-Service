@@ -4,12 +4,16 @@ namespace HS.Domain.Core.Dtos
 {
     public class SuggestionDto
     {
+        #region Properties
         public int Id { get; set; }
         public int OrderId { get; set; }
-        public int ExpertId { get; set; }
+        public Guid ExpertId { get; set; }
         public double SuggestedPrice { get; set; }
         public DateTime DurationOfWork { get; set; }
+        #endregion Properties
+        #region Navigation properties
         public Order? Order { get; set; }
         public Expert? Expert { get; set; }
+        #endregion Navigation properties
     }
 }

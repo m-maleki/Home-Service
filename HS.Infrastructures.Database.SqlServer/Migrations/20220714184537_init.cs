@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HS.Infrastructures.Database.SqlServer.Migrations
 {
-    public partial class init23665576 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -28,8 +27,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -66,16 +64,17 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Specialties",
+                name: "SpecialtyCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Specialties", x => x.Id);
+                    table.PrimaryKey("PK_SpecialtyCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +83,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -105,7 +104,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -127,7 +126,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,8 +143,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -168,7 +167,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -188,18 +187,17 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfileImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationUserId = table.Column<int>(type: "int", nullable: false)
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,8 +214,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 name: "Experts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -226,10 +223,10 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<int>(type: "int", nullable: false),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    ApplicationUserId = table.Column<int>(type: "int", nullable: false)
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,8 +250,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HomeServiceCategoryId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    HomeServiceCategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -267,6 +264,27 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Specialties",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpecialtyCategoryId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specialties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Specialties_SpecialtyCategories_SpecialtyCategoryId",
+                        column: x => x.SpecialtyCategoryId,
+                        principalTable: "SpecialtyCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -275,7 +293,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<int>(type: "int", nullable: false),
-                    ExpertId = table.Column<int>(type: "int", nullable: false)
+                    ExpertId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -289,10 +308,39 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    HomeServiceId = table.Column<int>(type: "int", nullable: false),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_HomeServices_HomeServiceId",
+                        column: x => x.HomeServiceId,
+                        principalTable: "HomeServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ExpertSpecialty",
                 columns: table => new
                 {
-                    ExpertsId = table.Column<int>(type: "int", nullable: false),
+                    ExpertsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SpecialtiesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -313,34 +361,6 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    HomeServiceId = table.Column<int>(type: "int", nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_HomeServices_HomeServiceId",
-                        column: x => x.HomeServiceId,
-                        principalTable: "HomeServices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
@@ -349,7 +369,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Alt = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -369,11 +391,12 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
-                    ExpertId = table.Column<int>(type: "int", nullable: false),
+                    ExpertId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SuggestedPrice = table.Column<double>(type: "float", nullable: false),
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DurationOfWork = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsAccept = table.Column<bool>(type: "bit", nullable: false)
+                    IsAccept = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -475,6 +498,11 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Specialties_SpecialtyCategoryId",
+                table: "Specialties",
+                column: "SpecialtyCategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Suggestions_ExpertId",
                 table: "Suggestions",
                 column: "ExpertId");
@@ -525,6 +553,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "SpecialtyCategories");
 
             migrationBuilder.DropTable(
                 name: "Customers");

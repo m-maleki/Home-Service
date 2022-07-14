@@ -5,9 +5,7 @@ using HS.Infrastructures.Database.Repos.Ef.AutoMapper;
 using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PaulMiami.AspNetCore.Mvc.Recaptcha;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +21,7 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddDbContext<HSDbContext>(options =>
     options.UseSqlServer(connectionString)); 
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
     options=>
     {
         options.SignIn.RequireConfirmedEmail = false;

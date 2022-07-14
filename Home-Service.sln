@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Domain.ApplicationServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Infrastructures.Database.SqlServer", "HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj", "{A3242EBA-52A3-4461-8256-604F70106F61}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.EndPoints.RazorPages.ShopUI", "HS.EndPoints.RazorPages.ShopUI\HS.EndPoints.RazorPages.ShopUI.csproj", "{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.EndPoints.RazorPages.UI", "HS.EndPoints.RazorPages.ShopUI\HS.EndPoints.RazorPages.UI.csproj", "{D91B2D6F-5E58-4007-A7F2-D8C4B937994D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HS.Infrastructures.Database.Repos.Ef", "HS.Infrastructures.Database.Repos.Ef\HS.Infrastructures.Database.Repos.Ef.csproj", "{BA3528A7-CA9D-48F1-9062-AA83F9DFE8A3}"
 EndProject
