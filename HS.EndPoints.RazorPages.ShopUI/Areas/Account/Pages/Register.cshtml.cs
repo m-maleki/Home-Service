@@ -34,15 +34,19 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
         {
             if (ModelState.IsValid)
             {
-                Expert expert = new Expert {
-                    Address = model.Password
+                //Expert expert = new Expert {
+                //};
+
+                Customer customer = new Customer
+                {
                 };
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    Expert = expert
-
+                  //  Expert = expert,
+                    Customer = customer
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

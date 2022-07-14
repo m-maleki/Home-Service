@@ -19,7 +19,7 @@ namespace HS.Domain.Core.Dtos
 
         #endregion Properties
         #region Navigation properties
-        public List<Specialty>? Specialties { get; set; }
+        public List<HomeService>? HomeServices { get; set; }
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
         #endregion Navigation properties

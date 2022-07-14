@@ -14,6 +14,7 @@
         #region Navigation properties
         public HomeServiceCategory? HomeServiceCategory { get; set; }
         public Order? Orders { get; set; }
+        public List<Expert>? Experts { get; set; }
         #endregion Navigation properties
     }
 }

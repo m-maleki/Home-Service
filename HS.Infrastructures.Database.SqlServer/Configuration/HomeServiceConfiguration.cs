@@ -12,6 +12,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Configuration
             builder.ToTable("HomeServices");
             builder.HasOne(x => x.Orders)
                 .WithOne(x => x.HomeService);
+            builder.HasMany(x => x.Experts).WithMany(x => x.HomeServices);
         }
     }
 }

@@ -18,7 +18,7 @@
         #endregion Properties
         #region Navigation properties
         public DateTime Birthday { get; set; }
-        public List<Specialty>? Specialties { get; set; }
+        public List<HomeService>? HomeServices { get; set; }
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }

@@ -4,6 +4,7 @@ using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HS.Infrastructures.Database.SqlServer.Migrations
 {
     [DbContext(typeof(HSDbContext))]
-    partial class HSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220714191514_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("ExpertHomeService", b =>
-                {
-                    b.Property<Guid>("ExpertsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("HomeServicesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ExpertsId", "HomeServicesId");
-
-                    b.HasIndex("HomeServicesId");
-
-                    b.ToTable("ExpertHomeService");
-                });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.ApplicationUser", b =>
                 {
@@ -239,6 +226,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ExpertId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int?>("HomeServiceCategoryId")
                         .HasColumnType("int");
 
@@ -258,6 +248,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExpertId");
 
                     b.HasIndex("HomeServiceCategoryId");
 
@@ -522,21 +514,6 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ExpertHomeService", b =>
-                {
-                    b.HasOne("HS.Domain.Core.Entities.Expert", null)
-                        .WithMany()
-                        .HasForeignKey("ExpertsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HS.Domain.Core.Entities.HomeService", null)
-                        .WithMany()
-                        .HasForeignKey("HomeServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HS.Domain.Core.Entities.Comment", b =>
                 {
                     b.HasOne("HS.Domain.Core.Entities.Expert", "Expert")
@@ -572,9 +549,15 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
             modelBuilder.Entity("HS.Domain.Core.Entities.HomeService", b =>
                 {
+                    b.HasOne("HS.Domain.Core.Entities.Expert", "Expert")
+                        .WithMany("HomeServices")
+                        .HasForeignKey("ExpertId");
+
                     b.HasOne("HS.Domain.Core.Entities.HomeServiceCategory", "HomeServiceCategory")
                         .WithMany("HomeServices")
                         .HasForeignKey("HomeServiceCategoryId");
+
+                    b.Navigation("Expert");
 
                     b.Navigation("HomeServiceCategory");
                 });
@@ -694,6 +677,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
             modelBuilder.Entity("HS.Domain.Core.Entities.Expert", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("HomeServices");
 
                     b.Navigation("Suggestion");
                 });
