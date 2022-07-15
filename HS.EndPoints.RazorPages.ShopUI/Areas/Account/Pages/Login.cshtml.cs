@@ -1,6 +1,7 @@
 using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
+using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,19 +12,21 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
     [Area("Account")]
     public class LoginModel : PageModel
     {
-       // private readonly UserManager<ApplicationUser> _userManager;
+
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly SeedIdentityData _seedIdentityData;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager,
-            ICommentRepository commentRepository)
+            SeedIdentityData seedIdentityData)
         {
-            //_userManager = userManager;
+
             _signInManager = signInManager;
+            _seedIdentityData = seedIdentityData;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-
+                await _seedIdentityData.Inistialize();
         }
 
         public async Task OnPostLogout()

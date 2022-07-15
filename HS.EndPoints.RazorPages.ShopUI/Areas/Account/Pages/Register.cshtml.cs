@@ -23,11 +23,9 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
             _roleManager = roleManager;
         }
 
-        public async Task OnGet()
+        public void OnGet()
         {
-            //var adminRoleResult = await _roleManager.CreateAsync(new IdentityRole<int>("AdminRole"));
-            //var adminUser = await _userManager.CreateAsync(new IdentityUser<int>("Admin"), "25915491");
-            //var assignRole = await _userManager.AddToRoleAsync(new IdentityUser<int>("Admin"), "AdminRole");
+
         }
 
         public async Task<IActionResult> OnPostCreate(RegisterViewModel model)

@@ -1,3 +1,4 @@
+using AutoMapper;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 using Microsoft.AspNetCore.Identity;
@@ -11,16 +12,19 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 {
     public class UserManagementModel : PageModel
     {
-        //private readonly SignInManager<IdentityUser<Guid>> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
-
+        private readonly IMapper _mapper;
         public List<UserViewModel> users;
         public List<SelectListItem> roles;
-        public UserManagementModel(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<Guid>> roleManager)
+
+        public UserManagementModel(UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole<Guid>> roleManager,
+            IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _mapper = mapper;
         }
 
         public async Task OnGet()
@@ -35,14 +39,19 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
                 Id = x.Id,
                 UserName = x.UserName,
                 Email = x.Email,
-                Role = string.Join(",", _userManager.GetRolesAsync(x).Result.ToArray())
             }).ToListAsync();
+
+            foreach (var item in users)
+            {
+                item.Role = (List<string>?)await _userManager.GetRolesAsync(await _userManager.Users.FirstAsync(x => x.Id == item.Id));
+                item.Roles = string.Join(",", item.Role);
+            }
         }
 
         public async Task OnPostDelete(Guid id)
         {
             var user = await _userManager.Users.Where(x => x.Id == id).SingleAsync();
-           await _userManager.DeleteAsync(user);
+            await _userManager.DeleteAsync(user);
             OnGet();
         }
 

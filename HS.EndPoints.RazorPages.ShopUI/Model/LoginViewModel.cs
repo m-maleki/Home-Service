@@ -7,12 +7,12 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
         [Required]
         [EmailAddress(ErrorMessage = "* آدرس ایمیل معتبر نمی باشد")]
         [Display(Name = "آدرس ایمیل")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [Required]
         [StringLength(16, ErrorMessage = "* کلمه عبور باید حداقل 3 و حداکثر 16 کاراکتر باشد", MinimumLength = 3)]
         [DataType(DataType.Password)]
         [Display(Name = "رمز عبور")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         public bool RemomberMe { get; set; }
     }

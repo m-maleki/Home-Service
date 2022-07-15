@@ -2,19 +2,24 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+<!-- BEGIN HEADER -->
 <div class="navbar navbar-fixed-top" id="main-navbar">
     <div class="header-right">
         <a href="dashboard.html" class="logo-con">
-            @*                <img src="~/assets/images/logo.png" class="img-responsive center-block" alt="لوگو قالب مدیران">
-            *@
+            <img src="~/assets/images/logo.png" class="img-responsive center-block" alt="لوگو قالب مدیران">
         </a>
-    </div>
+    </div><!-- /.header-right -->
     <div class="header-left">
         <div class="top-bar">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#" class="btn" id="toggle-sidebar">
                         <span class="menu"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="btn open" id="toggle-sidebar-top">
+                        <i class="icon-user-following"></i>
                     </a>
                 </li>
                 <li>
@@ -29,28 +34,49 @@
                         <i class="icon-size-fullscreen"></i>
                     </a>
                 </li>
+                <li class="dropdown dropdown-messages">
+                    <a href="#" class="dropdown-toggle btn" data-bs-toggle="dropdown">
+                        <i class="icon-envelope"></i>
+                    </a>
+                    <ul class="dropdown-menu has-scrollbar">
+                    </ul>
+                </li>
+                <li class="dropdown dropdown-announces">
 
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="dropdown dropdown-user">
-                        <a href="#" class="dropdown-toggle dropdown-hover" data-bs-toggle="dropdown">
-                            <img src="~/assets/images/user/48.png" alt="عکس پرفایل" class="img-circle img-responsive">
-                            <span>Hello @User.Identity?.Name!</span>
-                            <i class="icon-arrow-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="divider"></li>
-                            <li>
-                                <a href="login.html">
+                </li>
+
+                <li class="dropdown dropdown-user">
+                    <a href="#" class="dropdown-toggle dropdown-hover" data-bs-toggle="dropdown">
+                        <img src="~/assets/images/user/48.png" alt="عکس پرفایل" class="img-circle img-responsive">
+                        <span>Hello @User.Identity?.Name!</span>
+                        <i class="icon-arrow-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="edit_profile.html">
+                                <i class="icon-note"></i>
+                                ویرایش پروفایل
+                            </a>
+                        </li>
+                        <li>
+                            <a href="change_password.html">
+                                <i class="icon-key"></i>
+                                تغییر رمز عبور
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/Account/Logout">
                                     <i class="icon-power"></i>
                                     خروج
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                }
+                            </a>
+                        </li>
 
+
+                    </ul>
+                </li>
             </ul><!-- /.navbar-left -->
         </div><!-- /.top-bar -->
     </div><!-- /.header-left -->
 </div><!-- /.navbar -->
+<!-- END HEADER -->

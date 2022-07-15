@@ -42,7 +42,7 @@ builder.Services.AddMvc()
     .AddSessionStateTempDataProvider();
 builder.Services.AddSession();
 
-
+builder.Services.AddScoped<SeedIdentityData, SeedIdentityData>();
 
 var app = builder.Build();
 
@@ -63,5 +63,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
 
 app.Run();
