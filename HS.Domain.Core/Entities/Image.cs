@@ -11,6 +11,7 @@
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; } = false;
         #endregion Properties
+
         #region Navigation properties
         public Order? Order { get; set; }
         #endregion Navigation properties

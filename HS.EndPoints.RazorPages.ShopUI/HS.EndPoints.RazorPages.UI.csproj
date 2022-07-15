@@ -62,4 +62,8 @@
     <ProjectReference Include="..\HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\HomeService\" />
+  </ItemGroup>
+
 </Project>

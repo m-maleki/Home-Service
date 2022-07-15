@@ -16,8 +16,20 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.ToTable("HomeServiceCategories");
             builder.HasKey(x => x.Id);
 
-            builder.HasMany(x => x.HomeServices)
+            builder.HasMany(x => x.HomeServiceSubCategories)
                 .WithOne(x => x.HomeServiceCategory);
+
+            builder.HasData(
+                new HomeServiceCategory { Id = 1, Name = "دکوراسیون ساختمان" },
+                new HomeServiceCategory { Id = 2, Name = "تاسیسات ساختمان" },
+                new HomeServiceCategory { Id = 3, Name = "وسایل نقلیه" },
+                new HomeServiceCategory { Id = 4, Name = "اسباب کشی و باربری" },
+                new HomeServiceCategory { Id = 5, Name = "لوازم خانگی" },
+                new HomeServiceCategory { Id = 6, Name = "خدمات اداری" },
+                new HomeServiceCategory { Id = 7, Name = "نظافت و بهداشت" },
+                new HomeServiceCategory { Id = 8, Name = "دیجیتال و نرم افزار" },
+                new HomeServiceCategory { Id = 9, Name = "پزشکی و سلامت" }
+                );
         }
     }
 }

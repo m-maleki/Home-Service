@@ -104,6 +104,22 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("HS.Domain.Core.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("City");
+                });
+
             modelBuilder.Entity("HS.Domain.Core.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -196,6 +212,9 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -225,6 +244,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("Experts", (string)null);
                 });
 
@@ -239,10 +260,10 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("HomeServiceCategoryId")
+                    b.Property<int>("HomeServiceSubCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgUrl")
+                    b.Property<string>("ImgSrc")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -259,9 +280,1091 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HomeServiceCategoryId");
+                    b.HasIndex("HomeServiceSubCategoryId");
 
                     b.ToTable("HomeServices", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "2ce018e0-9826-4003-bcfa-3ddacc7d37b0.avif",
+                            IsDeleted = false,
+                            Name = "کاشی و سرامیک",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8679)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "e7472819-17a4-4d71-827a-89289c031373.avif",
+                            IsDeleted = false,
+                            Name = "بنایی ساختمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8689)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "34b130ba-5bf6-4ca4-8d34-f8071d707ff8.avif",
+                            IsDeleted = false,
+                            Name = "گچ کاری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8691)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "35de9364-d86b-4fdb-8758-31e89a7305f5.avif",
+                            IsDeleted = false,
+                            Name = "کارگر ساده",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8692)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "2cd703db-36aa-4921-9f12-0033d6b44ffe.avif",
+                            IsDeleted = false,
+                            Name = "بازسازی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8694)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "b6b376ac-3bcf-48a3-b055-6a7c20dd4dd0.avif",
+                            IsDeleted = false,
+                            Name = "کانال سازی و دریچه کولر",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8695)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "dac1bb2d-374d-4ef9-8de2-bb2f1082714b.avif",
+                            IsDeleted = false,
+                            Name = "عایق کاری و ایزوگام",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8697)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "a264b5eb-c52a-42d0-b70b-db5091869be7.avif",
+                            IsDeleted = false,
+                            Name = "سنگ کاری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8699)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            HomeServiceSubCategoryId = 1,
+                            ImgSrc = "a845202d-032c-406a-b8c9-b07217340951.avif",
+                            IsDeleted = false,
+                            Name = "سیمان کاری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8700)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "f172da2f-9444-4891-b693-03099e238fbc.avif",
+                            IsDeleted = false,
+                            Name = "نقاشی ساختمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8702)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "1498af45-eef9-4b71-a733-42a6b62b3ee7.avif",
+                            IsDeleted = false,
+                            Name = "کابینت",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8704)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "a836a67f-da40-4a4c-905e-48bf386d4726.avif",
+                            IsDeleted = false,
+                            Name = "کاغذ دیواری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8706)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "ea35c1c1-c87e-403a-811f-a04ed5da8224.avif",
+                            IsDeleted = false,
+                            Name = "نجاری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8708)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "8dfe930c-1ed7-4592-855e-252c3105e237.avif",
+                            IsDeleted = false,
+                            Name = "کفسابی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8709)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "d6724f46-cb4c-4f4f-bd3f-2c1fec484043.avif",
+                            IsDeleted = false,
+                            Name = "کفپوش",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8711)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "4407bd89-224a-4967-bef7-39e337936d23.avif",
+                            IsDeleted = false,
+                            Name = "پارکت",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8713)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "844dedd7-0876-4a81-bc4c-ff6beddafa06.avif",
+                            IsDeleted = false,
+                            Name = "لمینت",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8714)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "7a30dcfa-8d95-4759-84fb-2b211ac4b4ed.avif",
+                            IsDeleted = false,
+                            Name = "موکت",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8716)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "ed828d72-5110-40b3-8a53-be2f8ed4bb7f",
+                            IsDeleted = false,
+                            Name = "دوخت پرده",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8718)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "4d79e2a7-edac-473c-9753-543225e70346.avif",
+                            IsDeleted = false,
+                            Name = "مبلمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8719)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "329f3061-42b5-428f-b793-5f6362631cc4.avif",
+                            IsDeleted = false,
+                            Name = "سرویس خواب",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8721)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            HomeServiceSubCategoryId = 2,
+                            ImgSrc = "30fda66e-b645-46bf-8f50-135ab117e695.avif",
+                            IsDeleted = false,
+                            Name = "سقف کاذب",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8722)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            HomeServiceSubCategoryId = 3,
+                            ImgSrc = "8e0d0856-315f-43f3-907a-3c2271f10628.avif",
+                            IsDeleted = false,
+                            Name = "نمای ساختمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8724)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            HomeServiceSubCategoryId = 3,
+                            ImgSrc = "3e8e8c0f-99eb-44d1-ab2a-b1db73e666bb.avif",
+                            IsDeleted = false,
+                            Name = "تعمیر نمای ساختمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8725)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            HomeServiceSubCategoryId = 4,
+                            ImgSrc = "ff709f66-fbb0-47e9-a622-106e4a1b0d03.avif",
+                            IsDeleted = false,
+                            Name = "شیشه بری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8727)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            HomeServiceSubCategoryId = 4,
+                            ImgSrc = "554b399f-6347-40c6-aaae-a11d173766ad.avif",
+                            IsDeleted = false,
+                            Name = "توری پنجره",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8729)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            HomeServiceSubCategoryId = 4,
+                            ImgSrc = "6d3e0935-6c7c-4a7b-92c8-bff55e6ddcbe.avif",
+                            IsDeleted = false,
+                            Name = "نصب درب چوبی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8730)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            HomeServiceSubCategoryId = 5,
+                            ImgSrc = "35cb61d4-637a-4cc7-96a2-34e39782bf96.avif",
+                            IsDeleted = false,
+                            Name = "جوشکاری و آهنگری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8732)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            HomeServiceSubCategoryId = 5,
+                            ImgSrc = "d01f38eb-92ed-4a75-93b1-e512ee485d93.avif",
+                            IsDeleted = false,
+                            Name = "کلید سازی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8734)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            HomeServiceSubCategoryId = 6,
+                            ImgSrc = "7b9f726c-0d1b-4d80-8bdd-1da5d4ddfeb6.avif",
+                            IsDeleted = false,
+                            Name = "گل و گیاه آپارتمانی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8735)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            HomeServiceSubCategoryId = 6,
+                            ImgSrc = "b86725c4-2d69-4911-af66-74ba8eaf0a2c.avif",
+                            IsDeleted = false,
+                            Name = "باغبانی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8765)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "dbad83e3-bee2-4780-b52d-07850e7875da.avif",
+                            IsDeleted = false,
+                            Name = "کولر آبی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8767)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "8b54a660-e292-4be8-8599-3157f26821af.avif",
+                            IsDeleted = false,
+                            Name = "کولر گازی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8769)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "f91f1891-59c9-4f98-a187-0b0f7df31ae6.avif",
+                            IsDeleted = false,
+                            Name = "پکیج",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8771)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "c09a0de0-0565-4c90-a9f7-250b6ca8b5f1.avif",
+                            IsDeleted = false,
+                            Name = "آبگرمکن",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8772)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "3a603b3a-ef24-4c08-9034-9900b0c3b210.avif",
+                            IsDeleted = false,
+                            Name = "فن‌کویل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8775)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "5809f193-9a69-4a50-8bb7-a2a8bede30d6.avif",
+                            IsDeleted = false,
+                            Name = "چیلر و هواساز",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8777)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "210f7785-befe-4844-9b4a-fd569f581e0c.avif",
+                            IsDeleted = false,
+                            Name = "رادیاتور شوفاژ",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8784)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "33647fdc-9293-4b5d-8c95-d460631d4d96.avif",
+                            IsDeleted = false,
+                            Name = "موتورخانه",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8786)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "2a4a15fb-bcca-4080-aca6-48b56490503c.avif",
+                            IsDeleted = false,
+                            Name = "بخاری گازی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8788)
+                        },
+                        new
+                        {
+                            Id = 41,
+                            HomeServiceSubCategoryId = 7,
+                            ImgSrc = "0dfa16d5-03dc-4792-97b2-a2c53af7d7dc.avif",
+                            IsDeleted = false,
+                            Name = "شومینه گازی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8789)
+                        },
+                        new
+                        {
+                            Id = 42,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "3d246b0d-4045-4bca-a5d9-6fe88ce95d1e.avif",
+                            IsDeleted = false,
+                            Name = "لوله کشی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8791)
+                        },
+                        new
+                        {
+                            Id = 43,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "dc83b92f-188b-4763-8113-cfea3b7bc885.avif",
+                            IsDeleted = false,
+                            Name = "شیرآلات ساختمانی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8793)
+                        },
+                        new
+                        {
+                            Id = 44,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "7b297bb6-8ed8-4302-a4ad-a72859c53a74.avif",
+                            IsDeleted = false,
+                            Name = "لوله بازکنی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8794)
+                        },
+                        new
+                        {
+                            Id = 45,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "9fd2a021-c0f0-4c62-af06-52b54b7bd9a6.avif",
+                            IsDeleted = false,
+                            Name = "توالت فرنگی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8796)
+                        },
+                        new
+                        {
+                            Id = 46,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "9a0b0bb3-b077-4f75-817c-3e7b35889acb.avif",
+                            IsDeleted = false,
+                            Name = "پمپ آب",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8797)
+                        },
+                        new
+                        {
+                            Id = 47,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "46364dd7-c2a5-4e9e-bc05-8d2c11e2f3cc.avif",
+                            IsDeleted = false,
+                            Name = "لوله‌ کشی گاز",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8799)
+                        },
+                        new
+                        {
+                            Id = 48,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "fe75e004-e7cd-4db1-800b-5d5a797a75bf.avif",
+                            IsDeleted = false,
+                            Name = "تخلیه چاه",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8801)
+                        },
+                        new
+                        {
+                            Id = 49,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "1a9ce365-a1bf-4e98-8579-18d4fbd22667.avif",
+                            IsDeleted = false,
+                            Name = "فلاش تانک",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8802)
+                        },
+                        new
+                        {
+                            Id = 50,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "0c653840-4235-468b-a0ee-3a2eb24b1058.avif",
+                            IsDeleted = false,
+                            Name = "روشویی و دست‌شور",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8804)
+                        },
+                        new
+                        {
+                            Id = 51,
+                            HomeServiceSubCategoryId = 8,
+                            ImgSrc = "a6fed297-3438-43d8-94f2-e25c8e6e0533.avif",
+                            IsDeleted = false,
+                            Name = "سینک ظرفشویی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8805)
+                        },
+                        new
+                        {
+                            Id = 52,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "1e72d779-6c79-40c9-bd8b-051db9cd5ec5.avif",
+                            IsDeleted = false,
+                            Name = "برق کاری ساختمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8807)
+                        },
+                        new
+                        {
+                            Id = 53,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "8d5cc788-6dbd-45e4-84f0-84308c7a21b0.avif",
+                            IsDeleted = false,
+                            Name = "آیفون تصویری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8809)
+                        },
+                        new
+                        {
+                            Id = 54,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "9ed35b07-753a-43cb-aed8-3bc8dc757638.avif",
+                            IsDeleted = false,
+                            Name = "لوستر",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8810)
+                        },
+                        new
+                        {
+                            Id = 55,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "706e32b5-a1af-4363-91c3-fb2cfb612905.avif",
+                            IsDeleted = false,
+                            Name = "دوربین مداربسته",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8812)
+                        },
+                        new
+                        {
+                            Id = 56,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "a3aea78f-a04f-4198-87e2-a85ad73e91ea.avif",
+                            IsDeleted = false,
+                            Name = "هواکش",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8814)
+                        },
+                        new
+                        {
+                            Id = 57,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "02d218f0-1be8-45e3-9aa1-939768f70591.avif",
+                            IsDeleted = false,
+                            Name = "آنتن دیجیتال",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8815)
+                        },
+                        new
+                        {
+                            Id = 58,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "b384f9cf-023d-405f-9763-b38da76ddbe8.avif",
+                            IsDeleted = false,
+                            Name = "نورپردازی ساختمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8817)
+                        },
+                        new
+                        {
+                            Id = 59,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "c5e8e489-1cb1-4126-8b41-5aeda52f3aaf.avif",
+                            IsDeleted = false,
+                            Name = "تایمر مشاعات",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8819)
+                        },
+                        new
+                        {
+                            Id = 60,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "6432de25-5492-4eb6-850f-b0d77af90d1b.avif",
+                            IsDeleted = false,
+                            Name = "جعبه فیوز",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8821)
+                        },
+                        new
+                        {
+                            Id = 61,
+                            HomeServiceSubCategoryId = 9,
+                            ImgSrc = "51d9a954-77c2-4ef8-b0de-8f5d09160e8e.avif",
+                            IsDeleted = false,
+                            Name = "داکت کشی و ترانکینگ",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8822)
+                        },
+                        new
+                        {
+                            Id = 62,
+                            HomeServiceSubCategoryId = 10,
+                            ImgSrc = "36d05574-0b49-4a99-adb3-6dc22577b8d2.avif",
+                            IsDeleted = false,
+                            Name = "سیم کشی تلفن",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8824)
+                        },
+                        new
+                        {
+                            Id = 63,
+                            HomeServiceSubCategoryId = 10,
+                            ImgSrc = "16925f86-c028-4899-aa40-069f31d47b55.avif",
+                            IsDeleted = false,
+                            Name = "سیم کشی سانترال",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8826)
+                        },
+                        new
+                        {
+                            Id = 64,
+                            HomeServiceSubCategoryId = 11,
+                            ImgSrc = "7583b4a7-2ed5-4699-8bde-f416e78dd226.avif",
+                            IsDeleted = false,
+                            Name = "صافکاری و نقاشی خودرو",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8827)
+                        },
+                        new
+                        {
+                            Id = 65,
+                            HomeServiceSubCategoryId = 11,
+                            ImgSrc = "0258e8d5-9668-4893-8d15-0183145d0fab.avif",
+                            IsDeleted = false,
+                            Name = "تعویض روغن",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8829)
+                        },
+                        new
+                        {
+                            Id = 66,
+                            HomeServiceSubCategoryId = 11,
+                            ImgSrc = "454eca89-8ba7-4fbf-9270-2aeb3fc4879f.avif",
+                            IsDeleted = false,
+                            Name = "تعمیر خودرو",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8830)
+                        },
+                        new
+                        {
+                            Id = 67,
+                            HomeServiceSubCategoryId = 11,
+                            ImgSrc = "7014ff29-f51c-4e56-83b7-32f78341c1e4.avif",
+                            IsDeleted = false,
+                            Name = "برق خودرو",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8833)
+                        },
+                        new
+                        {
+                            Id = 68,
+                            HomeServiceSubCategoryId = 12,
+                            ImgSrc = "15b1016e-eede-448d-8a3e-c832030d4507.avif",
+                            IsDeleted = false,
+                            Name = "اسباب کشی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8834)
+                        },
+                        new
+                        {
+                            Id = 69,
+                            HomeServiceSubCategoryId = 13,
+                            ImgSrc = "d7946c6f-43bb-4ad5-8684-043e70fed7f7.avif",
+                            IsDeleted = false,
+                            Name = "حمل بار ",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8836)
+                        },
+                        new
+                        {
+                            Id = 70,
+                            HomeServiceSubCategoryId = 14,
+                            ImgSrc = "3a805751-f8ce-47fd-8e78-0429ee6a4c52.avif",
+                            IsDeleted = false,
+                            Name = "یخچال",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8838)
+                        },
+                        new
+                        {
+                            Id = 71,
+                            HomeServiceSubCategoryId = 14,
+                            ImgSrc = "69c43dcd-d644-4156-8e0f-06002ad6b3e8.avif",
+                            IsDeleted = false,
+                            Name = "ماشین ظرفشویی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8839)
+                        },
+                        new
+                        {
+                            Id = 72,
+                            HomeServiceSubCategoryId = 14,
+                            ImgSrc = "83bdaeea-f908-405b-9208-eeddbed88c5e.avif",
+                            IsDeleted = false,
+                            Name = "مایکروفر",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8842)
+                        },
+                        new
+                        {
+                            Id = 73,
+                            HomeServiceSubCategoryId = 14,
+                            ImgSrc = "4e58b3cb-36de-43a4-83e0-72632d1e1e86.avif",
+                            IsDeleted = false,
+                            Name = "اجاق برقی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8843)
+                        },
+                        new
+                        {
+                            Id = 74,
+                            HomeServiceSubCategoryId = 14,
+                            ImgSrc = "4df97a51-4335-4863-86de-1cc0bee8356d.avif",
+                            IsDeleted = false,
+                            Name = "هود آشپزخانه",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8845)
+                        },
+                        new
+                        {
+                            Id = 75,
+                            HomeServiceSubCategoryId = 14,
+                            ImgSrc = "0b84d3f6-89d4-4873-9157-b2d9fc2f51c5.avif",
+                            IsDeleted = false,
+                            Name = "اجاق گاز",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8847)
+                        },
+                        new
+                        {
+                            Id = 76,
+                            HomeServiceSubCategoryId = 15,
+                            ImgSrc = "aded05f5-8c4b-451b-b58f-d692c6e08d84.avif",
+                            IsDeleted = false,
+                            Name = "ماشین لباسشویی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8848)
+                        },
+                        new
+                        {
+                            Id = 77,
+                            HomeServiceSubCategoryId = 15,
+                            ImgSrc = "7f227268-ba59-457b-afcb-dd76a256d07d.avif",
+                            IsDeleted = false,
+                            Name = "اتو بخار",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8850)
+                        },
+                        new
+                        {
+                            Id = 78,
+                            HomeServiceSubCategoryId = 15,
+                            ImgSrc = "35bc08ad-7f9c-4a10-8ea6-c5f9edf9ea0e.avif",
+                            IsDeleted = false,
+                            Name = "اتو پرس",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8852)
+                        },
+                        new
+                        {
+                            Id = 79,
+                            HomeServiceSubCategoryId = 15,
+                            ImgSrc = "d04efd6a-2c16-4e57-afb1-cdaaccf91427.avif",
+                            IsDeleted = false,
+                            Name = "جاروبرقی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8853)
+                        },
+                        new
+                        {
+                            Id = 80,
+                            HomeServiceSubCategoryId = 15,
+                            ImgSrc = "a01bef88-058c-4caf-ad4a-7fedcedf9ba6.avif",
+                            IsDeleted = false,
+                            Name = "جارو شارژی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8855)
+                        },
+                        new
+                        {
+                            Id = 81,
+                            HomeServiceSubCategoryId = 16,
+                            ImgSrc = "4c7b8c4e-c292-486c-bf1a-0d15e551c0e8.avif",
+                            IsDeleted = false,
+                            Name = "تلویزیون",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8856)
+                        },
+                        new
+                        {
+                            Id = 82,
+                            HomeServiceSubCategoryId = 16,
+                            ImgSrc = "cb580eff-96fb-4ecd-bc3a-39e43c9e7062.avif",
+                            IsDeleted = false,
+                            Name = "سینما خانگی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8858)
+                        },
+                        new
+                        {
+                            Id = 83,
+                            HomeServiceSubCategoryId = 17,
+                            ImgSrc = "587fb9ab-11ca-4e29-a6f2-0404ca1c1ef2.avif",
+                            IsDeleted = false,
+                            Name = "دستگاه کپی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8860)
+                        },
+                        new
+                        {
+                            Id = 84,
+                            HomeServiceSubCategoryId = 17,
+                            ImgSrc = "88e26199-0184-4b06-865b-dfab22950800.avif",
+                            IsDeleted = false,
+                            Name = "فکس",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8861)
+                        },
+                        new
+                        {
+                            Id = 85,
+                            HomeServiceSubCategoryId = 17,
+                            ImgSrc = "7296d9ec-b48d-4225-bb36-23ceb5d75888.avif",
+                            IsDeleted = false,
+                            Name = "پرینتر",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8863)
+                        },
+                        new
+                        {
+                            Id = 86,
+                            HomeServiceSubCategoryId = 18,
+                            ImgSrc = "15dd3bcd-8c99-496c-b53d-a4c6be1f7cf1.avif",
+                            IsDeleted = false,
+                            Name = "پارتیشن اداری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8865)
+                        },
+                        new
+                        {
+                            Id = 87,
+                            HomeServiceSubCategoryId = 19,
+                            ImgSrc = "d35afbab-349a-40a5-9920-c7aaf0088bf8.avif",
+                            IsDeleted = false,
+                            Name = "نظافت دوره ای",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8867)
+                        },
+                        new
+                        {
+                            Id = 88,
+                            HomeServiceSubCategoryId = 19,
+                            ImgSrc = "53b6758b-6df7-4149-a1fb-179f8c14fe69.avif",
+                            IsDeleted = false,
+                            Name = "نظافت منزل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8869)
+                        },
+                        new
+                        {
+                            Id = 89,
+                            HomeServiceSubCategoryId = 19,
+                            ImgSrc = "428cfcf0-6cbb-4fc5-a425-24950f13c60d.avif",
+                            IsDeleted = false,
+                            Name = "نظافت ساختمان",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8870)
+                        },
+                        new
+                        {
+                            Id = 90,
+                            HomeServiceSubCategoryId = 19,
+                            ImgSrc = "12b6bd85-b5fb-4a6e-b3ef-6f4a7393601d.avif",
+                            IsDeleted = false,
+                            Name = "نظافت شرکت و اداره",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8872)
+                        },
+                        new
+                        {
+                            Id = 91,
+                            HomeServiceSubCategoryId = 19,
+                            ImgSrc = "eb16cbf2-f8ef-4bcc-99fc-1ce8a42b7f5f.avif",
+                            IsDeleted = false,
+                            Name = "ضدعفونی منزل و محل کار",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8874)
+                        },
+                        new
+                        {
+                            Id = 92,
+                            HomeServiceSubCategoryId = 20,
+                            ImgSrc = "6e672608-99a6-4f78-88b1-380fc3a884ba.avif",
+                            IsDeleted = false,
+                            Name = "خشکشویی آنلاین",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8875)
+                        },
+                        new
+                        {
+                            Id = 93,
+                            HomeServiceSubCategoryId = 20,
+                            ImgSrc = "a08223f4-a911-41d9-9efc-6173f7771021.avif",
+                            IsDeleted = false,
+                            Name = "خشکشویی پرده",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8877)
+                        },
+                        new
+                        {
+                            Id = 94,
+                            HomeServiceSubCategoryId = 21,
+                            ImgSrc = "65dc2285-4c94-4a31-aa6e-bb8000fc9402.avif",
+                            IsDeleted = false,
+                            Name = "قالیشویی آنلاین",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8879)
+                        },
+                        new
+                        {
+                            Id = 95,
+                            HomeServiceSubCategoryId = 21,
+                            ImgSrc = "3e8bf209-ea00-40a5-992c-b5e360bab4fb.avif",
+                            IsDeleted = false,
+                            Name = "مبل شویی",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8880)
+                        },
+                        new
+                        {
+                            Id = 96,
+                            HomeServiceSubCategoryId = 22,
+                            ImgSrc = "2fd6426a-ee1a-4bf3-befb-0fa5f3c17885.avif",
+                            IsDeleted = false,
+                            Name = "سمپاشی منازل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8882)
+                        },
+                        new
+                        {
+                            Id = 97,
+                            HomeServiceSubCategoryId = 23,
+                            ImgSrc = "958a54ca-c84f-47f2-8b66-7b84de6d9d2d.avif",
+                            IsDeleted = false,
+                            Name = "تعمیر موبایل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8884)
+                        },
+                        new
+                        {
+                            Id = 98,
+                            HomeServiceSubCategoryId = 24,
+                            ImgSrc = "8ddec483-9b8d-4fc9-8a39-987a4ab03873.avif",
+                            IsDeleted = false,
+                            Name = "تعمیر لپ‌تاپ",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8885)
+                        },
+                        new
+                        {
+                            Id = 99,
+                            HomeServiceSubCategoryId = 24,
+                            ImgSrc = "c068e5dd-bcaf-4b83-b9dd-9bfbb060c4e7.avif",
+                            IsDeleted = false,
+                            Name = "تعمیر سخت افزار کامپیوتر",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8888)
+                        },
+                        new
+                        {
+                            Id = 100,
+                            HomeServiceSubCategoryId = 24,
+                            ImgSrc = "f7fb5686-f130-4f13-86a0-b6f79d0ce790.avif",
+                            IsDeleted = false,
+                            Name = "نصب نرم افزار",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8889)
+                        },
+                        new
+                        {
+                            Id = 101,
+                            HomeServiceSubCategoryId = 24,
+                            ImgSrc = "f2d25592-d8c4-4430-badc-839a2fa9eff0.avif",
+                            IsDeleted = false,
+                            Name = "نصب ویندوز در محل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8891)
+                        },
+                        new
+                        {
+                            Id = 102,
+                            HomeServiceSubCategoryId = 25,
+                            ImgSrc = "7eeea6b2-0a32-4aa5-8244-7f84bcfe200e.avif",
+                            IsDeleted = false,
+                            Name = "تعمیر مودم اینترنت",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8893)
+                        },
+                        new
+                        {
+                            Id = 103,
+                            HomeServiceSubCategoryId = 25,
+                            ImgSrc = "6d22ccda-5eda-48dd-bb26-4095c48447af.avif",
+                            IsDeleted = false,
+                            Name = "راه‌ اندازی شبکه کامپیوتری",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8894)
+                        },
+                        new
+                        {
+                            Id = 104,
+                            HomeServiceSubCategoryId = 26,
+                            ImgSrc = "c214ac59-9605-48b4-95bf-1b12a79d870c.avif",
+                            IsDeleted = false,
+                            Name = "آزمایش در محل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8897)
+                        },
+                        new
+                        {
+                            Id = 105,
+                            HomeServiceSubCategoryId = 26,
+                            ImgSrc = "9d49d3fc-88fe-4fd8-bd12-eba51013a8d6.avif",
+                            IsDeleted = false,
+                            Name = "پرستاری در منزل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8898)
+                        },
+                        new
+                        {
+                            Id = 106,
+                            HomeServiceSubCategoryId = 26,
+                            ImgSrc = "3f4df8f1-7e51-4d57-b98a-568f1eef5396.avif",
+                            IsDeleted = false,
+                            Name = "ویزیت پزشک در منزل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8900)
+                        },
+                        new
+                        {
+                            Id = 107,
+                            HomeServiceSubCategoryId = 26,
+                            ImgSrc = "f73d4d27-3e0b-422e-bad2-deebd9d0467d.avif",
+                            IsDeleted = false,
+                            Name = "نوار قلب در محل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8901)
+                        },
+                        new
+                        {
+                            Id = 108,
+                            HomeServiceSubCategoryId = 26,
+                            ImgSrc = "64bd6636-1560-4dd6-9499-c72dde33b07e.avif",
+                            IsDeleted = false,
+                            Name = "فیزیوتراپی در منزل",
+                            Price = 0.0,
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(8904)
+                        });
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.HomeServiceCategory", b =>
@@ -271,6 +1374,102 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HomeServiceCategories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "دکوراسیون ساختمان",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6215)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "تاسیسات ساختمان",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6246)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "وسایل نقلیه",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6248)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "اسباب کشی و باربری",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6250)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "لوازم خانگی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6252)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Name = "خدمات اداری",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6254)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Name = "نظافت و بهداشت",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6255)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Name = "دیجیتال و نرم افزار",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6257)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Name = "پزشکی و سلامت",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(6258)
+                        });
+                });
+
+            modelBuilder.Entity("HS.Domain.Core.Entities.HomeServiceSubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("HomeServiceCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -283,7 +1482,219 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HomeServiceCategories", (string)null);
+                    b.HasIndex("HomeServiceCategoryId");
+
+                    b.ToTable("HomeServiceSubCategories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HomeServiceCategoryId = 1,
+                            IsDeleted = false,
+                            Name = "بنایی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7682)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            HomeServiceCategoryId = 1,
+                            IsDeleted = false,
+                            Name = "دکوراسیون",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7694)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            HomeServiceCategoryId = 1,
+                            IsDeleted = false,
+                            Name = "نقاشی ساختمان",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7696)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            HomeServiceCategoryId = 1,
+                            IsDeleted = false,
+                            Name = "درب و پنجره",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7698)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            HomeServiceCategoryId = 1,
+                            IsDeleted = false,
+                            Name = "آهنگری و جوشکاری",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7700)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            HomeServiceCategoryId = 1,
+                            IsDeleted = false,
+                            Name = "باغبانی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7702)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            HomeServiceCategoryId = 2,
+                            IsDeleted = false,
+                            Name = "سرمایش و گرمایش",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7703)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            HomeServiceCategoryId = 2,
+                            IsDeleted = false,
+                            Name = "لوله کشی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7706)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            HomeServiceCategoryId = 2,
+                            IsDeleted = false,
+                            Name = "برق و الکترونیک",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7708)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            HomeServiceCategoryId = 2,
+                            IsDeleted = false,
+                            Name = "تلفن و سانترال",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7710)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            HomeServiceCategoryId = 3,
+                            IsDeleted = false,
+                            Name = "خودرو",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7711)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            HomeServiceCategoryId = 4,
+                            IsDeleted = false,
+                            Name = "اسباب کشی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7713)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            HomeServiceCategoryId = 4,
+                            IsDeleted = false,
+                            Name = "حمل بار",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7715)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            HomeServiceCategoryId = 5,
+                            IsDeleted = false,
+                            Name = "لوازم آشپزخانه",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7716)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            HomeServiceCategoryId = 5,
+                            IsDeleted = false,
+                            Name = "لوازم شست و شو و نظافت",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7718)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            HomeServiceCategoryId = 5,
+                            IsDeleted = false,
+                            Name = "لوازم صوتی و تصویری",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7720)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            HomeServiceCategoryId = 6,
+                            IsDeleted = false,
+                            Name = "ماشین اداری",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7721)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            HomeServiceCategoryId = 6,
+                            IsDeleted = false,
+                            Name = "مبلمان اداری",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7723)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            HomeServiceCategoryId = 7,
+                            IsDeleted = false,
+                            Name = "نظافت",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7725)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            HomeServiceCategoryId = 7,
+                            IsDeleted = false,
+                            Name = "خشکشویی و اتوشویی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7726)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            HomeServiceCategoryId = 7,
+                            IsDeleted = false,
+                            Name = "قالیشویی و مبل شویی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7728)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            HomeServiceCategoryId = 7,
+                            IsDeleted = false,
+                            Name = "سمپاشی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7729)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            HomeServiceCategoryId = 8,
+                            IsDeleted = false,
+                            Name = "موبایل و تبلت",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7731)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            HomeServiceCategoryId = 8,
+                            IsDeleted = false,
+                            Name = "خدمات کامپیوتری",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7733)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            HomeServiceCategoryId = 8,
+                            IsDeleted = false,
+                            Name = "امنیت و شبکه",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7734)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            HomeServiceCategoryId = 9,
+                            IsDeleted = false,
+                            Name = "پزشکی",
+                            RegisterDate = new DateTime(2022, 7, 15, 19, 11, 43, 944, DateTimeKind.Local).AddTicks(7736)
+                        });
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.Image", b =>
@@ -567,14 +1978,33 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HS.Domain.Core.Entities.City", "City")
+                        .WithMany("Exprets")
+                        .HasForeignKey("CityId");
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.HomeService", b =>
                 {
-                    b.HasOne("HS.Domain.Core.Entities.HomeServiceCategory", "HomeServiceCategory")
+                    b.HasOne("HS.Domain.Core.Entities.HomeServiceSubCategory", "HomeServiceSubCategory")
                         .WithMany("HomeServices")
-                        .HasForeignKey("HomeServiceCategoryId");
+                        .HasForeignKey("HomeServiceSubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HomeServiceSubCategory");
+                });
+
+            modelBuilder.Entity("HS.Domain.Core.Entities.HomeServiceSubCategory", b =>
+                {
+                    b.HasOne("HS.Domain.Core.Entities.HomeServiceCategory", "HomeServiceCategory")
+                        .WithMany("HomeServiceSubCategories")
+                        .HasForeignKey("HomeServiceCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("HomeServiceCategory");
                 });
@@ -686,6 +2116,11 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.Navigation("Expert");
                 });
 
+            modelBuilder.Entity("HS.Domain.Core.Entities.City", b =>
+                {
+                    b.Navigation("Exprets");
+                });
+
             modelBuilder.Entity("HS.Domain.Core.Entities.Customer", b =>
                 {
                     b.Navigation("Orders");
@@ -704,6 +2139,11 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 });
 
             modelBuilder.Entity("HS.Domain.Core.Entities.HomeServiceCategory", b =>
+                {
+                    b.Navigation("HomeServiceSubCategories");
+                });
+
+            modelBuilder.Entity("HS.Domain.Core.Entities.HomeServiceSubCategory", b =>
                 {
                     b.Navigation("HomeServices");
                 });

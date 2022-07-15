@@ -13,11 +13,13 @@
         public bool IsDeleted { get; set; } = false;
         public Guid ApplicationUserId { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;
+        public DateTime Birthday { get; set; }
+
         #endregion Properties
+
         #region Navigation properties
         public ApplicationUser? ApplicationUser { get; set; }
         public List<Order>? Orders { get; set; }
-        public DateTime Birthday { get; set; }
         #endregion Navigation properties
     }
 }

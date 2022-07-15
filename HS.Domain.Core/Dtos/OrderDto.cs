@@ -11,6 +11,7 @@ namespace HS.Domain.Core.Dtos
         public int HomeServiceId { get; set; }
         public OrderStatusEnum Status { get; set; }
         #endregion Properties
+
         #region Navigation properties
         public List<Image>? Images { get; set; }
         public List<Suggestion>? Suggestions { get; set; }

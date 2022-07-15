@@ -11,6 +11,7 @@
         public bool IsDeleted { get; set; } = false;
 
         #endregion Properties
+
         #region Navigation properties
         public Expert? Expert { get; set; }
         #endregion Navigation properties

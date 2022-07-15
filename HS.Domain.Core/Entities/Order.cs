@@ -13,6 +13,7 @@ namespace HS.Domain.Core.Entities
         public bool IsDeleted { get; set; } = false;
 
         #endregion Properties
+
         #region Navigation properties
         public Customer? Customer { get; set; }
         public List<Image>? Images { get; set; }

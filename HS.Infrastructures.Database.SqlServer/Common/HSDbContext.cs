@@ -33,6 +33,7 @@ namespace HS.Infrastructures.Database.SqlServer.Common
             });
             
             builder.ApplyConfiguration(new HomeServiceCategoryConfiguration());
+            builder.ApplyConfiguration(new HomeServiceSubCategoryConfiguration());
             builder.ApplyConfiguration(new HomeServiceConfiguration());
             builder.ApplyConfiguration(new SuggestionConfiguration());
             builder.ApplyConfiguration(new CustomerConfiguration());
@@ -44,11 +45,10 @@ namespace HS.Infrastructures.Database.SqlServer.Common
             base.OnModelCreating(builder);
 
         }
-
+        public DbSet<HomeServiceSubCategory> HomeServiceSubCategories { get; set; } = null!;
         public DbSet<HomeServiceCategory> HomeServiceCategories { get; set; } = null!;
         public DbSet<HomeService> HomeServices { get; set; } = null!;
         public DbSet<Suggestion> Suggestions { get; set; } = null!;
-    
         public DbSet<Customer> Customers { get; set; } = null!;
         public DbSet<Comment> Comments { get; set; } = null!;
         public  DbSet<Expert> Experts { get; set; } = null!;
