@@ -9,6 +9,7 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public AutoMappingUi()
         {
             CreateMap< ExpertDto, UserViewModel>();
+            CreateMap<UserViewModel, ExpertDto>();
         }
     }
 }

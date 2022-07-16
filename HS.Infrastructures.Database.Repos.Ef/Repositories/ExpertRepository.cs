@@ -33,8 +33,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task Update(ExpertDto entity)
         {
-            var record = await _context.Experts.Where(x => x.ApplicationUserId == entity.Id).SingleOrDefaultAsync();
-            _mapper.Map(entity, record);
+            var record = await _context.Experts.Where(x => x.Id == entity.Id).SingleOrDefaultAsync();
+            _mapper.Map( entity ,record);
             await _context.SaveChangesAsync();
         }
 

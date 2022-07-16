@@ -53,6 +53,9 @@ builder.Services.AddScoped<IExpertApplicationService, ExpertApplicationService>(
 builder.Services.AddScoped<IExpertRepository, ExpertRepository>();
 builder.Services.AddScoped<IExpertService, ExpertService>();
 
+builder.Services.AddScoped<ICityApplicationService, CityApplicationService>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<ICityService, CityService>();
 
 var app = builder.Build();
 

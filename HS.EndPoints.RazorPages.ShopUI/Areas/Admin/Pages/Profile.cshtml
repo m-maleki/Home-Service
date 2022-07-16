@@ -18,6 +18,9 @@
                 </div>
             </div>
              <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+                 <input type="hidden" name="Id" value="@Model.UserViewModel.Id" />
+                 <input type="hidden" name="ApplicationUserId" value="@Model.UserViewModel.ApplicationUserId" />
+
             <div class="form-group relative mt-3 mb-4">
                 <input name="ProfileImgUrl"  type="file" class="form-control"> 
                 <div class="input-group round"> 
@@ -65,7 +68,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-screen-smartphone"></i>
                             </span>
-                            <input type="text" name="PhoneNumber" value="@Model.UserViewModel.ApplicationUser!.PhoneNumber" class="form-control ltr text-left mobile">
+                            <input type="text" name="PhoneNumber" value="@Model.UserViewModel.PhoneNumber" class="form-control ltr text-left mobile">
                         </div>
                     </div>
 
@@ -75,7 +78,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-envelope"></i>
                             </span>
-                            <input type="email" name="Email" asp-for="@Model.UserViewModel.ApplicationUser.Email" class="form-control ltr text-left">
+                            <input type="email" name="Email" asp-for="@Model.UserViewModel.ApplicationUser.Email" class="form-control ltr text-left" readonly>
                         </div>
                     </div>
 
@@ -98,17 +101,12 @@
                         </div>
                     </div>
 
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="slc-province">استان</label>
-                                <select id="City" name="City" class="form-control select2 round">
-                                    <option>تهران</option>
-                                    <option>فارس</option>
-                                    <option>اصفهان</option>
-                                    <option>خراسان</option>
-                                    <option>یزد</option>
+                                <select name="CityId" asp-for="@Model.UserViewModel.CityId" class="form-control select2 round" asp-items="Model.Cities">
+                                
                                 </select>
                             </div>
                         </div>

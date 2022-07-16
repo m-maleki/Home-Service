@@ -20,6 +20,7 @@
         #region Navigation properties
         public ApplicationUser? ApplicationUser { get; set; }
         public List<Order>? Orders { get; set; }
+        public City? City { get; set; }
         #endregion Navigation properties
     }
 }

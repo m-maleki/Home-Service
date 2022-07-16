@@ -13,10 +13,13 @@ namespace HS.Domain.Core.Dtos
         public string? ProfileImgUrl { get; set; }
         public string? ShebaNumber { get; set; }
         public string? CardNumber { get; set; }
+        public string? PhoneNumber { get; set; }
+        public int CityId { get; set; }
 
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
         public Guid ApplicationUserId { get; set; }
+        public City? City { get; set; }
 
         #endregion Properties
 

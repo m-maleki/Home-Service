@@ -1,4 +1,5 @@
 ﻿using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
 
 namespace HS.EndPoints.RazorPages.ShopUI.Model
@@ -6,6 +7,8 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
     public class UserViewModel
     {
         public Guid Id { get; set; }
+        [BindProperty]
+        public int CityId { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? UserName { get; set; }
@@ -20,6 +23,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
         public List<string>? Role { get; set; }
         public string? Roles { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
+        public Guid ApplicationUserId { get; set; }
 
     }
 }
