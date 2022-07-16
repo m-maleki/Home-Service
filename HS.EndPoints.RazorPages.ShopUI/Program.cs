@@ -1,5 +1,10 @@
+using HS.Domain.ApplicationServices;
+using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Contracts.Repository;
+using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Entities;
+using HS.Domain.Services;
+using HS.EndPoints.RazorPages.UI.Model;
 using HS.Infrastructures.Database.Repos.Ef.AutoMapper;
 using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using HS.Infrastructures.Database.SqlServer.Common;
@@ -13,7 +18,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/Account";
 });
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMapping)));
-
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMappingUi))); 
 var connectionString = builder.Configuration.GetConnectionString("HSConnection") ?? throw new InvalidOperationException("Connection string 'HSConnection' not found.");
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
@@ -43,6 +48,11 @@ builder.Services.AddMvc()
 builder.Services.AddSession();
 
 builder.Services.AddScoped<SeedIdentityData, SeedIdentityData>();
+
+builder.Services.AddScoped<IExpertApplicationService, ExpertApplicationService>();
+builder.Services.AddScoped<IExpertRepository, ExpertRepository>();
+builder.Services.AddScoped<IExpertService, ExpertService>();
+
 
 var app = builder.Build();
 

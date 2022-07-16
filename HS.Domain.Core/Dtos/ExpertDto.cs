@@ -9,16 +9,19 @@ namespace HS.Domain.Core.Dtos
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Biography { get; set; }
-        public string? ProfileImgUrl { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? MobileNumber { get; set; }
         public string? Address { get; set; }
+        public string? ProfileImgUrl { get; set; }
+        public string? ShebaNumber { get; set; }
+        public string? CardNumber { get; set; }
+
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
-        public Guid IdentityId { get; set; }
+        public Guid ApplicationUserId { get; set; }
 
         #endregion Properties
+
         #region Navigation properties
+        public ApplicationUser? ApplicationUser { get; set; }
         public List<HomeService>? HomeServices { get; set; }
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }

@@ -58,6 +58,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HS.Domain.AppServices\HS.Domain.ApplicationServices.csproj" />
+    <ProjectReference Include="..\HS.Domain.Services\HS.Domain.Services.csproj" />
     <ProjectReference Include="..\HS.Infrastructures.Database.Repos.Ef\HS.Infrastructures.Database.Repos.Ef.csproj" />
     <ProjectReference Include="..\HS.Infrastructures.Database.SqlServer\HS.Infrastructures.Database.SqlServer.csproj" />
   </ItemGroup>

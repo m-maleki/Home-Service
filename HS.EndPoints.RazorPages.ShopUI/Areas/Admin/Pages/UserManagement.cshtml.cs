@@ -1,6 +1,7 @@
 using AutoMapper;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,6 +11,8 @@ using System.Linq;
 
 namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 {
+
+    [Authorize]
     public class UserManagementModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -26,6 +29,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             _roleManager = roleManager;
             _mapper = mapper;
         }
+
 
         public async Task OnGet()
         {
@@ -48,28 +52,30 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             }
         }
 
-        public async Task OnPostDelete(Guid id)
+        public async Task<IActionResult> OnPostDelete(Guid id)
         {
             var user = await _userManager.Users.Where(x => x.Id == id).SingleAsync();
             await _userManager.DeleteAsync(user);
-            OnGet();
+            return LocalRedirect("/Admin/UserManagement");
         }
 
-        public async Task OnPostCreate(RegisterViewModel model)
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    Customer = new Customer(),
+                    Expert = new Expert()
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                  // var test =await _userManager.AddToRoleAsync(user, model.Role);
-                    OnGet();
+                   var test =await _userManager.AddToRoleAsync(user, model.Role);
+                   return LocalRedirect("/Admin/UserManagement");
                 }
                 else
                 {
@@ -77,8 +83,10 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
                     {
                         ModelState.AddModelError(string.Empty, item.Description);
                     }
+                    return LocalRedirect("/Admin/UserManagement");
                 }
             }
+            return LocalRedirect("/Admin/UserManagement");
         }
 
 

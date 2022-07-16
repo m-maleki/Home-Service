@@ -22,10 +22,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
           => _mapper.Map<List<ExpertDto>>(await _context.Experts.ToListAsync());
 
         public async Task<ExpertDto> GetBy(Guid id)
-          => await _mapper.ProjectTo<ExpertDto>(_context.Experts).Where(x => x.Id == id).SingleOrDefaultAsync();
-
-        public async Task<ExpertDto> GetBy(string mobileNumber)
-          => await _mapper.ProjectTo<ExpertDto>(_context.Experts).Where(x => x.MobileNumber == mobileNumber).SingleOrDefaultAsync();
+          => await _mapper.ProjectTo<ExpertDto>(_context.Experts).Where(x => x.ApplicationUserId == id).SingleOrDefaultAsync();
 
         public async Task Create(ExpertDto entity)
         {
@@ -36,7 +33,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task Update(ExpertDto entity)
         {
-            var record = await _context.Experts.Where(x => x.Id == entity.Id).SingleOrDefaultAsync();
+            var record = await _context.Experts.Where(x => x.ApplicationUserId == entity.Id).SingleOrDefaultAsync();
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }

@@ -1,22 +1,16 @@
-﻿using HS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 
 namespace HS.Domain.Core.Contracts.Service
 {
     public interface IExpertService
     {
-        Task<Expert> Get(int Id);
-        Task<List<Expert>> Get();
-        Task Create(Expert entity);
-        Task Update(Expert entity);
-        Task EnsureExists(int Id);
-        Task EnsureExists(string PhoneNumber);
-        Task EnsureDoesNotExist(int Id);
-        Task EnsureDoesNotExist(string PhoneNumber);
+        Task<ExpertDto> Get(Guid id);
+        Task<ExpertDto> Get(string email);
+        Task<List<ExpertDto>> Get();
+        Task Create(ExpertDto entity);
+        Task Update(ExpertDto entity);
+        Task EnsureExists(Guid id);
+        Task EnsureDoesNotExist(Guid id);
     }
 }
