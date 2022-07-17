@@ -1,4 +1,5 @@
-﻿using HS.Domain.Core.Entities;
+﻿using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,7 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface IHomeServiceService
     {
-        Task<HomeService> Get(int Id);
-        Task<List<HomeService>> Get();
-        Task Create(HomeService entity);
-        Task EnsureExists(int Id);
-        Task EnsureExists(string Name);
-        Task EnsureDoesNotExist(int Id);
-        Task EnsureDoesNotExist(string Name);
-        Task Update(HomeService entity);
+        Task<List<HomeServiceDto>> Get();
+
     }
 }

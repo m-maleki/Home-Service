@@ -1,4 +1,5 @@
 ﻿using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace HS.Domain.Core.Dtos
 {
@@ -15,6 +16,7 @@ namespace HS.Domain.Core.Dtos
         public string? CardNumber { get; set; }
         public string? PhoneNumber { get; set; }
         public int CityId { get; set; }
+        public IFormFile? ProfileImgFile { get; set; }
 
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
@@ -28,6 +30,7 @@ namespace HS.Domain.Core.Dtos
         public List<HomeService>? HomeServices { get; set; }
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
+
         #endregion Navigation properties
     }
 }

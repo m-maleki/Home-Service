@@ -66,6 +66,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\HomeService\" />
+    <Folder Include="wwwroot\Images\Profiles\" />
   </ItemGroup>
 
 </Project>

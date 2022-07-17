@@ -17,6 +17,7 @@
         public Guid ApplicationUserId { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public int? CityId { get; set; }
+
         #endregion Properties
 
         #region Navigation properties

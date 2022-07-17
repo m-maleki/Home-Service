@@ -2,8 +2,11 @@
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 
 namespace HS.Domain.Services
@@ -33,27 +36,52 @@ namespace HS.Domain.Services
 
         public async Task EnsureExists(Guid id)
         {
-            if( await _expertRepository.GetBy(id) == null)
+            if (await _expertRepository.GetBy(id) == null)
                 throw new Exception($"Expert Id : {id} Doesn't Exists!");
         }
 
         public async Task<ExpertDto> Get(Guid id)
-            =>await _expertRepository.GetBy(id);
-
-
+            => await _expertRepository.GetBy(id);
 
         public async Task<List<ExpertDto>> Get()
-            =>await _expertRepository.GetAll();
+            => await _expertRepository.GetAll();
 
         public async Task Update(ExpertDto entity)
         {
-           await _expertRepository.Update(entity);
+            await _expertRepository.Update(entity);
         }
 
         public async Task<ExpertDto> Get(string email)
         {
-            var user =await _userManager.Users.SingleAsync(x => x.Email == email);
-            return await _expertRepository.GetBy(user!.Id); 
+            var user = await _userManager.Users.SingleAsync(x => x.Email == email);
+            return await _expertRepository.GetBy(user!.Id);
+        }
+
+        public async Task<string> UploadImageProfile(IFormFile FormFile)
+        {
+            string filePath;
+            string fileName;
+            if (FormFile != null)
+            {
+                fileName = Guid.NewGuid().ToString() +
+                ContentDispositionHeaderValue.Parse(FormFile.ContentDisposition).FileName.Trim('"');
+                filePath = Path.Combine("wwwroot/Images/Profiles", fileName);
+                try
+                {
+                    using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await FormFile.CopyToAsync(stream);
+                    }
+                }
+                catch
+                {
+                    throw new Exception("Upload files operation failed");
+                }
+                return fileName;
+            }
+            else
+                fileName = "";
+            return fileName;
         }
     }
 }

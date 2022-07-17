@@ -8,8 +8,8 @@
         <div class="col-lg-6 col-md-10 m-auto m-b-30">
             <div class="text-center">
                 <div class="user-box">
-                    <a href="~/assets/images/user/128.png" target="_blank">
-                        <img src="~/assets/images/user/128.png" alt="عکس پروفایل" class="img-circle img-responsive">
+                    <a href="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" target="_blank">
+                        <img src="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" alt="عکس پروفایل" class="img-circle img-responsive">
                     </a>
                     <div class="user-details">
                         <h4>@Model.UserViewModel.FirstName @Model.UserViewModel.LastName</h4>
@@ -17,14 +17,13 @@
                     </div>
                 </div>
             </div>
-             <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+             <form enctype="multipart/form-data" id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
                  <input type="hidden" name="Id" value="@Model.UserViewModel.Id" />
                  <input type="hidden" name="ApplicationUserId" value="@Model.UserViewModel.ApplicationUserId" />
-
             <div class="form-group relative mt-3 mb-4">
-                <input name="ProfileImgUrl"  type="file" class="form-control"> 
+                <input name="ProfileImgFile"  type="file" class="form-control"> 
                 <div class="input-group round"> 
-                    <input  type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید"> 
+                    <input name="ProfileImgUrl" value="@Model.UserViewModel.ProfileImgUrl" type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید" disabled > 
                     <span class="input-group-btn"> 
                         <button  type="button" class="btn btn-info"> 
                             <i class="icon-picture"></i>
@@ -111,6 +110,9 @@
                             </div>
                         </div>
                     </div>
+
+
+
                  <div class="form-group">
                         <label>بیوگرافی</label>
                         <div class="input-group round">
@@ -120,6 +122,16 @@
                             <textarea name="Biography"  class="form-control" rows="4" >@Model.UserViewModel.Biography</textarea>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="slc-province">مهارت ها</label>
+                          <select class="form-control select2"  asp-items="Model.Cities" multiple>...</select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label>آدرس</label>
                         <div class="input-group round">
@@ -146,3 +158,10 @@
         </div>
     </div>
 </div>
+
+@section masterjs
+    {
+        <script src="~/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+        <script src="~/assets/plugins/select2/dist/js/i18n/fa.js"></script>
+        <script src="~/assets/js/pages/select2.js"></script>
+    }

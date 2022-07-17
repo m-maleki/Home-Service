@@ -42,13 +42,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         public async Task OnGet()
         {
             var result = await _cityApplicationService.Get();
-
             Cities = new SelectList(result, "Id", "Name");
-            //Cities = result.Select(x => new SelectListItem
-            //{
-            //    Value = x.Id.ToString(),
-            //    Text= x.Name
-            //}).ToList();
             var user = await _expertApplicationService.Get(User.Identity.Name);
             _mapper.Map(user, UserViewModel);   
         }

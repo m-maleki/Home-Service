@@ -1,5 +1,6 @@
 ﻿using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace HS.Domain.Core.Contracts.Service
 {
@@ -12,5 +13,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task Update(ExpertDto entity);
         Task EnsureExists(Guid id);
         Task EnsureDoesNotExist(Guid id);
+        Task<string> UploadImageProfile(IFormFile FormFile);
     }
 }
