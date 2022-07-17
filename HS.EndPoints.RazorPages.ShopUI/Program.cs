@@ -57,6 +57,10 @@ builder.Services.AddScoped<ICityApplicationService, CityApplicationService>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
 
+builder.Services.AddScoped<IHomeServiceApplicationService, HomeServiceApplicationService>();
+builder.Services.AddScoped<IHomeServiceRepository, HomeServiceRepository>();
+builder.Services.AddScoped<IHomeServiceService, HomeServiceService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

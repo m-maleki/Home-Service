@@ -16,17 +16,21 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
     {
         private readonly IExpertApplicationService _expertApplicationService ;
         private readonly ICityApplicationService _cityApplicationService ;
+        private readonly IHomeServiceApplicationService _homeServiceApplicationService;
         public SelectList Cities { get; set; }
+        public SelectList HomeServices { get; set; }
 
         private readonly IMapper _mapper;
 
         public ProfileModel(IExpertApplicationService expertApplicationService,
             IMapper mapper,
-            ICityApplicationService cityApplicationService)
+            ICityApplicationService cityApplicationService,
+            IHomeServiceApplicationService homeServiceApplicationService)
         {
             _expertApplicationService = expertApplicationService;
             _mapper = mapper;
             _cityApplicationService = cityApplicationService;
+            _homeServiceApplicationService = homeServiceApplicationService;
         }
 
         public UserViewModel UserViewModel=new UserViewModel();
@@ -41,8 +45,9 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task OnGet()
         {
-            var result = await _cityApplicationService.Get();
-            Cities = new SelectList(result, "Id", "Name");
+
+            Cities = new SelectList(await _cityApplicationService.Get(), "Id", "Name");
+            HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
             var user = await _expertApplicationService.Get(User.Identity.Name);
             _mapper.Map(user, UserViewModel);   
         }
