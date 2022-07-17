@@ -10,7 +10,7 @@
         public double Price { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; } = false;
-        public int HomeServiceSubCategoryId { get; set; }
+        public int? HomeServiceSubCategoryId { get; set; }
         public string? ImgSrc { get; set; }
 
         #endregion Properties

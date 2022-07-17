@@ -22,7 +22,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices.ToListAsync());
 
         public async Task<HomeServiceDto> GetBy(int id)
-            => await _mapper.ProjectTo<HomeServiceDto>(_context.HomeServices).Where(x => x.Id == id).SingleOrDefaultAsync();
+            => await _mapper.ProjectTo<HomeServiceDto>( _context.HomeServices.Include(x=>x.HomeServiceSubCategory))
+            .Where(x => x.Id == id).SingleOrDefaultAsync();
 
         public async Task Create(HomeServiceDto entity)
         {

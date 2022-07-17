@@ -1,4 +1,5 @@
 ﻿using HS.Domain.Core.Entities;
+using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
 
@@ -26,5 +27,8 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
         public Guid ApplicationUserId { get; set; }
         public string? ProfileImgUrl { get; set; }
         public IFormFile? ProfileImgFile { get; set; }
+        public List<HomeServiceViewModel>? HomeServices { get; set; } = new List<HomeServiceViewModel>();
+        public List<int>? HomeServicesIds { get; set; }
+
     }
 }

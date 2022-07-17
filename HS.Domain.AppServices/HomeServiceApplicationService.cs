@@ -14,7 +14,11 @@ namespace HS.Domain.ApplicationServices
             _homeService = homeService;
         }
 
-        public Task<List<HomeServiceDto>> Get()
-            => _homeService.Get();
+        public async Task<List<HomeServiceDto>> Get()
+            =>await _homeService.Get();
+
+        public async Task<HomeServiceDto> Get(int id)
+           => await _homeService.Get(id);
+
     }
 }

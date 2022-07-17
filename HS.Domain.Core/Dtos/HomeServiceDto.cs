@@ -10,6 +10,8 @@ namespace HS.Domain.Core.Dtos
         public string? Description { get; set; }
         public string? ImgUrl { get; set; }
         public double Price { get; set; }
+        public int? HomeServiceSubCategoryId { get; set; }
+
         #endregion Properties
         #region Navigation properties
         public HomeServiceCategory? HomeServiceCategory { get; set; }

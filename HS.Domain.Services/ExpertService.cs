@@ -1,4 +1,5 @@
-﻿using HS.Domain.Core.Contracts.Repository;
+﻿using AutoMapper;
+using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
@@ -15,12 +16,19 @@ namespace HS.Domain.Services
     {
         private readonly IExpertRepository _expertRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHomeServiceRepository _homeServiceRepository;
+        private readonly IMapper _mapper;
+
 
         public ExpertService(IExpertRepository expertRepository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IHomeServiceRepository homeServiceRepository,
+            IMapper mapper)
         {
             _expertRepository = expertRepository;
             _userManager = userManager;
+            _homeServiceRepository = homeServiceRepository;
+            _mapper = mapper;
         }
 
         public async Task Create(ExpertDto entity)
@@ -82,6 +90,18 @@ namespace HS.Domain.Services
             else
                 fileName = "";
             return fileName;
+        }
+
+        public async Task<ExpertDto> AssignHomeService(ExpertDto entity)
+        {
+            foreach (var homeServiceId in entity.HomeServicesIds)
+            {
+                var expert = await _homeServiceRepository.GetBy(homeServiceId);
+                var homeService = new HomeService();
+                _mapper.Map(expert, homeService);
+                entity.HomeServices.Add(homeService);
+            }
+            return entity;
         }
     }
 }

@@ -27,9 +27,10 @@ namespace HS.Domain.Core.Dtos
 
         #region Navigation properties
         public ApplicationUser? ApplicationUser { get; set; }
-        public List<HomeService>? HomeServices { get; set; }
+        public List<HomeService>? HomeServices { get; set; } = new List<HomeService>();
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
+        public List<int>? HomeServicesIds { get; set; }
 
         #endregion Navigation properties
     }

@@ -18,6 +18,8 @@ namespace HS.Domain.Services
             _homeServiceRepository = homeServiceRepository;
         }
 
+        public async Task<HomeServiceDto> Get(int id)
+            => await _homeServiceRepository.GetBy(id);
         public async Task<List<HomeServiceDto>> Get()
          => await  _homeServiceRepository.GetAll();
 

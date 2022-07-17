@@ -23,7 +23,7 @@
             <div class="form-group relative mt-3 mb-4">
                 <input name="ProfileImgFile"  type="file" class="form-control"> 
                 <div class="input-group round"> 
-                    <input name="ProfileImgUrl" value="@Model.UserViewModel.ProfileImgUrl" type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید" disabled > 
+                    <input name="ProfileImgUrl" value="@Model.UserViewModel.ProfileImgUrl" type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید"  > 
                     <span class="input-group-btn"> 
                         <button  type="button" class="btn btn-info"> 
                             <i class="icon-picture"></i>
@@ -111,8 +111,6 @@
                         </div>
                     </div>
 
-
-
                  <div class="form-group">
                         <label>بیوگرافی</label>
                         <div class="input-group round">
@@ -127,7 +125,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="slc-province">مهارت ها</label>
-                          <select class="form-control select2"  asp-items="Model.HomeServices" multiple>...</select>
+                          <select name="HomeServicesIds" name="HomeServicesIds"  class="form-control select2 round"  asp-items="Model.HomeServices" multiple>...</select>
                             </div>
                         </div>
                     </div>
