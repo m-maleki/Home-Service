@@ -61,7 +61,7 @@ builder.Services.AddScoped<IHomeServiceApplicationService, HomeServiceApplicatio
 builder.Services.AddScoped<IHomeServiceRepository, HomeServiceRepository>();
 builder.Services.AddScoped<IHomeServiceService, HomeServiceService>();
 
-builder.Services.AddScoped<CustomerApplicationService, CustomerApplicationService>();
+builder.Services.AddScoped<ICustomerApplicationService, CustomerApplicationService>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 

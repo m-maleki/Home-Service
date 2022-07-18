@@ -9,9 +9,10 @@ namespace HS.EndPoints.RazorPages.UI.Model
     {
         public AutoMappingUi()
         {
-            CreateMap< ExpertDto, UserViewModel>();
-            CreateMap<UserViewModel, ExpertDto>();
-            CreateMap<HomeService, HomeServiceViewModel>();
+            CreateMap< ExpertDto, UserViewModel>().ReverseMap();
+            CreateMap<CustomerDto, UserViewModel>().ReverseMap();
+            CreateMap<UserViewModel, ExpertDto>().ReverseMap();
+            CreateMap<HomeService, HomeServiceViewModel>().ReverseMap();
 
         }
     }

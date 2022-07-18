@@ -1,5 +1,6 @@
 ﻿using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,8 @@ namespace HS.Domain.Core.Contracts.Service
         Task EnsureExists(string PhoneNumber);
         Task EnsureDoesNotExist(Guid Id);
         Task EnsureDoesNotExist(string PhoneNumber);
-        
+        Task<string> UploadImageProfile(IFormFile FormFile);
+
 
     }
 }

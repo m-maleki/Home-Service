@@ -40,9 +40,20 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task<IActionResult> OnPost(UserViewModel model)
         {
-            var user = new ExpertDto();
-            _mapper.Map(model, user);
-            await _expertApplicationService.Update(user);
+            if (User.IsInRole("Expert"))
+            {
+                var user = new ExpertDto();
+                _mapper.Map(model, user);
+                await _expertApplicationService.Update(user);
+            }
+
+            if (User.IsInRole("Customer"))
+            {
+                var user = new CustomerDto();
+                _mapper.Map(model, user);
+                await _customerApplicationService.Update(user);
+            }
+
             return LocalRedirect("/Admin/Profile/");
         }
 

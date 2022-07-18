@@ -63,13 +63,26 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                var user = new ApplicationUser();
+                if (User.IsInRole("Expert"))
                 {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Customer = new Customer(),
-                    Expert = new Expert()
-                };
+                     user = new ApplicationUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        Expert = new Expert()
+                    };
+                }
+
+                if (User.IsInRole("Customer"))
+                {
+                     user = new ApplicationUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        Customer = new Customer()
+                    };
+                }
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

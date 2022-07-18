@@ -1,7 +1,7 @@
 ﻿@page
 @model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.ProfileModel
 @{
-      ViewData["Title"] = "Home Service - Dashboard";
+    ViewData["Title"] = "Home Service - Dashboard";
 }
 <div class="portlet-body edit-form">
     <div class="row">
@@ -17,23 +17,23 @@
                     </div>
                 </div>
             </div>
-             <form enctype="multipart/form-data" id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
-                 <input type="hidden" name="Id" value="@Model.UserViewModel.Id" />
-                 <input type="hidden" name="ApplicationUserId" value="@Model.UserViewModel.ApplicationUserId" />
-            <div class="form-group relative mt-3 mb-4">
-                <input name="ProfileImgFile"  type="file" class="form-control"> 
-                <div class="input-group round"> 
-                    <input name="ProfileImgUrl" value="@Model.UserViewModel.ProfileImgUrl" type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید"  > 
-                    <span class="input-group-btn"> 
-                        <button  type="button" class="btn btn-info"> 
-                            <i class="icon-picture"></i>
-                            آپلود عکس
-                        </button>
-                    </span> 
+            <form enctype="multipart/form-data" id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+                <input type="hidden" name="Id" value="@Model.UserViewModel.Id" />
+                <input type="hidden" name="ApplicationUserId" value="@Model.UserViewModel.ApplicationUserId" />
+                <div class="form-group relative mt-3 mb-4">
+                    <input name="ProfileImgFile" type="file" class="form-control">
+                    <div class="input-group round">
+                        <input name="ProfileImgUrl" value="@Model.UserViewModel.ProfileImgUrl" type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس
+                            </button>
+                        </span>
+                    </div>
+                    <div class="help-block"></div>
                 </div>
-                <div class="help-block"></div>
-            </div>
-            <hr>
+                <hr>
                 <div class="form-body">
 
                     <div class="row">
@@ -87,7 +87,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-barcode"></i>
                             </span>
-                            <input type="text" name="ShebaNumber" value="@Model.UserViewModel.ShebaNumber" class="form-control ltr text-left iban"  maxlength="27">
+                            <input type="text" name="ShebaNumber" value="@Model.UserViewModel.ShebaNumber" class="form-control ltr text-left iban" maxlength="27">
                         </div>
                     </div>
                     <div class="form-group">
@@ -96,7 +96,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-credit-card"></i>
                             </span>
-                            <input type="text" name="CardNumber"  value="@Model.UserViewModel.CardNumber" class="form-control ltr text-left card" >
+                            <input type="text" name="CardNumber" value="@Model.UserViewModel.CardNumber" class="form-control ltr text-left card">
                         </div>
                     </div>
 
@@ -105,36 +105,38 @@
                             <div class="form-group">
                                 <label for="slc-province">استان</label>
                                 <select name="CityId" asp-for="@Model.UserViewModel.CityId" class="form-control select2 round" asp-items="Model.Cities">
-                                
                                 </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="slc-province">مهارت ها</label>
-                          <select name="HomeServicesIds"  name="HomeServicesIds"  class="form-control select2 round"  asp-items="Model.HomeServices" multiple>
-                              @foreach (var homeService in @Model.HomeServicesUser)
-                                    {
-                                         <option value="@homeService.Id" selected="selected">@homeService.Name</option>
-                                    }
-                             
-                          </select>
-                      </div>
-                        </div>
-                    </div>
+                    @if (User.IsInRole("Expert"))
+                    {
+                        <div class="form-group">
+                            <label for="slc-province">مهارت ها</label>
+                            <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round" asp-items="Model.HomeServices" multiple>
+                                @foreach (var homeService in @Model.HomeServicesUser)
+                                {
+                                    <option value="@homeService.Id" selected="selected">@homeService.Name</option>
+                                }
 
-                 <div class="form-group">
-                        <label>بیوگرافی</label>
-                        <div class="input-group round">
-                            <span class="input-group-addon">
-                                <i class="icon-location-pin"></i>
-                            </span>
-                            <textarea name="Biography"  class="form-control" rows="4" >@Model.UserViewModel.Biography</textarea>
+                            </select>
                         </div>
-                    </div>
+
+
+                        <div class="form-group">
+                            <label>بیوگرافی</label>
+                            <div class="input-group round">
+                                <span class="input-group-addon">
+                                    <i class="icon-location-pin"></i>
+                                </span>
+                                <textarea name="Biography" class="form-control" rows="4">@Model.UserViewModel.Biography</textarea>
+                            </div>
+                        </div>
+
+                    }
+
+
 
 
 
@@ -144,7 +146,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-location-pin"></i>
                             </span>
-                            <textarea name="Address"  class="form-control" rows="4" >@Model.UserViewModel.Address</textarea>
+                            <textarea name="Address" class="form-control" rows="4">@Model.UserViewModel.Address</textarea>
                         </div>
                     </div>
 
@@ -167,7 +169,7 @@
 
 @section masterjs
     {
-        <script src="~/assets/plugins/select2/dist/js/select2.full.min.js"></script>
-        <script src="~/assets/plugins/select2/dist/js/i18n/fa.js"></script>
-        <script src="~/assets/js/pages/select2.js"></script>
+    <script src="~/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/assets/plugins/select2/dist/js/i18n/fa.js"></script>
+    <script src="~/assets/js/pages/select2.js"></script>
     }

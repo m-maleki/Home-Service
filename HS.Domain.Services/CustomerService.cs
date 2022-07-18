@@ -3,11 +3,13 @@ using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -67,9 +69,36 @@ namespace HS.Domain.Services
             return await _customerRepository.GetBy(user!.Id);
         }
 
-        public Task Update(CustomerDto entity)
+        public async Task Update(CustomerDto entity)
         {
-            throw new NotImplementedException();
+           await _customerRepository.Update(entity);
+        }
+
+        public async Task<string> UploadImageProfile(IFormFile FormFile)
+        {
+            string filePath;
+            string fileName;
+            if (FormFile != null)
+            {
+                fileName = Guid.NewGuid().ToString() +
+                ContentDispositionHeaderValue.Parse(FormFile.ContentDisposition).FileName.Trim('"');
+                filePath = Path.Combine("wwwroot/Images/Profiles", fileName);
+                try
+                {
+                    using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await FormFile.CopyToAsync(stream);
+                    }
+                }
+                catch
+                {
+                    throw new Exception("Upload files operation failed");
+                }
+                return fileName;
+            }
+            else
+                fileName = "";
+            return fileName;
         }
     }
 }

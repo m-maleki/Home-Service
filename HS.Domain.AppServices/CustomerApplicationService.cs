@@ -42,9 +42,12 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
-        public Task Update(CustomerDto dto)
+        public async Task Update(CustomerDto dto)
         {
-            throw new NotImplementedException();
+           // await _customerService.EnsureExists(dto.ApplicationUserId);
+            if (dto.ProfileImgFile != null)
+                dto.ProfileImgUrl = await _customerService.UploadImageProfile(dto.ProfileImgFile);
+            await _customerService.Update(dto);
         }
     }
 }

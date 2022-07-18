@@ -17,10 +17,12 @@ namespace HS.Domain.Core.Dtos
         public string? PhoneNumber { get; set; }
         public int CityId { get; set; }
         public IFormFile? ProfileImgFile { get; set; }
+
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
         public Guid ApplicationUserId { get; set; }
         public City? City { get; set; }
+
         #endregion Properties
 
         #region Navigation properties
@@ -29,6 +31,7 @@ namespace HS.Domain.Core.Dtos
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
         public List<int>? HomeServicesIds { get; set; }
+
         #endregion Navigation properties
     }
 }
