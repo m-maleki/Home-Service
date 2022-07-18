@@ -19,9 +19,13 @@ namespace HS.Infrastructures.Database.SqlServer.Common
         {
          
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             builder.Entity<ApplicationUser>(b =>
             {
                 b.Property(u => u.Id).HasDefaultValueSql("newsequentialid()");

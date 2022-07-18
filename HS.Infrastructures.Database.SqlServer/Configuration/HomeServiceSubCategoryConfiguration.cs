@@ -17,13 +17,11 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.ToTable("HomeServiceSubCategories");
 
             builder.HasOne(x => x.HomeServiceCategory)
-                .WithMany(x => x.HomeServiceSubCategories)
-                .OnDelete(DeleteBehavior.Cascade);
-                
+                .WithMany(x => x.HomeServiceSubCategories);
+
 
             builder.HasMany(x => x.HomeServices)
-                .WithOne(x => x.HomeServiceSubCategory)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithOne(x => x.HomeServiceSubCategory);
 
 
             builder.HasData(

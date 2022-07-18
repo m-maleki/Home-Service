@@ -4,6 +4,7 @@ using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 {
@@ -22,7 +23,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
           => _mapper.Map<List<ExpertDto>>(await _context.Experts.ToListAsync());
 
         public async Task<ExpertDto> GetBy(Guid id)
-          => await _mapper.ProjectTo<ExpertDto>(_context.Experts).Where(x => x.ApplicationUserId == id).SingleOrDefaultAsync();
+          => await _mapper.ProjectTo<ExpertDto>(_context.Experts.Include(x=>x.HomeServices))
+            .Where(x => x.ApplicationUserId == id)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
 
         public async Task Create(ExpertDto entity)
         {
@@ -33,14 +37,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task Update(ExpertDto entity)
         {
-            var record = await _context.Experts.Where(x => x.Id == entity.Id).SingleOrDefaultAsync();
-          var t = entity.HomeServices.Select(x => new HomeService
-            {
-              HomeServiceSubCategoryId=x.HomeServiceSubCategoryId,
-                Id = x.Id
-            }).ToList();
-            record.HomeServices = t;
+            var record = await _context.Experts
+                .Include(x => x.HomeServices)
+                .Where(x => x.Id == entity.Id)
+                .SingleOrDefaultAsync();
+            record.HomeServices.Clear();
+            _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
+
         }
 
     }

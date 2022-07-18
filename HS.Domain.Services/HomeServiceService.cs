@@ -23,5 +23,10 @@ namespace HS.Domain.Services
         public async Task<List<HomeServiceDto>> Get()
          => await  _homeServiceRepository.GetAll();
 
+        public Task<List<HomeServiceDto>> Get(Guid id)
+        {
+
+            throw new NotImplementedException();
+        }
     }
 }

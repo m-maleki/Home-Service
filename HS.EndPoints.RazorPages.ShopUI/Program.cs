@@ -61,6 +61,11 @@ builder.Services.AddScoped<IHomeServiceApplicationService, HomeServiceApplicatio
 builder.Services.AddScoped<IHomeServiceRepository, HomeServiceRepository>();
 builder.Services.AddScoped<IHomeServiceService, HomeServiceService>();
 
+builder.Services.AddScoped<CustomerApplicationService, CustomerApplicationService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

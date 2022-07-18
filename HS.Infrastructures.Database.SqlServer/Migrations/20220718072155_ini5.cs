@@ -5,2024 +5,2034 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HS.Infrastructures.Database.SqlServer.Migrations
 {
-    public partial class ininin56 : Migration
+    public partial class ini5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "CityId",
-                table: "Cities",
-                newName: "Id");
+                name: "MobileNumber",
+                table: "Customers",
+                newName: "ShebaNumber");
+
+            migrationBuilder.AddColumn<string>(
+                name: "CardNumber",
+                table: "Customers",
+                type: "nvarchar(max)",
+                nullable: true);
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8180));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4472));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8216));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4513));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8219));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4516));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8220));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4517));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8222));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4519));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 6,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8223));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4520));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8225));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4522));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 8,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8226));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4523));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 9,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(8228));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(4525));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9600));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5889));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9610));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5900));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9612));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5902));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9613));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5904));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9615));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5905));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 6,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9616));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5907));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9618));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5909));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 8,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9661));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5911));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 9,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9663));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5912));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 10,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9665));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5914));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 11,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9667));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5916));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 12,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9668));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5917));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 13,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9670));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5919));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 14,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9671));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5921));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 15,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9673));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5922));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 16,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9674));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5924));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 17,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9676));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5925));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 18,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9677));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5927));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 19,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9679));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5929));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9680));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5930));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 21,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9682));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5932));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 22,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9683));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5933));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 23,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9685));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5935));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 24,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9687));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5937));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 25,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9689));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5939));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 26,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 731, DateTimeKind.Local).AddTicks(9690));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(5941));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(602));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6512));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(611));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6528));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(613));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6530));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(615));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6532));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(616));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6534));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 6,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(619));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6536));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(620));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6538));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 8,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(622));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6540));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 9,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(624));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6542));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 10,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(625));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6544));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 11,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(627));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6546));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 12,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(628));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6548));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 13,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(630));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6550));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 14,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(632));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6552));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 15,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(633));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6554));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 16,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(635));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6556));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 17,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(636));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6558));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 18,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(638));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6560));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 19,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(639));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6562));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(641));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6564));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 21,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(643));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6566));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 22,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(644));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6568));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 23,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(646));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6570));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 24,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(647));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6572));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 25,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(649));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6574));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 26,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(651));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6576));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 27,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(652));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6577));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 28,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(654));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6579));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 29,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(655));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6581));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 30,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(657));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6583));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 31,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(659));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6585));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 32,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(661));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6587));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 33,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(662));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6589));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 34,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(664));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6591));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 35,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(665));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6592));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 36,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(667));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6595));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 37,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(668));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6597));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 38,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(670));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6599));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 39,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(671));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6601));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 40,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(673));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6604));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 41,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(675));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6605));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 42,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(676));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6607));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 43,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(678));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6609));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 44,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(679));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6611));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 45,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(681));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6613));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 46,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(683));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6615));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 47,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(684));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6617));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 48,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(686));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6661));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 49,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(687));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6664));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 50,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(689));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6666));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 51,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(690));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6668));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 52,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(692));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6670));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 53,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(693));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6672));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 54,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(695));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6674));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 55,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(696));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6676));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 56,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(699));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6678));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 57,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(700));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6682));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 58,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(727));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6684));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 59,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(729));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6686));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 60,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(731));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6688));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 61,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(733));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6690));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 62,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(734));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6691));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 63,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(736));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6693));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 64,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(737));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6695));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 65,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(739));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6697));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 66,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(740));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6699));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 67,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(742));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6701));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 68,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(743));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6703));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 69,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(745));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6705));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 70,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(747));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6707));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 71,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(748));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6708));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 72,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(750));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6710));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 73,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(751));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6712));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 74,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(753));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6714));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 75,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(755));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6716));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 76,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(756));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6718));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 77,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(758));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6720));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 78,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(759));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6722));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 79,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(761));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6724));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 80,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(762));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6726));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 81,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(769));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6728));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 82,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(770));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6730));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 83,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(772));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6732));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 84,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(773));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6734));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 85,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(775));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6736));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 86,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(776));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6738));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 87,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(778));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6740));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 88,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(779));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6742));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 89,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(781));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6744));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 90,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(783));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6746));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 91,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(784));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6747));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 92,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(786));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6749));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 93,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(787));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6751));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 94,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(789));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6753));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 95,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(790));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6755));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 96,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(792));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6757));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 97,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(794));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6760));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 98,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(795));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6762));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 99,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(797));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6764));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 100,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(798));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6766));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 101,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(800));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6767));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 102,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(802));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6769));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 103,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(803));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6771));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 104,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(805));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6773));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 105,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(807));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6775));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 106,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(809));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6777));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 107,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(810));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6778));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 108,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 4, 37, 732, DateTimeKind.Local).AddTicks(812));
+                value: new DateTime(2022, 7, 18, 11, 51, 55, 37, DateTimeKind.Local).AddTicks(6780));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "CardNumber",
+                table: "Customers");
+
             migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "Cities",
-                newName: "CityId");
+                name: "ShebaNumber",
+                table: "Customers",
+                newName: "MobileNumber");
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(797));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1096));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(846));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1125));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(848));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1127));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(850));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1128));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(852));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1130));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 6,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(854));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1131));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(856));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1133));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 8,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(858));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1135));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceCategories",
                 keyColumn: "Id",
                 keyValue: 9,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(860));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(1136));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3210));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2557));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3221));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2566));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3223));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2568));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3225));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2570));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3227));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2571));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 6,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3228));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2573));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3230));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2574));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 8,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3232));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2576));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 9,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3234));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2577));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 10,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3235));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2579));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 11,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3237));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2580));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 12,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3239));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2582));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 13,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3240));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2583));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 14,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3243));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2585));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 15,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3245));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2586));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 16,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3247));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2588));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 17,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3248));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2589));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 18,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3251));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2591));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 19,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3252));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2592));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3254));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2594));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 21,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3256));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2595));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 22,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3257));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2597));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 23,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3259));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2599));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 24,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3261));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2600));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 25,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3262));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2602));
 
             migrationBuilder.UpdateData(
                 table: "HomeServiceSubCategories",
                 keyColumn: "Id",
                 keyValue: 26,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(3264));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(2603));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4280));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3179));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4290));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3192));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4292));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3195));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4294));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3196));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 5,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4326));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3198));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 6,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4328));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3201));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4330));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3203));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 8,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4332));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3205));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 9,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4334));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3207));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 10,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4335));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3209));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 11,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4337));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3211));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 12,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4339));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3212));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 13,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4340));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3214));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 14,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4342));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3216));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 15,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4344));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3218));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 16,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4345));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3220));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 17,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4347));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3222));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 18,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4349));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3224));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 19,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4351));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3226));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4352));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3227));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 21,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4354));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3229));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 22,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4356));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3231));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 23,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4357));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3233));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 24,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4359));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3235));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 25,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4361));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3237));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 26,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4363));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3239));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 27,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4364));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3241));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 28,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4366));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3243));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 29,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4368));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3245));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 30,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4371));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3247));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 31,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4373));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3249));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 32,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4374));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3251));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 33,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4376));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3252));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 34,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4378));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3254));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 35,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4379));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3256));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 36,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4381));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3258));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 37,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4383));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3260));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 38,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4385));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3290));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 39,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4386));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3292));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 40,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4388));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3295));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 41,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4390));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3297));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 42,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4392));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3299));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 43,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4393));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3301));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 44,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4395));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3302));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 45,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4397));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3304));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 46,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4399));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3306));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 47,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4400));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3308));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 48,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4402));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3311));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 49,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4404));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3313));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 50,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4405));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3315));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 51,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4407));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3317));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 52,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4409));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3319));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 53,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4411));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3321));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 54,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4412));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3323));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 55,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4415));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3325));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 56,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4417));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3327));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 57,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4418));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3328));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 58,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4420));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3330));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 59,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4422));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3332));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 60,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4423));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3334));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 61,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4425));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3336));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 62,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4427));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3338));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 63,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4428));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3340));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 64,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4430));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3342));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 65,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4432));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3344));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 66,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4434));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3346));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 67,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4435));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3347));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 68,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4437));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3349));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 69,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4439));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3352));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 70,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4441));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3355));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 71,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4442));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3357));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 72,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4444));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3359));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 73,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4446));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3361));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 74,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4448));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3363));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 75,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4449));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3364));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 76,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4451));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3366));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 77,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4453));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3368));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 78,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4455));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3370));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 79,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4456));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3372));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 80,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4459));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3374));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 81,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4461));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3376));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 82,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4462));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3377));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 83,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4464));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3379));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 84,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4466));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3381));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 85,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4467));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3383));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 86,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4469));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3385));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 87,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4471));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3387));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 88,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4473));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3389));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 89,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4474));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3390));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 90,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4499));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3392));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 91,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4502));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3395));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 92,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4505));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3397));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 93,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4507));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3399));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 94,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4508));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3401));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 95,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4510));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3403));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 96,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4512));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3405));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 97,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4513));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3408));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 98,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4515));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3411));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 99,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4517));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3413));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 100,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4519));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3415));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 101,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4521));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3416));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 102,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4522));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3444));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 103,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4524));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3446));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 104,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4526));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3448));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 105,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4528));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3451));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 106,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4529));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3454));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 107,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4531));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3456));
 
             migrationBuilder.UpdateData(
                 table: "HomeServices",
                 keyColumn: "Id",
                 keyValue: 108,
                 column: "RegisterDate",
-                value: new DateTime(2022, 7, 16, 23, 3, 1, 903, DateTimeKind.Local).AddTicks(4533));
+                value: new DateTime(2022, 7, 18, 11, 2, 33, 903, DateTimeKind.Local).AddTicks(3458));
         }
     }
 }

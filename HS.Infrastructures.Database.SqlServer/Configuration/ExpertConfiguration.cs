@@ -21,6 +21,22 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
 
             builder.HasOne(x => x.ApplicationUser).WithOne(x => x.Expert);
 
+            builder.HasMany(d => d.HomeServices)
+                .WithMany(p => p.Experts)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ExpertHomeService",
+                    l => l.HasOne<HomeService>().WithMany().HasForeignKey("HomeServicesId"),
+                    r => r.HasOne<Expert>().WithMany().HasForeignKey("ExpertsId"),
+                    j =>
+                    {
+                        j.HasKey("ExpertsId", "HomeServicesId");
+
+                        j.ToTable("ExpertHomeService");
+
+                        j.HasIndex(new[] { "HomeServicesId" }, "IX_ExpertHomeService_HomeServicesId");
+                    });
+
+
         }
     }
 }

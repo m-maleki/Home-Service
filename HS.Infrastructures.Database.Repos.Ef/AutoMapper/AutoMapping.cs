@@ -10,16 +10,22 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
         public AutoMapping()
         {
          CreateMap<HomeServiceSubCategory, HomeServiceSubCategoryDto>();
-         CreateMap<HomeServiceCategory, HomeServiceCategoryDto>();
-         CreateMap<HomeServiceDto, HomeService>();
+            CreateMap<HomeServiceCategory, HomeServiceCategoryDto>();
+
+
+            CreateMap<HomeServiceDto, HomeService>()
+            .ForMember(x => x.Id, opt => opt.Ignore())
+            .ForMember(x => x.HomeServiceSubCategoryId, opt => opt.Ignore());
 
             CreateMap<HomeService, HomeServiceDto>();
          CreateMap<Suggestion, SuggestionDto>();
          CreateMap<Customer, CustomerDto>();
          CreateMap<Comment, CommentDto>();
          CreateMap<Expert, ExpertDto>();
-         CreateMap<ExpertDto, Expert>();
-         CreateMap<Image, ImageDto>();
+         CreateMap<ExpertDto, Expert>()
+       //  .ForMember(x => x.HomeServices, opt => opt.Ignore())
+         .ReverseMap();
+            CreateMap<Image, ImageDto>();
          CreateMap<Order, OrderDto>();
 
         }

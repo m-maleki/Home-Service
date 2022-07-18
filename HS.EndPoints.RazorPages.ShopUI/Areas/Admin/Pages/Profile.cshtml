@@ -111,6 +111,21 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="slc-province">مهارت ها</label>
+                          <select name="HomeServicesIds"  name="HomeServicesIds"  class="form-control select2 round"  asp-items="Model.HomeServices" multiple>
+                              @foreach (var homeService in @Model.HomeServicesUser)
+                                    {
+                                         <option value="@homeService.Id" selected="selected">@homeService.Name</option>
+                                    }
+                             
+                          </select>
+                      </div>
+                        </div>
+                    </div>
+
                  <div class="form-group">
                         <label>بیوگرافی</label>
                         <div class="input-group round">
@@ -121,14 +136,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="slc-province">مهارت ها</label>
-                          <select name="HomeServicesIds" name="HomeServicesIds"  class="form-control select2 round"  asp-items="Model.HomeServices" multiple>...</select>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div class="form-group">
                         <label>آدرس</label>

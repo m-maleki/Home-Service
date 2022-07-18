@@ -14,26 +14,29 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
     public class ProfileModel : PageModel
     {
-        private readonly IExpertApplicationService _expertApplicationService ;
-        private readonly ICityApplicationService _cityApplicationService ;
+        private readonly IExpertApplicationService _expertApplicationService;
+        private readonly ICityApplicationService _cityApplicationService;
         private readonly IHomeServiceApplicationService _homeServiceApplicationService;
+        private readonly ICustomerApplicationService _customerApplicationService;
         public SelectList Cities { get; set; }
         public SelectList HomeServices { get; set; }
-
+        public List<HomeService> HomeServicesUser { get; set; } = new List<HomeService>();
         private readonly IMapper _mapper;
 
         public ProfileModel(IExpertApplicationService expertApplicationService,
             IMapper mapper,
             ICityApplicationService cityApplicationService,
-            IHomeServiceApplicationService homeServiceApplicationService)
+            IHomeServiceApplicationService homeServiceApplicationService,
+            ICustomerApplicationService customerApplicationService)
         {
             _expertApplicationService = expertApplicationService;
             _mapper = mapper;
             _cityApplicationService = cityApplicationService;
             _homeServiceApplicationService = homeServiceApplicationService;
+            _customerApplicationService = customerApplicationService;
         }
 
-        public UserViewModel UserViewModel=new UserViewModel();
+        public UserViewModel UserViewModel = new UserViewModel();
 
         public async Task<IActionResult> OnPost(UserViewModel model)
         {
@@ -45,11 +48,26 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task OnGet()
         {
-
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             Cities = new SelectList(await _cityApplicationService.Get(), "Id", "Name");
-            HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-            var user = await _expertApplicationService.Get(User.Identity.Name);
-            _mapper.Map(user, UserViewModel);   
+
+            if (User.IsInRole("Expert"))
+            {
+                var expert = await _expertApplicationService.Get(new Guid(currentUserID));
+                if (expert.HomeServices != null)
+                    HomeServicesUser = expert.HomeServices;
+                HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
+                var user = await _expertApplicationService.Get(User.Identity.Name);
+                _mapper.Map(user, UserViewModel);
+            }
+
+            if (User.IsInRole("Customer"))
+            {
+                var customer = await _customerApplicationService.Get(new Guid(currentUserID));
+                var user = await _customerApplicationService.Get(User.Identity.Name);
+                _mapper.Map(user, UserViewModel);
+            }
         }
     }
 }

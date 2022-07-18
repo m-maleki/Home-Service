@@ -22,10 +22,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
           => _mapper.Map<List<CustomerDto>>(await _context.Customers.ToListAsync());
 
         public async Task<CustomerDto> GetBy(Guid id)
-          => await _mapper.ProjectTo<CustomerDto>(_context.Customers).Where(x => x.Id == id).SingleOrDefaultAsync();
+          => await _mapper.ProjectTo<CustomerDto>(_context.Customers).Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
 
         public async Task<CustomerDto> GetBy(string mobileNumber)
-          => await _mapper.ProjectTo<CustomerDto>(_context.Customers).Where(x => x.MobileNumber == mobileNumber).SingleOrDefaultAsync();
+          => await _mapper.ProjectTo<CustomerDto>(_context.Customers).Where(x => x.MobileNumber == mobileNumber).AsNoTracking().SingleOrDefaultAsync();
 
         public async Task Create(CustomerDto entity)
         {

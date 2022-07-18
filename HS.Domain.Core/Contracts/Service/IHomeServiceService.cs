@@ -1,10 +1,4 @@
 ﻿using HS.Domain.Core.Dtos;
-using HS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HS.Domain.Core.Contracts.Service
 {
@@ -12,7 +6,6 @@ namespace HS.Domain.Core.Contracts.Service
     {
         Task<List<HomeServiceDto>> Get();
         Task<HomeServiceDto> Get(int id);
-
-
+        Task<List<HomeServiceDto>> Get(Guid id);
     }
 }

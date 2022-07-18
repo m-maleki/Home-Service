@@ -13,6 +13,7 @@ namespace HS.Domain.Core.Contracts.Service
         Task Update(ExpertDto entity);
         Task EnsureExists(Guid id);
         Task EnsureDoesNotExist(Guid id);
+
         Task<string> UploadImageProfile(IFormFile FormFile);
         Task<ExpertDto> AssignHomeService(ExpertDto entity);
     }

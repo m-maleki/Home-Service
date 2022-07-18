@@ -1,4 +1,5 @@
-﻿using HS.Domain.Core.Contracts.Repository;
+﻿using AutoMapper;
+using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Entities;
 using System;
@@ -12,6 +13,8 @@ namespace HS.Domain.Services
     public class CityService : ICityService
     {
         private readonly ICityRepository _cityRepository;
+        private readonly IMapper _mapper;
+
 
         public CityService(ICityRepository cityRepository)
         {

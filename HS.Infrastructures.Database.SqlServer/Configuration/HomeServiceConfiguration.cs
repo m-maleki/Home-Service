@@ -14,8 +14,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Configuration
             builder.HasOne(x => x.Orders)
                 .WithOne(x => x.HomeService);
 
-            builder.HasMany(x => x.Experts)
-                .WithMany(x => x.HomeServices);
+            //builder.HasMany(x => x.Experts)
+            //       .WithMany(x => x.HomeServices);
+
+            
 
             #region SeedData
             builder.HasData(

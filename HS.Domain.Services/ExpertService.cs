@@ -61,7 +61,7 @@ namespace HS.Domain.Services
 
         public async Task<ExpertDto> Get(string email)
         {
-            var user = await _userManager.Users.SingleAsync(x => x.Email == email);
+            var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
             return await _expertRepository.GetBy(user!.Id);
         }
 
