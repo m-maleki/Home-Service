@@ -10,5 +10,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<List<CustomerDto>> GetAll();
         Task Create(CustomerDto entity);
         Task Update(CustomerDto entity);
+        Task<Guid> GetGuid(Guid customerId);
     }
 }

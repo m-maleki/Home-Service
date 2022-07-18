@@ -22,7 +22,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task EnsureDoesNotExist(Guid Id);
         Task EnsureDoesNotExist(string PhoneNumber);
         Task<string> UploadImageProfile(IFormFile FormFile);
-
-
+        Task<Guid> GetGuid(Guid customerId);
     }
 }

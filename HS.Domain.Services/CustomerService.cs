@@ -69,6 +69,9 @@ namespace HS.Domain.Services
             return await _customerRepository.GetBy(user!.Id);
         }
 
+        public async Task<Guid> GetGuid(Guid customerId)
+          => await _customerRepository.GetGuid(customerId);
+
         public async Task Update(CustomerDto entity)
         {
            await _customerRepository.Update(entity);

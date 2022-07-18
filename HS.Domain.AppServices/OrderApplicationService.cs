@@ -12,10 +12,13 @@ namespace HS.Domain.ApplicationServices
     public class OrderApplicationService : IOrderApplicationService
     {
         private readonly IOrderService _orderService;
+        private readonly ICustomerService _customerService;
 
-        public OrderApplicationService(IOrderService orderService)
+        public OrderApplicationService(IOrderService orderService,
+            ICustomerService customerService)
         {
             _orderService = orderService;
+            _customerService = customerService;
         }
 
         public Task Create(OrderDto entity)
@@ -30,7 +33,12 @@ namespace HS.Domain.ApplicationServices
          => await _orderService.Get();
 
         public async Task<List<OrderDto>> GetAllBy(Guid customerId)
-         => await _orderService.GetAllBy(customerId);
+        {
+            var applicatioUserId = await _customerService.GetGuid(customerId);
+             return await _orderService.GetAllBy(applicatioUserId);
+        }
+
+
 
         public Task Update(OrderDto entity)
         {

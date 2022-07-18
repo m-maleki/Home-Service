@@ -20,40 +20,31 @@
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model.users.user)
+        @if(Model.Orders !=null)
         {
-            <tr>
-                <td>@item.id</td>
-                <td>@item.name</td>
-                <td>@item.FullName</td>
-                <td>@item.enrolled_fingers</td>
-                <td>@item.enrolled_faces</td>
-                @{
-                    if (@item.active == "1")
-                    {
-                        <td>
-                            <button type="submit" class="btn btn-success curve">فعال</button>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <button type="submit" class="btn btn-danger curve">غیر فعال</button>
-                        </td>
-                    }
-                }
-                <td>
-                    <form method="get">
-                        <div class="portlet-body">
-                            <input type="hidden" name="id" id="id" value="@item.id">
-                            <button type="submit" asp-page="/Access/index" class="btn btn-primary curve">نمایش دسترسی ها</button>
-                            <button type="submit" asp-page="/Access/Create" class="btn btn-primary curve">تعریف دسترسی</button>
-                            <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve" disabled>حذف</button>
-                        </div>
-                    </form>
-                </td>
-            </tr>
-        }*@
+         @foreach (var item in Model.Orders)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Customer.FirstName @item.Customer.FirstName</td>
+                    <td>@item.HomeService.Name</td>
+                    <td>@item.RegisterDate</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <form method="get">
+                            <div class="portlet-body">
+                                <input type="hidden" name="id" id="id" value="@item.Id">
+                                <button type="submit" asp-page="/Access/index" class="btn btn-primary curve">نمایش دسترسی ها</button>
+                                <button type="submit" asp-page="/Access/Create" class="btn btn-primary curve">تعریف دسترسی</button>
+                                <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve" disabled>حذف</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            } 
+
+        }
+
     </tbody>
 </table>
 

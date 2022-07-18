@@ -1,9 +1,9 @@
 ﻿using HS.Domain.Core.Entities;
 using HS.Domain.Core.Enums;
 
-namespace HS.Domain.Core.Dtos
+namespace HS.EndPoints.RazorPages.UI.Model
 {
-    public class OrderDto
+    public class OrderViewModel
     {
         #region Properties
         public int Id { get; set; }
@@ -11,7 +11,6 @@ namespace HS.Domain.Core.Dtos
         public int HomeServiceId { get; set; }
         public OrderStatusEnum Status { get; set; }
         public DateTime RegisterDate { get; set; }
-
         #endregion Properties
 
         #region Navigation properties

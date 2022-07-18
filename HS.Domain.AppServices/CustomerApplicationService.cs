@@ -37,6 +37,10 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
+        public Task<Guid> GetGuid(Guid customerId)
+           => _customerService.GetGuid(customerId);
+
+
         public Task Set(CustomerDto dto)
         {
             throw new NotImplementedException();

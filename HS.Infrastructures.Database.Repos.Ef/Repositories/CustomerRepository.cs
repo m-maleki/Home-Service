@@ -27,7 +27,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             .SingleOrDefaultAsync();
 
         public async Task<CustomerDto> GetBy(string mobileNumber)
-          => await _mapper.ProjectTo<CustomerDto>(_context.Customers).Where(x => x.MobileNumber == mobileNumber).AsNoTracking().SingleOrDefaultAsync();
+          => await _mapper.ProjectTo<CustomerDto>(_context.Customers)
+            .Where(x => x.MobileNumber == mobileNumber)
+            .AsNoTracking()
+            .SingleOrDefaultAsync();
 
         public async Task Create(CustomerDto entity)
         {
@@ -43,6 +46,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .SingleOrDefaultAsync();
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Guid> GetGuid(Guid customerId)
+        {
+            return await _context.Customers
+                .Where(x => x.ApplicationUserId == customerId)
+                .Select(x=>x.Id)
+                .FirstAsync();
         }
     }
 }
