@@ -18,9 +18,9 @@ namespace HS.Domain.Services
             _orderRepository = orderRepository;
         }
 
-        public Task Create(OrderDto entity)
+        public async Task Create(OrderDto entity)
         {
-            throw new NotImplementedException();
+           await _orderRepository.Create(entity);
         }
 
         public Task EnsureDoesNotExist(int Id)

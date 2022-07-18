@@ -11,6 +11,8 @@ namespace HS.Domain.Core.Dtos
         public string? ImgSrc { get; set; }
         public double Price { get; set; }
         public int? HomeServiceSubCategoryId { get; set; }
+        public double BasePrice { get; set; }
+
 
         #endregion Properties
         #region Navigation properties

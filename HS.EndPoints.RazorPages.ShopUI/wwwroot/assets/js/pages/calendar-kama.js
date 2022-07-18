@@ -11,22 +11,7 @@ var datePickerOptions = {
     highlightSelectedDay: true,
     sync: true
 };
-kamaDatepicker("kama-datepicker-from", datePickerOptions);
-
-var datePickerOptions = {
-    placeholder: "روز / ماه / سال",
-    twodigit: true,
-    closeAfterSelect: true,
-    nextButtonIcon: "fa fa-arrow-right",
-    previousButtonIcon: "fa fa-arrow-left",
-    buttonsColor: "gray",
-    markToday: true,
-    markHolidays: true,
-    highlightSelectedDay: true,
-    sync: true
-};
-kamaDatepicker("kama-datepicker-to", datePickerOptions);
-
+kamaDatepicker("kama-datepicker", datePickerOptions);
 
 
 var datePickerOptionsEmpty = {

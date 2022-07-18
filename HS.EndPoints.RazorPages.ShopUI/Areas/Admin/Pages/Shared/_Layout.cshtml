@@ -25,13 +25,14 @@
     <link href="~/assets/plugins/paper-ripple/dist/paper-ripple.min.css" rel="stylesheet">
     <link href="~/assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet">
     <link href="~/assets/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css" rel="stylesheet">
+    <link href="~/assets/plugins/clockpicker/dist/bootstrap-clockpicker.min.css" rel="stylesheet">
 
     <link href="~/assets/plugins/kamadatepicker/kamadatepicker.min.css" rel="stylesheet">
-    <link href="~/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
+
     <link href="~/assets/css/style.css" rel="stylesheet">
     <link href="~/assets/css/colors.css" rel="stylesheet">
     <link href="~/assets/css/Custom.css" rel="stylesheet">
-    <link href="~/css/site.css" rel="stylesheet"  />
+    <link href="~/css/site.css" rel="stylesheet" />
     <!-- END CSS -->
 </head>
 
@@ -46,7 +47,7 @@
         <div class="spinner"></div>
     </div><!-- /loader -->
     <!-- END LOEADING -->
-     @Html.Partial("./PartialView/_Header")
+    @Html.Partial("./PartialView/_Header")
     <!-- END HEADER -->
     <!-- BEGIN WRAPPER -->
     <div id="wrapper">
@@ -143,9 +144,12 @@
     <script src="~/assets/js/pages/datatable.js"></script>
     <script src="~/assets/plugins/kamadatepicker/kamadatepicker.min.js"></script>
     <script src="~/assets/js/pages/calendar-kama.js"></script>
+    <script src="~/assets/plugins/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+    <script src="~/assets/js/pages/clock.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
     @RenderSection("masterjs", required: false)
-    
+
 </body>
 
 </html>

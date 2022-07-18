@@ -11,6 +11,10 @@ namespace HS.Domain.Core.Dtos
         public int HomeServiceId { get; set; }
         public OrderStatusEnum Status { get; set; }
         public DateTime RegisterDate { get; set; }
+        public string? Description { get; set; }
+        public DateTime DateOfExecution { get; set; }
+        public string Clock { get; set; }
+        public string currentApplicationUserID { get; set; }
 
         #endregion Properties
 

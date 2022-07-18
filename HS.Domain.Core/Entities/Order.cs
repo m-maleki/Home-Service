@@ -11,7 +11,8 @@ namespace HS.Domain.Core.Entities
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public OrderStatusEnum Status { get; set; }
         public bool IsDeleted { get; set; } = false;
-
+        public string? Description { get; set; }
+        public DateTime DateOfExecution { get; set; }
         #endregion Properties
 
         #region Navigation properties

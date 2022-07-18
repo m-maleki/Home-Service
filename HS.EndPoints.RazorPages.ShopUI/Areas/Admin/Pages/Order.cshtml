@@ -1,34 +1,41 @@
 ﻿@page
 @model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.OrderModel
 @{
-     ViewData["Title"] = "سفارش ها";
+    ViewData["Title"] = "سفارش ها";
 }
 
 
 <a class="btn btn-success curve " style="float:right" data-bs-toggle="modal" data-bs-target="#createBrand">سفارش سرویس جدید</a>
 <br />
 <br />
+
 <table class="table table-bordered table-striped table-hover" id="data-table">
     <thead>
         <tr>
             <th>شناسه سفارش</th>
             <th>سفارش دهنده</th>
             <th>هوم سرویس</th>
-            <th>تاریخ ثبت</th>
+            <th>قیمت پایه</th>
+            <th>تاریخ ثبت درخواست</th>
+            <th>تاریخ اجرا درخواست</th>
+            <th>ساعت اجرا درخواست</th>
             <th>وضعیت</th>
             <th>عملیات</th>
         </tr>
     </thead>
     <tbody>
-        @if(Model.Orders !=null)
+        @if (Model.Orders != null)
         {
-         @foreach (var item in Model.Orders)
+            @foreach (var item in Model.Orders)
             {
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Customer.FirstName @item.Customer.FirstName</td>
                     <td>@item.HomeService.Name</td>
+                    <td>@item.HomeService.BasePrice</td>
                     <td>@item.RegisterDate</td>
+                    <td>@item.DateOfExecution</td>
+                    <td>@item.Clock</td>
                     <td>@item.Status</td>
                     <td>
                         <form method="get">
@@ -41,7 +48,7 @@
                         </form>
                     </td>
                 </tr>
-            } 
+            }
 
         }
 
@@ -59,20 +66,48 @@
             </div>
             <div class="modal-body">
                 <form method="post" asp-page-handler="Create">
-
-                        <div class="form-group">
-                            <label for="slc-province">هوم سرویس</label>
-                            <select name="HomeServicesIds" name="HomeServicesIds" class="form-control round" asp-items="Model.HomeServices"></select>
+                    <div class="form-group">
+                        <label>هوم سرویس</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-wrench"></i>
+                            </span>
+                            <select name="HomeServiceId" name="HomeServiceId" class="form-control round" asp-items="Model.HomeServices"></select>
                         </div>
+                    </div>
 
                     <div class="form-group">
-                        <label for="name">نام خانوادگی</label>
-                        <input type="text" class="form-control" id="family" name="family" placeholder="نام خانوادگی را وارد کنید" required>
+                        <label>تاریخ اجرا</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            <input name="DateOfExecution" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تولد" value="1401/01/01">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ساعت اجرا</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-clock"></i>
+                            </span>
+                            <input name="Clock" type="text" class="form-control clockpicker-autoclose round">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <textarea name="Description" class="form-control" rows="4"></textarea>
+                        </div>
                     </div>
 
                     <div style="float:left;">
                         <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
-                        <button type="submit" class="btn btn-danger curve" data-bs-dismiss="modal">بازگشت<div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
                     </div>
 
                 </form>

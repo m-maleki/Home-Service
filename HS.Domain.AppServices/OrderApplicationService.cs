@@ -21,9 +21,13 @@ namespace HS.Domain.ApplicationServices
             _customerService = customerService;
         }
 
-        public Task Create(OrderDto entity)
+        public async Task Create(OrderDto entity)
         {
-            throw new NotImplementedException();
+            entity.CustomerId= await _customerService.GetGuid(new Guid(entity.currentApplicationUserID));
+            string clock = entity.Clock;
+            TimeSpan time = new TimeSpan(int.Parse(clock.Substring(0,2)), int.Parse(clock.Substring(3, 2)),0);
+
+            await _orderService.Create(entity);
         }
 
         public async Task<OrderDto> Get(int Id)
@@ -34,8 +38,8 @@ namespace HS.Domain.ApplicationServices
 
         public async Task<List<OrderDto>> GetAllBy(Guid customerId)
         {
-            var applicatioUserId = await _customerService.GetGuid(customerId);
-             return await _orderService.GetAllBy(applicatioUserId);
+            var id = await _customerService.GetGuid(customerId);
+             return await _orderService.GetAllBy(id);
         }
 
 

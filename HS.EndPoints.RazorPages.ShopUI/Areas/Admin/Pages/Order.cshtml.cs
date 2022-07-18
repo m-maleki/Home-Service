@@ -37,5 +37,16 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID));
             Orders = _mapper.Map(result, Orders);
         }
+
+        public async Task OnPostCreate(OrderViewModel model)
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var OrderDto = new OrderDto();
+            _mapper.Map(model, OrderDto);
+            OrderDto.currentApplicationUserID = currentUserID;
+            _orderApplicationService.Create(OrderDto);
+        }
     }
 }

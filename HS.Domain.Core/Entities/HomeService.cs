@@ -12,6 +12,7 @@
         public bool IsDeleted { get; set; } = false;
         public int? HomeServiceSubCategoryId { get; set; }
         public string? ImgSrc { get; set; }
+        public double BasePrice { get; set; }
 
         #endregion Properties
 
