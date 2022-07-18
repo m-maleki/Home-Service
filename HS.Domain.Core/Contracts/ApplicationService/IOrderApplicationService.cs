@@ -1,22 +1,19 @@
-﻿using HS.Domain.Core.Dtos;
-using HS.Domain.Core.Entities;
+﻿
+using HS.Domain.Core.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HS.Domain.Core.Contracts.Service
+namespace HS.Domain.Core.Contracts.ApplicationService
 {
-    public interface IOrderService
+    public interface IOrderApplicationService
     {
         Task<OrderDto> Get(int Id);
         Task<List<OrderDto>> Get();
+        Task<List<OrderDto>> GetAllBy(Guid customerId);
         Task Create(OrderDto entity);
         Task Update(OrderDto entity);
-        Task EnsureExists(int Id);
-        Task EnsureDoesNotExist(int Id);
-        Task<List<OrderDto>> GetAllBy(Guid customerId);
-
     }
 }

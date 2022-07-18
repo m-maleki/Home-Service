@@ -9,5 +9,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<OrderDto> GetBy(int id);
         Task Create(OrderDto entity);
         Task Update(OrderDto entity);
+        Task<List<OrderDto>> GetAllBy(Guid customerId);
     }
 }

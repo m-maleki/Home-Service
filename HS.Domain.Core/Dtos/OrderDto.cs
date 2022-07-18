@@ -15,6 +15,7 @@ namespace HS.Domain.Core.Dtos
         #region Navigation properties
         public List<Image>? Images { get; set; }
         public List<Suggestion>? Suggestions { get; set; }
+        public Customer Customer { get; set; }
         public HomeService? HomeService { get; set; }
         #endregion Navigation properties
     }

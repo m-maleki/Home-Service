@@ -1,0 +1,104 @@
+﻿@page
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.OrderModel
+@{
+     ViewData["Title"] = "سفارش ها";
+}
+
+
+<a class="btn btn-success curve " style="float:right" data-bs-toggle="modal" data-bs-target="#createBrand">تعریف کاربر جدید</a>
+<br />
+<br />
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <thead>
+        <tr>
+            <th>شناسه سفارش</th>
+            <th>سفارش دهنده</th>
+            <th>خدمات</th>
+            <th>تاریخ ثبت</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model.users.user)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.name</td>
+                <td>@item.FullName</td>
+                <td>@item.enrolled_fingers</td>
+                <td>@item.enrolled_faces</td>
+                @{
+                    if (@item.active == "1")
+                    {
+                        <td>
+                            <button type="submit" class="btn btn-success curve">فعال</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <button type="submit" class="btn btn-danger curve">غیر فعال</button>
+                        </td>
+                    }
+                }
+                <td>
+                    <form method="get">
+                        <div class="portlet-body">
+                            <input type="hidden" name="id" id="id" value="@item.id">
+                            <button type="submit" asp-page="/Access/index" class="btn btn-primary curve">نمایش دسترسی ها</button>
+                            <button type="submit" asp-page="/Access/Create" class="btn btn-primary curve">تعریف دسترسی</button>
+                            <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve" disabled>حذف</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        }*@
+    </tbody>
+</table>
+
+<div class="modal fade" id="createBrand" tabindex="-1" role="dialog" aria-labelledby="createBrandLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">ثبت کاربر جدید</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Create">
+                    <div class="form-group">
+                        <label for="name">نام</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="نام را وارد کنید" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">نام خانوادگی</label>
+                        <input type="text" class="form-control" id="family" name="family" placeholder="نام خانوادگی را وارد کنید" required>
+                    </div>
+
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="submit" class="btn btn-danger curve" data-bs-dismiss="modal">بازگشت<div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div></button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section masterjs
+    {
+    <script>
+        $(document).ready(function() {
+            $(".table a").on("click", function() {
+                var dataId = $(this).attr("data-id");
+                var dataName = $(this).attr("data-name");
+                $("#Name").val(dataName);
+                $("#Id").val(dataId);
+            });
+        });
+    </script>
+}

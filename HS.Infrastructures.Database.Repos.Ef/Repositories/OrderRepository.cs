@@ -19,10 +19,33 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
 
         public async Task<List<OrderDto>> GetAll()
-            => _mapper.Map<List<OrderDto>>(await _context.Orders.ToListAsync());
+        {
+            var records = await _context.Orders
+                .Include(x=>x.Customer)
+                .Include(x=>x.HomeService)
+                .AsNoTracking()
+                .ToListAsync();
+            return _mapper.Map<List<OrderDto>>(records);
+        }
+
+        public async Task<List<OrderDto>> GetAllBy(Guid customerId)
+        {
+            var records = await _context.Orders
+                .Include(x => x.Customer)
+                .Include(x => x.HomeService)
+                .Where(x=>x.CustomerId== customerId)
+                .AsNoTracking()
+                .ToListAsync();
+            return _mapper.Map<List<OrderDto>>(records);
+        }
 
         public async Task<OrderDto> GetBy(int id)
-            => await _mapper.ProjectTo<OrderDto>(_context.Orders).Where(x => x.Id == id).SingleOrDefaultAsync();
+            => await _mapper.ProjectTo<OrderDto>(_context.Orders)
+            .Include(x => x.Customer)
+            .Include(x => x.HomeService)
+            .Where(x => x.Id == id)
+            .AsNoTracking()
+            .SingleOrDefaultAsync();
 
         public async Task Create(OrderDto entity)
         {
