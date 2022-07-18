@@ -5,6 +5,7 @@ using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.Entity;
 
 namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
 {
@@ -26,7 +27,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
 
         public async Task OnGet()
         {
-                await _seedIdentityData.Inistialize();
+             await _seedIdentityData.Inistialize();
         }
 
         public async Task OnPostLogout()

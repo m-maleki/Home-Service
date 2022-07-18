@@ -64,7 +64,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser();
-                if (User.IsInRole("Expert"))
+                if (model.Role =="Expert")
                 {
                      user = new ApplicationUser
                     {
@@ -74,7 +74,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
                     };
                 }
 
-                if (User.IsInRole("Customer"))
+                if (model.Role == "Customer")
                 {
                      user = new ApplicationUser
                     {

@@ -36,7 +36,7 @@ namespace HS.Domain.ApplicationServices
 
         public async Task Update(ExpertDto dto)
         {
-           await _expertService.EnsureExists(dto.ApplicationUserId);
+           //await _expertService.EnsureExists(dto.ApplicationUserId);
             if(dto.ProfileImgFile !=null)
                 dto.ProfileImgUrl = await _expertService.UploadImageProfile(dto.ProfileImgFile);
             await _expertService.AssignHomeService(dto);

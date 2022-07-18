@@ -20,12 +20,12 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
 
         public async Task<List<ExpertDto>> GetAll()
-          => _mapper.Map<List<ExpertDto>>(await _context.Experts.ToListAsync());
+          => _mapper.Map<List<ExpertDto>>(await _context.Experts.AsNoTracking().ToListAsync());
 
         public async Task<ExpertDto> GetBy(Guid id)
-          => await _mapper.ProjectTo<ExpertDto>(_context.Experts.Include(x=>x.HomeServices))
-            .Where(x => x.ApplicationUserId == id)
+          => await _mapper.ProjectTo<ExpertDto>(_context.Experts.AsNoTracking().Include(x=>x.HomeServices))
             .AsNoTracking()
+            .Where(x => x.ApplicationUserId == id)
             .FirstOrDefaultAsync();
 
         public async Task Create(ExpertDto entity)
@@ -38,13 +38,17 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public async Task Update(ExpertDto entity)
         {
             var record = await _context.Experts
-                .Include(x => x.HomeServices)
-                .Where(x => x.Id == entity.Id)
-                .SingleOrDefaultAsync();
-            record.HomeServices.Clear();
+               .Include(x => x.HomeServices)
+               .Where(x => x.Id == entity.Id)
+               .SingleOrDefaultAsync();
+                record.HomeServices.Clear();
+
+
+            foreach (var item in entity.HomeServicesIds)
+                record.HomeServices.Add(await _context.HomeServices.FirstOrDefaultAsync(x => x.Id == item));
+
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
-
         }
 
     }

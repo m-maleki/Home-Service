@@ -96,9 +96,10 @@ namespace HS.Domain.Services
         {
             foreach (var homeServiceId in entity.HomeServicesIds)
             {
-                var expert = await _homeServiceRepository.GetBy(homeServiceId);
+                var record = await _homeServiceRepository.GetBy(homeServiceId);
                 var homeService = new HomeService();
-                _mapper.Map(expert, homeService);
+
+                _mapper.Map(record, homeService);
                 entity.HomeServices.Add(homeService);
             }
             return entity;

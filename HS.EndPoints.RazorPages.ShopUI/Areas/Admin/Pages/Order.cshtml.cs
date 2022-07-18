@@ -4,6 +4,7 @@ using HS.Domain.Core.Dtos;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
@@ -11,17 +12,26 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
     public class OrderModel : PageModel
     {
         private readonly IOrderApplicationService _orderApplicationService;
+        private readonly IHomeServiceApplicationService _homeServiceApplicationService;
+
         public List<OrderViewModel>? Orders;
         private readonly IMapper _mapper;
+        public SelectList HomeServices { get; set; }
 
-        public OrderModel(IOrderApplicationService orderApplicationService, IMapper mapper)
+        public OrderModel(IOrderApplicationService orderApplicationService,
+            IMapper mapper,
+            IHomeServiceApplicationService homeServiceApplicationService)
         {
             _orderApplicationService = orderApplicationService;
             _mapper = mapper;
+            _homeServiceApplicationService = homeServiceApplicationService;
         }
 
         public async Task OnGet()
         {
+            HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
+
+
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID));

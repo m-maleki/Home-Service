@@ -19,11 +19,20 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
 
         public async Task<List<HomeServiceDto>> GetAll()
-            => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices.AsNoTracking().ToListAsync());
+            => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
+                .AsNoTracking()
+                .ToListAsync());
 
         public async Task<HomeServiceDto> GetBy(int id)
-           => await _mapper.ProjectTo<HomeServiceDto>(_context.HomeServices.Include(x => x.HomeServiceSubCategory))
-            .Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
+        {
+            var record = await _context.HomeServices.AsNoTracking().Where(x => x.Id == id).SingleAsync();
+            var homeServiceDto = new HomeServiceDto();
+            _mapper.Map(record, homeServiceDto);
+            return homeServiceDto;
+            //=> await _mapper.ProjectTo<HomeServiceDto>(_context.HomeServices.AsNoTracking().Include(x => x.HomeServiceSubCategory))
+            // .Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
+        }
+
 
 
 

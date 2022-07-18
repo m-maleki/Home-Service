@@ -4,6 +4,7 @@ using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
+using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,6 +19,8 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         private readonly ICityApplicationService _cityApplicationService;
         private readonly IHomeServiceApplicationService _homeServiceApplicationService;
         private readonly ICustomerApplicationService _customerApplicationService;
+        private readonly IExpertRepository _expertRepository;
+
         public SelectList Cities { get; set; }
         public SelectList HomeServices { get; set; }
         public List<HomeService> HomeServicesUser { get; set; } = new List<HomeService>();
@@ -27,13 +30,15 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             IMapper mapper,
             ICityApplicationService cityApplicationService,
             IHomeServiceApplicationService homeServiceApplicationService,
-            ICustomerApplicationService customerApplicationService)
+            ICustomerApplicationService customerApplicationService,
+            IExpertRepository expertRepository)
         {
             _expertApplicationService = expertApplicationService;
             _mapper = mapper;
             _cityApplicationService = cityApplicationService;
             _homeServiceApplicationService = homeServiceApplicationService;
             _customerApplicationService = customerApplicationService;
+            _expertRepository = expertRepository;
         }
 
         public UserViewModel UserViewModel = new UserViewModel();
@@ -43,7 +48,9 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             if (User.IsInRole("Expert"))
             {
                 var user = new ExpertDto();
-                _mapper.Map(model, user);
+                 _mapper.Map(model, user);
+                var Expert = new Expert();
+               // await _expertRepository.Update(user);
                 await _expertApplicationService.Update(user);
             }
 
