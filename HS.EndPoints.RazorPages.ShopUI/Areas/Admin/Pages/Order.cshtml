@@ -1,4 +1,7 @@
 ﻿@page
+@using Framework.Utilities
+@using System.ComponentModel.DataAnnotations;
+@using HS.Domain.Core.Enums
 @model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.OrderModel
 @{
     ViewData["Title"] = "سفارش ها";
@@ -15,10 +18,9 @@
             <th>شناسه سفارش</th>
             <th>سفارش دهنده</th>
             <th>هوم سرویس</th>
-            <th>قیمت پایه</th>
             <th>تاریخ ثبت درخواست</th>
-            <th>تاریخ اجرا درخواست</th>
-            <th>ساعت اجرا درخواست</th>
+            <th>تاریخ اجرا </th>
+            <th>ساعت اجرا </th>
             <th>وضعیت</th>
             <th>عملیات</th>
         </tr>
@@ -28,21 +30,19 @@
         {
             @foreach (var item in Model.Orders)
             {
+                
                 <tr>
                     <td>@item.Id</td>
-                    <td>@item.Customer.FirstName @item.Customer.FirstName</td>
+                    <td>@item.Customer.FirstName @item.Customer.LastName</td>
                     <td>@item.HomeService.Name</td>
-                    <td>@item.HomeService.BasePrice</td>
-                    <td>@item.RegisterDate</td>
-                    <td>@item.DateOfExecution</td>
-                    <td>@item.Clock</td>
-                    <td>@item.Status</td>
+                    <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>@item.DateOfExecution.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>@item.DateOfExecution.ToString("H:mm")</td>
+                    <td>@item.Status.GetEnumDisplayName()</td>
                     <td>
                         <form method="get">
                             <div class="portlet-body">
                                 <input type="hidden" name="id" id="id" value="@item.Id">
-                                <button type="submit" asp-page="/Access/index" class="btn btn-primary curve">نمایش دسترسی ها</button>
-                                <button type="submit" asp-page="/Access/Create" class="btn btn-primary curve">تعریف دسترسی</button>
                                 <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve" disabled>حذف</button>
                             </div>
                         </form>

@@ -38,7 +38,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             Orders = _mapper.Map(result, Orders);
         }
 
-        public async Task OnPostCreate(OrderViewModel model)
+        public async Task<IActionResult> OnPostCreate(OrderViewModel model)
         {
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -46,7 +46,10 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             var OrderDto = new OrderDto();
             _mapper.Map(model, OrderDto);
             OrderDto.currentApplicationUserID = currentUserID;
-            _orderApplicationService.Create(OrderDto);
+           await _orderApplicationService.Create(OrderDto);
+
+            return LocalRedirect("/Admin/Order");
+            
         }
     }
 }

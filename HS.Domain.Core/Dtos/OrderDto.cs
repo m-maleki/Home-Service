@@ -10,7 +10,7 @@ namespace HS.Domain.Core.Dtos
         public Guid CustomerId { get; set; }
         public int HomeServiceId { get; set; }
         public OrderStatusEnum Status { get; set; }
-        public DateTime RegisterDate { get; set; }
+        public DateTime RegisterDate { get; set; } = DateTime.Now;
         public string? Description { get; set; }
         public DateTime DateOfExecution { get; set; }
         public string Clock { get; set; }

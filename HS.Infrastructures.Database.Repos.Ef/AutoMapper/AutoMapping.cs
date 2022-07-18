@@ -9,7 +9,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
     {
         public AutoMapping()
         {
-         CreateMap<HomeServiceSubCategory, HomeServiceSubCategoryDto>();
+            CreateMap<HomeServiceSubCategory, HomeServiceSubCategoryDto>();
             CreateMap<HomeServiceCategory, HomeServiceCategoryDto>();
 
 
@@ -18,17 +18,18 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
             //.ForMember(x => x.HomeServiceSubCategoryId, opt => opt.Ignore());
 
             CreateMap<HomeService, HomeServiceDto>();
-         //.ForMember(x => x.Id, opt => opt.Ignore());
+            //.ForMember(x => x.Id, opt => opt.Ignore());
 
             CreateMap<Suggestion, SuggestionDto>();
-         CreateMap<Customer, CustomerDto>().ReverseMap();
-         CreateMap<Comment, CommentDto>();
-         CreateMap<Expert, ExpertDto>();
+            CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<Comment, CommentDto>();
+            CreateMap<Expert, ExpertDto>();
             CreateMap<ExpertDto, Expert>()
             .ForMember(x => x.HomeServices, opt => opt.Ignore());
-        // .ReverseMap();
+            CreateMap<OrderDto, Order>();
+            // .ReverseMap();
             CreateMap<Image, ImageDto>();
-         CreateMap<Order, OrderDto>();
+            CreateMap<Order, OrderDto>();
 
         }
     }

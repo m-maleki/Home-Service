@@ -66,7 +66,7 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 builder.Services.AddScoped<IOrderApplicationService, OrderApplicationService>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderRepository, OrdersRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();

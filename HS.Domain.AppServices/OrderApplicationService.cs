@@ -3,6 +3,7 @@ using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,11 @@ namespace HS.Domain.ApplicationServices
         public async Task Create(OrderDto entity)
         {
             entity.CustomerId= await _customerService.GetGuid(new Guid(entity.currentApplicationUserID));
-            string clock = entity.Clock;
-            TimeSpan time = new TimeSpan(int.Parse(clock.Substring(0,2)), int.Parse(clock.Substring(3, 2)),0);
-
+            PersianCalendar pc = new PersianCalendar();
+            TimeSpan time = new TimeSpan(int.Parse(entity.Clock.Substring(0,2)), int.Parse(entity.Clock.Substring(3, 2)),0);
+            entity.DateOfExecution = new DateTime(entity.DateOfExecution.Year, entity.DateOfExecution.Month, entity.DateOfExecution.Day,  pc);
+            entity.DateOfExecution =  entity.DateOfExecution.Add(time);
+            var t = DateTime.Now;
             await _orderService.Create(entity);
         }
 
@@ -41,8 +44,6 @@ namespace HS.Domain.ApplicationServices
             var id = await _customerService.GetGuid(customerId);
              return await _orderService.GetAllBy(id);
         }
-
-
 
         public Task Update(OrderDto entity)
         {
