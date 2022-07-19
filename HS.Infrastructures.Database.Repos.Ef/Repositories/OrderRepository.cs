@@ -48,12 +48,29 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             .AsNoTracking()
             .SingleOrDefaultAsync();
 
-        public async Task Create(OrderDto entity)
+        public async Task<int> Create(OrderDto entity)
         {
             var record = _mapper.Map<Order>(entity);
             record.RegisterDate = DateTime.Now;
             record.Status = OrderStatusEnum.WaitingSpecialistSelection;
             await _context.Orders.AddAsync(record);
+            await _context.SaveChangesAsync();
+            return record.Id;
+        }
+
+        public async Task addOrderFiles(List<OrderFileDto> dto, int orderId)
+        {
+            foreach (var file in dto)
+            {
+                OrderFile productFile = new OrderFile
+                {
+                    OrderId=orderId,
+                    Name = file.Name,
+                    CreationDate = DateTime.Now,
+                    IsDeleted = false,
+                };
+                _context.OrderFiles.Add(productFile);
+            }
             await _context.SaveChangesAsync();
         }
 

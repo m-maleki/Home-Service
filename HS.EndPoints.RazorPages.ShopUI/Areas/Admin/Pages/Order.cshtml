@@ -30,7 +30,7 @@
         {
             @foreach (var item in Model.Orders)
             {
-                
+
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Customer.FirstName @item.Customer.LastName</td>
@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" asp-page-handler="Create">
+                <form method="post" enctype="multipart/form-data" asp-page-handler="Create">
                     <div class="form-group">
                         <label>هوم سرویس</label>
                         <div class="input-group">
@@ -105,6 +105,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group relative">
+                        <input name="FormFile" id="FormFile" class="form-control" type="file" placeholder="برای آپلود کلیک کنید" multiple />
+                        <div class="input-group round">
+                            <span class="input-group-btn">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info">
+                                        <i class="icon-picture"></i>
+                                        آپلود عکس
+                                        <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                    </button>
+                                </span>
+                        </div><!-- /.input-group -->
+                        <div class="help-block"></div>
+                    </div>
                     <div style="float:left;">
                         <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
                         <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>

@@ -18,7 +18,7 @@
 
         #region Navigation properties
         public HomeServiceSubCategory? HomeServiceSubCategory { get; set; }
-        public Order? Orders { get; set; }
+        public List<Order> Orders { get; set; }
         public List<Expert>? Experts { get; set; } = new List<Expert>();
         #endregion Navigation properties
     }

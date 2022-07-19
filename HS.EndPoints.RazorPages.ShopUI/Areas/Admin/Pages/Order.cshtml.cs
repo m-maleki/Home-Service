@@ -31,7 +31,6 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         {
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
 
-
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID));
@@ -46,7 +45,8 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             var OrderDto = new OrderDto();
             _mapper.Map(model, OrderDto);
             OrderDto.currentApplicationUserID = currentUserID;
-           await _orderApplicationService.Create(OrderDto);
+
+           await _orderApplicationService.Create(OrderDto,model.FormFile);
 
             return LocalRedirect("/Admin/Order");
             

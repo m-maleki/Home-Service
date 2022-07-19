@@ -10,8 +10,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.Configuration
         {
             builder.HasKey(x => x.Id);
             builder.ToTable("Orders");
+
             builder.HasOne(x => x.HomeService)
-                .WithOne(x => x.Orders);
+                .WithMany(x => x.Orders);
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Orders);

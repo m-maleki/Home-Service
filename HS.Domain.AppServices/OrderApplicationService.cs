@@ -1,6 +1,7 @@
 ﻿using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,15 +23,16 @@ namespace HS.Domain.ApplicationServices
             _customerService = customerService;
         }
 
-        public async Task Create(OrderDto entity)
+        public async Task Create(OrderDto entity, List<IFormFile> FormFile)
         {
             entity.CustomerId= await _customerService.GetGuid(new Guid(entity.currentApplicationUserID));
             PersianCalendar pc = new PersianCalendar();
             TimeSpan time = new TimeSpan(int.Parse(entity.Clock.Substring(0,2)), int.Parse(entity.Clock.Substring(3, 2)),0);
             entity.DateOfExecution = new DateTime(entity.DateOfExecution.Year, entity.DateOfExecution.Month, entity.DateOfExecution.Day,  pc);
             entity.DateOfExecution =  entity.DateOfExecution.Add(time);
-            var t = DateTime.Now;
-            await _orderService.Create(entity);
+            var orderId = await _orderService.Create(entity);
+            var files = await _orderService.UploadFiles(FormFile, orderId);
+            await _orderService.SetOrderFiles(files, orderId);
         }
 
         public async Task<OrderDto> Get(int Id)

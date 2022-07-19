@@ -15,7 +15,6 @@ namespace HS.Domain.Core.Dtos
         public DateTime DateOfExecution { get; set; }
         public string Clock { get; set; }
         public string currentApplicationUserID { get; set; }
-
         #endregion Properties
 
         #region Navigation properties
@@ -23,6 +22,8 @@ namespace HS.Domain.Core.Dtos
         public List<Suggestion>? Suggestions { get; set; }
         public Customer Customer { get; set; }
         public HomeService? HomeService { get; set; }
+        public List<OrderFileDto> files { get; set; } = new List<OrderFileDto>();
+
         #endregion Navigation properties
     }
 }

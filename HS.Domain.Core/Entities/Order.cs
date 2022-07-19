@@ -20,6 +20,7 @@ namespace HS.Domain.Core.Entities
         public List<Image>? Images { get; set; }
         public List<Suggestion>? Suggestions { get; set; }
         public HomeService? HomeService { get; set; }
+        public virtual ICollection<OrderFile> OrderFiles { get; set; }
 
         #endregion Navigation properties
     }

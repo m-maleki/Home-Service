@@ -1,5 +1,6 @@
 ﻿
 using HS.Domain.Core.Dtos;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<OrderDto> Get(int Id);
         Task<List<OrderDto>> Get();
         Task<List<OrderDto>> GetAllBy(Guid customerId);
-        Task Create(OrderDto entity);
+        Task Create(OrderDto entity, List<IFormFile> FormFile);
         Task Update(OrderDto entity);
     }
 }

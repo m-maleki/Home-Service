@@ -1,4 +1,5 @@
-﻿using HS.Domain.Core.Entities;
+﻿using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 using HS.Domain.Core.Enums;
 
 namespace HS.EndPoints.RazorPages.UI.Model
@@ -22,6 +23,9 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public List<Suggestion>? Suggestions { get; set; }
         public Customer Customer { get; set; }
         public HomeService? HomeService { get; set; }
+        public List<IFormFile> FormFile { get; set; } 
+
+
         #endregion Navigation properties
     }
 }

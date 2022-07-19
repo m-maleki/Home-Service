@@ -19,7 +19,7 @@
         </li>
         <li>
             <a asp-page="/Order">
-                <i class="icon-home"></i>
+                <i class="icon-docs"></i>
                 <span> سفارش ها</span>
             </a>
         </li>
@@ -35,7 +35,7 @@
                 {
                     <li>
                         <a asp-page="/UserManagement">
-                            <i class="icon-home"></i>
+                            <i class="icon-people"></i>
                             <span>مدیریت کاربران</span>
                         </a>
                     </li>
@@ -44,31 +44,26 @@
                 @if (role == "Expert")
                 {
                     <li>
-                        <a asp-page="/UserManagement">
-                            <i class="icon-home"></i>
+                        <a asp-page="/Profile">
+                            <i class="icon-badge"></i>
                             <span>مهارت ها</span>
                         </a>
                     </li>
 
                     <li>
-                        <a asp-page="/Device/Index">
-                            <i class="icon-home"></i>
+                        <a >
+                            <i class="icon-equalizer"></i>
                             <span>پیشنهاد ها</span>
                         </a>
                     </li>
-                    <li>
-                        <a asp-page="/Device/Index">
-                            <i class="icon-home"></i>
-                            <span>آیتم منو</span>
-                        </a>
-                    </li>
+
                 }
 
                 @if (role == "Customer")
                 {
                     <li>
-                        <a asp-page="/UserManagement">
-                            <i class="icon-home"></i>
+                        <a >
+                            <i class="icon-layers"></i>
                             <span>فاکتورها</span>
                         </a>
                     </li>
