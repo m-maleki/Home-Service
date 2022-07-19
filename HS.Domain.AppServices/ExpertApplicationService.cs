@@ -19,11 +19,15 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
-        public Task<ExpertDto> Get(Guid id)
-            =>_expertService.Get(id);
+        public async Task<ExpertDto> Get(Guid id)
+        {
+            var expertId= await _expertService.GetExpertId(id);
+            return await _expertService.Get(expertId);
+        }
+            //=>_expertService.Get(id);
 
-        public Task<ExpertDto> Get(string email)
-           => _expertService.Get(email);
+        public async Task<ExpertDto> Get(string email)
+           => await _expertService.Get(email);
 
         public async Task<List<ExpertDto>> GetAll()
             => await _expertService.Get();

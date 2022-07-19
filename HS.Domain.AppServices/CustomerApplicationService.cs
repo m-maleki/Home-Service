@@ -26,8 +26,12 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
-        public Task<CustomerDto> Get(Guid id)
-            =>_customerService.Get(id);
+        public async Task<CustomerDto> Get(Guid id)
+        {
+            var customer =await _customerService.GetCustomerId(id);
+            return await _customerService.Get(customer);
+        }
+          
 
         public Task<CustomerDto> Get(string email)
             => _customerService.Get(email);

@@ -20,13 +20,24 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
 
         public async Task<List<ExpertDto>> GetAll()
-          => _mapper.Map<List<ExpertDto>>(await _context.Experts.AsNoTracking().ToListAsync());
+          => _mapper.Map<List<ExpertDto>>(await _context.Experts
+              .AsNoTracking()
+              .Include(x=>x.HomeServices)
+              .ToListAsync());
+
+        public async Task<List<ExpertDto>> GetAll(Guid id)
+         => _mapper.Map<List<ExpertDto>>(await _context.Experts
+              .AsNoTracking()
+              .Include(x => x.HomeServices)
+              .Where(x=>x.Id==id)
+              .ToListAsync());
 
         public async Task<ExpertDto> GetBy(Guid id)
-          => await _mapper.ProjectTo<ExpertDto>(_context.Experts.AsNoTracking().Include(x=>x.HomeServices))
-            .AsNoTracking()
-            .Where(x => x.ApplicationUserId == id)
-            .FirstOrDefaultAsync();
+          => await _mapper.ProjectTo<ExpertDto>(_context.Experts
+              .AsNoTracking()
+              .Include(x=>x.HomeServices))
+              .Where(x => x.Id == id)
+              .FirstOrDefaultAsync();
 
         public async Task Create(ExpertDto entity)
         {

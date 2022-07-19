@@ -76,15 +76,15 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
                 if (expert.HomeServices != null)
                     HomeServicesUser = expert.HomeServices;
                 HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-                var user = await _expertApplicationService.Get(User.Identity.Name);
-                _mapper.Map(user, UserViewModel);
+               // var user = await _expertApplicationService.Get(new Guid(currentUserID));
+                _mapper.Map(expert, UserViewModel);
             }
 
             if (User.IsInRole("Customer"))
             {
                 var customer = await _customerApplicationService.Get(new Guid(currentUserID));
-                var user = await _customerApplicationService.Get(User.Identity.Name);
-                _mapper.Map(user, UserViewModel);
+                //var user = await _customerApplicationService.Get(User.Identity.Name);
+                _mapper.Map(customer, UserViewModel);
             }
         }
     }

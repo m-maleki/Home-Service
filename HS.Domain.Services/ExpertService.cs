@@ -17,18 +17,21 @@ namespace HS.Domain.Services
         private readonly IExpertRepository _expertRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHomeServiceRepository _homeServiceRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
 
 
         public ExpertService(IExpertRepository expertRepository,
             UserManager<ApplicationUser> userManager,
             IHomeServiceRepository homeServiceRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IOrderRepository orderRepository)
         {
             _expertRepository = expertRepository;
             _userManager = userManager;
             _homeServiceRepository = homeServiceRepository;
             _mapper = mapper;
+            _orderRepository = orderRepository;
         }
 
         public async Task Create(ExpertDto entity)
@@ -61,7 +64,9 @@ namespace HS.Domain.Services
 
         public async Task<ExpertDto> Get(string email)
         {
-            var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
+            var user = await _userManager.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Email == email);
             return await _expertRepository.GetBy(user!.Id);
         }
 
@@ -110,7 +115,38 @@ namespace HS.Domain.Services
 
         public async Task<List<OrderDto>> GetAllBy(Guid expertId)
         {
-            return await _expertRepository.GetAllBy(expertId);  
+      
+
+            List<Order> result = new List<Order>();
+
+            //var orders = await _context.Orders
+            //    .Include(x => x.Customer)
+            //    .Include(x => x.HomeService)
+            //    .AsNoTracking()
+            //    .ToListAsync();
+            var orders =await _orderRepository.GetAll();
+
+
+            //var expertHomeService = await _context.Experts
+            //    .Include(x => x.HomeServices)
+            //    .Where(x => x.Id == expertId)
+            //    .AsNoTracking()
+            //    .FirstAsync();
+            var expertHomeService =await _expertRepository.GetBy(expertId);
+
+
+            //foreach (var expertService in expertHomeService.HomeServices)
+            //{
+            //    foreach (var order in orders)
+            //    {
+            //        if (expertService.Name == order.HomeService.Name)
+            //            result.Add(order);
+            //    }
+            //}
+
+            return await _expertRepository.GetAllBy(expertId);
+            //return _mapper.Map<List<OrderDto>>(result);
+
         }
     }
 }

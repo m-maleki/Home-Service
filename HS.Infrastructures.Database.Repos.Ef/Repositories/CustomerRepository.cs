@@ -23,7 +23,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task<CustomerDto> GetBy(Guid id)
           => await _mapper.ProjectTo<CustomerDto>(_context.Customers)
-            .Where(x => x.ApplicationUserId == id).AsNoTracking()
+            .Where(x => x.Id == id)
+            .AsNoTracking()
             .SingleOrDefaultAsync();
 
         public async Task<CustomerDto> GetBy(string mobileNumber)
