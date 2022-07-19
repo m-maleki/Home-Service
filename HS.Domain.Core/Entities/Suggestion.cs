@@ -5,6 +5,7 @@
         #region Properties
         public int Id { get; set; }
         public int OrderId { get; set; }
+        public string? Description { get; set; }
         public Guid ExpertId { get; set; }
         public double SuggestedPrice { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;

@@ -7,8 +7,10 @@
     ViewData["Title"] = "سفارش ها";
 }
 
-
-<a class="btn btn-success curve " style="float:right" data-bs-toggle="modal" data-bs-target="#createBrand">سفارش سرویس جدید</a>
+@if (@User.IsInRole("Customer"))
+{
+    <a class="btn btn-success curve " style="float:right" data-bs-toggle="modal" data-bs-target="#create">سفارش سرویس جدید</a>
+}
 <br />
 <br />
 
@@ -16,7 +18,11 @@
     <thead>
         <tr>
             <th>شناسه سفارش</th>
-            <th>سفارش دهنده</th>
+            @if (@User.IsInRole("Customer"))
+            {
+                <th>سفارش دهنده</th>
+            }
+
             <th>هوم سرویس</th>
             <th>تاریخ ثبت درخواست</th>
             <th>تاریخ اجرا </th>
@@ -33,19 +39,32 @@
 
                 <tr>
                     <td>@item.Id</td>
-                    <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                    @if (@User.IsInRole("Customer"))
+                    {
+                        <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                    }
                     <td>@item.HomeService.Name</td>
                     <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
                     <td>@item.DateOfExecution.ToPersianString("dddd, dd MMMM,yyyy")</td>
                     <td>@item.DateOfExecution.ToString("H:mm")</td>
                     <td>@item.Status.GetEnumDisplayName()</td>
                     <td>
-                        <form method="get">
+                        @if (@User.IsInRole("Expert"))
+                        {
                             <div class="portlet-body">
                                 <input type="hidden" name="id" id="id" value="@item.Id">
-                                <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve" disabled>حذف</button>
+                                <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve" disabled>ارائه پیشنهاد</a>
                             </div>
-                        </form>
+                        }
+
+                        @if (@User.IsInRole("Customer"))
+                        {
+                            <div class="portlet-body">
+                                <input type="hidden" name="id" id="id" value="@item.Id">
+                                <a data-bs-toggle="modal" data-bs-target="#" asp-page-handler="Delete" class="btn btn-primary curve" disabled>پیشنهادها</a>
+                            </div>
+                        }
+
                     </td>
                 </tr>
             }
@@ -54,8 +73,70 @@
 
     </tbody>
 </table>
+<div class="modal fade" id="createSuggest" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">ارائه پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post"  asp-page-handler="CreateSuggest">
 
-<div class="modal fade" id="createBrand" tabindex="-1" role="dialog" aria-labelledby="createBrandLabel" aria-hidden="true">
+                    <input type="text" id="OrderId" name="OrderId"/>
+                    <input type="text" id="ExpertId" name="ExpertId"/>
+
+                    <div class="form-group">
+                        <label>قیمت پیشنهادی</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            <input name="SuggestedPrice" type="number" class="form-control round">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تاریخ تحویل</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            <input name="DurationOfWork" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تحویل" value="1401/01/01">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <textarea name="Description" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -135,10 +216,10 @@
     <script>
         $(document).ready(function() {
             $(".table a").on("click", function() {
-                var dataId = $(this).attr("data-id");
-                var dataName = $(this).attr("data-name");
-                $("#Name").val(dataName);
-                $("#Id").val(dataId);
+                var OrderId = $(this).attr("Order-Id");
+                var ExpertId = $(this).attr("Expert-Id");
+                $("#OrderId").val(OrderId);
+                $("#ExpertId").val(ExpertId);
             });
         });
     </script>

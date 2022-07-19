@@ -1,8 +1,8 @@
 ﻿using HS.Domain.Core.Entities;
 
-namespace HS.Domain.Core.Dtos
+namespace HS.EndPoints.RazorPages.UI.Model
 {
-    public class SuggestionDto
+    public class SuggestionViewModel
     {
         #region Properties
         public int Id { get; set; }

@@ -15,6 +15,7 @@ namespace HS.EndPoints.RazorPages.UI.Model
             CreateMap<HomeService, HomeServiceViewModel>().ReverseMap();
             CreateMap<Order, OrderViewModel>().ReverseMap();
             CreateMap<OrderDto, OrderViewModel>().ReverseMap();
+            CreateMap<SuggestionViewModel, SuggestionDto>();
 
         }
     }

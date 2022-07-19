@@ -1,14 +1,13 @@
 ﻿using HS.Domain.Core.Dtos;
-using HS.Domain.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HS.Domain.Core.Contracts.Service
+namespace HS.Domain.Core.Contracts.ApplicationService
 {
-    public interface ISuggestionService
+    public interface ISuggestionApplicationService
     {
         Task<SuggestionDto> Get(int Id);
         Task<List<SuggestionDto>> Get();
@@ -16,6 +15,5 @@ namespace HS.Domain.Core.Contracts.Service
         Task Update(SuggestionDto entity);
         Task EnsureExists(int Id);
         Task EnsureDoesNotExist(int Id);
-
     }
 }

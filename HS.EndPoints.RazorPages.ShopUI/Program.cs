@@ -69,6 +69,11 @@ builder.Services.AddScoped<IOrderApplicationService, OrderApplicationService>();
 builder.Services.AddScoped<IOrderRepository, OrdersRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
+builder.Services.AddScoped<ISuggestionApplicationService, SuggestionApplicationService>();
+builder.Services.AddScoped<ISuggestionRepository, SuggestionsRepository>();
+builder.Services.AddScoped<ISuggestionService, SuggestionService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

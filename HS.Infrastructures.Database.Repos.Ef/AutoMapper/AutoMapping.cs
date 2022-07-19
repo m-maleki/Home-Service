@@ -30,6 +30,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
             // .ReverseMap();
             CreateMap<Image, ImageDto>();
             CreateMap<Order, OrderDto>();
+            CreateMap<SuggestionDto, Suggestion>();
 
         }
     }

@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 {
-    public class SuggestionRepository :  ISuggestionRepository
+    public class SuggestionsRepository :  ISuggestionRepository
     {
         private readonly IMapper _mapper;
         private readonly HSDbContext _context;
 
-        public SuggestionRepository(HSDbContext context, IMapper mapper)
+        public SuggestionsRepository(HSDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -24,12 +24,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public async Task<SuggestionDto> GetBy(int id)
             => await _mapper.ProjectTo<SuggestionDto>(_context.Suggestions).Where(x => x.Id == id).SingleOrDefaultAsync();
 
-        public async Task Create(SuggestionDto entity)
-        {
-            var record = _mapper.Map<Suggestion>(entity);
-            await _context.Suggestions.AddAsync(record);
-            await _context.SaveChangesAsync();
-        }
+
 
         public async Task Update(SuggestionDto entity)
         {
@@ -38,5 +33,13 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
+
+        public async Task Create(SuggestionDto entity)
+        {
+            var record = _mapper.Map<Suggestion>(entity);
+            await _context.Suggestions.AddAsync(record);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }
