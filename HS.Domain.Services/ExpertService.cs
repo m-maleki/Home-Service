@@ -115,38 +115,18 @@ namespace HS.Domain.Services
 
         public async Task<List<OrderDto>> GetAllBy(Guid expertId)
         {
-      
+            List<Order> result = new();
+            var expertHomeService = await _expertRepository.GetBy(expertId);
+            var orders = _mapper.Map<List<Order>>(await _orderRepository.GetAll());
+           
+            foreach (var expertService in expertHomeService.HomeServices)
+                foreach (var order in orders)
+                {
+                    if (expertService.Name == order.HomeService.Name)
+                        result.Add(order);
+                }
 
-            List<Order> result = new List<Order>();
-
-            //var orders = await _context.Orders
-            //    .Include(x => x.Customer)
-            //    .Include(x => x.HomeService)
-            //    .AsNoTracking()
-            //    .ToListAsync();
-            var orders =await _orderRepository.GetAll();
-
-
-            //var expertHomeService = await _context.Experts
-            //    .Include(x => x.HomeServices)
-            //    .Where(x => x.Id == expertId)
-            //    .AsNoTracking()
-            //    .FirstAsync();
-            var expertHomeService =await _expertRepository.GetBy(expertId);
-
-
-            //foreach (var expertService in expertHomeService.HomeServices)
-            //{
-            //    foreach (var order in orders)
-            //    {
-            //        if (expertService.Name == order.HomeService.Name)
-            //            result.Add(order);
-            //    }
-            //}
-
-            return await _expertRepository.GetAllBy(expertId);
-            //return _mapper.Map<List<OrderDto>>(result);
-
+            return _mapper.Map<List<OrderDto>>(result);
         }
     }
 }
