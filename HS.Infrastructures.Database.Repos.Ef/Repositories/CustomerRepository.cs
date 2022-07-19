@@ -48,12 +48,22 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Guid> GetGuid(Guid customerId)
+        public async Task<Guid> GetCustomerId(Guid CustomerIdentityId)
         {
             return await _context.Customers
-                .Where(x => x.ApplicationUserId == customerId)
+                .Where(x => x.ApplicationUserId == CustomerIdentityId)
                 .Select(x=>x.Id)
                 .FirstAsync();
+        }
+        public async Task<List<OrderDto>> GetAllBy(Guid customerId)
+        {
+            var records = await _context.Orders
+                .Include(x => x.Customer)
+                .Include(x => x.HomeService)
+                .Where(x => x.CustomerId == customerId)
+                .AsNoTracking()
+                .ToListAsync();
+            return _mapper.Map<List<OrderDto>>(records);
         }
     }
 }

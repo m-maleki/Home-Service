@@ -37,8 +37,13 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
-        public Task<Guid> GetGuid(Guid customerId)
-           => _customerService.GetGuid(customerId);
+        public async Task<List<OrderDto>> GetAllBy(Guid customerId)
+        {
+            return await _customerService.GetAllBy(customerId);
+        }
+
+        public Task<Guid> GetCustomerId(Guid CustomerIdentityId)
+            => _customerService.GetCustomerId(CustomerIdentityId);
 
 
         public Task Set(CustomerDto dto)

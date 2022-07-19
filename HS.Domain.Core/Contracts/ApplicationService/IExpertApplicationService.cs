@@ -9,6 +9,8 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<ExpertDto> Get(Guid id);
         Task<ExpertDto> Get(string email);
         Task Update(ExpertDto dto);
+        Task<Guid> GetExpertId(Guid expertIdentityId);
         Task Delete(Guid id);
+        Task<List<OrderDto>> GetAllBy(Guid expertId);
     }
 }

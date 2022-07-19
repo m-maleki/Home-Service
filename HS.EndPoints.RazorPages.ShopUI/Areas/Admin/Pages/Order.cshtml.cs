@@ -30,10 +30,10 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         public async Task OnGet()
         {
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID));
+            bool isExpert = User.IsInRole("Expert");
+            var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID), isExpert);
             Orders = _mapper.Map(result, Orders);
         }
 

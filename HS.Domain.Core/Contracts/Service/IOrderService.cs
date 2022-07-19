@@ -17,7 +17,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task Update(OrderDto entity);
         Task EnsureExists(int Id);
         Task EnsureDoesNotExist(int Id);
-        Task<List<OrderDto>> GetAllBy(Guid customerId);
         Task SetOrderFiles(List<OrderFileDto> dto, int orderId);
         Task<List<OrderFileDto>> UploadFiles(List<IFormFile> FormFile, int orderId);
     }

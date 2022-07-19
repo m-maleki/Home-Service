@@ -39,10 +39,9 @@ namespace HS.Domain.Services
           => await _orderRepository.GetBy(Id);
 
         public async Task<List<OrderDto>> Get()
-           => await _orderRepository.GetAll();
-
-        public async Task<List<OrderDto>> GetAllBy(Guid customerId)
-           => await _orderRepository.GetAllBy(customerId);
+        {
+            return await _orderRepository.GetAll();
+        }
 
         public async Task SetOrderFiles(List<OrderFileDto> dto, int orderId)
         {

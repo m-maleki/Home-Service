@@ -19,6 +19,16 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _mapper = mapper;
         }
 
+        public async Task<List<OrderDto>> GetAllForExpert()
+        {
+            var records = await _context.Orders
+                .Include(x => x.Customer)
+                .Include(x => x.HomeService)
+                .AsNoTracking()
+                .ToListAsync();
+            return _mapper.Map<List<OrderDto>>(records);
+        }
+
         public async Task<List<OrderDto>> GetAll()
         {
             var records = await _context.Orders
@@ -29,16 +39,6 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             return _mapper.Map<List<OrderDto>>(records);
         }
 
-        public async Task<List<OrderDto>> GetAllBy(Guid customerId)
-        {
-            var records = await _context.Orders
-                .Include(x => x.Customer)
-                .Include(x => x.HomeService)
-                .Where(x => x.CustomerId == customerId)
-                .AsNoTracking()
-                .ToListAsync();
-            return _mapper.Map<List<OrderDto>>(records);
-        }
 
         public async Task<OrderDto> GetBy(int id)
             => await _mapper.ProjectTo<OrderDto>(_context.Orders)
@@ -81,5 +81,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
+
+
     }
 }

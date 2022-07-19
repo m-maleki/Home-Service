@@ -15,6 +15,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<CustomerDto> Get(string email);
         Task Update(CustomerDto dto);
         Task Delete(Guid id);
-        Task<Guid> GetGuid(Guid customerId);
+        Task<Guid> GetCustomerId(Guid CustomerIdentityId);
+        Task<List<OrderDto>> GetAllBy(Guid customerId);
     }
 }

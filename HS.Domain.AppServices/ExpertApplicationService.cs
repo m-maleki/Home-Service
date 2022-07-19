@@ -28,6 +28,14 @@ namespace HS.Domain.ApplicationServices
         public async Task<List<ExpertDto>> GetAll()
             => await _expertService.Get();
 
+        public async Task<List<OrderDto>> GetAllBy(Guid expertId)
+        {
+           return await _expertService.GetAllBy(expertId);
+        }
+
+        public Task<Guid> GetExpertId(Guid expertIdentityId)
+            => _expertService.GetExpertId(expertIdentityId);
+
         public  async Task Set(ExpertDto dto)
         {
              await _expertService.EnsureDoesNotExist(dto.ApplicationUserId);

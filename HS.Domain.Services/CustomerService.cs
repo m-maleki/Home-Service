@@ -55,6 +55,8 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
+     
+
         public Task<CustomerDto> Get(Guid Id)
            => _customerRepository.GetBy(Id);
 
@@ -63,14 +65,20 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
+
         public async Task<CustomerDto> Get(string email)
         {
             var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
             return await _customerRepository.GetBy(user!.Id);
         }
 
-        public async Task<Guid> GetGuid(Guid customerId)
-          => await _customerRepository.GetGuid(customerId);
+        public async Task<List<OrderDto>> GetAllBy(Guid customerId)
+        {
+           return await _customerRepository.GetAllBy(customerId);
+        }
+
+        public async Task<Guid> GetCustomerId(Guid CustomerIdentityId)
+          => await _customerRepository.GetCustomerId(CustomerIdentityId);
 
         public async Task Update(CustomerDto entity)
         {

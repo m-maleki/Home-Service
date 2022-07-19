@@ -9,7 +9,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<OrderDto> GetBy(int id);
         Task<int> Create(OrderDto entity);
         Task Update(OrderDto entity);
-        Task<List<OrderDto>> GetAllBy(Guid customerId);
         Task addOrderFiles(List<OrderFileDto> dto, int orderId);
     }
 }

@@ -104,5 +104,13 @@ namespace HS.Domain.Services
             }
             return entity;
         }
+
+        public Task<Guid> GetExpertId(Guid expertIdentityId)
+          =>_expertRepository.GetExpertId(expertIdentityId);
+
+        public async Task<List<OrderDto>> GetAllBy(Guid expertId)
+        {
+            return await _expertRepository.GetAllBy(expertId);  
+        }
     }
 }

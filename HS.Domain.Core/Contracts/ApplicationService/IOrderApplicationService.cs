@@ -13,7 +13,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
     {
         Task<OrderDto> Get(int Id);
         Task<List<OrderDto>> Get();
-        Task<List<OrderDto>> GetAllBy(Guid customerId);
+        Task<List<OrderDto>> GetAllBy(Guid Id, bool isExpert);
         Task Create(OrderDto entity, List<IFormFile> FormFile);
         Task Update(OrderDto entity);
     }

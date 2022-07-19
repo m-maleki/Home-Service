@@ -9,5 +9,7 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<List<ExpertDto>> GetAll();
         Task Create(ExpertDto entity);
         Task Update(ExpertDto entity);
+        Task<Guid> GetExpertId(Guid expertIdentityId);
+        Task<List<OrderDto>> GetAllBy(Guid expertId);
     }
 }

@@ -51,5 +51,40 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Guid> GetExpertId(Guid expertIdentityId)
+        {
+            return await _context.Experts
+                .Where(x => x.ApplicationUserId == expertIdentityId)
+                .Select(x => x.Id)
+                .FirstAsync();
+        }
+        public async Task<List<OrderDto>> GetAllBy(Guid expertId)
+        {
+            List<Order> result = new List<Order>();
+            var expertHomeService = await _context.Experts
+                .Include(x => x.HomeServices)
+                .Where(x => x.Id == expertId)
+                .AsNoTracking()
+                .FirstAsync();
+
+            var orders = await _context.Orders
+                .Include(x => x.Customer)
+                .Include(x => x.HomeService)
+                .AsNoTracking()
+                .ToListAsync();
+
+            foreach (var expertService in expertHomeService.HomeServices)
+            {
+                foreach (var order in orders)
+                {
+                    if (expertService.Name == order.HomeService.Name)
+                        result.Add(order);
+                }
+            }
+
+            return _mapper.Map<List<OrderDto>>(result);
+        }
+
+
     }
 }

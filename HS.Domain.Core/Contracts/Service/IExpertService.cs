@@ -13,8 +13,9 @@ namespace HS.Domain.Core.Contracts.Service
         Task Update(ExpertDto entity);
         Task EnsureExists(Guid id);
         Task EnsureDoesNotExist(Guid id);
-
+        Task<Guid> GetExpertId(Guid expertIdentityId);
         Task<string> UploadImageProfile(IFormFile FormFile);
         Task<ExpertDto> AssignHomeService(ExpertDto entity);
+        Task<List<OrderDto>> GetAllBy(Guid expertId);
     }
 }

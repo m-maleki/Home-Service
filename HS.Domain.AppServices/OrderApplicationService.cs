@@ -15,17 +15,20 @@ namespace HS.Domain.ApplicationServices
     {
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
+        private readonly IExpertService _expertService;
 
         public OrderApplicationService(IOrderService orderService,
-            ICustomerService customerService)
+            ICustomerService customerService,
+            IExpertService expertService)
         {
             _orderService = orderService;
             _customerService = customerService;
+            _expertService = expertService;
         }
 
         public async Task Create(OrderDto entity, List<IFormFile> FormFile)
         {
-            entity.CustomerId= await _customerService.GetGuid(new Guid(entity.currentApplicationUserID));
+            entity.CustomerId= await _customerService.GetCustomerId(new Guid(entity.currentApplicationUserID));
             PersianCalendar pc = new PersianCalendar();
             TimeSpan time = new TimeSpan(int.Parse(entity.Clock.Substring(0,2)), int.Parse(entity.Clock.Substring(3, 2)),0);
             entity.DateOfExecution = new DateTime(entity.DateOfExecution.Year, entity.DateOfExecution.Month, entity.DateOfExecution.Day,  pc);
@@ -41,10 +44,15 @@ namespace HS.Domain.ApplicationServices
         public async Task<List<OrderDto>> Get()
          => await _orderService.Get();
 
-        public async Task<List<OrderDto>> GetAllBy(Guid customerId)
+        public async Task<List<OrderDto>> GetAllBy(Guid Id, bool isExpert)
         {
-            var id = await _customerService.GetGuid(customerId);
-             return await _orderService.GetAllBy(id);
+            if (isExpert==true)
+            {
+                var expertCustomerid = await _expertService.GetExpertId(Id);
+                return await _expertService.GetAllBy(expertCustomerid);
+            }
+            var customerid = await _customerService.GetCustomerId(Id);
+            return await _customerService.GetAllBy(customerid);
         }
 
         public Task Update(OrderDto entity)
