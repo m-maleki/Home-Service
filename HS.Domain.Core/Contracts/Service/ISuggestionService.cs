@@ -12,6 +12,7 @@ namespace HS.Domain.Core.Contracts.Service
     {
         Task<SuggestionDto> Get(int Id);
         Task<List<SuggestionDto>> Get();
+        Task<List<SuggestionDto>> GetAll(int orderId);
         Task Create(SuggestionDto entity);
         Task Update(SuggestionDto entity);
         Task EnsureExists(int Id);

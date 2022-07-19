@@ -44,6 +44,11 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<SuggestionDto>> GetAll(int orderId)
+        {
+            return await _suggestionRepository.GetAll(orderId);
+        }
+
         public Task Update(SuggestionDto entity)
         {
             throw new NotImplementedException();

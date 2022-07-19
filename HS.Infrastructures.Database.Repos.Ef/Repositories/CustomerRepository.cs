@@ -61,6 +61,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             var records = await _context.Orders
                 .Include(x => x.Customer)
                 .Include(x => x.HomeService)
+                .Include(x=>x.Suggestions)
                 .Where(x => x.CustomerId == customerId)
                 .AsNoTracking()
                 .ToListAsync();

@@ -11,6 +11,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
     {
         Task<SuggestionDto> Get(int Id);
         Task<List<SuggestionDto>> Get();
+        Task<List<SuggestionDto>> GetAll(int orderId);
         Task Create(SuggestionDto entity);
         Task Update(SuggestionDto entity);
         Task EnsureExists(int Id);

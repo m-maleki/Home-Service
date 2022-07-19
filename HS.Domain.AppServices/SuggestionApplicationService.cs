@@ -3,6 +3,7 @@ using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,12 @@ namespace HS.Domain.ApplicationServices
 
         public async Task Create(SuggestionDto entity)
         {
+            PersianCalendar pc = new PersianCalendar();
+            entity.DurationOfWork = new DateTime(entity.DurationOfWork.Year, entity.DurationOfWork.Month, entity.DurationOfWork.Day, pc);
+            entity.RegisterDate = DateTime.Now;
             entity.ExpertId =  await _expertService.GetExpertId(entity.ExpertId);
-           await _suggestionService.Create(entity);
+
+            await _suggestionService.Create(entity);
         }
 
         public Task EnsureDoesNotExist(int Id)
@@ -44,6 +49,11 @@ namespace HS.Domain.ApplicationServices
         public Task<List<SuggestionDto>> Get()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<SuggestionDto>> GetAll(int orderId)
+        {
+            return await _suggestionService.GetAll(orderId);
         }
 
         public Task Update(SuggestionDto entity)

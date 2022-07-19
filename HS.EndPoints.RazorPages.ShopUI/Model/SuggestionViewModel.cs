@@ -11,6 +11,7 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public double SuggestedPrice { get; set; }
         public DateTime DurationOfWork { get; set; }
         public string? Description { get; set; }
+        public DateTime RegisterDate { get; set; }
 
         #endregion Properties
         #region Navigation properties

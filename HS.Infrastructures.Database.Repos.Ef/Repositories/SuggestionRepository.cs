@@ -41,5 +41,13 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<SuggestionDto>> GetAll(int orderId)
+        {
+            return  _mapper.Map<List<SuggestionDto>>(await _context.Suggestions
+                .AsNoTracking()
+                .Include(x=>x.Expert)
+                .Where(x=>x.OrderId==orderId)
+                .ToListAsync());
+        }
     }
 }

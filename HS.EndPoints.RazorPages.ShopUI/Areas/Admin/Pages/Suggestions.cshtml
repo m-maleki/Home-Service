@@ -1,0 +1,42 @@
+﻿@page
+@using Framework.Utilities
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.SuggestionsModel
+@{
+    ViewData["Title"] = "پیشنهاد های سفارش";
+}
+
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <thead>
+        <tr>
+            <th>شناسه پیشنهاد</th>
+            <th>شناسه سفارش</th>
+            <th>کارشناس</th>
+            <th>قیمت پیشنهادی </th>
+            <th>تاریخ پیشنهاد </th>
+            <th>تاریخ اتمام کار</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.suggestions != null)
+        {
+            @foreach (var item in Model.suggestions)
+            {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.OrderId</td>
+                    <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                    <td>@item.SuggestedPrice</td>
+                    <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>
+                        <input type="submit" value="پذیرفتن" class="btn btn-success curve" />
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </tbody>
+</table>
