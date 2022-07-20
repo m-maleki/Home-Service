@@ -1,0 +1,153 @@
+﻿@page
+@using Framework.Utilities
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.OrderDetailsModel
+@{
+    ViewData["Title"] = "مشخصات سفارش";
+}
+<label>جزئیات درخواست</label>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>شناسه سفارش</th>
+            <th>سفارش دهنده</th>
+            <th>هوم سرویس</th>
+            <th>تاریخ ثبت درخواست</th>
+            <th>تاریخ اجرا </th>
+            <th>ساعت اجرا </th>
+            <th>وضعیت</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Order.Id</td>
+            <td>@Model.Order.Customer.FirstName @Model.Order.Customer.LastName</td>
+            <td>@Model.Order.HomeService.Name</td>
+            <td>@Model.Order.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+            <td>@Model.Order.DateOfExecution.ToPersianString("yyyy/MM/dd")</td>
+            <td>@Model.Order.DateOfExecution.ToString("H:mm")</td>
+            <td>@Model.Order.Status.GetEnumDisplayName()</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<label>پیشنهاد ها</label>
+<br />
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>شناسه پیشنهاد</th>
+            <th>شناسه سفارش</th>
+            <th>کارشناس</th>
+            <th>قیمت پیشنهادی </th>
+            <th>تاریخ پیشنهاد </th>
+            <th>تاریخ اتمام کار</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.suggestions != null)
+        {
+            @foreach (var item in Model.suggestions)
+            {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.OrderId</td>
+                    <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                    <td>@item.SuggestedPrice</td>
+                    <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>
+                        <a data-bs-toggle="modal" data-bs-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" asp-page-handler="Delete" class="btn btn-success curve">جزئیات پیشنهاد</a>
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </tbody>
+</table>
+
+<hr>
+<div class="form-group">
+    <label>توضیحات درخواست</label>
+    <div class="input-group round">
+        <span class="input-group-addon">
+            <i class="icon-location-pin"></i>
+        </span>
+        <textarea name="Biography" class="form-control" rows="5">@Model.Order.Description</textarea>
+    </div>
+</div>
+<hr>
+<label>تصاویر پیوست شده</label>
+<center>
+    <div class="col-sm-6">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>تصویر</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.suggestions != null)
+                {
+                    @foreach (var item in Model.orderFiles)
+                    {
+                        <tr>
+                            <td>
+                                <a href="~/@item.Name" target="_blank">
+                                    <img src="~/@item.Name" class="img-circle" style="width:100px;height:100px" alt="Cinque Terre">
+                                </a>
+                            </td>
+                            <td>
+                                <a data-bs-toggle="modal" image-Id="@item.Id" data-bs-target="#ModalDelete" class="btn btn-danger curve">حذف تصویر</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</center>
+<hr>
+
+
+<div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="DeleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">حذف تصویر </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="DeleteImage">
+                    <input type="hidden" name="imageId" id="imageId" />
+                    <p>آیا از حذف تصویر اطمینان دارید ؟</p>
+                    <hr />
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-danger curve">در صورت اطمینان از حذف کلیک کنید<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-success curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section masterjs
+    {
+    <script>
+        $(document).ready(function() {
+            $(".table a").on("click", function() {
+                var OrderId = $(this).attr("image-Id");
+                $("#imageId").val(OrderId);
+            });
+        });
+    </script>
+}

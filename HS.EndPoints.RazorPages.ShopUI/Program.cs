@@ -73,6 +73,9 @@ builder.Services.AddScoped<ISuggestionApplicationService, SuggestionApplicationS
 builder.Services.AddScoped<ISuggestionRepository, SuggestionsRepository>();
 builder.Services.AddScoped<ISuggestionService, SuggestionService>();
 
+builder.Services.AddScoped<IOrderFileApplicationService, OrderFileApplicationService>();
+builder.Services.AddScoped<IOrderFileRepository, OrderFileRepository>();
+builder.Services.AddScoped<IOrderFileService, OrderFileService>();
 
 var app = builder.Build();
 

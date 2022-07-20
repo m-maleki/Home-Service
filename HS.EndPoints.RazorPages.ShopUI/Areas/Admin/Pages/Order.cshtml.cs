@@ -51,6 +51,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
             var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles);
+            if(User.IsInRole("Expert"))
             UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
             Orders = _mapper.Map(result, Orders);
         }

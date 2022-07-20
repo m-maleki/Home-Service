@@ -31,6 +31,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
             CreateMap<Image, ImageDto>();
             CreateMap<Order, OrderDto>();
             CreateMap<SuggestionDto, Suggestion>();
+            CreateMap<OrderFile, OrderFileDto>();
+
+
 
         }
     }

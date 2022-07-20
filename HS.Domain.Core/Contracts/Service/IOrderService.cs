@@ -13,6 +13,7 @@ namespace HS.Domain.Core.Contracts.Service
     public interface IOrderService
     {
         Task<OrderDto> Get(int Id);
+        Task<OrderDto> GetBy(int orderId);
         Task<List<OrderDto>> Get();
         Task<int> Create(OrderDto entity);
         Task Update(OrderDto entity);

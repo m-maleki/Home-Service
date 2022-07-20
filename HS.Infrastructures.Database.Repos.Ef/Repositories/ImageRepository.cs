@@ -19,7 +19,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
 
         public async Task<List<ImageDto>> GetBy(int orderId)
-            => _mapper.Map<List<ImageDto>>(await _context.Images.Where(x => x.OrderId == orderId).ToListAsync());
+            => _mapper.Map<List<ImageDto>>(await _context.Images
+                .AsNoTracking()
+                .Where(x => x.OrderId == orderId)
+                .ToListAsync());
 
         public async Task Create(ImageDto entity)
         {

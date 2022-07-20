@@ -13,6 +13,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
     public interface IOrderApplicationService
     {
         Task<OrderDto> Get(int Id);
+        Task<OrderDto> GetBy(int orderId);
         Task<List<OrderDto>> Get();
         Task<List<OrderDto>> GetAllBy(Guid Id, IList<string> roles);
         Task Create(OrderDto entity, List<IFormFile> FormFile);

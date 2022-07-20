@@ -67,6 +67,11 @@ namespace HS.Domain.ApplicationServices
             return default;
         }
 
+        public async Task<OrderDto> GetBy(int orderId)
+        {
+           return await _orderService.GetBy(orderId);
+        }
+
         public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
         {
             return await _orderService.GetOrderStatusEnum(orderId);

@@ -44,6 +44,11 @@ namespace HS.Domain.Services
             return await _orderRepository.GetAll();
         }
 
+        public async Task<OrderDto> GetBy(int orderId)
+        {
+            return await _orderRepository.GetBy(orderId);
+        }
+
         public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
         {
             return await _orderRepository.GetOrderStatusEnum(orderId);
@@ -86,7 +91,7 @@ namespace HS.Domain.Services
             {
                 if (formFile.Length > 0)
                 {
-                    var filename = Path.Combine("wwwroot/Images/Orders", Guid.NewGuid().ToString() +
+                    var filename = Path.Combine("wwwroot/Images/Profiles", Guid.NewGuid().ToString() +
                         ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim('"'));
                     files.Add(filename);
                     try
@@ -107,7 +112,7 @@ namespace HS.Domain.Services
             {
                 OrderFileDto orderfile = new OrderFileDto
                 {
-                    Name = file,
+                    Name = file.Substring(8, file.Length-8),
                     OrderId = orderId
 
                 };

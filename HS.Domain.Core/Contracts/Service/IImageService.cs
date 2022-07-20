@@ -1,14 +1,15 @@
-﻿using HS.Domain.Core.Entities;
+﻿using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 
 namespace HS.Domain.Core.Contracts.Service
 {
     public interface IImageService
     {
-        Task<Image> Get(int Id);
-        Task<List<Image>> Get();
-        Task Create(Image entity);
+        Task<ImageDto> Get(int Id);
+        Task<List<ImageDto>> GetBy(int orderId);
+        Task Create(ImageDto entity);
         Task EnsureExists(int Id);
         Task EnsureDoesNotExist(int Id);
-        Task Update(Image entity);
+        Task Update(ImageDto entity);
     }
 }

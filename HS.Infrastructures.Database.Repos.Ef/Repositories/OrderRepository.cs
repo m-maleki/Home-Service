@@ -41,12 +41,13 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
 
 
-        public async Task<OrderDto> GetBy(int id)
-            => await _mapper.ProjectTo<OrderDto>(_context.Orders)
-            .Include(x => x.Customer)
-            .Include(x => x.HomeService)
-            .Where(x => x.Id == id)
+        public async Task<OrderDto> GetBy(int orderId)
+            => await _mapper.ProjectTo<OrderDto>( _context.Orders
             .AsNoTracking()
+            .Include(x => x.Customer)
+            .Include(x=>x.OrderFiles)
+            .Include(x => x.HomeService))
+            .Where(x => x.Id == orderId)
             .SingleOrDefaultAsync();
 
         public async Task<int> Create(OrderDto entity)
@@ -128,5 +129,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context.Remove(order);
             await _context.SaveChangesAsync();
         }
+
+
     }
 }

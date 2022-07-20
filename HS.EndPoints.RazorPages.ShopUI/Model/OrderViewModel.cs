@@ -14,8 +14,8 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public OrderStatusEnum Status { get; set; }
         public DateTime DateOfExecution { get; set; }
         public DateTime RegisterDate { get; set; }
-        public string Clock { get; set; }
-        public string currentApplicationUserID { get; set; }
+        public string? Clock { get; set; }
+        public string? currentApplicationUserID { get; set; }
         public bool IsDeleted { get; set; }
         #endregion Properties
 
@@ -24,8 +24,9 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public List<Suggestion>? Suggestions { get; set; }
         public Customer Customer { get; set; }
         public HomeService? HomeService { get; set; }
-        public List<IFormFile> FormFile { get; set; } 
-
+        public List<IFormFile> FormFile { get; set; }
+        public List<OrderFile> OrderFiles { get; set; }
+        
 
         #endregion Navigation properties
     }
