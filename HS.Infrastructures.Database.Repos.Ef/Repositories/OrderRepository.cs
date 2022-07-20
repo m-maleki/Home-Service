@@ -34,6 +34,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             var records = await _context.Orders
                 .Include(x => x.Customer)
                 .Include(x => x.HomeService)
+                .Include(x=>x.Suggestions)
                 .AsNoTracking()
                 .ToListAsync();
             return _mapper.Map<List<OrderDto>>(records);
@@ -88,7 +89,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             .Where(x => x.Id == orderId)
             .SingleAsync();
             orderStatus.Status = orderStatusEnum;
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
         }
 

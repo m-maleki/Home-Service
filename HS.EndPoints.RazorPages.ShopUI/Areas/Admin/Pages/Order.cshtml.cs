@@ -18,25 +18,28 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         private readonly IHomeServiceApplicationService _homeServiceApplicationService;
         private readonly ISuggestionApplicationService _suggestionApplicationService;
         private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly IExpertApplicationService _expertApplicationService;
 
 
         public List<OrderViewModel>? Orders;
         private readonly IMapper _mapper;
         public string currentUserID { get; set; }
         public SelectList HomeServices { get; set; }
+        public Guid UserId;
 
         public OrderModel(IOrderApplicationService orderApplicationService,
             IMapper mapper,
             IHomeServiceApplicationService homeServiceApplicationService,
             ISuggestionApplicationService suggestionApplicationService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IExpertApplicationService expertApplicationService)
         {
             _orderApplicationService = orderApplicationService;
             _mapper = mapper;
             _homeServiceApplicationService = homeServiceApplicationService;
             _suggestionApplicationService = suggestionApplicationService;
             _userManager = userManager;
+            _expertApplicationService = expertApplicationService;
         }
 
         public async Task OnGet()
@@ -48,6 +51,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
             var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles);
+            UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
             Orders = _mapper.Map(result, Orders);
         }
 

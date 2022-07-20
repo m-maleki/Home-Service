@@ -55,10 +55,11 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task<int> GetCount(int orderId)
         {
-            return await _context.Suggestions
+            var record =  await _context.Suggestions
              .AsNoTracking()
              .Where(x => x.OrderId == orderId)
-             .CountAsync();
+             .ToListAsync();
+            return record.Count();
         }
 
         public async Task<bool> EnsureExistSuggestion(int orderId)

@@ -38,10 +38,11 @@ namespace HS.Domain.ApplicationServices
             entity.RegisterDate = DateTime.Now;
             entity.ExpertId =  await _expertService.GetExpertId(entity.ExpertId);
             await _suggestionService.Create(entity);
-            var tttt = await _suggestionService.GetCount(entity.OrderId);
-            if (tttt == 1)
-            await _orderService.SetOrderStatusEnum(entity.OrderId,OrderStatusEnum.WaitingSpecialistSelection);
-
+            var suggestionCount = await _suggestionService.GetCount(entity.OrderId);
+            if (suggestionCount == 1)
+            {
+                await _orderService.SetOrderStatusEnum(entity.OrderId, OrderStatusEnum.WaitingSpecialistSelection);
+            }
         }
 
         public Task EnsureDoesNotExist(int Id)
