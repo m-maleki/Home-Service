@@ -1,5 +1,6 @@
 ﻿
 using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<List<OrderDto>> GetAllBy(Guid Id, bool isExpert);
         Task Create(OrderDto entity, List<IFormFile> FormFile);
         Task Update(OrderDto entity);
+        Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum);
+        Task<OrderStatusEnum> GetOrderStatusEnum(int orderId);
     }
 }

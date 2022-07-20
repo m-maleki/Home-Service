@@ -1,6 +1,7 @@
 ﻿using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -43,9 +44,19 @@ namespace HS.Domain.Services
             return await _orderRepository.GetAll();
         }
 
+        public Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
+        {
+            return _orderRepository.GetOrderStatusEnum(orderId);
+        }
+
         public async Task SetOrderFiles(List<OrderFileDto> dto, int orderId)
         {
            await _orderRepository.addOrderFiles(dto, orderId);
+        }
+
+        public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum)
+        {
+            await _orderRepository.SetOrderStatusEnum(orderId, orderStatusEnum);
         }
 
         public Task Update(OrderDto entity)

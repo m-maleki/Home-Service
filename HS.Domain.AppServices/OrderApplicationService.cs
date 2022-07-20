@@ -1,6 +1,7 @@
 ﻿using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,16 @@ namespace HS.Domain.ApplicationServices
             }
             var customerid = await _customerService.GetCustomerId(Id);
             return await _customerService.GetAllBy(customerid);
+        }
+
+        public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
+        {
+            return await _orderService.GetOrderStatusEnum(orderId);
+        }
+
+        public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum)
+        {
+            await _orderService.SetOrderStatusEnum(orderId, orderStatusEnum);
         }
 
         public Task Update(OrderDto entity)

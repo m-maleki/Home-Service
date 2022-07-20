@@ -82,6 +82,23 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum)
+        {
+            var orderStatus =await _context.Orders
+            .Where(x => x.Id == orderId)
+            .SingleAsync();
+            orderStatus.Status = orderStatusEnum;
+            _context.SaveChangesAsync();
 
+        }
+
+        public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
+        {
+           return await _context.Orders
+            .AsNoTracking()
+            .Where(x => x.Id == orderId)
+            .Select(x => x.Status)
+            .SingleAsync();
+        }
     }
 }
