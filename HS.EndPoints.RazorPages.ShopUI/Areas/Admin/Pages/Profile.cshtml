@@ -9,7 +9,7 @@
             <div class="text-center">
                 <div class="user-box">
                     <a href="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" target="_blank">
-                        <img src="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" alt="عکس پروفایل" class="img-circle img-responsive">
+                        <img id="profileImage" src="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" alt="عکس پروفایل" class="img-circle img-responsive">
                     </a>
                     <div class="user-details">
                         <h4>@Model.UserViewModel.FirstName @Model.UserViewModel.LastName</h4>
@@ -21,12 +21,12 @@
                 <input type="hidden" name="Id" value="@Model.UserViewModel.Id" />
                 <input type="hidden" name="ApplicationUserId" value="@Model.UserViewModel.ApplicationUserId" />
                 <div class="form-group relative mt-3 mb-4">
-                    <input name="ProfileImgFile" type="file" class="form-control">
+                    <input name="ProfileImgFile" onchange="loadFile(event)" type="file" class="form-control">
                     <div class="input-group round">
                         <input name="ProfileImgUrl" value="@Model.UserViewModel.ProfileImgUrl" type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-info">
-                                <i class="icon-picture"></i>
+                                <i class="icon-picture"  ></i>
                                 آپلود عکس
                             </button>
                         </span>
@@ -173,3 +173,13 @@
     <script src="~/assets/plugins/select2/dist/js/i18n/fa.js"></script>
     <script src="~/assets/js/pages/select2.js"></script>
     }
+
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('profileImage');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>

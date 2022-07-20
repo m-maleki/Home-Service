@@ -43,8 +43,16 @@
                         @if (@User.IsInRole("Expert"))
                         {
                             <div class="portlet-body">
-                                <input type="hidden" name="id" id="id" value="@item.Id">
-                                <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve" disabled>ارائه پیشنهاد</a>
+                                
+                                @if(@item.Status==OrderStatusEnum.WaitingExpertAdvice)
+                                {
+                                    <input type="hidden" name="id" id="id" value="@item.Id">
+                                    <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve" >ارائه پیشنهاد</a>
+                                }
+                                else
+                                {
+                                      <button class="btn btn-success curve" disabled>پیشنهاد داده شده</button>
+                                }
                             </div>
                         }
 
