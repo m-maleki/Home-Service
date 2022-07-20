@@ -52,9 +52,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task<int> GetCount(int orderId)
         {
-            return await _context.Orders
+            return await _context.Suggestions
              .AsNoTracking()
-             .Where(x => x.Id == orderId)
+             .Where(x => x.OrderId == orderId)
              .CountAsync();
         }
 

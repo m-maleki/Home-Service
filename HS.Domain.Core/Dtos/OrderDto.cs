@@ -13,6 +13,8 @@ namespace HS.Domain.Core.Dtos
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public string? Description { get; set; }
         public DateTime DateOfExecution { get; set; }
+        public bool IsDeleted { get; set; }
+
         public string Clock { get; set; }
         public string currentApplicationUserID { get; set; }
         #endregion Properties

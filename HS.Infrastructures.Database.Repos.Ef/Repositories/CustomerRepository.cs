@@ -62,7 +62,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Include(x => x.Customer)
                 .Include(x => x.HomeService)
                 .Include(x=>x.Suggestions)
-                .Where(x => x.CustomerId == customerId)
+                .Where(x => x.CustomerId == customerId && x.IsDeleted==false)
                 .AsNoTracking()
                 .ToListAsync();
             return _mapper.Map<List<OrderDto>>(records);

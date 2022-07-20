@@ -47,7 +47,6 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-            bool isExpert = User.IsInRole("Expert");
             var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles);
             Orders = _mapper.Map(result, Orders);
         }
@@ -73,9 +72,18 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             return LocalRedirect("/Admin/Order");
         }
 
-        public async Task<IActionResult> OnPostDeleteOrder(int OrderId)
+        public async Task<IActionResult> OnPostDeleteOrder(int OrderIdDelete)
         {
-            await _orderApplicationService.
+            await _orderApplicationService.SoftDelete(OrderIdDelete);
+            return LocalRedirect("/Admin/Order");
         }
+
+        public async Task<IActionResult> OnPostRecover(int OrderId)
+        {
+            await _orderApplicationService.SoftRecover(OrderId);
+            return LocalRedirect("/Admin/Order");
+        }
+
+        
     }
 }

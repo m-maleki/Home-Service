@@ -44,9 +44,14 @@ namespace HS.Domain.Services
             return await _orderRepository.GetAll();
         }
 
-        public Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
+        public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
         {
-            return _orderRepository.GetOrderStatusEnum(orderId);
+            return await _orderRepository.GetOrderStatusEnum(orderId);
+        }
+
+        public async Task HardDelete(int orderId)
+        {
+            await _orderRepository.HardDelete(orderId);
         }
 
         public async Task SetOrderFiles(List<OrderFileDto> dto, int orderId)
@@ -57,6 +62,16 @@ namespace HS.Domain.Services
         public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum)
         {
             await _orderRepository.SetOrderStatusEnum(orderId, orderStatusEnum);
+        }
+
+        public async Task SoftDelete(int orderId)
+        {
+            await _orderRepository.SoftDelete(orderId);
+        }
+
+        public async Task SoftRecover(int orderId)
+        {
+            await _orderRepository.SoftRecover(orderId);
         }
 
         public Task Update(OrderDto entity)

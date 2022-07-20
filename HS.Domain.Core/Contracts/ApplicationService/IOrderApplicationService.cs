@@ -19,5 +19,8 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task Update(OrderDto entity);
         Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum);
         Task<OrderStatusEnum> GetOrderStatusEnum(int orderId);
+        Task SoftDelete(int orderId);
+        Task HardDelete(int orderId);
+        Task SoftRecover(int orderId);
     }
 }

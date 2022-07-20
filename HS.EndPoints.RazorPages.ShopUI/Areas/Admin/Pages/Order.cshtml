@@ -27,7 +27,11 @@
             <th>تاریخ اجرا </th>
             <th>ساعت اجرا </th>
             <th>وضعیت</th>
-            <th>عملیات</th>
+            <th>پیشنهاد</th>
+              @if   (User.IsInRole("Admin"))
+              {
+                        <th>عملیات</th>
+              }
         </tr>
     </thead>
     <tbody>
@@ -35,7 +39,6 @@
         {
             @foreach (var item in Model.Orders)
             {
-
                 <tr>
                     <td>@item.Id</td>
                     @if (User.IsInRole("Admin"))
@@ -48,49 +51,54 @@
                     <td>@item.DateOfExecution.ToString("H:mm")</td>
                     <td>@item.Status.GetEnumDisplayName()</td>
                     <td>
-                        @if (@User.IsInRole("Expert"))
-                        {
-                            <div class="portlet-body">
+                        <div class="portlet-body">
+                            @if (@User.IsInRole("Expert"))
+                                    {
+                                        @if (@item.Status == OrderStatusEnum.WaitingExpertAdvice)
+                                        {
+                                            <input type="hidden" name="id" id="id" value="@item.Id">
+                                            <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve">ارائه پیشنهاد</a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-success curve" disabled>پیشنهاد داده شده</button>
+                                        }
+                                    }
 
-                                @if (@item.Status == OrderStatusEnum.WaitingExpertAdvice)
-                                {
-                                    <input type="hidden" name="id" id="id" value="@item.Id">
-                                    <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve">ارائه پیشنهاد</a>
-                                }
-                                else
-                                {
-                                    <button class="btn btn-success curve" disabled>پیشنهاد داده شده</button>
-                                }
-                            </div>
-                        }
-
-                        @if (@User.IsInRole("Customer"))
-                        {
-                            @if (@item.Suggestions.Count > 0)
-                            {
-                                <form method="get" class="m-t-30 m-b-30" role="form" asp-page="Suggestions">
-                                    <div class="portlet-body">
+                                    @if (@User.IsInRole("Customer") || @User.IsInRole("Admin"))
+                                    {
+                                        @if (@item.Suggestions.Count > 0 || (@User.IsInRole("Admin")))
+                                        {
+                                            <form method="get" role="form" asp-page="Suggestions">
                                         <input type="hidden" name="orderId" id="orderId" value="@item.Id">
-                                        <input type="submit" value="پیشنهادها" class="btn btn-primary curve" />
-                                    </div>
-                                </form>
-                            }
-                            else
-                            {
-                                <input type="submit" value="بدون پیشنهاد" class="btn btn-warning curve" disabled />
-                            }
-                        }
-
-                        @if (User.IsInRole("Admin"))
+                                        <input type="submit" class="btn btn-primary curve" value="پیشنهادها" />
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" value="بدون پیشنهاد" class="btn btn-warning curve" disabled />
+                                        }
+                                    }
+                        </div>
+                    </td>
+                        @if (User.IsInRole("Admin") && @item.IsDeleted==false)
                         {
-
-                            <a data-bs-toggle="modal" data-bs-target="#ModalDelete" HomeService="@item.HomeService.Name" Order-Id="@item.Id" Customer="@item.Customer.FirstName @item.Customer.LastName" asp-page-handler="Delete" class="btn btn-danger curve">حذف</a>
+                              <td>
+                                <a data-bs-toggle="modal" data-bs-target="#ModalDelete" HomeService="@item.HomeService.Name" Order-Id="@item.Id" Customer="@item.Customer.FirstName @item.Customer.LastName" asp-page-handler="Delete" class="btn btn-danger curve">غیر فعال</a>
+                              </td>
+                        }
+                       @if (User.IsInRole("Admin") && @item.IsDeleted==true)
+                        {
+                              <td>
+                              <form method="post" role="form" asp-page-handler="Recover">
+                                <input type="hidden" name="OrderId" id="OrderId" value="@item.Id">
+                                <input type="submit" value="فعال کردن"  class="btn btn-success curve">
+                            </form> 
+                            </td>
                         }
                 </tr>
             }
-
         }
-
     </tbody>
 </table>
 
@@ -98,7 +106,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createBrandLabel">ارائه پیشنهاد </h5>
+                <h5 class="modal-title" id="createBrandLabel">حذف پیشنهاد </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -112,7 +120,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-key"></i>
                             </span>
-                            <input name="OrderId" id="OrderId" type="text" class="form-control round" disabled>
+                            <input name="OrderIdDelete" id="OrderIdDelete" type="text" class="form-control round" readonly>
                         </div>
                     </div>
 
@@ -140,7 +148,6 @@
                         <button type="submit" class="btn btn-danger curve">در صورت اطمینان از حذف کلیک کنید<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
                         <button type="button" class="btn btn-success curve " data-bs-dismiss="modal">بازگشت</button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -291,6 +298,8 @@
                 $("#ExpertId").val(ExpertId);
                 $("#Customer").val(Customer);
                 $("#HomeService").val(HomeService);
+                $("#OrderIdDelete").val(OrderId);
+                
             });
         });
     </script>

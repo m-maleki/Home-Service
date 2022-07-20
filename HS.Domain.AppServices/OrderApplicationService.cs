@@ -72,9 +72,24 @@ namespace HS.Domain.ApplicationServices
             return await _orderService.GetOrderStatusEnum(orderId);
         }
 
+        public async Task HardDelete(int orderId)
+        {
+            await _orderService.HardDelete(orderId);
+        }
+
         public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum)
         {
             await _orderService.SetOrderStatusEnum(orderId, orderStatusEnum);
+        }
+
+        public async Task SoftDelete(int orderId)
+        {
+            await _orderService.SoftDelete(orderId);
+        }
+
+        public async Task SoftRecover(int orderId)
+        {
+            await _orderService.SoftRecover(orderId);
         }
 
         public Task Update(OrderDto entity)

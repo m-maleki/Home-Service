@@ -100,5 +100,32 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             .Select(x => x.Status)
             .SingleAsync();
         }
+
+        public async Task SoftDelete(int orderId)
+        {
+            var order =await _context.Orders
+                .Where(x=>x.Id== orderId)
+                .SingleAsync();
+            order.IsDeleted = true;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SoftRecover(int orderId)
+        {
+            var order = await _context.Orders
+                .Where(x => x.Id == orderId)
+                .SingleAsync();
+            order.IsDeleted = false;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task HardDelete(int orderId)
+        {
+            var order = await _context.Orders
+                .Where(x => x.Id == orderId)
+                .SingleAsync();
+            _context.Remove(order);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -32,7 +32,8 @@ namespace HS.Domain.ApplicationServices
             entity.RegisterDate = DateTime.Now;
             entity.ExpertId =  await _expertService.GetExpertId(entity.ExpertId);
             await _suggestionService.Create(entity);
-            if (await _suggestionService.GetCount(entity.OrderId) == 1)
+            var tttt = await _suggestionService.GetCount(entity.OrderId);
+            if (tttt == 1)
             await _orderService.SetOrderStatusEnum(entity.OrderId,OrderStatusEnum.WaitingSpecialistSelection);
 
         }

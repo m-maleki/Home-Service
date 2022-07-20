@@ -13,5 +13,10 @@ namespace HS.Domain.Core.Contracts.Repository
         Task addOrderFiles(List<OrderFileDto> dto, int orderId);
         Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum);
         Task<OrderStatusEnum> GetOrderStatusEnum(int orderId);
+
+        Task SoftDelete(int orderId);
+        Task HardDelete(int orderId);
+        Task SoftRecover(int orderId);
+
     }
 }

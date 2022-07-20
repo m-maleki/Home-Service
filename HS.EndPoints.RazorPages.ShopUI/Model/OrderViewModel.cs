@@ -16,6 +16,7 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public DateTime RegisterDate { get; set; }
         public string Clock { get; set; }
         public string currentApplicationUserID { get; set; }
+        public bool IsDeleted { get; set; }
         #endregion Properties
 
         #region Navigation properties

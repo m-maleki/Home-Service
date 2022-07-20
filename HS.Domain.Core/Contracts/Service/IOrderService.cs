@@ -22,5 +22,9 @@ namespace HS.Domain.Core.Contracts.Service
         Task<List<OrderFileDto>> UploadFiles(List<IFormFile> FormFile, int orderId);
         Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum);
         Task<OrderStatusEnum> GetOrderStatusEnum(int orderId);
+        Task SoftDelete(int orderId);
+        Task HardDelete(int orderId);
+        Task SoftRecover(int orderId);
+
     }
 }
