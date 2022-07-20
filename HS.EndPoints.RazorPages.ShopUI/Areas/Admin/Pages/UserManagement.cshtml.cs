@@ -43,7 +43,9 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
                 Id = x.Id,
                 UserName = x.UserName,
                 Email = x.Email,
-            }).ToListAsync();
+                ProfileImgUrl=x.Expert.ProfileImgUrl,
+                ProfileImgUrlCustomer=x.Customer.ProfileImgUrl
+             }).ToListAsync();
 
             foreach (var item in users)
             {

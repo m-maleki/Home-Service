@@ -9,7 +9,7 @@
 <table class="table table-bordered table-striped table-hover" id="data-table">
     <thead>
         <tr>
-            <th>شناسه کاربری</th>
+            <th>تصویر کاربر</th>
             <th>نام کاربری</th>
             <th>آدرس ایمیل</th>
             <th>نقش کاربر</th>
@@ -22,11 +22,20 @@
             @foreach (var item in Model.users)
             {
                 <tr>
-                    <td>@item.Id</td>
+                    <td>
+                        @if(@item.Roles=="Expert")
+                        {
+                        <img src="~/Images/Profiles/@item.ProfileImgUrl" class="img-circle" style="width:50px;height:50px" alt="Cinque Terre">
+                        }
+                         @if(@item.Roles=="Customer")
+                        {
+                        <img src="~/Images/Profiles/@item.ProfileImgUrlCustomer" class="img-circle" style="width:50px;height:50px" alt="Cinque Terre">
+                        }
+                    </td>
                     <td>@item.UserName</td>
                     <td>@item.Email</td>
                     <td>
-                    @item.Roles
+                        @item.Roles
                     </td>
 
                     <td>

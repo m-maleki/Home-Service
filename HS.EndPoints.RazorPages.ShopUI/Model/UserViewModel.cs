@@ -21,6 +21,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
         public int Score { get; set; }
         public string? Roles { get; set; }
         public string? ProfileImgUrl { get; set; }
+        public string? ProfileImgUrlCustomer { get; set; }
 
         public List<string>? Role { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
