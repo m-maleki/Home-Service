@@ -48,15 +48,23 @@ namespace HS.Domain.ApplicationServices
         public async Task<List<OrderDto>> Get()
          => await _orderService.Get();
 
-        public async Task<List<OrderDto>> GetAllBy(Guid Id, bool isExpert)
+        public async Task<List<OrderDto>> GetAllBy(Guid Id, IList<string> roles)
         {
-            if (isExpert==true)
+            if(roles.Any(x => x.Contains("Expert")))
             {
                 var expertCustomerid = await _expertService.GetExpertId(Id);
                 return await _expertService.GetAllBy(expertCustomerid);
             }
-            var customerid = await _customerService.GetCustomerId(Id);
-            return await _customerService.GetAllBy(customerid);
+            else if(roles.Any(x => x.Contains("Customer")))
+            {
+                var customerid = await _customerService.GetCustomerId(Id);
+                return await _customerService.GetAllBy(customerid);
+            }
+            else if (roles.Any(x => x.Contains("Admin")))
+            {
+                return await _orderService.Get();
+            }
+            return default;
         }
 
         public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)

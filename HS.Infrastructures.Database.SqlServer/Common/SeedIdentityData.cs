@@ -36,8 +36,6 @@ namespace HS.Infrastructures.Database.SqlServer.Common
                 await _roleManager.CreateAsync(new IdentityRole<Guid>("Expert"));
                 await _userManager.CreateAsync(user, "25915491");
                 await _userManager.AddToRoleAsync(user, "Admin");
-                await _userManager.AddToRoleAsync(user, "Customer");
-                await _userManager.AddToRoleAsync(user, "Expert");
             }
         }
     }

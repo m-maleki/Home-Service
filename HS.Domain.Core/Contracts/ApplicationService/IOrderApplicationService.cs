@@ -14,7 +14,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
     {
         Task<OrderDto> Get(int Id);
         Task<List<OrderDto>> Get();
-        Task<List<OrderDto>> GetAllBy(Guid Id, bool isExpert);
+        Task<List<OrderDto>> GetAllBy(Guid Id, IList<string> roles);
         Task Create(OrderDto entity, List<IFormFile> FormFile);
         Task Update(OrderDto entity);
         Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum);
