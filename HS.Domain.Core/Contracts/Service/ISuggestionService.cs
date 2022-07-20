@@ -18,6 +18,7 @@ namespace HS.Domain.Core.Contracts.Service
         Task EnsureExists(int Id);
         Task EnsureDoesNotExist(int Id);
         Task<int> GetCount(int orderId);
+        Task<bool> EnsureExistSuggestion(int orderId);
 
     }
 }

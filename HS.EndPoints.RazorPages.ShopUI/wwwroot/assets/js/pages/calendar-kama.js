@@ -21,7 +21,7 @@ var datePickerOptionsEmpty = {
     nextButtonIcon: "fa fa-arrow-right",
     previousButtonIcon: "fa fa-arrow-left",
     buttonsColor: "gray",
-    markToday: false,
+    markToday: true,
     markHolidays: true,
     highlightSelectedDay: true,
     sync: true

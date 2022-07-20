@@ -104,7 +104,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-calendar"></i>
                             </span>
-                            <input name="DurationOfWork" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تحویل" value="1401/01/01">
+                            <input name="DurationOfWork" type="text" class="form-control round" id="kama-datepicker-empty" placeholder="تاریخ تحویل" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")">
                         </div>
                     </div>
 
@@ -163,7 +163,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-calendar"></i>
                             </span>
-                            <input name="DateOfExecution" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تولد" value="1401/01/01">
+                            <input name="DateOfExecution" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تولد" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")">
                         </div>
                     </div>
 

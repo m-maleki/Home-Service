@@ -34,6 +34,11 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
+        public async Task<bool> EnsureExistSuggestion(int orderId)
+        {
+            return await _suggestionRepository.EnsureExistSuggestion(orderId);
+        }
+
         public Task<SuggestionDto> Get(int Id)
         {
             throw new NotImplementedException();

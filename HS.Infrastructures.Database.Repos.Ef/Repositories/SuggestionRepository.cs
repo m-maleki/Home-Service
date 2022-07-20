@@ -57,5 +57,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
              .Where(x => x.Id == orderId)
              .CountAsync();
         }
+
+        public async Task<bool> EnsureExistSuggestion(int orderId)
+        {
+            return await _context.Orders
+             .AsNoTracking()
+             .Where(x => x.Id == orderId)
+             .AnyAsync();
+        }
+
     }
 }

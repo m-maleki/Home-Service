@@ -1,6 +1,7 @@
 ﻿using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,12 +14,15 @@ namespace HS.Domain.ApplicationServices
     public class SuggestionApplicationService : ISuggestionApplicationService
     {
         private readonly ISuggestionService _suggestionService;
+        private readonly IOrderService _orderService;
         private readonly IExpertService _expertService;
         public SuggestionApplicationService(ISuggestionService suggestionService,
-            IExpertService expertService)
+            IExpertService expertService,
+            IOrderService orderService)
         {
             _suggestionService = suggestionService;
             _expertService = expertService;
+            _orderService = orderService;
         }
 
         public async Task Create(SuggestionDto entity)
@@ -27,16 +31,23 @@ namespace HS.Domain.ApplicationServices
             entity.DurationOfWork = new DateTime(entity.DurationOfWork.Year, entity.DurationOfWork.Month, entity.DurationOfWork.Day, pc);
             entity.RegisterDate = DateTime.Now;
             entity.ExpertId =  await _expertService.GetExpertId(entity.ExpertId);
-
             await _suggestionService.Create(entity);
+            if (await _suggestionService.GetCount(entity.OrderId) == 1)
+            await _orderService.SetOrderStatusEnum(entity.OrderId,OrderStatusEnum.WaitingSpecialistSelection);
+
         }
 
         public Task EnsureDoesNotExist(int Id)
         {
-            throw new NotImplementedException();
+            return _suggestionService.EnsureDoesNotExist(Id);
         }
 
         public Task EnsureExists(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> EnsureExistSuggestion(int orderId)
         {
             throw new NotImplementedException();
         }

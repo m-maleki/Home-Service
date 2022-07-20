@@ -35,8 +35,11 @@ namespace HS.Domain.ApplicationServices
             entity.DateOfExecution = new DateTime(entity.DateOfExecution.Year, entity.DateOfExecution.Month, entity.DateOfExecution.Day,  pc);
             entity.DateOfExecution =  entity.DateOfExecution.Add(time);
             var orderId = await _orderService.Create(entity);
+            if(FormFile !=null)
+            {
             var files = await _orderService.UploadFiles(FormFile, orderId);
             await _orderService.SetOrderFiles(files, orderId);
+            }
         }
 
         public async Task<OrderDto> Get(int Id)

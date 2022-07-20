@@ -52,7 +52,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         {
             var record = _mapper.Map<Order>(entity);
             record.RegisterDate = DateTime.Now;
-            record.Status = OrderStatusEnum.WaitingSpecialistSelection;
+            record.Status = OrderStatusEnum.WaitingExpertAdvice;
             await _context.Orders.AddAsync(record);
             await _context.SaveChangesAsync();
             return record.Id;
