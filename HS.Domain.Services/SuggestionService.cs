@@ -19,6 +19,11 @@ namespace HS.Domain.Services
             _suggestionRepository = suggestionRepository;
         }
 
+        public async Task Accept(int suggestionId)
+        {
+            await _suggestionRepository.Accept(suggestionId);
+        }
+
         public async Task Create(SuggestionDto entity)
         {
             await _suggestionRepository.Create(entity);

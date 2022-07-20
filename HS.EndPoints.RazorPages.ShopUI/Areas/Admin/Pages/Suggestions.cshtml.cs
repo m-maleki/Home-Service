@@ -28,6 +28,12 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         }
 
+        public async Task<IActionResult> OnPostAccept(int SuggId , int OrderId)
+        {
+           await _suggestionApplicationService.Accept(SuggId, OrderId);
+           return LocalRedirect("/Admin/Order/");
+        }
+
         public void OnPost(int id)
         {
 

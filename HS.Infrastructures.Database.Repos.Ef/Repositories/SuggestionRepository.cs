@@ -46,6 +46,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             return  _mapper.Map<List<SuggestionDto>>(await _context.Suggestions
                 .AsNoTracking()
                 .Include(x=>x.Expert)
+                .Include(x=>x.Order)
+                .ThenInclude(x=>x.HomeService)
+                .Include(x=>x.Expert)
                 .Where(x=>x.OrderId==orderId)
                 .ToListAsync());
         }
@@ -64,6 +67,15 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
              .AsNoTracking()
              .Where(x => x.Id == orderId)
              .AnyAsync();
+        }
+
+        public async Task Accept(int suggestionId)
+        {
+            var order = await _context.Suggestions
+                .Where(x => x.Id == suggestionId)
+                .SingleAsync();
+            order.IsAccept = true;
+            await _context.SaveChangesAsync();
         }
 
     }

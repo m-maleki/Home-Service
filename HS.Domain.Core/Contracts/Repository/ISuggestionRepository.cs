@@ -11,5 +11,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task Update(SuggestionDto entity);
         Task<int> GetCount(int orderId);
         Task<bool> EnsureExistSuggestion(int orderId);
+        Task Accept(int suggestionId);
     }
 }

@@ -25,6 +25,12 @@ namespace HS.Domain.ApplicationServices
             _orderService = orderService;
         }
 
+        public async Task Accept(int suggestionId, int orderId)
+        {
+            await _suggestionService.Accept(suggestionId);
+            await _orderService.SetOrderStatusEnum(orderId, OrderStatusEnum.WaitingSpecialistComeToYourPlace);
+        }
+
         public async Task Create(SuggestionDto entity)
         {
             PersianCalendar pc = new PersianCalendar();

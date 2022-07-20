@@ -28,9 +28,9 @@
             <th>ساعت اجرا </th>
             <th>وضعیت</th>
             <th>پیشنهاد</th>
-              @if   (User.IsInRole("Admin"))
+              @if   (User.IsInRole("Admin") )
               {
-                        <th>عملیات</th>
+                <th>عملیات</th>
               }
         </tr>
     </thead>
@@ -54,33 +54,33 @@
                         <div class="portlet-body">
                             @if (@User.IsInRole("Expert"))
                                     {
-                                        @if (@item.Status == OrderStatusEnum.WaitingExpertAdvice)
-                                        {
                                             <input type="hidden" name="id" id="id" value="@item.Id">
                                             <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve">ارائه پیشنهاد</a>
-                                        }
-                                        else
-                                        {
-                                            <button class="btn btn-success curve" disabled>پیشنهاد داده شده</button>
-                                        }
+
                                     }
 
                                     @if (@User.IsInRole("Customer") || @User.IsInRole("Admin"))
                                     {
-                                        @if (@item.Suggestions.Count > 0 || (@User.IsInRole("Admin")))
+                                        @if ((@item.Suggestions.Count > 0 && item.Status==OrderStatusEnum.WaitingSpecialistSelection) || (@User.IsInRole("Admin")))
                                         {
                                             <form method="get" role="form" asp-page="Suggestions">
                                         <input type="hidden" name="orderId" id="orderId" value="@item.Id">
                                         <input type="submit" class="btn btn-primary curve" value="پیشنهادها" />
-                                            </form>
-                                        }
-                                        else
+                                    </form>
+                                }
+                                else if(item.Status==OrderStatusEnum.WaitingExpertAdvice)
                                         {
                                             <input type="submit" value="بدون پیشنهاد" class="btn btn-warning curve" disabled />
                                         }
+                                 else if(item.Status==OrderStatusEnum.WaitingSpecialistComeToYourPlace)
+                                        {
+                                            <input type="submit" value="پیشنهاد پذیرفته شده" class="btn btn-success curve" disabled />
+                                        }
+
                                     }
                         </div>
                     </td>
+
                         @if (User.IsInRole("Admin") && @item.IsDeleted==false)
                         {
                               <td>
@@ -101,6 +101,9 @@
         }
     </tbody>
 </table>
+
+
+
 
 <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="DeleteLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
