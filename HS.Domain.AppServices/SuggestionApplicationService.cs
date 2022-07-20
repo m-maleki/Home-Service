@@ -56,6 +56,11 @@ namespace HS.Domain.ApplicationServices
             return await _suggestionService.GetAll(orderId);
         }
 
+        public async Task<int> GetCount(int orderId)
+        {
+            return await _suggestionService.GetCount(orderId);
+        }
+
         public Task Update(SuggestionDto entity)
         {
             throw new NotImplementedException();

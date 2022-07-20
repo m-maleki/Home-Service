@@ -49,5 +49,13 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Where(x=>x.OrderId==orderId)
                 .ToListAsync());
         }
+
+        public async Task<int> GetCount(int orderId)
+        {
+            return await _context.Orders
+             .AsNoTracking()
+             .Where(x => x.Id == orderId)
+             .CountAsync();
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<List<SuggestionDto>> GetAll(int orderId);
         Task Create(SuggestionDto entity);
         Task Update(SuggestionDto entity);
+        Task<int> GetCount(int orderId);
     }
 }

@@ -49,6 +49,11 @@ namespace HS.Domain.Services
             return await _suggestionRepository.GetAll(orderId);
         }
 
+        public async Task<int> GetCount(int orderId)
+        {
+            return await _suggestionRepository.GetCount(orderId);
+        }
+
         public Task Update(SuggestionDto entity)
         {
             throw new NotImplementedException();

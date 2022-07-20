@@ -17,6 +17,7 @@ namespace HS.Domain.Core.Contracts.Service
         Task Update(SuggestionDto entity);
         Task EnsureExists(int Id);
         Task EnsureDoesNotExist(int Id);
+        Task<int> GetCount(int orderId);
 
     }
 }
