@@ -59,7 +59,7 @@
                                 if (@User.IsInRole("Expert"))
                                 {
                                     <input type="hidden" name="id" id="id" value="@item.Id">
-                                    <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve">ارائه پیشنهاد</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id-Suggedtion="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve">ارائه پیشنهاد</a>
                                 }
 
                             }
@@ -187,7 +187,7 @@
             <div class="modal-body">
                 <form method="post" asp-page-handler="CreateSuggest">
 
-                    <input type="text" id="OrderId" name="OrderId" />
+                    <input type="text" id="OrderIdSuggestion" name="OrderId" />
                     <input type="text" id="ExpertId" name="ExpertId" />
 
                     <div class="form-group">
@@ -312,6 +312,7 @@
         $(document).ready(function() {
             $(".table a").on("click", function() {
                 var OrderId = $(this).attr("Order-Id");
+                var OrderIdSuggestion = $(this).attr("Order-Id-Suggedtion");
                 var ExpertId = $(this).attr("Expert-Id");
                 var Customer = $(this).attr("Customer");
                 var HomeService = $(this).attr("HomeService");
@@ -320,6 +321,8 @@
                 $("#Customer").val(Customer);
                 $("#HomeService").val(HomeService);
                 $("#OrderIdDelete").val(OrderId);
+                $("#OrderIdSuggestion").val(OrderIdSuggestion);
+                
 
             });
         });

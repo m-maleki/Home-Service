@@ -3,6 +3,7 @@ using HS.Domain.Core.Contracts.ApplicationService;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
@@ -11,25 +12,34 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         private readonly IOrderApplicationService _orderApplicationService;
         private readonly ISuggestionApplicationService _suggestionApplicationService;
         private readonly IOrderFileApplicationService _orderFileApplicationService;
+        private readonly IExpertApplicationService _expertApplicationService;
 
         public List<SuggestionViewModel> suggestions = new();
         public List<OrderFileViewModel> orderFiles = new();
         public OrderViewModel Order;
         private readonly IMapper _mapper;
-
+        public string currentUserID { get; set; }
+        public Guid UserId;
         public OrderDetailsModel(IOrderApplicationService orderApplicationService,
             IMapper mapper,
             ISuggestionApplicationService suggestionApplicationService,
-            IOrderFileApplicationService orderFileApplicationService)
+            IOrderFileApplicationService orderFileApplicationService,
+            IExpertApplicationService expertApplicationService)
         {
             _orderApplicationService = orderApplicationService;
             _mapper = mapper;
             _suggestionApplicationService = suggestionApplicationService;
             _orderFileApplicationService = orderFileApplicationService;
+            _expertApplicationService = expertApplicationService;
         }
 
         public async Task OnGet(int OrderId)
         {
+            ClaimsPrincipal currentUser = this.User;
+            currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if(User.IsInRole("Expert"))
+            UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
+
             var orderRecord = await _orderApplicationService.GetBy(OrderId);
             Order= _mapper.Map(orderRecord, Order);
 
