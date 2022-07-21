@@ -31,9 +31,11 @@ namespace HS.Infrastructures.Database.SqlServer.Common
                     PhoneNumberConfirmed = true,
                     SecurityStamp = Guid.NewGuid().ToString("D")
                 };
+
                 await _roleManager.CreateAsync(new IdentityRole<Guid>("Admin"));
                 await _roleManager.CreateAsync(new IdentityRole<Guid>("Customer"));
                 await _roleManager.CreateAsync(new IdentityRole<Guid>("Expert"));
+
                 await _userManager.CreateAsync(user, "25915491");
                 await _userManager.AddToRoleAsync(user, "Admin");
             }

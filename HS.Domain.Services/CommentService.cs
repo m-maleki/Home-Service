@@ -24,9 +24,9 @@ namespace HS.Domain.Services
            await _commentRepository.Active(commentId);
         }
 
-        public async Task Create(string comment, Guid expertId)
+        public async Task Create(string comment, Guid expertId,CancellationToken cancellationToken)
         {
-            await _commentRepository.Create(comment, expertId);
+            await _commentRepository.Create(comment, expertId, cancellationToken);
         }
 
         public async Task DeActive(int commentId)

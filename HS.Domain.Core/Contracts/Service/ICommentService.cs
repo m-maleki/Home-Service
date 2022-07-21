@@ -14,7 +14,7 @@ namespace HS.Domain.Core.Contracts.Service
         Task<CommentDto> Get(int Id);
         Task<List<CommentDto>> Get();
         Task<List<CommentDto>> GetAll();
-        Task Create(string comment,Guid expertId);
+        Task Create(string comment,Guid expertId,CancellationToken cancellationToken);
         Task<List<CommentDto>> GetBy(Guid expertId);
         Task EnsureExists(int Id);
         Task EnsureDoesNotExist(int Id);

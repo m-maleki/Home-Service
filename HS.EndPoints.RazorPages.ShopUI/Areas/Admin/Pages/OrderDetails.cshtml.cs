@@ -55,9 +55,9 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         }
 
-        public async Task<IActionResult> OnPostComment(string Comment,int OrderId)
+        public async Task<IActionResult> OnPostComment(string Comment,int OrderId,CancellationToken cancellationToken)
         {
-            await _commentApplicationService.Create(Comment, OrderId);
+            await _commentApplicationService.Create(Comment, OrderId,cancellationToken);
             return RedirectToPage("/OrderDetails", new { OrderId });
         }
 

@@ -37,7 +37,6 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
 
         public async Task<IActionResult> OnPostLogin(LoginViewModel model)
         {
-
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RemomberMe, false);

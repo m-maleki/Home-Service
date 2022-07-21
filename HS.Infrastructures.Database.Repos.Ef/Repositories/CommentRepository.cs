@@ -23,7 +23,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Include(x => x.Expert))
                 .Where(x => x.ExpertId == expertId && x.IsAccept == true)
                 .ToListAsync();
-        public async Task Create(string comment, Guid expertId)
+        public async Task Create(string comment, Guid expertId, CancellationToken cancellationToken)
         {
             Comment record = new Comment()
             {

@@ -26,10 +26,10 @@ namespace HS.Domain.ApplicationServices
             await _commentService.Active(commentId);
         }
 
-        public async Task Create(string comment,int orderId)
+        public async Task Create(string comment,int orderId,CancellationToken cancellationToken)
         {
             var expertId =await _suggestionService.GetAcceptSuggestionExpertId(orderId);
-            await _commentService.Create(comment,expertId);
+            await _commentService.Create(comment,expertId,cancellationToken);
         }
 
         public async Task DeActive(int commentId)
