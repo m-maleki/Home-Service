@@ -17,45 +17,39 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<List<CustomerDto>> GetAll()
-          => _mapper.Map<List<CustomerDto>>(await _context.Customers.ToListAsync());
-
+          => _mapper.Map<List<CustomerDto>>(await _context.Customers
+              .AsNoTracking()
+              .ToListAsync());
         public async Task<CustomerDto> GetBy(Guid id)
           => await _mapper.ProjectTo<CustomerDto>(_context.Customers)
-            .Where(x => x.Id == id)
             .AsNoTracking()
-            .SingleOrDefaultAsync();
-
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
         public async Task<CustomerDto> GetBy(string mobileNumber)
           => await _mapper.ProjectTo<CustomerDto>(_context.Customers)
             .Where(x => x.MobileNumber == mobileNumber)
             .AsNoTracking()
-            .SingleOrDefaultAsync();
-
+            .FirstOrDefaultAsync();
         public async Task Create(CustomerDto entity)
         {
             var record = _mapper.Map<Customer>(entity);
             await _context.Customers.AddAsync(record);
             await _context.SaveChangesAsync();
         }
-
         public async Task Update(CustomerDto entity)
         {
             var record = await _context.Customers
                 .Where(x => x.Id == entity.Id)
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
-
         public async Task<Guid> GetCustomerId(Guid CustomerIdentityId)
-        {
-            return await _context.Customers
+            => await _context.Customers
                 .Where(x => x.ApplicationUserId == CustomerIdentityId)
                 .Select(x=>x.Id)
-                .FirstAsync();
-        }
+                .FirstOrDefaultAsync();
         public async Task<List<OrderDto>> GetAllBy(Guid customerId)
         {
             var records = await _context.Orders

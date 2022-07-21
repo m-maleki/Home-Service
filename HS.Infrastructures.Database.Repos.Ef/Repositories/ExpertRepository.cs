@@ -18,40 +18,35 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<List<ExpertDto>> GetAll()
           => _mapper.Map<List<ExpertDto>>(await _context.Experts
               .AsNoTracking()
               .Include(x=>x.HomeServices)
               .ToListAsync());
-
         public async Task<List<ExpertDto>> GetAll(Guid id)
          => _mapper.Map<List<ExpertDto>>(await _context.Experts
               .AsNoTracking()
               .Include(x => x.HomeServices)
               .Where(x=>x.Id==id)
               .ToListAsync());
-
         public async Task<ExpertDto> GetBy(Guid id)
           => await _mapper.ProjectTo<ExpertDto>(_context.Experts
               .AsNoTracking()
               .Include(x=>x.HomeServices))
               .Where(x => x.Id == id)
               .FirstOrDefaultAsync();
-
         public async Task Create(ExpertDto entity)
         {
             var record = _mapper.Map<Expert>(entity);
             await _context.Experts.AddAsync(record);
             await _context.SaveChangesAsync();
         }
-
         public async Task Update(ExpertDto entity)
         {
             var record = await _context.Experts
                .Include(x => x.HomeServices)
                .Where(x => x.Id == entity.Id)
-               .SingleOrDefaultAsync();
+               .FirstOrDefaultAsync();
                 record.HomeServices.Clear();
 
 
@@ -61,14 +56,11 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             record = _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
-
         public async Task<Guid> GetExpertId(Guid expertIdentityId)
-        {
-            return await _context.Experts
+            => await _context.Experts
                 .Where(x => x.ApplicationUserId == expertIdentityId)
                 .Select(x => x.Id)
-                .FirstAsync();
-        }
+                .FirstOrDefaultAsync();
         public async Task<List<OrderDto>> GetAllBy(Guid expertId)
         {
             List<Order> result = new List<Order>();
@@ -76,7 +68,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Include(x => x.HomeServices)
                 .Where(x => x.Id == expertId)
                 .AsNoTracking()
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             var orders = await _context.Orders
                 .Include(x => x.Customer)
@@ -95,7 +87,5 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
             return _mapper.Map<List<OrderDto>>(result);
         }
-
-
     }
 }

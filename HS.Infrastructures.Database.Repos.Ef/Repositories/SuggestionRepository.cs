@@ -17,33 +17,30 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<List<SuggestionDto>> GetAll()
-            => _mapper.Map<List<SuggestionDto>>(await _context.Suggestions.ToListAsync());
-
+            => _mapper.Map<List<SuggestionDto>>(await _context.Suggestions
+                .AsNoTracking()
+                .ToListAsync());
         public async Task<SuggestionDto> GetBy(int id)
-            => await _mapper.ProjectTo<SuggestionDto>(_context.Suggestions).Where(x => x.Id == id).SingleOrDefaultAsync();
-
-
-
+            => await _mapper.ProjectTo<SuggestionDto>(_context.Suggestions)
+            .AsNoTracking()
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
         public async Task Update(SuggestionDto entity)
         {
             var record = await _mapper.ProjectTo<SuggestionDto>(_context.Set<SuggestionDto>())
-                 .Where(x => x.Id == entity.Id).SingleOrDefaultAsync();
+                 .Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
-
         public async Task Create(SuggestionDto entity)
         {
             var record = _mapper.Map<Suggestion>(entity);
             await _context.Suggestions.AddAsync(record);
             await _context.SaveChangesAsync();
         }
-
         public async Task<List<SuggestionDto>> GetAll(int orderId)
-        {
-            return  _mapper.Map<List<SuggestionDto>>(await _context.Suggestions
+            =>  _mapper.Map<List<SuggestionDto>>(await _context.Suggestions
                 .AsNoTracking()
                 .Include(x=>x.Expert)
                 .Include(x=>x.Order)
@@ -51,8 +48,6 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Include(x=>x.Expert)
                 .Where(x=>x.OrderId==orderId)
                 .ToListAsync());
-        }
-
         public async Task<int> GetCount(int orderId)
         {
             var record =  await _context.Suggestions
@@ -61,30 +56,24 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
              .ToListAsync();
             return record.Count();
         }
-
         public async Task<bool> EnsureExistSuggestion(int orderId)
-        {
-            return await _context.Orders
+            => await _context.Orders
              .AsNoTracking()
              .Where(x => x.Id == orderId)
              .AnyAsync();
-        }
-
         public async Task Accept(int suggestionId)
         {
             var order = await _context.Suggestions
                 .Where(x => x.Id == suggestionId)
-                .SingleAsync();
+                .FirstOrDefaultAsync();
             order.IsAccept = true;
             await _context.SaveChangesAsync();
         }
-
         public async Task<Guid> GetAcceptSuggestionExpertId(int orderId)
-        {
-            return await _context.Suggestions.AsNoTracking()
+                => await _context.Suggestions
+                .AsNoTracking()
                 .Where(x=>x.OrderId== orderId && x.IsAccept==true)
                 .Select(x=>x.ExpertId)
-                .SingleOrDefaultAsync();
-        }
+                .FirstOrDefaultAsync();
     }
 }

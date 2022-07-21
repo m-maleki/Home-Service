@@ -17,40 +17,32 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<List<HomeServiceDto>> GetAll()
             => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
                 .AsNoTracking()
                 .ToListAsync());
-
         public async Task<HomeServiceDto> GetBy(int id)
         {
-            var record = await _context.HomeServices.AsNoTracking().Where(x => x.Id == id).SingleAsync();
-            var homeServiceDto = new HomeServiceDto();
-            _mapper.Map(record, homeServiceDto);
-            return homeServiceDto;
-            //=> await _mapper.ProjectTo<HomeServiceDto>(_context.HomeServices.AsNoTracking().Include(x => x.HomeServiceSubCategory))
-            // .Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
+            var record = await _context.HomeServices
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            return _mapper.Map(record, new HomeServiceDto());
         }
-
-
-
-
         public async Task Create(HomeServiceDto entity)
         {
             var record = _mapper.Map<HomeService>(entity);
             await _context.HomeServices.AddAsync(record);
             await _context.SaveChangesAsync();
         }
-
         public async Task Update(HomeServiceDto entity)
         {
             var record = await _mapper.ProjectTo<HomeServiceDto>(_context.Set<HomeServiceDto>())
-                 .Where(x => x.Id == entity.Id).AsNoTracking().SingleOrDefaultAsync();
+                 .Where(x => x.Id == entity.Id)
+                 .FirstOrDefaultAsync();
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
-
         public Task<List<HomeServiceDto>> GetAll(Guid id)
         {
             throw new NotImplementedException();

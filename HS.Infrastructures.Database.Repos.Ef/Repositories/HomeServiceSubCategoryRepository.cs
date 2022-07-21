@@ -17,20 +17,20 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<List<HomeServiceSubCategoryDto>> GetAll()
-            => _mapper.Map<List<HomeServiceSubCategoryDto>>(await _context.HomeServiceSubCategories.ToListAsync());
-
+            => _mapper.Map<List<HomeServiceSubCategoryDto>>(await _context.HomeServiceSubCategories
+                .AsNoTracking()
+                .ToListAsync());
         public async Task<HomeServiceSubCategoryDto> GetBy(int id)
-            => await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.HomeServiceSubCategories).Where(x => x.Id == id).SingleOrDefaultAsync();
-
+            => await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.HomeServiceSubCategories)
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
         public async Task Create(HomeServiceSubCategoryDto entity)
         {
             var record = _mapper.Map<HomeServiceSubCategory>(entity);
             await _context.HomeServiceSubCategories.AddAsync(record);
             await _context.SaveChangesAsync();
         }
-
         public async Task Update(HomeServiceSubCategoryDto entity)
         {
             var record = await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.Set<HomeServiceSubCategoryDto>())
@@ -38,9 +38,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
-
         public async Task<HomeServiceSubCategoryDto> GetBy(string name)
-            => await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.HomeServiceSubCategories).Where(x => x.Name == name).SingleOrDefaultAsync();
-
+            => await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.HomeServiceSubCategories)
+            .AsNoTracking()
+            .Where(x => x.Name == name)
+            .FirstOrDefaultAsync();
     }
 }
