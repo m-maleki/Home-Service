@@ -4,7 +4,7 @@
     {
         #region Properties
         public Guid Id { get; set; }
-        public string? FirstName { get; set; }
+        public string? FirstName { get; set; }=String.Empty;
         public string? LastName { get; set; }
         public string? Biography { get; set; }
         public string? ProfileImgUrl { get; set; }
@@ -22,7 +22,7 @@
         #region Navigation properties
         public DateTime Birthday { get; set; }
         public List<HomeService>? HomeServices { get; set; } = new List<HomeService>();
-        public List<Suggestion>? Suggestion { get; set; }
+        public List<Suggestion>? Suggestion { get; set; }=new List<Suggestion>();
         public List<Comment>? Comments { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
         public City? City { get; set; }

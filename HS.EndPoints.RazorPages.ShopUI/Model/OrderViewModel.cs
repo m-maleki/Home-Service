@@ -22,10 +22,10 @@ namespace HS.EndPoints.RazorPages.UI.Model
         #region Navigation properties
         public List<Image>? Images { get; set; }
         public List<Suggestion>? Suggestions { get; set; }
-        public Customer Customer { get; set; }
+        public Customer? Customer { get; set; }
         public HomeService? HomeService { get; set; }
-        public List<IFormFile> FormFile { get; set; }
-        public List<OrderFile> OrderFiles { get; set; }
+        public List<IFormFile>? FormFile { get; set; }
+        public List<OrderFile>? OrderFiles { get; set; }
         
 
         #endregion Navigation properties

@@ -1,80 +1,81 @@
-using AutoMapper;
 using HS.Domain.Core.Contracts.ApplicationService;
-using HS.Domain.Core.Contracts.Repository;
-using HS.Domain.Core.Dtos;
-using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
-using HS.Infrastructures.Database.SqlServer.Common;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using HS.Domain.Core.Contracts.Repository;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using HS.Domain.Core.Entities;
 using System.Security.Claims;
+using HS.Domain.Core.Dtos;
+using AutoMapper;
+
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
     public class ProfileModel : PageModel
     {
-        private readonly IExpertApplicationService _expertApplicationService;
-        private readonly ICityApplicationService _cityApplicationService;
         private readonly IHomeServiceApplicationService _homeServiceApplicationService;
         private readonly ICustomerApplicationService _customerApplicationService;
+        private readonly IExpertApplicationService _expertApplicationService;
+        private readonly ICityApplicationService _cityApplicationService;
         private readonly IExpertRepository _expertRepository;
-
-        public SelectList Cities { get; set; }
-        public SelectList HomeServices { get; set; }
-        public List<HomeService> HomeServicesUser { get; set; } = new List<HomeService>();
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ICollection<HomeService> HomeServicesUser { get; set; } = new List<HomeService>();
+        public SelectList HomeServices { get; set; } = new SelectList(new List<HomeServiceDto>());
+        public SelectList Cities { get; set; } = new SelectList(new List<City>());
+        public UserViewModel UserViewModel = new UserViewModel();
         private readonly IMapper _mapper;
 
-        public ProfileModel(IExpertApplicationService expertApplicationService,
-            IMapper mapper,
-            ICityApplicationService cityApplicationService,
-            IHomeServiceApplicationService homeServiceApplicationService,
+
+        public ProfileModel(IHomeServiceApplicationService homeServiceApplicationService,
+            UserManager<ApplicationUser> userManager,
             ICustomerApplicationService customerApplicationService,
-            IExpertRepository expertRepository)
+            IExpertApplicationService expertApplicationService,
+            ICityApplicationService cityApplicationService,
+            IExpertRepository expertRepository,
+            IMapper mapper)
         {
-            _expertApplicationService = expertApplicationService;
-            _mapper = mapper;
-            _cityApplicationService = cityApplicationService;
             _homeServiceApplicationService = homeServiceApplicationService;
             _customerApplicationService = customerApplicationService;
+            _expertApplicationService = expertApplicationService;
+            _cityApplicationService = cityApplicationService;
             _expertRepository = expertRepository;
+            _userManager = userManager;
+            _mapper = mapper;
         }
-
-        public UserViewModel UserViewModel = new UserViewModel();
 
         public async Task<IActionResult> OnPost(UserViewModel model)
         {
-            if (User.IsInRole("Expert"))
+            if(ModelState.IsValid)
             {
-                var user = new ExpertDto();
-                 _mapper.Map(model, user);
-                var Expert = new Expert();
-                await _expertApplicationService.Update(user);
-            }
+                if (User.IsInRole("Expert"))
+                {
+                    var user = _mapper.Map(model, new ExpertDto());
+                    await _expertApplicationService.Update(user);
+                }
 
-            if (User.IsInRole("Customer"))
-            {
-                var user = new CustomerDto();
-                _mapper.Map(model, user);
-                await _customerApplicationService.Update(user);
+                if (User.IsInRole("Customer"))
+                {
+                    var user = _mapper.Map(model, new CustomerDto());
+                    await _customerApplicationService.Update(user);
+                }
             }
-
             return LocalRedirect("/Admin/Profile/");
         }
 
         public async Task OnGet()
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             Cities = new SelectList(await _cityApplicationService.Get(), "Id", "Name");
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
             if (User.IsInRole("Expert"))
             {
+                HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
                 var expert = await _expertApplicationService.Get(new Guid(currentUserID));
                 if (expert.HomeServices != null)
-                    HomeServicesUser = expert.HomeServices;
-                HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
+                HomeServicesUser = expert.HomeServices;
                 _mapper.Map(expert, UserViewModel);
             }
 

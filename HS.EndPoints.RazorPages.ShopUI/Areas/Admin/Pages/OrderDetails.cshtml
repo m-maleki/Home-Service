@@ -1,6 +1,7 @@
 ﻿@page
 @using Framework.Utilities
 @using HS.Domain.Core.Enums
+@using System.Globalization
 @model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.OrderDetailsModel
 @{
     ViewData["Title"] = "مشخصات سفارش";
@@ -58,7 +59,7 @@
                         <td>@item.Id</td>
                         <td>@item.OrderId</td>
                         <td>@item.Expert.FirstName @item.Expert.LastName</td>
-                        <td>@item.SuggestedPrice</td>
+                        <td style="color:red">@item.SuggestedPrice.ToString("C", CultureInfo.CurrentCulture= new CultureInfo("fa-Ir",false))</td>
                         <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
                         <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
                         <td>
@@ -134,7 +135,7 @@
                             @if (@User.IsInRole("Admin"))
                             {
                                 <td>
-                                    <a data-bs-toggle="modal" image-Id="@item.Id" data-bs-target="#ModalDelete" class="btn btn-danger curve">حذف تصویر</a>
+                                    <a data-bs-toggle="modal" Order-Id="@item.OrderId" image-Id="@item.Id"  data-bs-target="#ModalDelete" class="btn btn-danger curve">حذف تصویر</a>
                                 </td>
                             }
                         </tr>
@@ -160,6 +161,8 @@
             <div class="modal-body">
                 <form method="post" asp-page-handler="DeleteImage">
                     <input type="hidden" name="imageId" id="imageId" />
+                    <input type="hidden" name="orderIdDelete" id="orderIdDelete" />
+
                     <p>آیا از حذف تصویر اطمینان دارید ؟</p>
                     <hr />
                     <div style="float:left;">
@@ -260,7 +263,7 @@
                 $("#Customer").val(Customer);
                 $("#HomeService").val(HomeService);
                 $("#OrderId").val(OrderId);
-
+                $("#orderIdDelete").val(OrderId);
             });
         });
     </script>

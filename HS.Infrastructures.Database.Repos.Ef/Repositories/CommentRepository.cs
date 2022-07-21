@@ -25,7 +25,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .ToListAsync());
 
         public async Task<CommentDto> GetBy(int id)
-            => await _mapper.ProjectTo<CommentDto>(_context.Comments).Where(x=>x.Id==id).SingleOrDefaultAsync();
+            => await _mapper.ProjectTo<CommentDto>(_context.Comments)
+            .AsNoTracking()
+            .Where(x=>x.Id==id)
+            .SingleOrDefaultAsync();
 
         public async Task Create(string comment, Guid expertId)
         {
@@ -41,8 +44,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task Update(CommentDto entity)
         {
+            
             var record = await _mapper.ProjectTo<CommentDto>(_context.Set<CommentDto>())
                  .Where(x => x.Id == entity.Id).SingleOrDefaultAsync();
+
             _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }

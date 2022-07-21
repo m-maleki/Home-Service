@@ -58,7 +58,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             foreach (var item in entity.HomeServicesIds)
                 record.HomeServices.Add(await _context.HomeServices.FirstOrDefaultAsync(x => x.Id == item));
 
-            _mapper.Map(entity, record);
+            record = _mapper.Map(entity, record);
             await _context.SaveChangesAsync();
         }
 

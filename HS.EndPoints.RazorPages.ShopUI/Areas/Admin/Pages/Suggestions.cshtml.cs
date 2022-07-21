@@ -1,17 +1,15 @@
-using AutoMapper;
 using HS.Domain.Core.Contracts.ApplicationService;
-using HS.Domain.Core.Dtos;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using AutoMapper;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
     public class SuggestionsModel : PageModel
     {
+        public ICollection<SuggestionViewModel> suggestions = new List<SuggestionViewModel>();
         private readonly ISuggestionApplicationService _suggestionApplicationService;
-        public List<SuggestionViewModel> suggestions = new();
         private readonly IMapper _mapper;
 
         public SuggestionsModel(ISuggestionApplicationService suggestionApplicationService,
@@ -23,21 +21,16 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task OnGet(int orderId)
         {
-            var records  =  await _suggestionApplicationService.GetAll(orderId);
-            _mapper.Map(records,suggestions);
-
-
+            if(ModelState.IsValid)
+            _mapper.Map(await _suggestionApplicationService.GetAll(orderId),suggestions);
         }
 
         public async Task<IActionResult> OnPostAccept(int SuggId , int OrderId)
         {
-           await _suggestionApplicationService.Accept(SuggId, OrderId);
-           return LocalRedirect("/Admin/Order/");
+            if (ModelState.IsValid)
+                await _suggestionApplicationService.Accept(SuggId, OrderId);
+            return LocalRedirect("/Admin/Order/");
         }
 
-        public void OnPost(int id)
-        {
-
-        }
     }
 }

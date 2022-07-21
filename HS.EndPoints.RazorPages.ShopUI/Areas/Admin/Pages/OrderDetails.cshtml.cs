@@ -1,70 +1,71 @@
-using AutoMapper;
 using HS.Domain.Core.Contracts.ApplicationService;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
+using AutoMapper;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
     public class OrderDetailsModel : PageModel
     {
-        private readonly IOrderApplicationService _orderApplicationService;
         private readonly ISuggestionApplicationService _suggestionApplicationService;
         private readonly IOrderFileApplicationService _orderFileApplicationService;
-        private readonly IExpertApplicationService _expertApplicationService;
         private readonly ICommentApplicationService _commentApplicationService;
-
-        public List<SuggestionViewModel> suggestions = new();
-        public List<OrderFileViewModel> orderFiles = new();
-        public OrderViewModel Order;
+        private readonly IExpertApplicationService _expertApplicationService;
+        private readonly IOrderApplicationService _orderApplicationService;
+        public ICollection<SuggestionViewModel> suggestions = new List<SuggestionViewModel>();
+        public ICollection<OrderFileViewModel> orderFiles = new List<OrderFileViewModel>();
+        public string currentUserID { get; set; } = string.Empty;
+        public OrderViewModel Order = new OrderViewModel();
         private readonly IMapper _mapper;
-        public string currentUserID { get; set; }
         public Guid UserId;
-        public OrderDetailsModel(IOrderApplicationService orderApplicationService,
-            IMapper mapper,
-            ISuggestionApplicationService suggestionApplicationService,
+        
+        public OrderDetailsModel(ISuggestionApplicationService suggestionApplicationService,
+            ICommentApplicationService commentApplicationService,
             IOrderFileApplicationService orderFileApplicationService,
             IExpertApplicationService expertApplicationService,
-            ICommentApplicationService commentApplicationService)
+            IOrderApplicationService orderApplicationService,
+            IMapper mapper)
         {
-            _orderApplicationService = orderApplicationService;
-            _mapper = mapper;
             _suggestionApplicationService = suggestionApplicationService;
             _orderFileApplicationService = orderFileApplicationService;
-            _expertApplicationService = expertApplicationService;
             _commentApplicationService = commentApplicationService;
+            _expertApplicationService = expertApplicationService;
+            _orderApplicationService = orderApplicationService;
+            _mapper = mapper;
         }
 
         public async Task OnGet(int OrderId)
         {
             ClaimsPrincipal currentUser = this.User;
-            currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if(User.IsInRole("Expert"))
+            currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            _mapper.Map(await _orderApplicationService.GetBy(OrderId), Order);
+            _mapper.Map(await _suggestionApplicationService.GetAll(OrderId), suggestions);
+            _mapper.Map(await _orderFileApplicationService.GetAll(OrderId), orderFiles);
+            if (User.IsInRole("Expert"))
             UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
-
-            var orderRecord = await _orderApplicationService.GetBy(OrderId);
-            Order= _mapper.Map(orderRecord, Order);
-
-            var suggestionRecords = await _suggestionApplicationService.GetAll(OrderId);
-            _mapper.Map(suggestionRecords, suggestions);
-
-            var orderFileRecords = await _orderFileApplicationService.GetAll(OrderId);
-            _mapper.Map(orderFileRecords, orderFiles);
         }
 
-        public async Task<IActionResult> OnPostDeleteImage(int imageId)
+        public async Task<IActionResult> OnPostDeleteImage(int imageId , int orderIdDelete)
         {
-             await _orderFileApplicationService.DeleteFile(imageId);
-            return LocalRedirect("/Admin/Order/");
+            if(ModelState.IsValid)
+                await _orderFileApplicationService.DeleteFile(imageId);
+                return RedirectToPage("/OrderDetails", new { OrderId = orderIdDelete });
+
         }
 
         public async Task<IActionResult> OnPostComment(string Comment,int OrderId)
         {
             await _commentApplicationService.Create(Comment, OrderId);
-            RedirectToAction("Action", "Controller");
             return RedirectToPage("/OrderDetails", new { OrderId });
+        }
 
+        public async Task<IActionResult> OnPostAccept(int SuggId, int OrderId)
+        {
+            if (ModelState.IsValid)
+                await _suggestionApplicationService.Accept(SuggId, OrderId);
+            return LocalRedirect("/Admin/Order/");
         }
     }
 }

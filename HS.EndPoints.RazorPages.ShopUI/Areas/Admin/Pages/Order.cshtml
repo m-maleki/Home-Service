@@ -109,10 +109,10 @@
                         </td>
                     }
                     <td>
-                         <form method="get" role="form" asp-page="OrderDetails">
-                                <input type="hidden" name="OrderId" id="OrderId" value="@item.Id">
-                                <input type="submit" value="نمایش" class="btn btn-success curve">
-                          </form>
+                        <form method="get" role="form" asp-page="OrderDetails">
+                            <input type="hidden" name="OrderId" id="OrderId" value="@item.Id">
+                            <input type="submit" value="نمایش" class="btn btn-success curve">
+                        </form>
                     </td>
                 </tr>
             }
@@ -166,7 +166,7 @@
                     </div>
 
                     <div style="float:left;">
-                        <button type="submit" class="btn btn-danger curve">در صورت اطمینان از حذف کلیک کنید<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="submit" class="btn btn-danger curve">در صورت اطمینان از غیرفعال سازی کلیک کنید<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
                         <button type="button" class="btn btn-success curve " data-bs-dismiss="modal">بازگشت</button>
                     </div>
                 </form>
@@ -187,16 +187,16 @@
             <div class="modal-body">
                 <form method="post" asp-page-handler="CreateSuggest">
 
-                    <input type="text" id="OrderIdSuggestion" name="OrderId" />
-                    <input type="text" id="ExpertId" name="ExpertId" />
+                    <input type="hidden" id="OrderIdSuggestion" name="OrderId" />
+                    <input type="hidden" id="ExpertId" name="ExpertId" />
 
                     <div class="form-group">
-                        <label>قیمت پیشنهادی</label>
+                        <label>قیمت پیشنهادی (ریال)</label>
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <i class="icon-calendar"></i>
+                                <i class="icon-wallet"></i>
                             </span>
-                            <input name="SuggestedPrice" type="number" class="form-control round">
+                            <input type="text" pattern="[0-9.,]+" required data-type="number" name="SuggestedPrice"  id="SuggestedPrice" type="number" step="0.01" class="form-control round" required>
                         </div>
                     </div>
 
@@ -221,7 +221,7 @@
                     </div>
 
                     <div style="float:left;">
-                        <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="submit" class="btn btn-info curve">ثبت سفارش<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
                         <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
                     </div>
 
@@ -248,7 +248,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-wrench"></i>
                             </span>
-                            <select name="HomeServiceId" name="HomeServiceId" class="form-control round" asp-items="Model.HomeServices"></select>
+                            <select name="HomeServiceId" name="HomeServiceId" class="form-control round" asp-items="Model.HomeServices" required></select>
                         </div>
                     </div>
 
@@ -258,7 +258,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-calendar"></i>
                             </span>
-                            <input name="DateOfExecution" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تولد" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")">
+                            <input name="DateOfExecution" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تولد" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")" required>
                         </div>
                     </div>
 
@@ -268,7 +268,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-clock"></i>
                             </span>
-                            <input name="Clock" type="text" class="form-control clockpicker-autoclose round">
+                            <input name="Clock" type="text" class="form-control clockpicker-autoclose round" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -322,9 +322,25 @@
                 $("#HomeService").val(HomeService);
                 $("#OrderIdDelete").val(OrderId);
                 $("#OrderIdSuggestion").val(OrderIdSuggestion);
-                
+
 
             });
         });
+    </script>
+
+    <script>
+        $('#SuggestedPrice').keydown(function(e) {
+            setTimeout(() => {
+                let parts = $(this).val().split(".");
+                let v = parts[0].replace(/\D/g, ""),
+                    dec = parts[1]
+                let calc_num = Number((dec !== undefined ? v + "." + dec : v));
+                // use this for numeric calculations
+                console.log('number for calculations: ', calc_num);
+                let n = new Intl.NumberFormat('ir-fa').format(v);
+                n = dec !== undefined ? n + "." + dec : n;
+                $(this).val(n);
+            })
+        })
     </script>
 }

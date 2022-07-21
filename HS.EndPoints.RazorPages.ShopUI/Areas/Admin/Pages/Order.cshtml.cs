@@ -1,14 +1,13 @@
-using AutoMapper;
 using HS.Domain.Core.Contracts.ApplicationService;
-using HS.Domain.Core.Dtos;
-using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Data.Entity;
+using HS.Domain.Core.Entities;
 using System.Security.Claims;
+using HS.Domain.Core.Dtos;
+using AutoMapper;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
@@ -20,11 +19,10 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IExpertApplicationService _expertApplicationService;
 
-
-        public List<OrderViewModel>? Orders;
-        private readonly IMapper _mapper;
-        public string currentUserID { get; set; }
+        public ICollection<OrderViewModel>? Orders = new List<OrderViewModel>();
+        public string currentUserID { get; set; } = String.Empty;
         public SelectList HomeServices { get; set; }
+        private readonly IMapper _mapper;
         public Guid UserId;
 
         public OrderModel(IOrderApplicationService orderApplicationService,
@@ -44,48 +42,46 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task OnGet()
         {
-            var user = await _userManager.FindByEmailAsync(User.Identity!.Name);
-            var roles = await  _userManager.GetRolesAsync(user);
             ClaimsPrincipal currentUser = this.User;
-            currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
+            currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-            var result = await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles);
-            if(User.IsInRole("Expert"))
+            var roles = await  _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(User.Identity!.Name));
+            Orders = _mapper.Map(await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles), Orders);
+            if (User.IsInRole("Expert"))
             UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
-            Orders = _mapper.Map(result, Orders);
         }
 
         public async Task<IActionResult> OnPostCreate(OrderViewModel model)
         {
-            ClaimsPrincipal currentUser = this.User;
-            currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            var OrderDto = new OrderDto();
-            _mapper.Map(model, OrderDto);
-            OrderDto.currentApplicationUserID = currentUserID;
-           await _orderApplicationService.Create(OrderDto,model.FormFile);
-            return LocalRedirect("/Admin/Order");
-            
+            if(ModelState.IsValid)
+            {
+                ClaimsPrincipal currentUser = this.User;
+                currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var OrderDto = _mapper.Map(model, new OrderDto());
+                OrderDto.currentApplicationUserID = currentUserID;
+                await _orderApplicationService.Create(OrderDto, model.FormFile);
+            }
+            return LocalRedirect("/Admin/Order");  
         }
 
         public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model)
         {
-            var suggestionDto = new SuggestionDto();
-            _mapper.Map(model, suggestionDto);
-            await _suggestionApplicationService.Create(suggestionDto);
-            return LocalRedirect("/Admin/Order");
+             if(ModelState.IsValid)
+                await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()));
+             return LocalRedirect("/Admin/Order");
         }
 
         public async Task<IActionResult> OnPostDeleteOrder(int OrderIdDelete)
         {
-            await _orderApplicationService.SoftDelete(OrderIdDelete);
+            if (ModelState.IsValid)
+                await _orderApplicationService.SoftDelete(OrderIdDelete);
             return LocalRedirect("/Admin/Order");
         }
 
         public async Task<IActionResult> OnPostRecover(int OrderId)
         {
-            await _orderApplicationService.SoftRecover(OrderId);
+            if (ModelState.IsValid)
+                await _orderApplicationService.SoftRecover(OrderId);
             return LocalRedirect("/Admin/Order");
         }
 

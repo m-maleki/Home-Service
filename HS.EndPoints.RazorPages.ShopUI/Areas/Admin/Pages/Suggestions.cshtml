@@ -34,7 +34,7 @@
                             <input type="submit" value="نمایش" class="btn btn-success curve">
                         </form>
                     </td>>
-                    <td>@item.SuggestedPrice</td>
+                    <td>@item.SuggestedPrice ریال</td>
                     <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
                     <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
                     <td>
@@ -128,7 +128,6 @@
                 $("#Customer").val(Customer);
                 $("#HomeService").val(HomeService);
                 $("#OrderId").val(OrderId);
-
             });
         });
     </script>

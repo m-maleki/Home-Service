@@ -23,18 +23,21 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task OnGet()
         {
+
             var records = await _commentApplicationService.GetAll();
             comments = _mapper.Map(records, comments);
         }
 
         public async Task<IActionResult> OnPostActive(int commentId)
         {
-           await _commentApplicationService.Active(commentId);
-            return LocalRedirect("/Admin/comment");
+            if (ModelState.IsValid)
+                await _commentApplicationService.Active(commentId);
+                return LocalRedirect("/Admin/comment");
         }
 
         public async Task<IActionResult> OnPostDeActive(int commentId)
         {
+            if(ModelState.IsValid)
             await _commentApplicationService.DeActive(commentId);
             return LocalRedirect("/Admin/comment");
         }

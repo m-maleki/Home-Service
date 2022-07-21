@@ -19,6 +19,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMapping)));
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMappingUi))); 
+
 var connectionString = builder.Configuration.GetConnectionString("HSConnection") ?? throw new InvalidOperationException("Connection string 'HSConnection' not found.");
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 

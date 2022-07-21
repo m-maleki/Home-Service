@@ -32,9 +32,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
             CreateMap<Order, OrderDto>();
             CreateMap<SuggestionDto, Suggestion>();
             CreateMap<OrderFile, OrderFileDto>();
-
-
-
+            CreateMap<CustomerDto, UserDto>();
+            CreateMap<ExpertDto, UserDto>();
+            CreateMap<UserDto,ExpertDto> ();
         }
     }
 }
