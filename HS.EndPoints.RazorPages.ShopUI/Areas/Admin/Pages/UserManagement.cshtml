@@ -23,11 +23,11 @@
             {
                 <tr>
                     <td>
-                        @if(@item.Roles=="Expert")
+                        @if(@item.Role=="Expert")
                         {
                         <img src="~/Images/Profiles/@item.ProfileImgUrl" class="img-circle" style="width:50px;height:50px" alt="Cinque Terre">
                         }
-                         @if(@item.Roles=="Customer")
+                         @if(@item.Role=="Customer")
                         {
                         <img src="~/Images/Profiles/@item.ProfileImgUrlCustomer" class="img-circle" style="width:50px;height:50px" alt="Cinque Terre">
                         }
@@ -35,15 +35,15 @@
                     <td>@item.UserName</td>
                     <td>@item.Email</td>
                     <td>
-                        @item.Roles
+                        @item.Role
                     </td>
 
                     <td>
                         <form method="post">
                             <div class="portlet-body">
                                 <input type="hidden" name="id" id="id" value="@item.Id">
-                                <button type="submit" asp-page="/Access/Create" class="btn btn-primary curve">ویرایش</button>
-                                <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve">حذف</button>
+                                <button type="submit" asp-page="/Access/Create" class="btn btn-primary curve" disabled>ویرایش</button>
+                                <button type="submit" asp-page-handler="Delete" class="btn btn-danger curve" disabled>حذف</button>
                             </div>
                         </form>
                     </td>

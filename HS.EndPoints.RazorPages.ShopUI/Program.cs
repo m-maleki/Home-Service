@@ -82,6 +82,10 @@ builder.Services.AddScoped<ICommentApplicationService, CommentApplicationService
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 
+builder.Services.AddScoped<IApplicationUserApplicationService, ApplicationUserApplicationService>();
+builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

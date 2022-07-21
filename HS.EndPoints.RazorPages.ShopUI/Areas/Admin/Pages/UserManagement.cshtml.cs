@@ -1,6 +1,9 @@
 using AutoMapper;
+using HS.Domain.Core.Contracts.ApplicationService;
+using HS.Domain.Core.Dtos.ApplicationUsers;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
+using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,37 +18,26 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
     [Authorize]
     public class UserManagementModel : PageModel
     {
+        private readonly IApplicationUserApplicationService _applicationUserApplicationService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+
         private readonly IMapper _mapper;
-        public List<UserViewModel> users;
+        public List<ApplicationUserViewModel> users;
 
         public UserManagementModel(UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole<Guid>> roleManager,
-            IMapper mapper)
+            IMapper mapper,
+            IApplicationUserApplicationService applicationUserApplicationService)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _mapper = mapper;
+            _applicationUserApplicationService = applicationUserApplicationService;
         }
 
 
         public async Task OnGet()
         {
-             users = await _userManager.Users.Select(x=> new UserViewModel()
-            {
-                Id = x.Id,
-                UserName = x.UserName,
-                Email = x.Email,
-                ProfileImgUrl=x.Expert.ProfileImgUrl,
-                ProfileImgUrlCustomer=x.Customer.ProfileImgUrl
-             }).ToListAsync();
-
-            foreach (var item in users)
-            {
-                item.Role = (List<string>?)await _userManager.GetRolesAsync(await _userManager.Users.FirstAsync(x => x.Id == item.Id));
-                item.Roles = string.Join(",", item.Role);
-            }
+            var t = await _applicationUserApplicationService.GetAll();
+            users= _mapper.Map(t, users);
         }
 
         public async Task<IActionResult> OnPostDelete(Guid id)
@@ -59,45 +51,22 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser();
-                if (model.Role =="Expert")
-                {
-                     user = new ApplicationUser
-                    {
-                        UserName = model.Email,
-                        Email = model.Email,
-                        Expert = new Expert()
-                    };
-                }
-
-                if (model.Role == "Customer")
-                {
-                     user = new ApplicationUser
-                    {
-                        UserName = model.Email,
-                        Email = model.Email,
-                        Customer = new Customer()
-                    };
-                }
-
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()));
                 if (result.Succeeded)
                 {
-                   var test =await _userManager.AddToRoleAsync(user, model.Role);
-                   return LocalRedirect("/Admin/UserManagement");
+                    return LocalRedirect("/Admin/UserManagement");
                 }
                 else
                 {
                     foreach (var item in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, item.Description);
+                        return default;
                     }
                     return LocalRedirect("/Admin/UserManagement");
                 }
             }
             return LocalRedirect("/Admin/UserManagement");
         }
-
-
     }
 }

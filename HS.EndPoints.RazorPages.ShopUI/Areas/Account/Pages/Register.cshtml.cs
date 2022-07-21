@@ -1,3 +1,6 @@
+using AutoMapper;
+using HS.Domain.Core.Contracts.ApplicationService;
+using HS.Domain.Core.Dtos.ApplicationUsers;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -10,41 +13,24 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
     [Area("Account")]
     public class RegisterModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+        private readonly IApplicationUserApplicationService _applicationUserApplicationService;
+        private readonly IMapper _mapper;
 
-        public RegisterModel(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole<Guid>> roleManager)
+        public RegisterModel(IMapper mapper,
+            IApplicationUserApplicationService applicationUserApplicationService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _roleManager = roleManager;
-        }
-
-        public void OnGet()
-        {
-
+            _mapper = mapper;
+            _applicationUserApplicationService = applicationUserApplicationService;
         }
 
         public async Task<IActionResult> OnPostCreate(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Customer = new Customer()
-                };
-
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()));
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Customer");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect("~/Admin/");
+                    return LocalRedirect("~/Account/Login");
                 }
                 else
                 {

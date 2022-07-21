@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Dtos.ApplicationUsers;
 using HS.Domain.Core.Entities;
 
 
@@ -35,6 +36,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.AutoMapper
             CreateMap<CustomerDto, UserDto>();
             CreateMap<ExpertDto, UserDto>();
             CreateMap<UserDto,ExpertDto> ();
+            CreateMap<ApplicationUser, ApplicationUserDto>();
         }
     }
 }

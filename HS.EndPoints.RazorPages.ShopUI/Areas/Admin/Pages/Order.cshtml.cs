@@ -1,13 +1,13 @@
+using AutoMapper;
 using HS.Domain.Core.Contracts.ApplicationService;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
-using HS.Domain.Core.Dtos;
-using AutoMapper;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
@@ -45,30 +45,28 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             ClaimsPrincipal currentUser = this.User;
             currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-            var roles = await  _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(User.Identity!.Name));
+            var roles = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(User.Identity!.Name));
             Orders = _mapper.Map(await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles), Orders);
             if (User.IsInRole("Expert"))
-            UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
+                UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
         }
 
         public async Task<IActionResult> OnPostCreate(OrderViewModel model)
         {
-            if(ModelState.IsValid)
-            {
+  
                 ClaimsPrincipal currentUser = this.User;
                 currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var OrderDto = _mapper.Map(model, new OrderDto());
                 OrderDto.currentApplicationUserID = currentUserID;
                 await _orderApplicationService.Create(OrderDto, model.FormFile);
-            }
-            return LocalRedirect("/Admin/Order");  
+            return LocalRedirect("/Admin/Order");
         }
 
         public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model)
         {
-             if(ModelState.IsValid)
+
                 await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()));
-             return LocalRedirect("/Admin/Order");
+            return LocalRedirect("/Admin/Order");
         }
 
         public async Task<IActionResult> OnPostDeleteOrder(int OrderIdDelete)
@@ -85,6 +83,6 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             return LocalRedirect("/Admin/Order");
         }
 
-        
+
     }
 }
