@@ -8,7 +8,7 @@ namespace HS.Domain.Core.Contracts.Repository
     {
         Task<CommentDto> GetBy(int id);
         Task<List<CommentDto>> GetAll();
-        Task Create(CommentDto entity);
+        Task Create(string comment, Guid expertId);
         Task Update(CommentDto entity);
     }
 }

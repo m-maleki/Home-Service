@@ -1,5 +1,6 @@
 ﻿@page
 @using Framework.Utilities
+@using HS.Domain.Core.Enums
 @model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.OrderDetailsModel
 @{
     ViewData["Title"] = "مشخصات سفارش";
@@ -25,7 +26,7 @@
             <td>@Model.Order.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
             <td>@Model.Order.DateOfExecution.ToPersianString("yyyy/MM/dd")</td>
             <td>@Model.Order.DateOfExecution.ToString("H:mm")</td>
-            <td>@Model.Order.Status.GetEnumDisplayName()</td>
+            <td style="color:red">@Model.Order.Status.GetEnumDisplayName()</td>
         </tr>
     </tbody>
 </table>
@@ -51,19 +52,19 @@
         {
             @foreach (var item in Model.suggestions)
             {
-                @if(item.ExpertId==Model.UserId || User.IsInRole("Admin") ||  User.IsInRole("Customer"))
+                @if (item.ExpertId == Model.UserId || User.IsInRole("Admin") || User.IsInRole("Customer"))
                 {
                     <tr>
-                    <td>@item.Id</td>
-                    <td>@item.OrderId</td>
-                    <td>@item.Expert.FirstName @item.Expert.LastName</td>
-                    <td>@item.SuggestedPrice</td>
-                    <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
-                    <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
-                    <td>
-                        <a data-bs-toggle="modal" data-bs-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" asp-page-handler="Delete" class="btn btn-success curve">جزئیات پیشنهاد</a>
-                    </td>
-                </tr>
+                        <td>@item.Id</td>
+                        <td>@item.OrderId</td>
+                        <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                        <td>@item.SuggestedPrice</td>
+                        <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                        <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                        <td>
+                            <a data-bs-toggle="modal" data-bs-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" asp-page-handler="Delete" class="btn btn-success curve">جزئیات پیشنهاد</a>
+                        </td>
+                    </tr>
                 }
             }
         }
@@ -76,11 +77,34 @@
     <label>توضیحات درخواست</label>
     <div class="input-group round">
         <span class="input-group-addon">
-            <i class="icon-location-pin"></i>
+            <i class="icon-note"></i>
         </span>
-        <textarea name="Biography" class="form-control" rows="5">@Model.Order.Description</textarea>
+        <textarea name="Description" class="form-control" rows="5">@Model.Order.Description</textarea>
     </div>
 </div>
+@if (@Model.Order.Status == OrderStatusEnum.Done)
+{
+
+    <hr>
+      <form method="post" asp-page-handler="Comment">
+      <input type="hidden" name="OrderId" value="@Model.Order.Id">
+    <div class="form-group">
+        <label style="color:red">شما میتوانید میزان رضایت خود را از عملکرد کارشناس در فرم زیر ثبت کنید</label>
+        <div class="input-group round">
+            <span class="input-group-addon">
+                <i style="color:red" class="icon-note"></i>
+            </span>
+            <textarea name="Comment" class="form-control" rows="3"></textarea>
+        </div>
+        <br>
+        <div style="float:left;">
+            <button type="submit" class="btn btn-success curve">ثبت پیشنهاد<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+        </div>
+    </div>
+    </form>
+}
+<br />
+
 <hr>
 <label>تصاویر پیوست شده</label>
 <center>
@@ -89,15 +113,16 @@
             <thead>
                 <tr>
                     <th>تصاویر ثبت شده سفارش</th>
-                      @if(@User.IsInRole("Admin"))
-                        {
-                    <th>عملیات</th>
-                        }
+                    @if (@User.IsInRole("Admin"))
+                    {
+                        <th>عملیات</th>
+                    }
                 </tr>
             </thead>
             <tbody>
                 @if (Model.suggestions != null)
                 {
+
                     @foreach (var item in Model.orderFiles)
                     {
                         <tr>
@@ -106,22 +131,21 @@
                                     <img src="~/@item.Name" class="img-circle" style="width:100px;height:100px" alt="Cinque Terre">
                                 </a>
                             </td>
-                         @if(@User.IsInRole("Admin"))
-                        {
-                            <td>
-                                <a data-bs-toggle="modal" image-Id="@item.Id" data-bs-target="#ModalDelete" class="btn btn-danger curve">حذف تصویر</a>
-                            </td>
-                        }
+                            @if (@User.IsInRole("Admin"))
+                            {
+                                <td>
+                                    <a data-bs-toggle="modal" image-Id="@item.Id" data-bs-target="#ModalDelete" class="btn btn-danger curve">حذف تصویر</a>
+                                </td>
+                            }
                         </tr>
                     }
-
                 }
-
             </tbody>
         </table>
     </div>
 </center>
 <hr>
+
 
 
 <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="DeleteLabel" aria-hidden="true">
@@ -139,9 +163,9 @@
                     <p>آیا از حذف تصویر اطمینان دارید ؟</p>
                     <hr />
                     <div style="float:left;">
-                        @if(@User.IsInRole("Admin"))
+                        @if (@User.IsInRole("Admin"))
                         {
-                             <button type="submit" class="btn btn-danger curve">در صورت اطمینان از حذف کلیک کنید<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                            <button type="submit" class="btn btn-danger curve">در صورت اطمینان از حذف کلیک کنید<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
                         }
                         <button type="button" class="btn btn-success curve " data-bs-dismiss="modal">بازگشت</button>
                     </div>
@@ -151,7 +175,7 @@
     </div>
 </div>
 
- <div class="modal fade" id="SuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsLabel" aria-hidden="true">
+<div class="modal fade" id="SuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -189,22 +213,21 @@
                             <span class="input-group-addon">
                                 <i class="icon-wrench"></i>
                             </span>
-                            <input name="HomeService" id="HomeService" type="text" class="form-control round" disabled>
+                            <input name="HomeService" id="HomeService" type="text" class="form-control round" readonly>
                         </div>
                     </div>
 
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>توضیحات</label>
                         <div class="input-group round">
                             <span class="input-group-addon">
                                 <i class="icon-note"></i>
                             </span>
-                            <textarea id="Description" name="Description" class="form-control" rows="4"></textarea>
+                            <textarea id="Description" name="Description" class="form-control" rows="4" readonly></textarea>
                         </div>
                     </div>
 
                     <div style="float:left;">
-                        <button type="submit" class="btn btn-success curve">قبول پیشنهاد<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
                         <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
                     </div>
                 </form>
@@ -224,7 +247,7 @@
         });
     </script>
 
-        <script>
+    <script>
         $(document).ready(function() {
             $(".table a").on("click", function() {
                 var SuggId = $(this).attr("SuggId");
@@ -237,7 +260,7 @@
                 $("#Customer").val(Customer);
                 $("#HomeService").val(HomeService);
                 $("#OrderId").val(OrderId);
-                
+
             });
         });
     </script>

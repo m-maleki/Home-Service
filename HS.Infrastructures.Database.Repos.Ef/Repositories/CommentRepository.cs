@@ -24,9 +24,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public async Task<CommentDto> GetBy(int id)
             => await _mapper.ProjectTo<CommentDto>(_context.Comments).Where(x=>x.Id==id).SingleOrDefaultAsync();
 
-        public async Task Create(CommentDto entity)
+        public async Task Create(string comment, Guid expertId)
         {
-            var record = _mapper.Map<Comment>(entity);
+            Comment record = new Comment()
+            {
+                Body = comment,
+                ExpertId = expertId
+            };
+
             await _context.Comments.AddAsync(record);
             await _context.SaveChangesAsync();
         }

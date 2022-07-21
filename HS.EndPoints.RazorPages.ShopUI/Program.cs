@@ -77,6 +77,10 @@ builder.Services.AddScoped<IOrderFileApplicationService, OrderFileApplicationSer
 builder.Services.AddScoped<IOrderFileRepository, OrderFileRepository>();
 builder.Services.AddScoped<IOrderFileService, OrderFileService>();
 
+builder.Services.AddScoped<ICommentApplicationService, CommentApplicationService>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

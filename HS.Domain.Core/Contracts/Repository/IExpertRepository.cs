@@ -12,5 +12,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<Guid> GetExpertId(Guid expertIdentityId);
         Task<List<OrderDto>> GetAllBy(Guid expertId);
         Task<List<ExpertDto>> GetAll(Guid id);
+        
     }
 }

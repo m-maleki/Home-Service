@@ -79,5 +79,12 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Guid> GetAcceptSuggestionExpertId(int orderId)
+        {
+            return await _context.Suggestions.AsNoTracking()
+                .Where(x=>x.OrderId== orderId && x.IsAccept==true)
+                .Select(x=>x.ExpertId)
+                .SingleOrDefaultAsync();
+        }
     }
 }

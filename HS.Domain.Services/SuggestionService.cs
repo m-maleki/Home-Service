@@ -54,6 +54,11 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
+        public async Task<Guid> GetAcceptSuggestionExpertId(int orderId)
+        {
+          return  await _suggestionRepository.GetAcceptSuggestionExpertId(orderId);
+        }
+
         public async Task<List<SuggestionDto>> GetAll(int orderId)
         {
             return await _suggestionRepository.GetAll(orderId);

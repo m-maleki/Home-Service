@@ -13,6 +13,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         private readonly ISuggestionApplicationService _suggestionApplicationService;
         private readonly IOrderFileApplicationService _orderFileApplicationService;
         private readonly IExpertApplicationService _expertApplicationService;
+        private readonly ICommentApplicationService _commentApplicationService;
 
         public List<SuggestionViewModel> suggestions = new();
         public List<OrderFileViewModel> orderFiles = new();
@@ -24,13 +25,15 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             IMapper mapper,
             ISuggestionApplicationService suggestionApplicationService,
             IOrderFileApplicationService orderFileApplicationService,
-            IExpertApplicationService expertApplicationService)
+            IExpertApplicationService expertApplicationService,
+            ICommentApplicationService commentApplicationService)
         {
             _orderApplicationService = orderApplicationService;
             _mapper = mapper;
             _suggestionApplicationService = suggestionApplicationService;
             _orderFileApplicationService = orderFileApplicationService;
             _expertApplicationService = expertApplicationService;
+            _commentApplicationService = commentApplicationService;
         }
 
         public async Task OnGet(int OrderId)
@@ -54,6 +57,13 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         {
              await _orderFileApplicationService.DeleteFile(imageId);
             return LocalRedirect("/Admin/Order/");
+        }
+
+        public async Task<IActionResult> OnPostComment(string Comment,int OrderId)
+        {
+            await _commentApplicationService.Create(Comment, OrderId);
+            return LocalRedirect("/Admin/Order/");
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HS.Domain.Core.Entities;
+﻿using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface ICommentService
     {
-        Task<Comment> Get(int Id);
-        Task<List<Comment>> Get();
-        Task Create(Comment entity);
+        Task<CommentDto> Get(int Id);
+        Task<List<CommentDto>> Get();
+        Task Create(string comment,Guid expertId);
         Task EnsureExists(int Id);
         Task EnsureDoesNotExist(int Id);
-        Task Update(Comment entity);
+        Task Update(CommentDto entity);
     }
 }
