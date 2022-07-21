@@ -11,6 +11,7 @@
             <th>شناسه پیشنهاد</th>
             <th>شناسه سفارش</th>
             <th>کارشناس</th>
+            <th>عملکرد کارشناس</th>
             <th>قیمت پیشنهادی </th>
             <th>تاریخ پیشنهاد </th>
             <th>تاریخ اتمام کار</th>
@@ -27,11 +28,17 @@
                     <td>@item.Id</td>
                     <td>@item.OrderId</td>
                     <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                    <td>
+                        <form method="get" role="form" asp-page="ExpertComment">
+                            <input type="hidden" name="ExpertId" value="@item.Expert.Id">
+                            <input type="submit" value="نمایش" class="btn btn-success curve">
+                        </form>
+                    </td>>
                     <td>@item.SuggestedPrice</td>
                     <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
                     <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
                     <td>
-                         <a data-bs-toggle="modal" data-bs-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" asp-page-handler="Delete" class="btn btn-success curve">جزئیات پیشنهاد</a>
+                        <a data-bs-toggle="modal" data-bs-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" asp-page-handler="Delete" class="btn btn-success curve">جزئیات پیشنهاد</a>
                     </td>
                 </tr>
             }
@@ -43,7 +50,7 @@
 
 
 
- <div class="modal fade" id="SuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsLabel" aria-hidden="true">
+<div class="modal fade" id="SuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -85,7 +92,7 @@
                         </div>
                     </div>
 
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>توضیحات</label>
                         <div class="input-group round">
                             <span class="input-group-addon">
@@ -105,7 +112,7 @@
     </div>
 </div>
 
-                    
+
 @section masterjs
     {
     <script>
@@ -121,7 +128,7 @@
                 $("#Customer").val(Customer);
                 $("#HomeService").val(HomeService);
                 $("#OrderId").val(OrderId);
-                
+
             });
         });
     </script>

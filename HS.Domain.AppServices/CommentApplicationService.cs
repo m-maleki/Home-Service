@@ -21,20 +21,35 @@ namespace HS.Domain.ApplicationServices
             _suggestionService = suggestionService;
         }
 
+        public async Task Active(int commentId)
+        {
+            await _commentService.Active(commentId);
+        }
+
         public async Task Create(string comment,int orderId)
         {
             var expertId =await _suggestionService.GetAcceptSuggestionExpertId(orderId);
             await _commentService.Create(comment,expertId);
         }
 
-        public Task<List<CommentDto>> GetAll()
+        public async Task DeActive(int commentId)
         {
-            throw new NotImplementedException();
+            await _commentService.DeActive(commentId);
+        }
+
+        public async Task<List<CommentDto>> GetAll()
+        {
+            return await _commentService.GetAll();
         }
 
         public Task<CommentDto> GetBy(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<CommentDto>> GetBy(Guid expertId)
+        {
+            return await _commentService.GetBy(expertId);
         }
 
         public Task Update(CommentDto entity)

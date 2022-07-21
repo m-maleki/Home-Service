@@ -1,15 +1,16 @@
-﻿namespace HS.Domain.Core.Entities
+﻿using HS.Domain.Core.Entities;
+
+namespace HS.EndPoints.RazorPages.UI.Model
 {
-    public class Comment
+    public class CommentViewModel
     {
         #region Properties
         public int Id { get; set; }
         public string? Body { get; set; }
-        public int? Score { get; set; }
+        public int Score { get; set; }
         public Guid ExpertId { get; set; }
-        public bool IsDeleted { get; set; } = false;
-        public bool IsAccept { get; set;}= false;
-        public DateTime RegisterDate { get; set; } = DateTime.Now;
+        public bool IsAccept { get; set; } = false;
+        public DateTime RegisterDate { get; set; }
         #endregion Properties
 
         #region Navigation properties

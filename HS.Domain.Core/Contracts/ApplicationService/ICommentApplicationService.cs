@@ -13,5 +13,8 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<List<CommentDto>> GetAll();
         Task Create(string comment , int orderId);
         Task Update(CommentDto entity);
+        Task<List<CommentDto>> GetBy(Guid expertId);
+        Task Active(int commentId);
+        Task DeActive(int commentId);
     }
 }

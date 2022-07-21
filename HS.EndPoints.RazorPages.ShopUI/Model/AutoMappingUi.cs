@@ -19,6 +19,7 @@ namespace HS.EndPoints.RazorPages.UI.Model
             CreateMap<SuggestionDto, SuggestionViewModel>();
             CreateMap<OrderDto, OrderViewModel>();
             CreateMap<OrderFileDto, OrderFileViewModel>();
+            CreateMap<CommentDto, CommentViewModel>();
         }
     }
 }

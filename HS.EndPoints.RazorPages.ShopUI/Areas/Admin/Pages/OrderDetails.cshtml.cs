@@ -62,7 +62,8 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         public async Task<IActionResult> OnPostComment(string Comment,int OrderId)
         {
             await _commentApplicationService.Create(Comment, OrderId);
-            return LocalRedirect("/Admin/Order/");
+            RedirectToAction("Action", "Controller");
+            return RedirectToPage("/OrderDetails", new { OrderId });
 
         }
     }

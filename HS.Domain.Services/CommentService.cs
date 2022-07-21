@@ -19,9 +19,19 @@ namespace HS.Domain.Services
             _commentRepository = commentRepository;
         }
 
+        public async Task Active(int commentId)
+        {
+           await _commentRepository.Active(commentId);
+        }
+
         public async Task Create(string comment, Guid expertId)
         {
             await _commentRepository.Create(comment, expertId);
+        }
+
+        public async Task DeActive(int commentId)
+        {
+            await _commentRepository.DeActive(commentId);
         }
 
         public Task EnsureDoesNotExist(int Id)
@@ -42,6 +52,16 @@ namespace HS.Domain.Services
         public Task<List<CommentDto>> Get()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<CommentDto>> GetAll()
+        {
+           return await _commentRepository.GetAll();
+        }
+
+        public async Task<List<CommentDto>> GetBy(Guid expertId)
+        {
+           return await _commentRepository.GetBy(expertId);
         }
 
         public Task Update(CommentDto entity)

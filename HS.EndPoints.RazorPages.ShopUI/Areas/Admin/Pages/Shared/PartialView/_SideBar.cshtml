@@ -2,8 +2,6 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> Sign
 @inject UserManager<ApplicationUser> _userManager
-
-
 @using Microsoft.AspNetCore.Http
 @using System.Security.Claims
 @using Microsoft.EntityFrameworkCore
@@ -39,6 +37,12 @@
                             <span>مدیریت کاربران</span>
                         </a>
                     </li>
+                    <li>
+                        <a asp-page="/Comment">
+                            <i class="icon-people"></i>
+                            <span>مدیریت کامنت ها</span>
+                        </a>
+                    </li>
                 }
 
                 @if (role == "Expert")
@@ -51,7 +55,7 @@
                     </li>
 
                     <li>
-                        <a >
+                        <a>
                             <i class="icon-equalizer"></i>
                             <span>پیشنهاد ها</span>
                         </a>
@@ -62,7 +66,7 @@
                 @if (role == "Customer")
                 {
                     <li>
-                        <a >
+                        <a>
                             <i class="icon-layers"></i>
                             <span>فاکتورها</span>
                         </a>

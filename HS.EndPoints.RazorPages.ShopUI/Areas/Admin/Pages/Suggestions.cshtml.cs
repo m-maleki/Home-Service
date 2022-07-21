@@ -4,6 +4,7 @@ using HS.Domain.Core.Dtos;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
@@ -24,7 +25,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         {
             var records  =  await _suggestionApplicationService.GetAll(orderId);
             _mapper.Map(records,suggestions);
-            
+
 
         }
 
