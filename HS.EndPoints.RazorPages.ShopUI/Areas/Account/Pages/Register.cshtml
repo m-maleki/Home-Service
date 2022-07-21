@@ -1,8 +1,8 @@
 ﻿@page
 @model HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages.RegisterModel
 @{
-        Layout = "_Layout";
-        ViewBag.Title = "ثبت نام در سایت";
+    Layout = "_Layout";
+    ViewBag.Title = "ثبت نام در سایت";
 }
 
 <div class="col-md-12">
@@ -48,6 +48,19 @@
             </div><!-- /.input-group-->
         </div><!-- /.form-group -->
 
+                <div class="form-group">
+            <label for="email" class="sr-only">نوع کاربر</label>
+            <div class="input-group round">
+                <span class="input-group-addon">
+                    <i class="icon-envelope"></i>
+                </span>
+                <select class="form-control" name="Role">
+                    <option value="Customer" >مشتری</option>
+                    <option value="Expert">کارشناس</option>
+                </select>
+            </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
+
         <div class="form-group">
             <button type="submit" class="btn btn-info btn-round btn-block" name="signup" value="Sign up">
                 <i class="icon-check"></i>
@@ -67,6 +80,6 @@
     </a>
 </div>
 @section Scripts{
-   <script src="~/assets/js/pages/register.js"></script>
+    <script src="~/assets/js/pages/register.js"></script>
 }
 

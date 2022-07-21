@@ -19,7 +19,6 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly IMapper _mapper;
         public List<UserViewModel> users;
-        public List<SelectListItem> roles;
 
         public UserManagementModel(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole<Guid>> roleManager,
@@ -33,11 +32,6 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 
         public async Task OnGet()
         {
-             roles = await _roleManager.Roles.Select(x=> new SelectListItem
-             {
-                 Text = x.Name,
-                 Value = x.Name,
-             } ).ToListAsync();
              users = await _userManager.Users.Select(x=> new UserViewModel()
             {
                 Id = x.Id,

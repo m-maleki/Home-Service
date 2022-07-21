@@ -32,24 +32,17 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
         {
             if (ModelState.IsValid)
             {
-                //Expert expert = new Expert {
-                //};
-
-                Customer customer = new Customer
-                {
-                };
-
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                  //  Expert = expert,
-                    Customer = customer
+                    Customer = new Customer()
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Customer");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect("~/Admin/");
                 }
