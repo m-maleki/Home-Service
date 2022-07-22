@@ -16,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account";
+    options.AccessDeniedPath = "/AccessDenied";
 });
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMapping)));
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMappingUi))); 

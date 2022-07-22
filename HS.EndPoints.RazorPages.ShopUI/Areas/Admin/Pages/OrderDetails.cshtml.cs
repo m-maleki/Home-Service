@@ -4,9 +4,11 @@ using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
+    [Authorize]
     public class OrderDetailsModel : PageModel
     {
         private readonly ISuggestionApplicationService _suggestionApplicationService;

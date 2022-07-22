@@ -3,6 +3,7 @@ using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.UI.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,6 +12,7 @@ using System.Security.Claims;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
+    [Authorize]
     public class OrderModel : PageModel
     {
         private readonly IOrderApplicationService _orderApplicationService;

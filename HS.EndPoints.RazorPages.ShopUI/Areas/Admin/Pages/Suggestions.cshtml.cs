@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
+    [Authorize(Roles = "Admin,Customer")]
     public class SuggestionsModel : PageModel
     {
         public ICollection<SuggestionViewModel> suggestions = new List<SuggestionViewModel>();

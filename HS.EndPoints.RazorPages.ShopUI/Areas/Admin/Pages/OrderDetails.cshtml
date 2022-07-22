@@ -83,7 +83,7 @@
         <textarea name="Description" class="form-control" rows="5">@Model.Order.Description</textarea>
     </div>
 </div>
-@if (@Model.Order.Status == OrderStatusEnum.Done)
+@if (@Model.Order.Status == OrderStatusEnum.Done && @User.IsInRole("Customer"))
 {
 
     <hr>

@@ -15,7 +15,7 @@ using System.Linq;
 namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 {
 
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class UserManagementModel : PageModel
     {
         private readonly IApplicationUserApplicationService _applicationUserApplicationService;
@@ -36,8 +36,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 
         public async Task OnGet()
         {
-            var t = await _applicationUserApplicationService.GetAll();
-            users= _mapper.Map(t, users);
+            users= _mapper.Map(await _applicationUserApplicationService.GetAll(), users);
         }
 
         public async Task<IActionResult> OnPostDelete(Guid id)

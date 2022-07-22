@@ -9,10 +9,11 @@ using HS.Domain.Core.Entities;
 using System.Security.Claims;
 using HS.Domain.Core.Dtos;
 using AutoMapper;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 {
+    [Authorize]
     public class ProfileModel : PageModel
     {
         private readonly IHomeServiceApplicationService _homeServiceApplicationService;
