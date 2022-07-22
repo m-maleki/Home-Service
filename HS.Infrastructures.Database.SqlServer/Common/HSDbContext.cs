@@ -59,7 +59,7 @@ namespace HS.Infrastructures.Database.SqlServer.Common
             builder.ApplyConfiguration(new ImageConfiguration());
             builder.ApplyConfiguration(new OrderConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());
-            
+
             base.OnModelCreating(builder);
         }
         public DbSet<HomeServiceSubCategory> HomeServiceSubCategories { get; set; } = null!;

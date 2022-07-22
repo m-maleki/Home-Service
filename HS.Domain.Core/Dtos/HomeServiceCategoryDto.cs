@@ -10,7 +10,7 @@ namespace HS.Domain.Core.Dtos
         #endregion Properties
 
         #region Navigation properties  
-        public List<HomeService>? HomeServices { get; set; }
+        public List<HomeServiceSubCategory>? HomeServiceSubCategories { get; set; }
         #endregion Navigation properties
     }
 }

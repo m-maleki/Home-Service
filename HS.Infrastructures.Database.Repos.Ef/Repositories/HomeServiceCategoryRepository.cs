@@ -20,6 +20,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         
         public async Task<List<HomeServiceCategoryDto>> GetAll()
             => _mapper.Map<List<HomeServiceCategoryDto>>(await _context.HomeServiceCategories
+                .Include(x=>x.HomeServiceSubCategories)
+                .ThenInclude(x=>x.HomeServices)
                 .AsNoTracking()
                 .ToListAsync());
         public async Task<HomeServiceCategoryDto> GetBy(int id)

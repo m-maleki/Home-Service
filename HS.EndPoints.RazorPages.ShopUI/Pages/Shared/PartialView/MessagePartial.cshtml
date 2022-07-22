@@ -1,0 +1,10 @@
+﻿@{
+    if (@Model.message.Body != null)
+    {
+        <div class="alert @Model.message.Type fill  fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <i class="icon-check"></i>
+            @Model.message.Body
+        </div>
+    }
+}

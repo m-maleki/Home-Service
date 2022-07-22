@@ -65,7 +65,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\HomeService\" />
     <Folder Include="wwwroot\Images\Orders\" />
     <Folder Include="wwwroot\Images\Profiles\" />
   </ItemGroup>

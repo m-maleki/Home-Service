@@ -1,5 +1,124 @@
 ﻿@page
 @model HS.EndPoints.RazorPages.ShopUI.Pages.IndexModel
 @{
+    Layout = "_Layout";
 }
-<h1>test</h1>
+<!--=====================================-->
+<!--=            Category Start           =-->
+<!--=====================================-->
+<section class="section-padding-top-heading">
+    <div class="container">
+        <div class="heading-layout1">
+            <h2 class="heading-title">از میان دسته های برتر مرور کنید</h2>
+        </div>
+        <div class="row">
+
+            @foreach (var category in @Model.homeServiceCategories)
+            {
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="h-100 pd-b-30">
+                        <div class="category-box-layout2">
+                            <a href="#" class="item-heading-area">
+                                <div class="item-img">
+                                    <img src="~/Images/HomeService/2ce018e0-9826-4003-bcfa-3ddacc7d37b0.webp" alt="Service">
+                                </div>
+                                <h3 class="item-title">@category.Name</h3>
+                            </a>
+                            <ul class="item-sub-category">
+                                @foreach (var subCategory in @category.HomeServiceSubCategories)
+                                {
+                                     <li>
+                                         <a href="#">@subCategory.Name</a>
+                                     </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+</section>
+<!--=====================================-->
+<!--=       Process Start           	=-->
+<!--=====================================-->
+<section class="process-wrap-layout1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="process-box-layout1">
+                    <h3 class="item-title">قرار دادن تبلیغات هرگز آسان تر نشده است!</h3>
+                    <div class="item-content">
+                        <ul>
+                            <li>تبلیغات خود را ارسال کنید</li>
+                            <li>تبلیغات خود را تبلیغ کنید</li>
+                            <li>ذخیره تبلیغات مورد علاقه</li>
+                            <li>در رسانه های اجتماعی به اشتراک بگذارید</li>
+                            <li>و بیشتر...</li>
+                        </ul>
+                    </div>
+                    <div class="item-btn">
+                        <a href="#" class="btn-fill-lg bgLight color-dark">ثبت نام کنید</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--=====================================-->
+<!--=       Blog Start           	=-->
+<!--=====================================-->
+<section class="section-padding-top-heading bg-accent">
+    <div class="container">
+        <div class="heading-layout1">
+            <h2 class="heading-title">پست های اخیر وبلاگ</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="blog-box-layout1">
+                    <div class="item-img">
+                        <a href="single-blog.html"><img src="~/media/blog/blog1.jpg" alt="blog"></a>
+                    </div>
+                    <div class="item-content">
+                        <ul class="post-meta">
+                            <li>1398/10/19</li>
+                            <li>/ <a href="#">راست چین</a></li>
+                        </ul>
+                        <h3 class="post-title"><a href="single-blog.html">سه ترفند قدرتمند برای تبلیغات آنلاین</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-box-layout1">
+                    <div class="item-img">
+                        <a href="single-blog.html"><img src="~/media/blog/blog2.jpg" alt="blog"></a>
+                    </div>
+                    <div class="item-content">
+                        <ul class="post-meta">
+                            <li>1398/10/20</li>
+                            <li>/ <a href="#">راست چین</a></li>
+                        </ul>
+                        <h3 class="post-title"><a href="~/single-blog.html">تجزیه و تحلیل رقابتی برای کارآفرینان 1398</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-box-layout1">
+                    <div class="item-img">
+                        <a href="single-blog.html"><img src="~/media/blog/blog3.jpg" alt="blog"></a>
+                    </div>
+                    <div class="item-content">
+                        <ul class="post-meta">
+                            <li>1398/10/21</li>
+                            <li>/ <a href="#">راست چین</a></li>
+                        </ul>
+                        <h3 class="post-title"><a href="single-blog.html">چگونه منابعی را با جستجوی محلی منفجر کنید</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

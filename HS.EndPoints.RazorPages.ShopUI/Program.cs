@@ -87,6 +87,9 @@ builder.Services.AddScoped<IApplicationUserApplicationService, ApplicationUserAp
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
+builder.Services.AddScoped<IHomeServiceCategoryRepository, HomeServiceCategoryRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

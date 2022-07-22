@@ -1,3 +1,6 @@
+using HS.Domain.Core.Contracts.Repository;
+using HS.Domain.Core.Dtos;
+using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -5,12 +8,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace HS.EndPoints.RazorPages.ShopUI.Pages
 {
 
-    [Authorize]
     public class IndexModel : PageModel
     {
-        public IActionResult OnGet()
+        private readonly IHomeServiceCategoryRepository _homeServiceCategory;
+
+        public List<HomeServiceCategoryDto> homeServiceCategories;
+        public IndexModel(IHomeServiceCategoryRepository homeServiceCategory)
         {
-            return LocalRedirect("/Admin");
+            _homeServiceCategory = homeServiceCategory;
+        }
+
+        public async Task OnGet()
+        {
+            homeServiceCategories = await _homeServiceCategory.GetAll();
         }
     }
 }

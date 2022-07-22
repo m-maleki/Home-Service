@@ -11,13 +11,6 @@ namespace HS.Infrastructures.Database.Repos.Ef.Configuration
             builder.HasKey(x => x.Id);
             builder.ToTable("HomeServices");
 
-
-
-            //builder.HasMany(x => x.Experts)
-            //       .WithMany(x => x.HomeServices);
-
-            
-
             #region SeedData
             builder.HasData(
                new HomeService { Id = 1, HomeServiceSubCategoryId = 1, Name = "کاشی و سرامیک", ImgSrc = "2ce018e0-9826-4003-bcfa-3ddacc7d37b0.avif" },
