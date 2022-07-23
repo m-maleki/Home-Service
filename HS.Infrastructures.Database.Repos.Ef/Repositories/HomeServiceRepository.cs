@@ -21,6 +21,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
                 .AsNoTracking()
                 .ToListAsync());
+
+        public async Task<List<HomeServiceDto>> GetAll(int subCategoryId)
+           => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
+               .AsNoTracking()
+               .Include(x=>x.HomeServiceSubCategory)
+               .Where(x=>x.HomeServiceSubCategoryId== subCategoryId)
+               .ToListAsync());
+
         public async Task<HomeServiceDto> GetBy(int id)
         {
             var record = await _context.HomeServices

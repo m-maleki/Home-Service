@@ -10,6 +10,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Pages
 
     public class IndexModel : PageModel
     {
+
         private readonly IHomeServiceCategoryRepository _homeServiceCategory;
 
         public List<HomeServiceCategoryDto> homeServiceCategories;

@@ -17,6 +17,8 @@ namespace HS.Domain.Core.Dtos
         #endregion Properties
         #region Navigation properties
         public HomeServiceCategory? HomeServiceCategory { get; set; }
+        public HomeServiceSubCategory? HomeServiceSubCategory { get; set; }
+
         public Order? Orders { get; set; }
         #endregion Navigation properties
     }

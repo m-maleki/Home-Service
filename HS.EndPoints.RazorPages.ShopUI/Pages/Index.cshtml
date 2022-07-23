@@ -24,14 +24,17 @@
                                 </div>
                                 <h3 class="item-title">@category.Name</h3>
                             </a>
-                            <ul class="item-sub-category">
-                                @foreach (var subCategory in @category.HomeServiceSubCategories)
-                                {
-                                     <li>
-                                         <a href="#">@subCategory.Name</a>
-                                     </li>
-                                }
-                            </ul>
+
+                            <form method="get" asp-page="HomeServices">
+                                <ul class="item-sub-category">
+                                    @foreach (var subCategory in @category.HomeServiceSubCategories)
+                                    {
+                                        <li>
+                                            <a asp-page="/HomeServices" asp-route-id="@subCategory.Id">@subCategory.Name</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -39,32 +42,6 @@
 
 
 
-        </div>
-    </div>
-</section>
-<!--=====================================-->
-<!--=       Process Start           	=-->
-<!--=====================================-->
-<section class="process-wrap-layout1">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="process-box-layout1">
-                    <h3 class="item-title">قرار دادن تبلیغات هرگز آسان تر نشده است!</h3>
-                    <div class="item-content">
-                        <ul>
-                            <li>تبلیغات خود را ارسال کنید</li>
-                            <li>تبلیغات خود را تبلیغ کنید</li>
-                            <li>ذخیره تبلیغات مورد علاقه</li>
-                            <li>در رسانه های اجتماعی به اشتراک بگذارید</li>
-                            <li>و بیشتر...</li>
-                        </ul>
-                    </div>
-                    <div class="item-btn">
-                        <a href="#" class="btn-fill-lg bgLight color-dark">ثبت نام کنید</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>

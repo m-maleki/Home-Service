@@ -20,5 +20,9 @@ namespace HS.Domain.ApplicationServices
         public async Task<HomeServiceDto> Get(int id)
            => await _homeService.Get(id);
 
+        public async Task<List<HomeServiceDto>> GetAll(int subCategoryId)
+        {
+            return await _homeService.GetAll(subCategoryId);
+        }
     }
 }

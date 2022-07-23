@@ -7,6 +7,7 @@ namespace HS.Domain.Core.Contracts.Repository
     {
         Task<HomeServiceDto> GetBy(int id);
         Task<List<HomeServiceDto>> GetAll();
+        Task<List<HomeServiceDto>> GetAll(int subCategoryId);
         Task<List<HomeServiceDto>> GetAll(Guid id);
         Task Create(HomeServiceDto entity);
         Task Update(HomeServiceDto entity);

@@ -23,10 +23,15 @@ namespace HS.Domain.Services
         public async Task<List<HomeServiceDto>> Get()
          => await  _homeServiceRepository.GetAll();
 
-        public Task<List<HomeServiceDto>> Get(Guid id)
+        public async Task<List<HomeServiceDto>> Get(Guid id)
         {
 
-            throw new NotImplementedException();
+            return await _homeServiceRepository.GetAll(id);
+        }
+
+        public async Task<List<HomeServiceDto>> GetAll(int subCategoryId)
+        {
+           return await _homeServiceRepository.GetAll(subCategoryId);
         }
     }
 }
