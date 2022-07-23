@@ -1,6 +1,7 @@
 ﻿@page
 @using Framework.Utilities
 @using System.Globalization
+@using HS.Domain.Core.Enums
 @model HS.EndPoints.RazorPages.UI.Pages.ProfileModel
 @{
     Layout = "_LayoutProfile";
@@ -170,6 +171,11 @@
                                                         <td><button class="btn btn-success">جزئیات</button></td>
                                                     </tr>
                                                     <tr>
+
+
+
+                                                            
+                                                        
                                                         <td colspan="5">
                                                             <div class="faq-box-layout1">
                                                                 <div id="accordion" class="accordion-box">
@@ -204,7 +210,22 @@
                                                                                                         <td>@item.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
                                                                                                         <td>@item.DurationOfWork.ToPersianString("yyyy/MM/dd")</td>
                                                                                                         <td>
-                                                                                                            <button class="btn btn-success curve">قبول پیشنهاد</button>
+                                                                                                            @if(item.IsAccept==true)
+                                                                                                        {
+                                                                                                            
+                                                                                                             <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-success curve">پذیرفته شده</button>
+                                                                                                        }
+                                                                                                        else
+                                                                                                        {
+                                                                                                            @if(@order.Status==OrderStatusEnum.WaitingExpertAdvice || @order.Status==OrderStatusEnum.WaitingSpecialistSelection)
+                                                                                                            {
+                                                                                                                <button data-toggle="modal" data-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                              <button type="submit" class="btn btn-warning" disabled>جزئیات پیشنهاد</button>
+                                                                                                            }
+                                                                                                        }
                                                                                                         </td>
                                                                                                     </tr>
                                                                                             }
@@ -238,3 +259,128 @@
                 </div>
             </div>
 </section>
+
+<div class="modal fade" id="AcceptSuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">جزئیات پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Accept">
+                    <input id="SuggId" name="SuggId" type="hidden" />
+
+                        <label>شماره سفارش</label>
+                        <div class="input-group">
+                            <input name="OrderId" id="OrderId" type="text" class="form-control round" readonly>
+                        </div>
+
+                        <label>کارشناس</label>
+                        <div class="input-group">
+                            <input name="Customer" id="Customer" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>هوم سرویس سفارش</label>
+                        <div class="input-group">
+                            <input name="HomeService" id="HomeService" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <textarea id="Description" name="Description" class="form-control" rows="4" disabled></textarea>
+                        </div>
+
+                        <hr />
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="SuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">جزئیات پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Accept">
+                    <input id="SuggId2" name="SuggId" type="hidden" />
+
+                        <label>شماره سفارش</label>
+                        <div class="input-group">
+                            <input name="OrderId" id="OrderId2" type="text" class="form-control round" readonly>
+                        </div>
+
+                        <label>کارشناس</label>
+                        <div class="input-group">
+                            <input name="Customer" id="Customer2" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>هوم سرویس سفارش</label>
+                        <div class="input-group">
+                            <input name="HomeService" id="HomeService2" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <textarea id="Description2" name="Description" class="form-control" rows="4" disabled></textarea>
+                        </div>
+
+                        <hr />
+                        <br />
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-success curve">قبول پیشنهاد<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section masterjs
+    {
+    <script>
+        $(document).ready(function() {
+            $(".table button").on("click", function() {
+                var SuggId = $(this).attr("SuggId");
+                var OrderId = $(this).attr("Order-Id");
+                var Description = $(this).attr("Description");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#SuggId").val(SuggId);
+                $("#Description").val(Description);
+                $("#Customer").val(Customer);
+                $("#HomeService").val(HomeService);
+                $("#OrderId").val(OrderId);
+            });
+        });
+    </script>
+
+        <script>
+        $(document).ready(function() {
+            $(".table button").on("click", function() {
+                var SuggId = $(this).attr("SuggId");
+                var OrderId = $(this).attr("Order-Id");
+                var Description = $(this).attr("Description");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#SuggId2").val(SuggId);
+                $("#Description2").val(Description);
+                $("#Customer2").val(Customer);
+                $("#HomeService2").val(HomeService);
+                $("#OrderId2").val(OrderId);
+            });
+        });
+    </script>
+}

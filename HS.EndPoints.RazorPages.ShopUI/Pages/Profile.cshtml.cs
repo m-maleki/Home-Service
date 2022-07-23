@@ -17,6 +17,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         private readonly IExpertApplicationService _expertApplicationService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IOrderApplicationService _orderApplicationService;
+        private readonly ISuggestionApplicationService _suggestionApplicationService;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IApplicationUserApplicationService _applicationUserApplicationService;
@@ -26,12 +27,14 @@ namespace HS.EndPoints.RazorPages.UI.Pages
 
         public ProfileModel(ICustomerApplicationService customerApplicationService,
             IExpertApplicationService expertApplicationService,
+            ISuggestionApplicationService suggestionApplicationService,
             SignInManager<ApplicationUser> signInManager,
             IApplicationUserApplicationService applicationUserApplicationService,
             UserManager<ApplicationUser> userManager,
             IOrderApplicationService orderApplicationService,
             IMapper mapper)
         {
+            _suggestionApplicationService = suggestionApplicationService;
             _customerApplicationService = customerApplicationService;
             _expertApplicationService = expertApplicationService;
             _signInManager = signInManager;
@@ -77,6 +80,13 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         public async Task<IActionResult> OnPostLogout()
         {
             await _signInManager.SignOutAsync();
+            return LocalRedirect("/Profile");
+        }
+
+        public async Task<IActionResult> OnPostAccept(int SuggId, int OrderId)
+        {
+            if (ModelState.IsValid)
+                await _suggestionApplicationService.Accept(SuggId, OrderId);
             return LocalRedirect("/Profile");
         }
     }
