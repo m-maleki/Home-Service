@@ -1,0 +1,1048 @@
+﻿@page
+@model HS.EndPoints.RazorPages.UI.Pages.ProfileModel
+@{
+    Layout = "_LayoutProfile";
+}
+
+<section class="section-padding-equal-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 sidebar-break-sm sidebar-widget-area mt-0">
+                <div class="widget-bottom-margin widget-account-menu widget-light-bg">
+                    <h3 class="widget-border-title">منو</h3>
+                    <ul class="nav nav-tabs flex-column" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#logout" role="tab" aria-selected="true">حساب کاربری</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#dashboard" role="tab" aria-selected="true">داشبورد</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#my-listing" role="tab" aria-selected="false">آگهی های من</a>
+                             </li>
+                           <li class="nav-item">
+                           <a class="nav-link" data-toggle="tab" href="#store" role="tab" aria-selected="false">فروشگاه</a>
+                             </li>
+                         <li class="nav-item">
+                             <a class="nav-link" data-toggle="tab" href="#favourite" role="tab" aria-selected="false">علاقه مندی ها</a>
+                             </li>
+                          <li class="nav-item">
+                          <a class="nav-link" data-toggle="tab" href="#payment" role="tab" aria-selected="false">پرداخت ها</a>
+                            </li>
+                         <li class="nav-item">
+                             <a class="nav-link" data-toggle="tab" href="#accout-detail" role="tab" aria-selected="false">جزئیات حساب</a>
+                         </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="logout" role="tabpanel">
+                        <div class="myaccount-login-form light-shadow-bg">
+                            <div class="light-box-content">
+                                <div class="row">
+
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="col-lg-6">
+                                            <div class="form-box login-form">
+                                                <h3 class="item-title">ورود</h3>
+                                                <form id="form" role="form" asp-page-handler="Login" method="post">
+                                                    <div style="text-align: center;" asp-validation-summary="All" class="text-danger"></div>
+                                                    <div class="form-group">
+                                                        <label for="email">آدرس ایمیل</label>
+                                                        <input type="email" class="form-control" name="email" id="email" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="password">کلمه عبور</label>
+                                                        <input id="password" name="password" type="password" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group d-flex">
+                                                        <input type="submit" class="submit-btn" value="ورود">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-box registration-form">
+                                                <h3 class="item-title">ثبت نام</h3>
+                                                <form action="#">
+                                                    <div class="form-group">
+                                                        <label>نام کاربری *</label>
+                                                        <input type="text" class="form-control" name="registration-username" id="registration-username">
+                                                        <div class="help-block">نام کاربری قابل تغییر نیست.</div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>آدرس ایمیل *</label>
+                                                        <input type="email" class="form-control" name="registration-email" id="registration-email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>رمز عبور *</label>
+                                                        <input type="text" class="form-control" name="registration-password" id="registration-password">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="submit" class="submit-btn" value="ثبت نام">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6">
+                                            <div class="form-box registration-form">
+                                                <h3 class="item-title">خوش آمدید</h3>
+                                            </div>
+                                            <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Logout" method="post">
+                                                <button type="submit" class="btn btn-danger">خروج از سایت</button>
+                                            </form>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade " id="dashboard" role="tabpanel">
+                        <div class="myaccount-dashboard light-shadow-bg">
+                            <div class="light-box-content">
+                                <div class="media-box">
+                                    <div class="item-img">
+                                        <img src="media/figure/avatar.jpg" alt="avatar">
+                                    </div>
+                                    <div class="item-content">
+                                        <h3 class="item-title">جعفر عباسی</h3>
+                                        <div class="item-email"><span>ایمیل: </span>techlabpro.8@gmail.com</div>
+                                    </div>
+                                </div>
+                                <div class="static-report">
+                                    <h3 class="report-title">گزارش عضویت</h3>
+                                    <div class="report-list">
+                                        <div class="report-item">
+                                            <label>وضعیت</label>
+                                            <div class="item-value">فعال</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-list">
+                                        <div class="report-item">
+                                            <label>اعتبار</label>
+                                            <div class="item-value">تا سال 1400/09/17 - 05:16:15</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-list">
+                                        <div class="report-item">
+                                            <label>تبلیغات باقیمانده</label>
+                                            <div class="item-value">947</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-list">
+                                        <div class="report-item">
+                                            <label>تبلیغات ارسال شده</label>
+                                            <div class="item-value">53</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="my-listing" role="tabpanel">
+                        <div class="myaccount-listing">
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product19.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">گلکسی نوت</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">ترویج</a>
+                                                <a href="#">ویرایش</a>
+                                                <a href="#">حذف</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product20.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">کیف های مارک چین</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">ترویج</a>
+                                                <a href="#">ویرایش</a>
+                                                <a href="#">حذف</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product21.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">لپ تاپ های فوق العاده</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">ترویج</a>
+                                                <a href="#">ویرایش</a>
+                                                <a href="#">حذف</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product22.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">اسباب بازی بچه ها</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">ترویج</a>
+                                                <a href="#">ویرایش</a>
+                                                <a href="#">حذف</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination-layout1">
+                            <div class="btn-prev disabled">
+                                <a href="#"><i class="fas fa-angle-double-left"></i>قبلی</a>
+                            </div>
+                            <div class="page-number">
+                                <a href="#" class="active">1</a>
+                                <a href="#">2</a>
+                            </div>
+                            <div class="btn-next">
+                                <a href="#">بعدی<i class="fas fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="store" role="tabpanel">
+                        <div class="light-shadow-bg post-ad-box-layout1 myaccount-store-settings">
+                            <div class="light-box-content">
+                                <form action="#">
+                                    <div class="post-section store-banner">
+                                        <div class="post-ad-title">
+                                            <i class="far fa-image"></i>
+                                            <h3 class="item-title">تصاویر فروشگاه</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    بنر فروشگاه
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <div class="store-banner-wrapper">
+                                                        <div class="banenr-img">
+                                                            <img src="media/figure/store-banner.jpg" alt="بنر فروشگاه">
+                                                            <div class="media-action">
+                                                                <a href="#" class="media-add"><i class="fas fa-plus"></i></a>
+                                                                <a href="#" class="media-delete"><i class="far fa-trash-alt"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="alert alert-danger">
+                                                            اندازه تصویر توصیه شده به (1180x300) px ، حداکثر اندازه پرونده 3 مگابایت ، نوع مجاز تصویر (png ، jpg ، jpeg)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    لوگوی فروشگاه
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <div class="store-banner-wrapper">
+                                                        <div class="banenr-img">
+                                                            <img src="media/figure/store10.png" alt="Store Banner">
+                                                            <div class="media-action">
+                                                                <a href="#" class="media-add"><i class="fas fa-plus"></i></a>
+                                                                <a href="#" class="media-delete"><i class="far fa-trash-alt"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="alert alert-danger">
+                                                            اندازه تصویر توصیه شده به (180x140) px ، حداکثر اندازه پرونده 3 MB ، نوع مجاز تصویر (png ، jpg ، jpeg)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-section store-schedule">
+                                        <div class="post-ad-title">
+                                            <i class="far fa-calendar"></i>
+                                            <h3 class="item-title">برنامه فروشگاه</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    ساعات کار
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <div class="form-check form-radio-btn">
+                                                        <input class="form-check-input" type="radio" id="exampleRadios1" name="exampleRadios1" value="جدید">
+                                                        <label class="form-check-label" for="exampleRadios1">
+                                                            همیشه باز
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-radio-btn">
+                                                        <input class="form-check-input" type="radio" id="exampleRadios2" name="exampleRadios1" value="استفاده شده">
+                                                        <label class="form-check-label" for="exampleRadios2">
+                                                            ساعات کار را انتخاب کنید
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-section store-information">
+                                        <div class="post-ad-title">
+                                            <i class="fas fa-folder-open"></i>
+                                            <h3 class="item-title">اطلاعات فروشگاه</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    شناسه
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="123" class="form-control" name="id" id="store-id" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    نام
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="جعفر" class="form-control" name="name" id="store-name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    شعار
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="ما عالی هستیم" class="form-control" name="slogan" id="store-slogan">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    ایمیل
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="email" value="ok@gmail.com" class="form-control" name="email" id="store-email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    شماره تلفن
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="123456" class="form-control" name="phone" id="store-phone">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    وب سایت
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="http://rtl-temp.ir" class="form-control" name="website" id="store-website">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    آدرس
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <textarea name="address" class="form-control textarea" id="address" cols="30" rows="2">http://rtl-temp.ir</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    توضیحات
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <textarea name="discription" class="form-control textarea" id="discription" cols="30" rows="6">http://rtl-temp.ir</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    شبکه اجتماعی
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group store-social">
+                                                    <input type="text" value="http://rtl-temp.ir" class="form-control" name="facebook" id="store-facebook" placeholder="Facebook">
+                                                    <input type="text" class="form-control" name="twitter" id="store-twitter" placeholder="توییتر">
+                                                    <input type="text" class="form-control" name="youtube" id="store-youtube" placeholder="یوتیوب">
+                                                    <input type="text" class="form-control" name="linkedin" id="store-linkedin" placeholder="لینکدین">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="submit" class="submit-btn" value="بروز رسانی فروشگاه">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="favourite" role="tabpanel">
+                        <div class="myaccount-listing">
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product19.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">گلکسی نوت</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">حذف از موارد دلخواه</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product20.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">کیف های مارک چین</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">حذف از موارد دلخواه</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product21.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">لپ تاپ های فوق العاده</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">حذف از موارد دلخواه</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-view-layout1">
+                                <div class="product-box-layout3">
+                                    <div class="item-img">
+                                        <a href="single-product1.html"><img src="media/product/product22.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="item-content">
+                                            <h3 class="item-title"><a href="single-product1.html">اسباب بازی بچه ها</a><span> جدید</span></h3>
+                                            <ul class="entry-meta">
+                                                <li><i class="far fa-clock"></i>3 ماه قبل</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>نیوجرسی ، بلومفیلد</li>
+                                                <li><i class="far fa-eye"></i>86 بازدید</li>
+                                            </ul>
+                                            <ul class="item-condition">
+                                                <li><span>وضعیت:</span> جدید</li>
+                                                <li><span>نام تجاری:</span> دیگر برند ها</li>
+                                            </ul>
+                                            <div class="btn-group">
+                                                <a href="#">حذف از موارد دلخواه</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-right">
+                                            <div class="item-price">
+                                                <span class="currency-symbol">551</span>
+                                                تومان
+                                            </div>
+                                            <div class="item-btn">
+                                                <a href="#">جزئیات</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination-layout1">
+                            <div class="btn-prev disabled">
+                                <a href="#"><i class="fas fa-angle-double-left"></i>قبلی</a>
+                            </div>
+                            <div class="page-number">
+                                <a href="#" class="active">1</a>
+                                <a href="#">2</a>
+                            </div>
+                            <div class="btn-next">
+                                <a href="#">بعدی<i class="fas fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="payment" role="tabpanel">
+                        <div class="myaccount-payment light-shadow-bg">
+                            <div class="light-box-content">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>شناسه پرداخت</th>
+                                                <th>میزان</th>
+                                                <th>نوع</th>
+                                                <th>وضعیت</th>
+                                                <th>تاریخ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="#">2125</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2126</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2127</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2128</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2129</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2130</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2131</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2132</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2133</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">2134</a></td>
+                                                <td>
+                                                    <div class="price-amount">
+                                                        10
+                                                        <span class="currency-symbol">551</span>
+                                                    </div>
+                                                </td>
+                                                <td>انتقال مستقیم بانکی</td>
+                                                <td>در انتظار</td>
+                                                <td>14 دی 1398 - 6:49 صبح</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination-layout1">
+                            <div class="btn-prev disabled">
+                                <a href="#"><i class="fas fa-angle-double-left"></i>قبلی</a>
+                            </div>
+                            <div class="page-number">
+                                <a href="#" class="active">1</a>
+                                <a href="#">2</a>
+                            </div>
+                            <div class="btn-next">
+                                <a href="#">بعدی<i class="fas fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="accout-detail" role="tabpanel">
+                        <div class="light-shadow-bg post-ad-box-layout1 myaccount-store-settings myaccount-detail">
+                            <div class="light-box-content">
+                                <form action="#">
+                                    <div class="post-section basic-information">
+                                        <div class="post-ad-title">
+                                            <i class="fas fa-user"></i>
+                                            <h3 class="item-title">اطلاعات اصلی</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    نام کاربری
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <div class="text-value">غیر قابل تغییر</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    نام
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="جعفر" class="form-control" name="first-name" id="first-name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    نام خانوادگی
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="عباسی" class="form-control" name="last-name" id="last-name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    ایمیل
+                                                    <span>*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="email" value="techlabpro.8@gmail.com" class="form-control" name="email" id="email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    تغییر رمز عبور
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group mb-5">
+                                                    <div class="form-check form-check-box">
+                                                        <input class="form-check-input" type="checkbox" id="password" value="password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    تلفن
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="093389943**" class="form-control" name="phone1" id="phone1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    تلفن واتس آپ
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="093389943**" class="form-control" name="phone2" id="phone2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    وب سایت
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="http://rtl-temp.ir" class="form-control" name="website" id="website">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-section location-detail">
+                                        <div class="post-ad-title">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <h3 class="item-title">موقعیت</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    کشور
+                                                    <span>*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <select class="form-control select-box">
+                                                        <option value="0">انتخاب شهر</option>
+                                                        <option value="1">قم</option>
+                                                        <option value="2">فلوریدا</option>
+                                                        <option value="3">هاوایی</option>
+                                                        <option value="4">ایندیانا</option>
+                                                        <option value="5">کانزاس</option>
+                                                        <option value="6">میشیگان</option>
+                                                        <option value="7">نیوجرسی</option>
+                                                        <option value="8">اصفهان</option>
+                                                        <option value="9">نیویورک</option>
+                                                        <option value="10">ارومیه</option>
+                                                        <option value="11">تگزاس</option>
+                                                        <option value="12">تهران</option>
+                                                        <option value="13">مشهد</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    شهر
+                                                    <span>*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <select class="form-control select-box">
+                                                        <option value="0">Select City</option>
+                                                        <option value="1">جمکران</option>
+                                                        <option value="2">فلوریدا</option>
+                                                        <option value="3">سن دیگو</option>
+                                                        <option value="4">سن خوزه</option>
+                                                        <option value="5">سن فرانسیسکو</option>
+                                                        <option value="6">فرانس</option>
+                                                        <option value="7">کرج</option>
+                                                        <option value="8">ایل</option>
+                                                        <option value="9">بندر</option>
+                                                        <option value="10">نوری آباد</option>
+                                                        <option value="11">امریک</option>
+                                                        <option value="12">شاهین دژ</option>
+                                                        <option value="12">سلماس</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    کد پستی
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="text" value="201301" class="form-control" name="zipcode" id="post-zip">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    آدرس
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <textarea name="address1" class="form-control textarea" id="address1" cols="30" rows="2">ارومیه</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">
+                                                    نقشه
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <div id="googleMap" class="google-map" style="width: 100%; height: 400px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <input type="submit" class="submit-btn" value="بروز حساب کاربری">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,46 +1,95 @@
-﻿    <div class="navbar navbar-fixed-top" id="main-navbar">
-        <div class="header-right">
-            <a href="dashboard.html" class="logo-con">
-                <img src="~/assets/images/logo.png" class="img-responsive center-block" alt="لوگو قالب مدیران">
-            </a>
-        </div>
-        <div class="header-left">
-            <div class="top-bar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" class="btn" id="toggle-sidebar">
-                            <span class="menu"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" id="toggle-dark-mode">
-                            <i class="icon-bulb"></i>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="dropdown">
-                        <a href="#" class="btn" id="toggle-fullscreen">
-                            <i class="icon-size-fullscreen"></i>
-                        </a>
-                    </li>
-                    <li class="dropdown dropdown-user">
-                        <a href="#" class="dropdown-toggle dropdown-hover" data-bs-toggle="dropdown">
-                            <img src="~/assets/images/user/48.png" alt="عکس پرفایل" class="img-circle img-responsive">
-                            <span>مدیر سیستم</span>
-                            <i class="icon-arrow-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="divider"></li>
-                            <li>
-                                <a href="login.html">
-                                    <i class="icon-power"></i>
-                                    خروج
+﻿        <!--=====================================-->
+        <!--=            Header Start           =-->
+        <!--=====================================-->
+        <header class="header">
+            <div id="rt-sticky-placeholder"></div>
+            <div id="header-menu" class="header-menu menu-layout2">
+                <div class="container">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-lg-2">
+                            <div class="logo-area">
+                                <a href="index-2.html" class="temp-logo">
+                                    <img src="media/logo-dark.png" alt="logo" class="img-fluid">
                                 </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul><!-- /.navbar-left -->
-            </div><!-- /.top-bar -->
-        </div><!-- /.header-left -->
-    </div><!-- /.navbar -->
+                            </div>
+                        </div>
+                        <div class="col-lg-7 d-flex justify-content-end">
+                            <nav id="dropdown" class="template-main-menu">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="has-dropdown">خانه</a>
+   
+                                    </li>
+                                    <li>
+                                        <a href="about.html" class="has-dropdown">همه تبلیغات</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown">صفحات</a>
+                                        <ul class="mega-menu mega-menu-col-2">
+                                            <li>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="about.html">درباره ما</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="faq.html">سوالات متداول</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="search-result.html">نتیجه جستجو</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="404.html">ارور 404</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="all-ad.html">همه تبلیغات</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="single-product1.html">تک تبلیغ 1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="single-product2.html">تک تبلیغ 2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="account.html">حساب کاربری من</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown">فروشگاه ها</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown">بلاگ</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">تماس</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-lg-3 d-flex justify-content-end">
+                            <div class="header-action-layout1">
+                                <ul>
+                                    <li class="header-login-icon">
+                                        <a  asp-page="/Profile" class="color-primary" data-toggle="tooltip" data-placement="top" title="ثبت نام/ورود">
+                                            <i class="far fa-user"></i>
+                                        </a>
+                                    </li>
+                                    <li class="header-btn">
+                                        <a href="post-ad.html" class="item-btn"><i class="fas fa-plus"></i>آگهی خود را ارسال کنید</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>

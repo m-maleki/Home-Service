@@ -27,6 +27,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                .AsNoTracking()
                .Include(x=>x.HomeServiceSubCategory)
                .Where(x=>x.HomeServiceSubCategoryId== subCategoryId)
+               
                .ToListAsync());
 
         public async Task<HomeServiceDto> GetBy(int id)
