@@ -9,18 +9,18 @@
 <section class="section-padding-top-heading">
     <div class="container">
         <div class="heading-layout1">
-            <h2 class="heading-title">از میان دسته های برتر مرور کنید</h2>
+            <h2 class="heading-title">به کدام یک از سرویس های زیر نیاز دارید </h2>
         </div>
         <div class="row">
 
             @foreach (var category in @Model.homeServiceCategories)
             {
-                <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="col-xl-3 col-lg-8 col-sm-8">
                     <div class="h-100 pd-b-30">
                         <div class="category-box-layout2">
                             <a href="#" class="item-heading-area">
                                 <div class="item-img">
-                                    <img src="~/Images/HomeService/2ce018e0-9826-4003-bcfa-3ddacc7d37b0.webp" alt="Service">
+                                    <img src="~/Images/HomeService/@category.ImgSrc" alt="Service">
                                 </div>
                                 <h3 class="item-title">@category.Name</h3>
                             </a>

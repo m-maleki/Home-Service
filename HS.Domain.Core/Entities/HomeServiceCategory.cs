@@ -8,6 +8,7 @@
         public string? Title { get; set; }
         public string? Description { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public string? ImgSrc { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         #endregion Properties
 
