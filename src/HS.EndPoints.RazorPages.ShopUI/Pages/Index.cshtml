@@ -1,0 +1,102 @@
+﻿@page
+@model HS.EndPoints.RazorPages.ShopUI.Pages.IndexModel
+@{
+    Layout = "_Layout";
+}
+<!--=====================================-->
+<!--=            Category Start           =-->
+<!--=====================================-->
+<section class="section-padding-top-heading">
+    <div class="container">
+        <div class="heading-layout1">
+            <h2 class="heading-title">به کدام یک از سرویس های زیر نیاز دارید </h2>
+        </div>
+        <div class="row">
+
+            @foreach (var category in @Model.homeServiceCategories)
+            {
+                <div class="col-xl-3 col-lg-8 col-sm-8">
+                    <div class="h-100 pd-b-30">
+                        <div class="category-box-layout2">
+                            <a href="#" class="item-heading-area">
+                                <div class="item-img">
+                                    <img src="~/Images/HomeService/@category.ImgSrc" alt="Service">
+                                </div>
+                                <h3 class="item-title">@category.Name</h3>
+                            </a>
+
+                            <form method="get" asp-page="HomeServices">
+                                <ul class="item-sub-category">
+                                    @foreach (var subCategory in @category.HomeServiceSubCategories)
+                                    {
+                                        <li>
+                                            <a asp-page="/HomeServices" asp-route-id="@subCategory.Id">@subCategory.Name</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+</section>
+<!--=====================================-->
+<!--=       Blog Start           	=-->
+<!--=====================================-->
+<section class="section-padding-top-heading bg-accent">
+    <div class="container">
+        <div class="heading-layout1">
+            <h2 class="heading-title">پست های اخیر وبلاگ</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="blog-box-layout1">
+                    <div class="item-img">
+                        <a href="single-blog.html"><img src="~/media/blog/blog1.jpg" alt="blog"></a>
+                    </div>
+                    <div class="item-content">
+                        <ul class="post-meta">
+                            <li>1398/10/19</li>
+                            <li>/ <a href="#">راست چین</a></li>
+                        </ul>
+                        <h3 class="post-title"><a href="single-blog.html">سه ترفند قدرتمند برای تبلیغات آنلاین</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-box-layout1">
+                    <div class="item-img">
+                        <a href="single-blog.html"><img src="~/media/blog/blog2.jpg" alt="blog"></a>
+                    </div>
+                    <div class="item-content">
+                        <ul class="post-meta">
+                            <li>1398/10/20</li>
+                            <li>/ <a href="#">راست چین</a></li>
+                        </ul>
+                        <h3 class="post-title"><a href="~/single-blog.html">تجزیه و تحلیل رقابتی برای کارآفرینان 1398</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-box-layout1">
+                    <div class="item-img">
+                        <a href="single-blog.html"><img src="~/media/blog/blog3.jpg" alt="blog"></a>
+                    </div>
+                    <div class="item-content">
+                        <ul class="post-meta">
+                            <li>1398/10/21</li>
+                            <li>/ <a href="#">راست چین</a></li>
+                        </ul>
+                        <h3 class="post-title"><a href="single-blog.html">چگونه منابعی را با جستجوی محلی منفجر کنید</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

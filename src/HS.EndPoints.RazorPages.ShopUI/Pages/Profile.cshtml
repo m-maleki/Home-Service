@@ -1,0 +1,386 @@
+﻿@page
+@using Framework.Utilities
+@using System.Globalization
+@using HS.Domain.Core.Enums
+@model HS.EndPoints.RazorPages.UI.Pages.ProfileModel
+@{
+    Layout = "_LayoutProfile";
+}
+
+<section class="section-padding-equal-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 sidebar-break-sm sidebar-widget-area mt-0">
+                <div class="widget-bottom-margin widget-account-menu widget-light-bg">
+                    <h3 class="widget-border-title">منو</h3>
+                    <ul class="nav nav-tabs flex-column" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#logout" role="tab" aria-selected="true">حساب کاربری</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " data-toggle="tab" href="#dashboard" role="tab" aria-selected="true">داشبورد</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#my-listing" role="tab" aria-selected="false">سفارشات من</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#payment" role="tab" aria-selected="false">پرداخت ها</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#accout-detail" role="tab" aria-selected="false">جزئیات حساب</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="logout" role="tabpanel">
+                        <div class="myaccount-login-form light-shadow-bg">
+                            <div class="light-box-content">
+                                <div class="row">
+
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="col-lg-6">
+                                            <div class="form-box login-form">
+                                                <h3 class="item-title">ورود</h3>
+                                                <form id="form" role="form" asp-page-handler="Login" method="post">
+                                                    <div style="text-align: center;" asp-validation-summary="All" class="text-danger"></div>
+                                                    <div class="form-group">
+                                                        <label for="email">آدرس ایمیل</label>
+                                                        <input type="email" class="form-control" name="email" id="email" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="password">کلمه عبور</label>
+                                                        <input id="password" name="password" type="password" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group d-flex">
+                                                        <input type="submit" class="submit-btn" value="ورود">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-box registration-form">
+                                                <h3 class="item-title">ثبت نام</h3>
+                                                <form action="#">
+                                                    <div class="form-group">
+                                                        <label>نام کاربری *</label>
+                                                        <input type="text" class="form-control" name="registration-username" id="registration-username">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>آدرس ایمیل *</label>
+                                                        <input type="email" class="form-control" name="registration-email" id="registration-email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>رمز عبور *</label>
+                                                        <input type="text" class="form-control" name="registration-password" id="registration-password">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="submit" class="submit-btn" value="ثبت نام">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6">
+                                            <div class="form-box registration-form">
+                                                <h3 class="item-title">خوش آمدید</h3>
+                                            </div>
+                                            <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Logout" method="post">
+                                                <button type="submit" class="btn btn-danger">خروج از سایت</button>
+                                            </form>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                    {
+                        <div class="tab-pane fade " id="dashboard" role="tabpanel">
+                            <div class="myaccount-dashboard light-shadow-bg">
+                                <div class="light-box-content">
+                                    <div class="media-box">
+                                        <div class="item-img">
+                                            <img src="media/figure/avatar.jpg" alt="avatar">
+                                        </div>
+                                        <div class="item-content">
+                                            <h3 class="item-title">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h3>
+                                            <div class="item-email"><span>ایمیل: </span>@User.Identity.Name</div>
+                                        </div>
+                                    </div>
+                                    <div class="static-report">
+                                        <h3 class="report-title">گزارش عضویت</h3>
+
+                                        <div class="report-list">
+                                            <div class="report-item">
+                                                <label>وضعیت</label>
+                                                <div class="item-value">فعال</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="report-list">
+                                            <div class="report-item">
+                                                <label>شماره شبا</label>
+                                                <div class="item-value">@Model.CurrentUser.ShebaNumber</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="report-list">
+                                            <div class="report-item">
+                                                <label>شماره کارت</label>
+                                                <div class="item-value">@Model.CurrentUser.CardNumber</div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="my-listing" role="tabpanel">
+                            <div class="myaccount-payment light-shadow-bg">
+                                <div class="light-box-content">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>شناسه سفارش</th>
+                                                    <th>هوم سرویس</th>
+                                                    <th>تاریخ ثبت</th>
+                                                    <th>وضعیت</th>
+                                                    <th>عملیات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var order in @Model.Orders)
+                                                {
+                                                    <tr>
+                                                        <td>@order.Id</td>
+                                                        <td>@order.HomeService.Name</td>
+                                                        <td>@order.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                                                        <td>@order.Status.GetEnumDisplayName()</td>
+                                                        <td><button class="btn btn-success">جزئیات</button></td>
+                                                    </tr>
+                                                    <tr>
+
+
+
+                                                            
+                                                        
+                                                        <td colspan="5">
+                                                            <div class="faq-box-layout1">
+                                                                <div id="accordion" class="accordion-box">
+                                                                    <div class="card">
+                                                                        <div class="card-header">
+                                                                            <a class="heading-title collapsed" data-toggle="collapse" href="@("#Order"+order.Id)" role="button" aria-expanded="false">
+                                                                                پیشنهاد های ارائه شده
+                                                                            </a>
+                                                                        </div>
+                                                                        <div id="@("Order"+order.Id)" class="collapse" data-parent="#accordion">
+                                                                            <div class="card-body">
+                                                                                <table class="table table-bordered table-striped table-hover">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>شناسه</th>
+                                                                                            <th>کارشناس</th>
+                                                                                            <th>قیمت پیشنهادی </th>
+                                                                                            <th>تاریخ پیشنهاد </th>
+                                                                                            <th>تاریخ اتمام کار</th>
+                                                                                            <th>عملیات</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @if (order.Suggestions.Count>0)
+                                                                                        {
+                                                                                            @foreach (var item in order.Suggestions)
+                                                                                            {
+                                                                                                    <tr>
+                                                                                                        <td>@item.Id</td>
+                                                                                                        <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                                                                                                        <td style="color:red">@item.SuggestedPrice.ToString("C", CultureInfo.CurrentCulture= new CultureInfo("fa-Ir",false))</td>
+                                                                                                        <td>@item.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>@item.DurationOfWork.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>
+                                                                                                            @if(item.IsAccept==true)
+                                                                                                        {
+                                                                                                            
+                                                                                                             <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-success curve">پذیرفته شده</button>
+                                                                                                        }
+                                                                                                        else
+                                                                                                        {
+                                                                                                            @if(@order.Status==OrderStatusEnum.WaitingExpertAdvice || @order.Status==OrderStatusEnum.WaitingSpecialistSelection)
+                                                                                                            {
+                                                                                                                <button data-toggle="modal" data-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                              <button type="submit" class="btn btn-warning" disabled>جزئیات پیشنهاد</button>
+                                                                                                            }
+                                                                                                        }
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                            }
+                                                                                          }
+                                                                                          else
+                                                                                          {
+                                                                                              <tr>
+                                                                                                  <td colspan="7">پیشنهادی ارائه نشده است</td>
+                                                                                              </tr>
+                                                                                          }
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+</section>
+
+<div class="modal fade" id="AcceptSuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">جزئیات پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Accept">
+                    <input id="SuggId" name="SuggId" type="hidden" />
+
+                        <label>شماره سفارش</label>
+                        <div class="input-group">
+                            <input name="OrderId" id="OrderId" type="text" class="form-control round" readonly>
+                        </div>
+
+                        <label>کارشناس</label>
+                        <div class="input-group">
+                            <input name="Customer" id="Customer" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>هوم سرویس سفارش</label>
+                        <div class="input-group">
+                            <input name="HomeService" id="HomeService" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <textarea id="Description" name="Description" class="form-control" rows="4" disabled></textarea>
+                        </div>
+
+                        <hr />
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="SuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">جزئیات پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Accept">
+                    <input id="SuggId2" name="SuggId" type="hidden" />
+
+                        <label>شماره سفارش</label>
+                        <div class="input-group">
+                            <input name="OrderId" id="OrderId2" type="text" class="form-control round" readonly>
+                        </div>
+
+                        <label>کارشناس</label>
+                        <div class="input-group">
+                            <input name="Customer" id="Customer2" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>هوم سرویس سفارش</label>
+                        <div class="input-group">
+                            <input name="HomeService" id="HomeService2" type="text" class="form-control round" disabled>
+                        </div>
+
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <textarea id="Description2" name="Description" class="form-control" rows="4" disabled></textarea>
+                        </div>
+
+                        <hr />
+                        <br />
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-success curve">قبول پیشنهاد<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section masterjs
+    {
+    <script>
+        $(document).ready(function() {
+            $(".table button").on("click", function() {
+                var SuggId = $(this).attr("SuggId");
+                var OrderId = $(this).attr("Order-Id");
+                var Description = $(this).attr("Description");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#SuggId").val(SuggId);
+                $("#Description").val(Description);
+                $("#Customer").val(Customer);
+                $("#HomeService").val(HomeService);
+                $("#OrderId").val(OrderId);
+            });
+        });
+    </script>
+
+        <script>
+        $(document).ready(function() {
+            $(".table button").on("click", function() {
+                var SuggId = $(this).attr("SuggId");
+                var OrderId = $(this).attr("Order-Id");
+                var Description = $(this).attr("Description");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#SuggId2").val(SuggId);
+                $("#Description2").val(Description);
+                $("#Customer2").val(Customer);
+                $("#HomeService2").val(HomeService);
+                $("#OrderId2").val(OrderId);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,17 @@
+﻿@page
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.ExpertCommentModel
+@{
+       ViewData["Title"] = "کامنت های کارشناس";
+}
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <tbody>
+        @foreach(var comment in @Model.comments)
+        {
+        <tr> 
+            <td >
+               <lable>@comment.Body</lable>
+            </td>
+         </tr>
+        }
+    </tbody>
+</table>

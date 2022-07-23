@@ -1,0 +1,1 @@
+REN *.avif *.webp

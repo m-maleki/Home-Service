@@ -1,0 +1,80 @@
+﻿@using HS.Domain.Core.Entities
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> Sign
+@inject UserManager<ApplicationUser> _userManager
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore
+@inject IHttpContextAccessor HttpContextAccessor
+
+<div id="sidebar">
+    <ul class="metismenu" id="side-menu">
+        <li>
+            <a asp-page="/Index">
+                <i class="icon-home"></i>
+                <span>پنل کاربری</span>
+            </a>
+        </li>
+        <li>
+            <a asp-page="/Order">
+                <i class="icon-docs"></i>
+                <span> سفارش ها</span>
+            </a>
+        </li>
+        @if (User.Identity!.IsAuthenticated)
+        {
+            var UserEmail = User.Identity.Name;
+            var roles = await _userManager.GetRolesAsync(await _userManager.Users.FirstAsync(x => x.Email == UserEmail));
+
+            @foreach (var role in roles)
+            {
+
+                @if (role == "Admin")
+                {
+                    <li>
+                        <a asp-page="/UserManagement">
+                            <i class="icon-people"></i>
+                            <span>مدیریت کاربران</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-page="/Comment">
+                            <i class="icon-note"></i>
+                            <span>مدیریت کامنت ها</span>
+                        </a>
+                    </li>
+                }
+
+                @if (role == "Expert")
+                {
+                    <li>
+                        <a asp-page="/Profile">
+                            <i class="icon-badge"></i>
+                            <span>مهارت ها</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a>
+                            <i class="icon-equalizer"></i>
+                            <span>پیشنهاد ها</span>
+                        </a>
+                    </li>
+
+                }
+
+                @if (role == "Customer")
+                {
+                    <li>
+                        <a>
+                            <i class="icon-layers"></i>
+                            <span>فاکتورها</span>
+                        </a>
+                    </li>
+                }
+            }
+        }
+
+    </ul>
+
+</div>

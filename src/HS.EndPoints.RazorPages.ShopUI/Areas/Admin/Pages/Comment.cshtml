@@ -1,0 +1,65 @@
+﻿@page
+@using Framework.Utilities
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.CommentModel
+@{
+    ViewData["Title"] = "مدیریت کامنت ها";
+}
+
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <thead>
+        <tr>
+            <th>شناسه کامنت</th>
+            <th>کامنت</th>
+            <th>نام کارشناس</th>
+            <th>تاریخ ثبت</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.comments != null)
+        {
+            @foreach (var item in Model.comments)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Body</td>
+                    <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                    <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
+
+                    @if (@item.IsAccept == false)
+                    {
+                        <td style="color:red">
+                            تایید نشده
+                        </td>
+                    }
+                    @if (@item.IsAccept == true)
+                    {
+                        <td style="color:green">
+                            تایید شده
+                        </td>
+                    }
+                     @if (@item.IsAccept == false)
+                    {
+                        <td>
+                            <form method="post" role="form" asp-page="Comment" asp-page-handler="Active">
+                            <input type="hidden" value="@item.Id" name="commentId" />
+                            <button type="submit" class="btn btn-success curve">تایید کردن</button>
+                        </form>
+                    </td>
+                    }
+                     @if (@item.IsAccept == true)
+                    {
+                        <td>
+                            <form method="post" role="form" asp-page="Comment" asp-page-handler="DeActive">
+                            <input type="hidden" value="@item.Id" name="commentId" />
+                            <button type="submit" class="btn btn-danger curve">رد کردن</button>
+                        </form>
+                    </td>
+                    }
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

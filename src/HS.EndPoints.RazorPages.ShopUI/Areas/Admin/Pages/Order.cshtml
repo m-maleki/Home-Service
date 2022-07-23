@@ -1,0 +1,346 @@
+﻿@page
+@using Framework.Utilities
+@using System.ComponentModel.DataAnnotations;
+@using HS.Domain.Core.Entities
+@using HS.Domain.Core.Enums
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.OrderModel
+@{
+    ViewData["Title"] = "سفارش ها";
+}
+
+@if (@User.IsInRole("Customer"))
+{
+    <a class="btn btn-success curve " style="float:right" data-bs-toggle="modal" data-bs-target="#create">سفارش سرویس جدید</a>
+}
+<br />
+<br />
+
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <thead>
+        <tr>
+            <th>شناسه سفارش</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>سفارش دهنده</th>
+            }
+            <th>هوم سرویس</th>
+            <th>تاریخ ثبت درخواست</th>
+            <th>تاریخ اجرا </th>
+            <th>ساعت اجرا </th>
+            <th>وضعیت</th>
+            <th>پیشنهاد</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>عملیات</th>
+            }
+            <th>جزئیات سفارش</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Orders != null)
+        {
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                    }
+                    <td>@item.HomeService.Name</td>
+                    <td>@item.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                    <td>@item.DateOfExecution.ToPersianString("yyyy/MM/dd")</td>
+                    <td>@item.DateOfExecution.ToString("H:mm")</td>
+                    <td>@item.Status.GetEnumDisplayName()</td>
+                    <td>
+                        <div class="portlet-body">
+                            @if ((@User.IsInRole("Expert")) && !@item.Suggestions.Exists(x => x.ExpertId == Model.UserId))
+                            {
+                                if (@User.IsInRole("Expert"))
+                                {
+                                    <input type="hidden" name="id" id="id" value="@item.Id">
+                                    <a data-bs-toggle="modal" data-bs-target="#createSuggest" Order-Id-Suggedtion="@item.Id" Expert-Id="@Model.currentUserID" asp-page-handler="Delete" class="btn btn-primary curve">ارائه پیشنهاد</a>
+                                }
+
+                            }
+                            else
+                            {
+                                if (@User.IsInRole("Expert"))
+                                {
+                                    <button type="button" class="btn btn-success curve" disabled>پیشنهاد ثبت شده</button>
+                                }
+                            }
+
+                            @if (@User.IsInRole("Customer") || @User.IsInRole("Admin"))
+                            {
+                                @if ((@item.Suggestions.Count > 0 && item.Status == OrderStatusEnum.WaitingSpecialistSelection) || (@User.IsInRole("Admin")))
+                                {
+                                    <form method="get" role="form" asp-page="Suggestions">
+                                        <input type="hidden" name="orderId" id="orderId" value="@item.Id">
+                                        <input type="submit" class="btn btn-primary curve" value="پیشنهادها" />
+                                    </form>
+                                }
+                                else if (item.Status == OrderStatusEnum.WaitingExpertAdvice)
+                                {
+                                    <input type="submit" value="بدون پیشنهاد" class="btn btn-warning curve" disabled />
+                                }
+                                else if (item.Status == OrderStatusEnum.WaitingSpecialistComeToYourPlace)
+                                {
+                                    <input type="submit" value="پیشنهاد پذیرفته شده" class="btn btn-success curve" disabled />
+                                }
+
+                            }
+                        </div>
+                    </td>
+
+                    @if (User.IsInRole("Admin") && @item.IsDeleted == false)
+                    {
+                        <td>
+                            <a data-bs-toggle="modal" data-bs-target="#ModalDelete" HomeService="@item.HomeService.Name" Order-Id="@item.Id" Customer="@item.Customer.FirstName @item.Customer.LastName" asp-page-handler="Delete" class="btn btn-danger curve">غیر فعال</a>
+                        </td>
+                    }
+                    @if (User.IsInRole("Admin") && @item.IsDeleted == true)
+                    {
+                        <td>
+                            <form method="post" role="form" asp-page-handler="Recover">
+                                <input type="hidden" name="OrderId" id="OrderId" value="@item.Id">
+                                <input type="submit" value="فعال کردن" class="btn btn-success curve">
+                            </form>
+                        </td>
+                    }
+                    <td>
+                        <form method="get" role="form" asp-page="OrderDetails">
+                            <input type="hidden" name="OrderId" value="@item.Id">
+                            <input type="submit" value="نمایش" class="btn btn-success curve">
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+
+
+<div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="DeleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">حذف پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="DeleteOrder">
+
+                    <div class="form-group">
+                        <label>شماره سفارش</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-key"></i>
+                            </span>
+                            <input name="OrderIdDelete" id="OrderIdDelete" type="text" class="form-control round" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>مشتری</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input name="Customer" id="Customer" type="text" class="form-control round" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>هوم سرویس</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-wrench"></i>
+                            </span>
+                            <input name="HomeService" id="HomeService" type="text" class="form-control round" disabled>
+                        </div>
+                    </div>
+
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-danger curve">در صورت اطمینان از غیرفعال سازی کلیک کنید<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-success curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createSuggest" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">ارائه پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="CreateSuggest">
+
+                    <input type="hidden" id="OrderIdSuggestion" name="OrderId" />
+                    <input type="hidden" id="ExpertId" name="ExpertId" />
+
+                    <div class="form-group">
+                        <label>قیمت پیشنهادی (ریال)</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-wallet"></i>
+                            </span>
+                            <input type="text" pattern="[0-9.,]+" required data-type="number" name="SuggestedPrice"  id="SuggestedPrice" type="number" step="0.01" class="form-control round" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تاریخ تحویل</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            <input name="DurationOfWork" type="text" class="form-control round" id="kama-datepicker-empty" placeholder="تاریخ تحویل" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <textarea name="Description" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-info curve">ثبت سفارش<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">ثبت درخواست سرویس جدید</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data" asp-page-handler="Create">
+                    <div class="form-group">
+                        <label>هوم سرویس</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-wrench"></i>
+                            </span>
+                            <select name="HomeServiceId" name="HomeServiceId" class="form-control round" asp-items="Model.HomeServices" required></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تاریخ اجرا</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            <input name="DateOfExecution" type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تولد" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ساعت اجرا</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-clock"></i>
+                            </span>
+                            <input name="Clock" type="text" class="form-control clockpicker-autoclose round" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <textarea name="Description" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group relative">
+                        <input name="FormFile" id="FormFile" class="form-control" type="file" placeholder="برای آپلود کلیک کنید" multiple />
+                        <div class="input-group round">
+                            <span class="input-group-btn">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info">
+                                        <i class="icon-picture"></i>
+                                        آپلود عکس
+                                        <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                    </button>
+                                </span>
+                        </div><!-- /.input-group -->
+                        <div class="help-block"></div>
+                    </div>
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section masterjs
+    {
+    <script>
+        $(document).ready(function() {
+            $(".table a").on("click", function() {
+                var OrderId = $(this).attr("Order-Id");
+                var OrderIdSuggestion = $(this).attr("Order-Id-Suggedtion");
+                var ExpertId = $(this).attr("Expert-Id");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#OrderId").val(OrderId);
+                $("#ExpertId").val(ExpertId);
+                $("#Customer").val(Customer);
+                $("#HomeService").val(HomeService);
+                $("#OrderIdDelete").val(OrderId);
+                $("#OrderIdSuggestion").val(OrderIdSuggestion);
+
+
+            });
+        });
+    </script>
+
+    <script>
+        $('#SuggestedPrice').keydown(function(e) {
+            setTimeout(() => {
+                let parts = $(this).val().split(".");
+                let v = parts[0].replace(/\D/g, ""),
+                    dec = parts[1]
+                let calc_num = Number((dec !== undefined ? v + "." + dec : v));
+                // use this for numeric calculations
+                console.log('number for calculations: ', calc_num);
+                let n = new Intl.NumberFormat('ir-fa').format(v);
+                n = dec !== undefined ? n + "." + dec : n;
+                $(this).val(n);
+            })
+        })
+    </script>
+}

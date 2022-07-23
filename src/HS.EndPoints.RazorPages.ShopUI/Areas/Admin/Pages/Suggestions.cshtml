@@ -1,0 +1,134 @@
+﻿@page
+@using Framework.Utilities
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.SuggestionsModel
+@{
+    ViewData["Title"] = "پیشنهاد های سفارش";
+}
+
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <thead>
+        <tr>
+            <th>شناسه پیشنهاد</th>
+            <th>شناسه سفارش</th>
+            <th>کارشناس</th>
+            <th>عملکرد کارشناس</th>
+            <th>قیمت پیشنهادی </th>
+            <th>تاریخ پیشنهاد </th>
+            <th>تاریخ اتمام کار</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.suggestions != null)
+        {
+            @foreach (var item in Model.suggestions)
+            {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.OrderId</td>
+                    <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                    <td>
+                        <form method="get" role="form" asp-page="ExpertComment">
+                            <input type="hidden" name="ExpertId" value="@item.Expert.Id">
+                            <input type="submit" value="نمایش" class="btn btn-success curve">
+                        </form>
+                    </td>>
+                    <td>@item.SuggestedPrice ریال</td>
+                    <td>@item.RegisterDate.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>@item.DurationOfWork.ToPersianString("dddd, dd MMMM,yyyy")</td>
+                    <td>
+                        <a data-bs-toggle="modal" data-bs-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" asp-page-handler="Delete" class="btn btn-success curve">جزئیات پیشنهاد</a>
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </tbody>
+</table>
+
+
+
+<div class="modal fade" id="SuggestionDetailsModal" tabindex="-1" role="dialog" aria-labelledby="SuggestionDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">جزئیات پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Accept">
+                    <input id="SuggId" name="SuggId" type="hidden" />
+                    <div class="form-group">
+                        <label>شماره سفارش</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-key"></i>
+                            </span>
+                            <input name="OrderId" id="OrderId" type="text" class="form-control round" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>کارشناس</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input name="Customer" id="Customer" type="text" class="form-control round" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>هوم سرویس سفارش</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-wrench"></i>
+                            </span>
+                            <input name="HomeService" id="HomeService" type="text" class="form-control round" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <textarea id="Description" name="Description" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-success curve">قبول پیشنهاد<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section masterjs
+    {
+    <script>
+        $(document).ready(function() {
+            $(".table a").on("click", function() {
+                var SuggId = $(this).attr("SuggId");
+                var OrderId = $(this).attr("Order-Id");
+                var Description = $(this).attr("Description");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#SuggId").val(SuggId);
+                $("#Description").val(Description);
+                $("#Customer").val(Customer);
+                $("#HomeService").val(HomeService);
+                $("#OrderId").val(OrderId);
+            });
+        });
+    </script>
+}

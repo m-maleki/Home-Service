@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>کلاسیما | خانه دو</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="media/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/dependencies/bootstrap/css/bootstrap.min.css">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="~/dependencies/fontawesome/css/all.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="~/dependencies/flaticon/flaticon.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="~/dependencies/owl.carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/dependencies/owl.carousel/css/owl.theme.default.min.css">
+    <!-- Animated Headlines CSS -->
+    <link rel="stylesheet" href="~/dependencies/jquery-animated-headlines/css/jquery.animatedheadline.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="~/dependencies/magnific-popup/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/dependencies/animate.css/css/animate.min.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="~/dependencies/meanmenu/css/meanmenu.min.css">
+    <!-- Site Stylesheet -->
+    <link rel="stylesheet" href="~/assets/css/app.css">
+    <!-- Google Web Fonts -->
+</head>
+
+<body class="sticky-header bg-accent">
+             
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  	<![endif]-->
+    <!-- ScrollUp Start Here -->
+    <a href="#wrapper" data-type="section-switch" class="scrollup">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+    <!-- ScrollUp End Here -->
+    <!-- Preloader Start Here -->
+    <div id="preloader"></div>
+    <!-- Preloader End Here -->
+    <div id="wrapper" class="wrapper">
+
+            @Html.Partial("./PartialView/_Header")
+            @RenderBody()
+            @Html.Partial("./PartialView/_Footer")
+
+
+        <div class="modal fade modal-location" id="modal-location" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="بستن">
+                        <span class="fas fa-times" aria-hidden="true"></span>
+                    </button>
+                    <div class="location-list">
+                        <h4 class="item-title">موقعیت</h4>
+                        <ul>
+                            <li><a href="#">کالیفرنیا</a></li>
+                            <li><a href="#">ترکیه</a></li>
+                            <li><a href="#">تهران</a></li>
+                            <li><a href="#">مشهد</a></li>
+                            <li><a href="#">ارومیه</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-location" id="modal-category" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="بستن">
+                        <span class="fas fa-times" aria-hidden="true"></span>
+                    </button>
+                    <div class="location-list">
+                        <h4 class="item-title">دسته بندی</h4>
+                        <ul>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category5.png" alt="icon"></span>تجارت و صنعت</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category7.png" alt="icon"></span>ماشین و وسایل نقلیه</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category14.png" alt="icon"></span>الکترونیک</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category4.png" alt="icon"></span>سلامت و زیبایی</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category18.png" alt="icon"></span>سرگرمی ، ورزش و کودکان</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category8.png" alt="icon"></span>لوازم خانگی</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category6.png" alt="icon"></span>شغل ها</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="~/media/category/category12.png" alt="icon"></span>دیگری ها</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category11.png" alt="icon"></span>حیوانات خانگی و حیوانات</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category3.png" alt="icon"></span>املاک</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category1.png" alt="icon"></span>خدمات</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Jquery Js -->
+   
+@RenderBody()
+ 
+    <script src="~/dependencies/jquery/js/jquery.min.js"></script>
+    <!-- Popper Js -->
+    <script src="~/dependencies/popper.js/js/popper.min.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="~/dependencies/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Waypoints Js -->
+    <script src="~/dependencies/waypoints/js/jquery.waypoints.min.js"></script>
+    <!-- Counterup Js -->
+    <script src="~/dependencies/jquery.counterup/js/jquery.counterup.min.js"></script>
+    <!-- Owl Carousel Js -->
+    <script src="~/dependencies/owl.carousel/js/owl.carousel.min.js"></script>
+    <!-- ImagesLoaded Js -->
+    <script src="~/dependencies/imagesloaded/js/imagesloaded.pkgd.min.js"></script>
+    <!-- Isotope Js -->
+    <script src="~/dependencies/isotope-layout/js/isotope.pkgd.min.js"></script>
+    <!-- Animated Headline Js -->
+    <script src="~/dependencies/jquery-animated-headlines/js/jquery.animatedheadline.min.js"></script>
+    <!-- Magnific Popup Js -->
+    <script src="~/dependencies/magnific-popup/js/jquery.magnific-popup.min.js"></script>
+    <!-- ElevateZoom Js -->
+    <script src="~/dependencies/elevatezoom/js/jquery.elevateZoom-2.2.3.min.js"></script>
+    <!-- Bootstrap Validate Js -->
+    <script src="~/dependencies/bootstrap-validator/js/validator.min.js"></script>
+    <!-- Meanmenu Js -->
+    <script src="~/dependencies/meanmenu/js/jquery.meanmenu.min.js"></script>
+    <!-- Google Map js -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtmXSwv4YmAKtcZyyad9W7D4AC08z0Rb4"></script>
+    <!-- Site Scripts -->
+    <script src="~/assets/js/app.js"></script>
+</body>
+
+</html>
+
+@section Scripts{
+}
+
+@await RenderSectionAsync("Scripts", required: false)
+@RenderSection("masterjs", required: false)
+
