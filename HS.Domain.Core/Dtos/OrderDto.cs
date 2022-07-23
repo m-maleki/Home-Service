@@ -23,6 +23,7 @@ namespace HS.Domain.Core.Dtos
         public List<Image>? Images { get; set; }
         public List<Suggestion>? Suggestions { get; set; }
         public Customer Customer { get; set; }
+
         public HomeService? HomeService { get; set; }
         public List<OrderFileDto> files { get; set; } = new List<OrderFileDto>();
 

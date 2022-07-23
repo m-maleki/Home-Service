@@ -56,6 +56,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Include(x => x.Customer)
                 .Include(x => x.HomeService)
                 .Include(x=>x.Suggestions)
+                .ThenInclude(x=>x.Expert)
                 .Where(x => x.CustomerId == customerId && x.IsDeleted==false)
                 .AsNoTracking()
                 .ToListAsync();

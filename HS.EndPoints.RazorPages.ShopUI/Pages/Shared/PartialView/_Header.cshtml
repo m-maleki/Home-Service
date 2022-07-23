@@ -78,11 +78,24 @@
                         <div class="col-lg-3 d-flex justify-content-end">
                             <div class="header-action-layout1">
                                 <ul>
+                                     @if (!User.Identity.IsAuthenticated)
+                                     {
                                     <li class="header-login-icon">
                                         <a  asp-page="/Profile" class="color-primary" data-toggle="tooltip" data-placement="top" title="ثبت نام/ورود">
                                             <i class="far fa-user"></i>
                                         </a>
+                                </li>
+                            }
+                            else
+                            {
+                                    <li class="header-login-icon">
+                                        <a  asp-page="/Profile" class="color-primary" data-toggle="tooltip" data-placement="top" title="@User.Identity.Name">
+                                            <i style="color:green" class="far fa-user"></i>
+                                        </a>
                                     </li>
+                            }
+
+
                                     <li class="header-btn">
                                         <a href="post-ad.html" class="item-btn"><i class="fas fa-plus"></i>آگهی خود را ارسال کنید</a>
                                     </li>

@@ -3720,7 +3720,6 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 /*------------------- 5.10 FAQ -------------------*/
 .faq-box-layout1 {
     background-color: #ffffff;
-    padding: 1.875rem;
     box-shadow: 0 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -3728,7 +3727,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
     font-size: 2rem;
     color: #2a2a2a;
     font-weight: 700;
-    margin-bottom: 0.9375rem;
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -3738,7 +3737,6 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .faq-box-layout1 .accordion-box {
-    padding: 0.625rem 0;
 }
 
 .faq-box-layout1 .accordion-box .card {

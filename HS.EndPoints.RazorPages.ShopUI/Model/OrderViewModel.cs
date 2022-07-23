@@ -26,7 +26,7 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public HomeService? HomeService { get; set; }
         public List<IFormFile>? FormFile { get; set; }
         public List<OrderFile>? OrderFiles { get; set; }
-        
+
 
         #endregion Navigation properties
     }

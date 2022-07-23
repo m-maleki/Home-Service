@@ -46,8 +46,11 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         {
             ClaimsPrincipal currentUser = this.User;
             currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
+
             var roles = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(User.Identity!.Name));
+
             Orders = _mapper.Map(await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles), Orders);
             if (User.IsInRole("Expert"))
                 UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));

@@ -36,6 +36,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Include(x => x.Customer)
                 .Include(x => x.HomeService)
                 .Include(x=>x.Suggestions)
+                .ThenInclude(x=>x.Expert)
                 .ToListAsync();
             return _mapper.Map<List<OrderDto>>(records);
         }
@@ -44,7 +45,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             .AsNoTracking()
             .Include(x => x.Customer)
             .Include(x=>x.OrderFiles)
-            .Include(x => x.HomeService))
+            .Include(x => x.HomeService)
+            .ThenInclude(x=>x.Experts))
             .Where(x => x.Id == orderId)
             .FirstOrDefaultAsync();
         public async Task<int> Create(OrderDto entity)
