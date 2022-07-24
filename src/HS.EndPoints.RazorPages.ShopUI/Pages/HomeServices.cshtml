@@ -1,8 +1,13 @@
 ﻿@page
+@using Framework.Utilities
 @model HS.EndPoints.RazorPages.UI.Pages.HomeServicesModel
 @{
     Layout = "_Layout";
 }
+
+
+
+
 
 <section class="section-padding-top-heading bg-accent">
     <div class="container">
@@ -18,13 +23,27 @@
                             <a href="single-product1.html"><img style="margin:10px" src="~/Images/HomeService/@homeService.ImgSrc" alt="@homeService.Name"></a>
                         </div>
                         <div class="item-content">
-                            <h3 class="item-title"><a href="single-product1.html">@homeService.Name</a></h3>
+                            <h3 id="HomeServiceTitle" class="item-title"><a href="single-product1.html">@homeService.Name</a></h3>
                             <ul class="entry-meta">
                                 <li><i class="fas fa-tag"></i><a href="#">@homeService.HomeServiceSubCategory!.Name</a></li>
                                 <li><i class="far fa-eye"></i>125 بازدید</li>
                             </ul>
-                            <p>@homeService.Description
-لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن  …                             <div class="item-price">قیمت پایه سرویس : @homeService.BasePrice</div>
+                            <p>
+
+                                @homeService.Description
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن  …
+                            </p>
+                            <div class="item-price">قیمت پایه سرویس : @homeService.BasePrice</div>
+                            <br>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a class="btn btn-success curve" style="color:white; float:left" HomeServiceId="@homeService.Id" HomeServiceTitle="@homeService.Name" style="float:right" data-toggle="modal" data-target="#create">سفارش سرویس جدید</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 }
@@ -32,3 +51,103 @@
         </div>
     </div>
 </section>
+
+<div class="form-group">
+
+
+
+    <div  class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content form-group">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createBrandLabel">ثبت درخواست سرویس جدید</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data" asp-page-handler="Create">
+                        <input type="hidden" id="HomeServiceId" name="HomeServiceId" />
+                        <div class="form-group">
+                            <label> هوم سرویس</label>
+                            <input type="text" id="HomeService" class="form-control border" readonly/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>تاریخ اجرا</label>
+                            <input name="DateOfExecution" type="text" class="form-control  border" id="kama-datepicker" placeholder="تاریخ تولد" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ساعت اجرا</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-clock"></i>
+                                </span>
+                                <input name="Clock" type="time" class="form-control border " required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>توضیحات</label>
+                            <div class="input-group round">
+                                <span class="input-group-addon">
+                                    <i class="icon-note"></i>
+                                </span>
+                                <textarea name="Description" class="form-control border" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group relative">
+                             <label>آپلود تصاویر</label>
+
+                            <input name="FormFile" id="FormFile" class="form-control" type="file" placeholder="برای آپلود کلیک کنید" multiple />
+ 
+                        </div>
+                        <div style="float:left;">
+                            <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                            <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section masterjs
+    {
+
+    <script>
+        $(document).ready(function() {
+            $(".table a").on("click", function() {
+                var HomeServiceId = $(this).attr("HomeServiceId");
+                var HomeService = $(this).attr("HomeServiceTitle");
+                $("#HomeServiceId").val(HomeServiceId);
+                $("#HomeService").val(HomeService);
+            });
+        });
+    </script>
+
+    <script>
+        $('#SuggestedPrice').keydown(function(e) {
+            setTimeout(() => {
+                let parts = $(this).val().split(".");
+                let v = parts[0].replace(/\D/g, ""),
+                    dec = parts[1]
+                let calc_num = Number((dec !== undefined ? v + "." + dec : v));
+                // use this for numeric calculations
+                console.log('number for calculations: ', calc_num);
+                let n = new Intl.NumberFormat('ir-fa').format(v);
+                n = dec !== undefined ? n + "." + dec : n;
+                $(this).val(n);
+            })
+        })
+    </script>
+}

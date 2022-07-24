@@ -9,5 +9,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<List<HomeServiceCategoryDto>> GetAll();
         Task Create(HomeServiceCategoryDto entity);
         Task Update(HomeServiceCategoryDto entity);
+        
     }
 }

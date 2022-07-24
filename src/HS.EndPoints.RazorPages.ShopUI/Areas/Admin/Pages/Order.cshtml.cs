@@ -58,13 +58,12 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task<IActionResult> OnPostCreate(OrderViewModel model)
         {
-  
                 ClaimsPrincipal currentUser = this.User;
                 currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var OrderDto = _mapper.Map(model, new OrderDto());
                 OrderDto.currentApplicationUserID = currentUserID;
                 await _orderApplicationService.Create(OrderDto, model.FormFile);
-            return LocalRedirect("/Admin/Order");
+                return LocalRedirect("/Admin/Order");
         }
 
         public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model)
