@@ -8,9 +8,19 @@
         <div class="col-lg-6 col-md-10 m-auto m-b-30">
             <div class="text-center">
                 <div class="user-box">
-                    <a href="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" target="_blank">
+                    @if(Model.UserViewModel.ProfileImgUrl ==null)
+                    {
+                     <a href="~/media/figure/avatar.jpg" target="_blank">
+                        <img id="profileImage" src="~/media/figure/avatar.jpg" alt="عکس پروفایل" class="img-circle img-responsive">
+                        </a>
+                    }
+                    else
+                    {
+                     <a href="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" target="_blank">
                         <img id="profileImage" src="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" alt="عکس پروفایل" class="img-circle img-responsive">
                     </a>
+                    }
+
                     <div class="user-details">
                         <h4>@Model.UserViewModel.FirstName @Model.UserViewModel.LastName</h4>
                         <p class="role"></p>

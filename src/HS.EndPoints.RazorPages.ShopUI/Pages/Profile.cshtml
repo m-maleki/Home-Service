@@ -108,9 +108,18 @@
                             <div class="myaccount-dashboard light-shadow-bg">
                                 <div class="light-box-content">
                                     <div class="media-box">
-                                        <div class="item-img">
+                                        @if(Model.CurrentUser.ProfileImgUrl ==null)
+                                        {
+                                          <div class="item-img">
                                             <img src="media/figure/avatar.jpg" alt="avatar">
-                                        </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="item-img">
+                                            <img style="width:100px;height:100px" src="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="avatar">
+                                            </div>
+                                        }
                                         <div class="item-content">
                                             <h3 class="item-title">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h3>
                                             <div class="item-email"><span>ایمیل: </span>@User.Identity.Name</div>

@@ -71,7 +71,9 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             if (ModelState.IsValid)
             {
                 var result = await _applicationUserApplicationService.Login(_mapper.Map(model, new ApplicationUserDto()));
+                if(result.Succeeded)
                     return LocalRedirect("/Profile");
+                else
                 ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است *");
             }
             return default;
