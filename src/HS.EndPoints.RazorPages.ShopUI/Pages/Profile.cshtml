@@ -184,8 +184,9 @@
 
 
                                                             
-                                                        
-                                                        <td colspan="5">
+                                                        @if(order.Status!=OrderStatusEnum.WaitingExpertAdvice)
+                                                        {
+                                                              <td colspan="5">
                                                             <div class="faq-box-layout1">
                                                                 <div id="accordion" class="accordion-box">
                                                                     <div class="card">
@@ -254,6 +255,8 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                        }
+                                                      
                                                     </tr>
                                                 }
                                             </tbody>
