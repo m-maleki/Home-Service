@@ -6,65 +6,82 @@
 }
 
 
-
-
-
-<section class="section-padding-top-heading bg-accent">
-    <div class="container">
-        <div class="row gutters-20">
-            <div class="col-xl-12 col-lg-8">
-                <div class="heading-layout2">
-                    <h2 class="heading-title">خدمات مرتبط با @Model.homeServices.First().HomeServiceSubCategory.Name</h2>
+@if (@Model.homeServices.Count == 0)
+{
+    <section class="section-padding-top-heading bg-accent">
+        <div class="container">
+            <div class="row gutters-20">
+                <div class="col-xl-12 col-lg-8">
+                   <center>
+                     <h2 class="heading-title">خدماتی یافت نشد</h2>
+                   </center>
                 </div>
-                @foreach (var homeService in @Model.homeServices)
-                {
-                    <div class="product-box-layout2">
-                        <div class="item-img">
-                            <a href="single-product1.html"><img style="margin:10px" src="~/Images/HomeService/@homeService.ImgSrc" alt="@homeService.Name"></a>
-                        </div>
-                        <div class="item-content">
-                            <h3 id="HomeServiceTitle" class="item-title"><a href="single-product1.html">@homeService.Name</a></h3>
-                            <ul class="entry-meta">
-                                <li><i class="fas fa-tag"></i><a href="#">@homeService.HomeServiceSubCategory!.Name</a></li>
-                                <li><i class="far fa-eye"></i>125 بازدید</li>
-                            </ul>
-                            <p>
-
-                                @homeService.Description
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن  …
-                            </p>
-                            <div class="item-price">قیمت پایه سرویس : @homeService.BasePrice</div>
-                            <br>
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        @if(User.IsInRole("Customer") && User.Identity.IsAuthenticated)
-                                        {
-                                         <td>
-                                            <a class="btn btn-success curve" style="color:white; float:left" HomeServiceId="@homeService.Id" HomeServiceTitle="@homeService.Name" style="float:right" data-toggle="modal" data-target="#create">سفارش سرویس جدید</a>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <a href="/Profile" class="btn btn-success curve" style="color:white; float:left" >برای ثبت سفارش وارد شوید</a>
-                                        }
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                }
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <h1></h1>
+}
+else
+{
+    <section class="section-padding-top-heading bg-accent">
+        <div class="container">
+            <div class="row gutters-20">
+                <div class="col-xl-12 col-lg-8">
+                    <div class="heading-layout2">
+                        <h2 class="heading-title">خدمات مرتبط با @Model.homeServices.First().HomeServiceSubCategory.Name</h2>
+                    </div>
+                    @foreach (var homeService in @Model.homeServices)
+                    {
+                        <div class="product-box-layout2">
+                            <div class="item-img">
+                                <a href="single-product1.html"><img style="margin:10px" src="~/Images/HomeService/@homeService.ImgSrc" alt="@homeService.Name"></a>
+                            </div>
+                            <div class="item-content">
+                                <h3 id="HomeServiceTitle" class="item-title"><a href="single-product1.html">@homeService.Name</a></h3>
+                                <ul class="entry-meta">
+                                    <li><i class="fas fa-tag"></i><a href="#">@homeService.HomeServiceSubCategory!.Name</a></li>
+                                    <li><i class="far fa-eye"></i>125 بازدید</li>
+                                </ul>
+                                <p>
+
+                                    @homeService.Description
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن  …
+                                </p>
+                                <div class="item-price">قیمت پایه سرویس : @homeService.BasePrice</div>
+                                <br>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            @if (User.IsInRole("Customer") && User.Identity.IsAuthenticated)
+                                            {
+                                                <td>
+                                                    <a class="btn btn-success curve" style="color:white; float:left" HomeServiceId="@homeService.Id" HomeServiceTitle="@homeService.Name" style="float:right" data-toggle="modal" data-target="#create">سفارش سرویس جدید</a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <a href="/Profile" class="btn btn-success curve" style="color:white; float:left">برای ثبت سفارش وارد شوید</a>
+                                            }
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
 
 <div class="form-group">
 
 
 
-    <div  class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+    <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
         <div class="modal-dialog " role="document">
             <div class="modal-content form-group">
                 <div class="modal-header">
@@ -78,7 +95,7 @@
                         <input type="hidden" id="HomeServiceId" name="HomeServiceId" />
                         <div class="form-group">
                             <label> هوم سرویس</label>
-                            <input type="text" id="HomeService" class="form-control border" readonly/>
+                            <input type="text" id="HomeService" class="form-control border" readonly />
                         </div>
 
 
@@ -108,10 +125,10 @@
                         </div>
 
                         <div class="form-group relative">
-                             <label>آپلود تصاویر</label>
+                            <label>آپلود تصاویر</label>
 
                             <input name="FormFile" id="FormFile" class="form-control" type="file" placeholder="برای آپلود کلیک کنید" multiple />
- 
+
                         </div>
                         <div style="float:left;">
                             <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
