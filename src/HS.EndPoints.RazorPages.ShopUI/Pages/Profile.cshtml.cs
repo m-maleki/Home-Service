@@ -18,7 +18,6 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IOrderApplicationService _orderApplicationService;
         private readonly ISuggestionApplicationService _suggestionApplicationService;
-
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IApplicationUserApplicationService _applicationUserApplicationService;
         private readonly IMapper _mapper;
@@ -48,19 +47,16 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         {
             if(User.Identity.IsAuthenticated)
             {
-                ClaimsPrincipal currentUser = this.User;
-                var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-                var roles = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(User.Identity!.Name));
                 if (User.IsInRole("Expert"))
                 {
-                    var expert = await _expertApplicationService.Get(new Guid(currentUserID));
+                    var expert = await _expertApplicationService.Get();
                     _mapper.Map(expert, CurrentUser);
                 }
 
                 if (User.IsInRole("Customer"))
                 {
-                    Orders = _mapper.Map(await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles), Orders);
-                    var customer = await _customerApplicationService.Get(new Guid(currentUserID));
+                    Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
+                    var customer = await _customerApplicationService.Get();
                     _mapper.Map(customer, CurrentUser);
                 }
             }

@@ -13,6 +13,10 @@ namespace HS.Domain.Core.Contracts.Service
         Task<IdentityResult> Create(ApplicationUserDto command);
         Task<SignInResult> Login(ApplicationUserDto command);
         Task<List<ApplicationUserDto>> GetAll();
+        public Guid GetUserId();
+        Task<string> getRole();
+        bool IsInRole(string role);
+
 
     }
 }

@@ -14,11 +14,13 @@ namespace HS.Domain.ApplicationServices
     {
         private readonly ICustomerService _customerService;
         private readonly IMapper _mapper;
+        private readonly IApplicationUserApplicationService _userApplicationService;
 
-        public CustomerApplicationService(ICustomerService customerService, IMapper mapper)
+        public CustomerApplicationService(ICustomerService customerService, IMapper mapper, IApplicationUserApplicationService userApplicationService)
         {
             _customerService = customerService;
             _mapper = mapper;
+            _userApplicationService = userApplicationService;
         }
 
         public Task Delete(Guid id)
@@ -26,16 +28,16 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
-        public async Task<CustomerDto> Get(Guid id)
+        public async Task<CustomerDto> Get()
         {
-            var customer =await _customerService.GetCustomerId(id);
+            var customer =await _customerService.GetCustomerId(_userApplicationService.GetUserId());
             return await _customerService.Get(customer);
         }
           
 
         public Task<CustomerDto> Get(string email)
             => _customerService.Get(email);
-
+        
         public Task<List<CustomerDto>> GetAll()
         {
             throw new NotImplementedException();

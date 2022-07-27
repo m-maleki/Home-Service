@@ -17,23 +17,26 @@ namespace HS.Domain.ApplicationServices
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
         private readonly IExpertService _expertService;
-
+        private readonly IApplicationUserService _applicationUserService;
         public OrderApplicationService(IOrderService orderService,
             ICustomerService customerService,
-            IExpertService expertService)
+            IExpertService expertService,
+            IApplicationUserService applicationUserService)
         {
             _orderService = orderService;
             _customerService = customerService;
             _expertService = expertService;
+            _applicationUserService = applicationUserService;
         }
 
         public async Task Create(OrderDto entity, List<IFormFile> FormFile)
         {
-            entity.CustomerId= await _customerService.GetCustomerId(new Guid(entity.currentApplicationUserID));
+            entity.CustomerId= await _customerService.GetCustomerId(_applicationUserService.GetUserId());
             PersianCalendar pc = new PersianCalendar();
             TimeSpan time = new TimeSpan(int.Parse(entity.Clock.Substring(0,2)), int.Parse(entity.Clock.Substring(3, 2)),0);
             entity.DateOfExecution = new DateTime(entity.DateOfExecution.Year, entity.DateOfExecution.Month, entity.DateOfExecution.Day,  pc);
             entity.DateOfExecution =  entity.DateOfExecution.Add(time);
+            entity.currentApplicationUserID = _applicationUserService.GetUserId().ToString();
             var orderId = await _orderService.Create(entity);
             if(FormFile !=null)
             {
@@ -48,19 +51,21 @@ namespace HS.Domain.ApplicationServices
         public async Task<List<OrderDto>> Get()
          => await _orderService.Get();
 
-        public async Task<List<OrderDto>> GetAllBy(Guid Id, IList<string> roles)
+        public async Task<List<OrderDto>> GetAll()
         {
-            if(roles.Any(x => x.Contains("Expert")))
+             var role = await _applicationUserService.getRole();
+
+            if (role=="Expert")
             {
-                var expertCustomerid = await _expertService.GetExpertId(Id);
+                var expertCustomerid = await _expertService.GetExpertId(_applicationUserService.GetUserId());
                 return await _expertService.GetAllBy(expertCustomerid);
             }
-            else if(roles.Any(x => x.Contains("Customer")))
+            else if(role == "Customer")
             {
-                var customerid = await _customerService.GetCustomerId(Id);
+                var customerid = await _customerService.GetCustomerId(_applicationUserService.GetUserId());
                 return await _customerService.GetAllBy(customerid);
             }
-            else if (roles.Any(x => x.Contains("Admin")))
+            else if (role == "Admin")
             {
                 return await _orderService.Get();
             }

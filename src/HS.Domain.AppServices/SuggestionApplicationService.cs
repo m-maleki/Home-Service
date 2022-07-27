@@ -16,13 +16,16 @@ namespace HS.Domain.ApplicationServices
         private readonly ISuggestionService _suggestionService;
         private readonly IOrderService _orderService;
         private readonly IExpertService _expertService;
+        private readonly IApplicationUserApplicationService _userApplicationService;
         public SuggestionApplicationService(ISuggestionService suggestionService,
             IExpertService expertService,
-            IOrderService orderService)
+            IOrderService orderService,
+            IApplicationUserApplicationService userApplicationService)
         {
             _suggestionService = suggestionService;
             _expertService = expertService;
             _orderService = orderService;
+            _userApplicationService = userApplicationService;
         }
 
         public async Task Accept(int suggestionId, int orderId)
@@ -36,7 +39,7 @@ namespace HS.Domain.ApplicationServices
             PersianCalendar pc = new PersianCalendar();
             entity.DurationOfWork = new DateTime(entity.DurationOfWork.Year, entity.DurationOfWork.Month, entity.DurationOfWork.Day, pc);
             entity.RegisterDate = DateTime.Now;
-            entity.ExpertId =  await _expertService.GetExpertId(entity.ExpertId);
+            entity.ExpertId =  await _expertService.GetExpertId(_userApplicationService.GetUserId());
             await _suggestionService.Create(entity);
             var suggestionCount = await _suggestionService.GetCount(entity.OrderId);
             if (suggestionCount == 1)

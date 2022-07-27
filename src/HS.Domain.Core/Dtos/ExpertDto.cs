@@ -17,7 +17,6 @@ namespace HS.Domain.Core.Dtos
         public string? PhoneNumber { get; set; }
         public int CityId { get; set; }
         public IFormFile? ProfileImgFile { get; set; }
-
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
         public Guid ApplicationUserId { get; set; }

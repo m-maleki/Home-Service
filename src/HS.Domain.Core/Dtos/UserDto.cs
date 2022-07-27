@@ -31,5 +31,7 @@ namespace HS.Domain.Core.Dtos
         public Guid ApplicationUserId { get; set; }
         public IFormFile? ProfileImgFile { get; set; }
         public List<HomeServiceSubCategory>? HomeServices { get; set; } = new List<HomeServiceSubCategory>();
+        public List<int>? HomeServicesIds { get; set; }
+
     }
 }

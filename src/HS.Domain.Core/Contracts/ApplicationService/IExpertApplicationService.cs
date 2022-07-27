@@ -6,10 +6,10 @@ namespace HS.Domain.Core.Contracts.ApplicationService
     {
         Task<List<ExpertDto>> GetAll();
         Task Set(ExpertDto dto);
-        Task<ExpertDto> Get(Guid id);
+        Task<ExpertDto> Get();
         Task<ExpertDto> Get(string email);
         Task Update(ExpertDto dto);
-        Task<Guid> GetExpertId(Guid expertIdentityId);
+        Task<Guid> GetExpertId();
         Task Delete(Guid id);
         Task<List<OrderDto>> GetAllBy(Guid expertId);
     }

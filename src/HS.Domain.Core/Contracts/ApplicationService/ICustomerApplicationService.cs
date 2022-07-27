@@ -11,7 +11,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
     {
         Task<List<CustomerDto>> GetAll();
         Task Set(CustomerDto dto);
-        Task<CustomerDto> Get(Guid id);
+        Task<CustomerDto> Get();
         Task<CustomerDto> Get(string email);
         Task Update(CustomerDto dto);
         Task Delete(Guid id);

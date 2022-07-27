@@ -44,25 +44,17 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
         public async Task OnGet()
         {
-            ClaimsPrincipal currentUser = this.User;
-            currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-
             var roles = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(User.Identity!.Name));
-
-            Orders = _mapper.Map(await _orderApplicationService.GetAllBy(new Guid(currentUserID), roles), Orders);
+            Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
             if (User.IsInRole("Expert"))
-                UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
+                UserId = await _expertApplicationService.GetExpertId();
         }
 
         public async Task<IActionResult> OnPostCreate(OrderViewModel model)
         {
-                ClaimsPrincipal currentUser = this.User;
-                currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var OrderDto = _mapper.Map(model, new OrderDto());
-                OrderDto.currentApplicationUserID = currentUserID;
-                await _orderApplicationService.Create(OrderDto, model.FormFile);
+                await _orderApplicationService.Create(_mapper.Map(model, new OrderDto()), model.FormFile);
                 return LocalRedirect("/Admin/Order");
         }
 

@@ -46,7 +46,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             _mapper.Map(await _suggestionApplicationService.GetAll(OrderId), suggestions);
             _mapper.Map(await _orderFileApplicationService.GetAll(OrderId), orderFiles);
             if (User.IsInRole("Expert"))
-            UserId = await _expertApplicationService.GetExpertId(new Guid(currentUserID));
+            UserId = await _expertApplicationService.GetExpertId();
         }
 
         public async Task<IActionResult> OnPostDeleteImage(int imageId , int orderIdDelete)

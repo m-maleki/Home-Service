@@ -48,7 +48,7 @@ builder.Services.AddRazorPages()
 builder.Services.AddMvc()
     .AddSessionStateTempDataProvider();
 builder.Services.AddSession();
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<SeedIdentityData, SeedIdentityData>();
 
 builder.Services.AddScoped<IExpertApplicationService, ExpertApplicationService>();

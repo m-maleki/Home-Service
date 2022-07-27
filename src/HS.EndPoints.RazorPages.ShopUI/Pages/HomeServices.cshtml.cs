@@ -31,11 +31,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
 
         public async Task<IActionResult> OnPostCreate(OrderViewModel model)
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var OrderDto = _mapper.Map(model, new OrderDto());
-            OrderDto.currentApplicationUserID = currentUserID;
-            await _orderApplicationService.Create(OrderDto, model.FormFile);
+            await _orderApplicationService.Create(_mapper.Map(model, new OrderDto()), model.FormFile);
             return LocalRedirect("/");
         }
     }

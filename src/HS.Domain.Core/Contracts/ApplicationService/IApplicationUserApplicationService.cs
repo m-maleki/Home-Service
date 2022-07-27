@@ -1,4 +1,5 @@
-﻿using HS.Domain.Core.Dtos.ApplicationUsers;
+﻿using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Dtos.ApplicationUsers;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<IdentityResult> Create(ApplicationUserDto command);
         Task<SignInResult> Login(ApplicationUserDto command);
         Task<List<ApplicationUserDto>> GetAll();
+        public Guid GetUserId();
+        Task Update(UserDto dto);
 
     }
 }

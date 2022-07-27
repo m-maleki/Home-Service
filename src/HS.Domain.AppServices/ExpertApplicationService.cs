@@ -8,10 +8,12 @@ namespace HS.Domain.ApplicationServices
     public class ExpertApplicationService : IExpertApplicationService
     {
         private readonly IExpertService _expertService;
-
-        public ExpertApplicationService(IExpertService expertService)
+        private readonly IApplicationUserApplicationService _userApplicationService;
+        public ExpertApplicationService(IExpertService expertService,
+            IApplicationUserApplicationService userApplicationService)
         {
             _expertService = expertService;
+            _userApplicationService = userApplicationService;
         }
 
         public Task Delete(Guid id)
@@ -19,9 +21,9 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
-        public async Task<ExpertDto> Get(Guid id)
+        public async Task<ExpertDto> Get()
         {
-            var expertId= await _expertService.GetExpertId(id);
+            var expertId= await _expertService.GetExpertId(_userApplicationService.GetUserId());
             return await _expertService.Get(expertId);
         }
             //=>_expertService.Get(id);
@@ -37,8 +39,8 @@ namespace HS.Domain.ApplicationServices
            return await _expertService.GetAllBy(expertId);
         }
 
-        public Task<Guid> GetExpertId(Guid expertIdentityId)
-            => _expertService.GetExpertId(expertIdentityId);
+        public Task<Guid> GetExpertId()
+            => _expertService.GetExpertId(_userApplicationService.GetUserId());
 
         public  async Task Set(ExpertDto dto)
         {
@@ -48,7 +50,6 @@ namespace HS.Domain.ApplicationServices
 
         public async Task Update(ExpertDto dto)
         {
-           //await _expertService.EnsureExists(dto.ApplicationUserId);
             if(dto.ProfileImgFile !=null)
                 dto.ProfileImgUrl = await _expertService.UploadImageProfile(dto.ProfileImgFile);
             await _expertService.AssignHomeService(dto);

@@ -20,6 +20,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         private readonly ICustomerApplicationService _customerApplicationService;
         private readonly IExpertApplicationService _expertApplicationService;
         private readonly ICityApplicationService _cityApplicationService;
+        private readonly IApplicationUserApplicationService _userApplicationService;
         private readonly IExpertRepository _expertRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         public ICollection<HomeService> HomeServicesUser { get; set; } = new List<HomeService>();
@@ -35,7 +36,8 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             IExpertApplicationService expertApplicationService,
             ICityApplicationService cityApplicationService,
             IExpertRepository expertRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IApplicationUserApplicationService userApplicationService)
         {
             _homeServiceApplicationService = homeServiceApplicationService;
             _customerApplicationService = customerApplicationService;
@@ -44,23 +46,14 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             _expertRepository = expertRepository;
             _userManager = userManager;
             _mapper = mapper;
+            _userApplicationService = userApplicationService;
         }
 
         public async Task<IActionResult> OnPost(UserViewModel model)
         {
             if(ModelState.IsValid)
             {
-                if (User.IsInRole("Expert"))
-                {
-                    var user = _mapper.Map(model, new ExpertDto());
-                    await _expertApplicationService.Update(user);
-                }
-
-                if (User.IsInRole("Customer"))
-                {
-                    var user = _mapper.Map(model, new CustomerDto());
-                    await _customerApplicationService.Update(user);
-                }
+               await _userApplicationService.Update(_mapper.Map(model,new UserDto()));
             }
             return LocalRedirect("/Admin/Profile/");
         }
@@ -68,13 +61,12 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         public async Task OnGet()
         {
             Cities = new SelectList(await _cityApplicationService.Get(), "Id", "Name");
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
 
             if (User.IsInRole("Expert"))
             {
                 HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-                var expert = await _expertApplicationService.Get(new Guid(currentUserID));
+                var expert = await _expertApplicationService.Get();
                 if (expert.HomeServices != null)
                 HomeServicesUser = expert.HomeServices;
                 _mapper.Map(expert, UserViewModel);
@@ -82,7 +74,7 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
 
             if (User.IsInRole("Customer"))
             {
-                var customer = await _customerApplicationService.Get(new Guid(currentUserID));
+                var customer = await _customerApplicationService.Get();
                 _mapper.Map(customer, UserViewModel);
             }
         }

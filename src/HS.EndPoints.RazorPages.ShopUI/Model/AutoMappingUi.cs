@@ -25,6 +25,9 @@ namespace HS.EndPoints.RazorPages.UI.Model
             CreateMap<LoginViewModel, ApplicationUserDto>();
             CreateMap<ApplicationUserDto, ApplicationUserViewModel>();
             CreateMap<HomeServiceDto, HomeServiceViewModel>();
+            CreateMap<UserViewModel, UserDto>();
+            CreateMap<UserDto, CustomerDto>();
+
         }
     }
 }
