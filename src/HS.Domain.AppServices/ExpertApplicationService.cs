@@ -9,11 +9,17 @@ namespace HS.Domain.ApplicationServices
     {
         private readonly IExpertService _expertService;
         private readonly IApplicationUserApplicationService _userApplicationService;
+        private readonly ICityService _cityService;
+        private readonly IHomeServiceService _homeServiceService;
         public ExpertApplicationService(IExpertService expertService,
-            IApplicationUserApplicationService userApplicationService)
+            IApplicationUserApplicationService userApplicationService,
+            ICityService cityService,
+            IHomeServiceService homeServiceService)
         {
             _expertService = expertService;
             _userApplicationService = userApplicationService;
+            _cityService = cityService;
+            _homeServiceService = homeServiceService;
         }
 
         public Task Delete(Guid id)
@@ -24,9 +30,12 @@ namespace HS.Domain.ApplicationServices
         public async Task<ExpertDto> Get()
         {
             var expertId= await _expertService.GetExpertId(_userApplicationService.GetUserId());
-            return await _expertService.Get(expertId);
+            var result =  await _expertService.Get(expertId);
+            result.Cities = await _cityService.Get();
+            result.SelectHomeServices = await _homeServiceService.Get();
+            result.HomeServicesUser = result.HomeServices;
+            return result;
         }
-            //=>_expertService.Get(id);
 
         public async Task<ExpertDto> Get(string email)
            => await _expertService.Get(email);

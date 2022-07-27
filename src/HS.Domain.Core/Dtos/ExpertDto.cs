@@ -30,6 +30,9 @@ namespace HS.Domain.Core.Dtos
         public List<Suggestion>? Suggestion { get; set; }
         public List<Comment>? Comments { get; set; }
         public List<int>? HomeServicesIds { get; set; }
+        public List<City> Cities {get; set;}
+        public List<HomeServiceDto> SelectHomeServices { get; set; }
+        public ICollection<HomeService> HomeServicesUser { get; set; }
 
         #endregion Navigation properties
     }

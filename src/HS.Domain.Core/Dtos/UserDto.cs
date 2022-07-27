@@ -30,8 +30,12 @@ namespace HS.Domain.Core.Dtos
         public ApplicationUser? ApplicationUser { get; set; }
         public Guid ApplicationUserId { get; set; }
         public IFormFile? ProfileImgFile { get; set; }
-        public List<HomeServiceSubCategory>? HomeServices { get; set; } = new List<HomeServiceSubCategory>();
-        public List<int>? HomeServicesIds { get; set; }
+        //public List<HomeServiceSubCategory>? HomeServices { get; set; } = new List<HomeServiceSubCategory>();
+        public List<HomeService>? HomeServices { get; set; } = new List<HomeService>();
+        public List<HomeServiceDto> SelectHomeServices { get; set; }
 
+        public List<int>? HomeServicesIds { get; set; }
+        public ICollection<HomeService> HomeServicesUser { get; set; }
+        public List<City> Cities { get; set; }
     }
 }

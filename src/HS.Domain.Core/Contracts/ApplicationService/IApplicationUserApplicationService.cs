@@ -16,6 +16,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<List<ApplicationUserDto>> GetAll();
         public Guid GetUserId();
         Task Update(UserDto dto);
+        Task<UserDto> Get();
 
     }
 }

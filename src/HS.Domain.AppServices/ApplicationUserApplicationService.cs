@@ -4,11 +4,7 @@ using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Dtos.ApplicationUsers;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HS.Domain.ApplicationServices
 {
@@ -18,20 +14,48 @@ namespace HS.Domain.ApplicationServices
         private readonly ICustomerService _customerService;
         private readonly IExpertService _expertService;
         private readonly IMapper _mapper;
+        private readonly ICityService _cityService;
+        private readonly IHomeServiceService _homeServiceService;
 
-        public ApplicationUserApplicationService(IApplicationUserService applicationUserService,
+        public ApplicationUserApplicationService(
+            IApplicationUserService applicationUserService,
+            ICustomerService customerService,
             IExpertService expertService,
             IMapper mapper,
-            ICustomerService customerService)
+            ICityService cityService,
+            IHomeServiceService homeServiceService)
         {
             _applicationUserService = applicationUserService;
+            _customerService = customerService;
             _expertService = expertService;
             _mapper = mapper;
-            _customerService = customerService;
+            _cityService = cityService;
+            _homeServiceService = homeServiceService;
         }
 
         public async Task<IdentityResult> Create(ApplicationUserDto command)
             =>await _applicationUserService.Create(command);
+
+        public async Task<UserDto> Get()
+        {
+            if (_applicationUserService.IsInRole("Expert"))
+            {
+                var expertId = await _expertService.GetExpertId(_applicationUserService.GetUserId());
+                var result = await _expertService.Get(expertId);
+                result.Cities = await _cityService.Get();
+                result.SelectHomeServices = await _homeServiceService.Get();
+                result.HomeServicesUser = result.HomeServices;
+                return _mapper.Map(result,new UserDto());
+            }
+            if (_applicationUserService.IsInRole("Customer"))
+            {
+                var customer = await _customerService.GetCustomerId(_applicationUserService.GetUserId());
+                var result = await _customerService.Get(customer);
+                result.Cities = await _cityService.Get();
+                return _mapper.Map(result, new UserDto());
+            }
+            return default;
+        }
 
         public Task<List<ApplicationUserDto>> GetAll()
         => _applicationUserService.GetAll();

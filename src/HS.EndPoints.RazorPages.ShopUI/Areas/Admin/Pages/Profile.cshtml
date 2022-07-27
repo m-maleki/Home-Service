@@ -114,7 +114,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="slc-province">استان</label>
-                                <select name="CityId" asp-for="@Model.UserViewModel.CityId" class="form-control select2 round" asp-items="Model.Cities">
+                                <select name="CityId" asp-for="@Model.UserViewModel.CityId" class="form-control select2 round" asp-items="@(new SelectList(Model.UserViewModel.Cities, "Id", "Name"))">
                                 </select>
                             </div>
                         </div>
@@ -124,8 +124,8 @@
                     {
                         <div class="form-group">
                             <label for="slc-province">مهارت ها</label>
-                            <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round" asp-items="Model.HomeServices" multiple>
-                                @foreach (var homeService in @Model.HomeServicesUser)
+                            <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round"  multiple  asp-items="@(new SelectList(Model.UserViewModel.SelectHomeServices, "Id", "Name"))">
+                                @foreach (var homeService in @Model.UserViewModel.HomeServicesUser)
                                 {
                                     <option value="@homeService.Id" selected="selected">@homeService.Name</option>
                                 }

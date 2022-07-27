@@ -15,12 +15,18 @@ namespace HS.Domain.ApplicationServices
         private readonly ICustomerService _customerService;
         private readonly IMapper _mapper;
         private readonly IApplicationUserApplicationService _userApplicationService;
+        private readonly ICityService _cityService;
 
-        public CustomerApplicationService(ICustomerService customerService, IMapper mapper, IApplicationUserApplicationService userApplicationService)
+
+        public CustomerApplicationService(ICustomerService customerService,
+            IMapper mapper,
+            IApplicationUserApplicationService userApplicationService,
+            ICityService cityService)
         {
             _customerService = customerService;
             _mapper = mapper;
             _userApplicationService = userApplicationService;
+            _cityService = cityService;
         }
 
         public Task Delete(Guid id)
@@ -31,7 +37,9 @@ namespace HS.Domain.ApplicationServices
         public async Task<CustomerDto> Get()
         {
             var customer =await _customerService.GetCustomerId(_userApplicationService.GetUserId());
-            return await _customerService.Get(customer);
+            var result =  await _customerService.Get(customer);
+            result.Cities =await _cityService.Get();
+            return result;
         }
           
 
