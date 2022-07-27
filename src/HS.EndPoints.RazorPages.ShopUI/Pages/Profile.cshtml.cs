@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HS.Domain.Core.Contracts.ApplicationService;
+using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Dtos.ApplicationUsers;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
@@ -20,6 +21,8 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         private readonly ISuggestionApplicationService _suggestionApplicationService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IApplicationUserApplicationService _applicationUserApplicationService;
+        private readonly IApplicationUserApplicationService _userApplicationService;
+
         private readonly IMapper _mapper;
         public UserViewModel CurrentUser = new UserViewModel();
         public ICollection<OrderViewModel>? Orders = new List<OrderViewModel>();
@@ -31,7 +34,8 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             IApplicationUserApplicationService applicationUserApplicationService,
             UserManager<ApplicationUser> userManager,
             IOrderApplicationService orderApplicationService,
-            IMapper mapper)
+            IMapper mapper,
+            IApplicationUserApplicationService userApplicationService)
         {
             _suggestionApplicationService = suggestionApplicationService;
             _customerApplicationService = customerApplicationService;
@@ -41,27 +45,22 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             _mapper = mapper;
             _userManager = userManager;
             _orderApplicationService = orderApplicationService;
+            _userApplicationService = userApplicationService;
         }
 
         public async Task OnGet()
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
-                if (User.IsInRole("Expert"))
-                {
-                    var expert = await _expertApplicationService.Get();
-                    _mapper.Map(expert, CurrentUser);
-                }
-
-                if (User.IsInRole("Customer"))
-                {
-                    Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
-                    var customer = await _customerApplicationService.Get();
-                    _mapper.Map(customer, CurrentUser);
-                }
+                CurrentUser = _mapper.Map(await _userApplicationService.Get(), CurrentUser);
+                Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
             }
         }
-
+        public async Task<IActionResult> OnPost(UserViewModel model)
+        {
+            await _userApplicationService.Update(_mapper.Map(model, new UserDto()));
+            return LocalRedirect("/Profile");
+        }
         public async Task<IActionResult> OnPostLogin(LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -87,5 +86,13 @@ namespace HS.EndPoints.RazorPages.UI.Pages
                 await _suggestionApplicationService.Accept(SuggId, OrderId);
             return LocalRedirect("/Profile");
         }
+
+        public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model)
+        {
+
+            await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()));
+            return LocalRedirect("/Admin/Order");
+        }
+
     }
 }

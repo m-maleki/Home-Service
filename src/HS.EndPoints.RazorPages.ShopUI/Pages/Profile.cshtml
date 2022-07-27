@@ -5,6 +5,7 @@
 @model HS.EndPoints.RazorPages.UI.Pages.ProfileModel
 @{
     Layout = "_LayoutProfile";
+    bool isAccept = false;
 }
 
 <section class="section-padding-equal-70">
@@ -17,11 +18,13 @@
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#logout" role="tab" aria-selected="true">حساب کاربری</a>
                         </li>
-
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("Customer") || User.IsInRole("Expert")))
                         {
                             <li class="nav-item">
                                 <a class="nav-link " data-toggle="tab" href="#dashboard" role="tab" aria-selected="true">داشبورد</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#accout-detail" role="tab" aria-selected="false">جزئیات حساب</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#my-listing" role="tab" aria-selected="false">سفارشات من</a>
@@ -29,9 +32,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#payment" role="tab" aria-selected="false">پرداخت ها</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#accout-detail" role="tab" aria-selected="false">جزئیات حساب</a>
-                            </li>
+
                         }
                     </ul>
                 </div>
@@ -102,22 +103,199 @@
                             </div>
                         </div>
                     </div>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+
+
+                    @if (@Model.User.Identity.IsAuthenticated && (User.IsInRole("Expert")||User.IsInRole("Customer")))
+                    {
+                        <div class="tab-pane fade " id="accout-detail" role="accout-detail">
+                            <div class="myaccount-dashboard light-shadow-bg">
+                                <div class="light-box-content">
+                                    <div class="static-report">
+                                        <h3 class="report-title">جزئیات حساب</h3>
+                                        <div class="portlet-body edit-form">
+                                            <div class="row">
+                                                <div class="col-lg-9 col-md-10 m-auto m-b-30">
+                                                    <div class="text-center">
+                                                        <div class="user-box">
+                                                            @if (Model.CurrentUser.ProfileImgUrl == null)
+                                                            {
+                                                                <a href="~/media/figure/avatar.jpg" target="_blank">
+                                                                    <img id="profileImage" src="~/media/figure/avatar.jpg" alt="عکس پروفایل" style="border-radius: 50%;width:200px">
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" target="_blank">
+                                                                    <img id="profileImage" src="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="عکس پروفایل" style="border-radius: 50%;width:200px">
+                                                                </a>
+                                                            }
+
+                                                            <div class="user-details">
+                                                                <h4>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+                                                                <p class="role"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <form enctype="multipart/form-data" id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+                                                        <input type="hidden" name="Id" value="@Model.CurrentUser.Id" />
+                                                        <input type="hidden" name="ApplicationUserId" value="@Model.CurrentUser.ApplicationUserId" />
+                                                        <div class="form-group relative mt-3 mb-4">
+                                                            <center>
+                                                                <input name="ProfileImgFile" onchange="loadFile(event)" title="your text" type="file" class="form-control">
+                                                            </center>
+
+                                                            <div class="input-group round">
+                                                                <input name="ProfileImgUrl" value="@Model.CurrentUser.ProfileImgUrl" type="hidden" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+
+                                                            </div>
+                                                            <div class="help-block"></div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="form-body">
+
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="txt-firstname">نام</label>
+                                                                        <input type="text" name="FirstName" value="@Model.CurrentUser.FirstName" style="border: 0.5px solid;border-color:grey" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="txt-lastname">نام خانوادگی</label>
+                                                                        <div class="input-group round">
+                                                                            <input type="text" name="LastName" value="@Model.CurrentUser.LastName" style="border: 0.5px solid;border-color:grey" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="txt-mobile">موبایل</label>
+                                                                <div class="input-group round">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="icon-screen-smartphone"></i>
+                                                                    </span>
+                                                                    <input type="text" name="PhoneNumber" value="@Model.CurrentUser.PhoneNumber" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left mobile">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="txt-email">ایمیل</label>
+                                                                <div class="input-group round">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="icon-envelope"></i>
+                                                                    </span>
+                                                                    <input type="email" name="Email" asp-for="@Model.CurrentUser.ApplicationUser.Email" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="txt-iban">شماره شبا</label>
+                                                                <div class="input-group round">
+                                                                    <input type="text" name="ShebaNumber" value="@Model.CurrentUser.ShebaNumber" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left iban" maxlength="27">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="txt-card">شماره کارت</label>
+                                                                <div class="input-group round">
+                                                                    <input type="text" name="CardNumber" value="@Model.CurrentUser.CardNumber" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left card">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label for="slc-province">استان</label>
+                                                                        <select name="CityId" asp-for="@Model.CurrentUser.CityId" style="border: 0.5px solid;border-color:grey;height:40px;" class="form-control" asp-items="@(new SelectList(Model.CurrentUser.Cities, "Id", "Name"))">
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            @if (User.IsInRole("Expert"))
+                                                            {
+                                                                <div class="form-group">
+                                                                    <label for="slc-province">مهارت ها</label>
+                                                                    <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round" style="border: 0.5px solid;border-color:grey" multiple asp-items="@(new SelectList(Model.CurrentUser.SelectHomeServices, "Id", "Name"))">
+                                                                        @foreach (var homeService in @Model.CurrentUser.HomeServicesUser)
+                                                                        {
+                                                                            <option value="@homeService.Id" selected="selected">@homeService.Name</option>
+                                                                        }
+
+                                                                    </select>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <label>بیوگرافی</label>
+                                                                    <div class="input-group round">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="icon-location-pin"></i>
+                                                                        </span>
+                                                                        <textarea name="Biography" class="form-control" style="border: 0.5px solid;border-color:grey" rows="4">@Model.CurrentUser.Biography</textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                            }
+
+
+
+
+
+                                                            <div class="form-group">
+                                                                <label>آدرس</label>
+                                                                <div class="input-group round">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="icon-location-pin"></i>
+                                                                    </span>
+                                                                    <textarea name="Address" style="border: 0.5px solid;border-color:grey" class="form-control" rows="4">@Model.CurrentUser.Address</textarea>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <br>
+                                                        <div class="form-actions">
+                                                            <button type="submit" class="btn btn-info btn-round">
+                                                                <i class="icon-check"></i>
+                                                                ذخیره
+                                                            </button>
+                                                            <a href="#" class="btn btn-warning btn-round pull-left">
+                                                                <i class="icon-close"></i>
+                                                                بازگشت
+                                                            </a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+
+
+                    @if (User.Identity.IsAuthenticated)
                     {
                         <div class="tab-pane fade " id="dashboard" role="tabpanel">
                             <div class="myaccount-dashboard light-shadow-bg">
                                 <div class="light-box-content">
                                     <div class="media-box">
-                                        @if(Model.CurrentUser.ProfileImgUrl ==null)
+                                        @if (Model.CurrentUser.ProfileImgUrl == null)
                                         {
-                                          <div class="item-img">
-                                            <img src="media/figure/avatar.jpg" alt="avatar">
+                                            <div class="item-img">
+                                                <img src="media/figure/avatar.jpg" alt="avatar">
                                             </div>
                                         }
                                         else
                                         {
                                             <div class="item-img">
-                                            <img style="width:100px;height:100px" src="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="avatar">
+                                                <img style="width:100px;height:100px" src="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="avatar">
                                             </div>
                                         }
                                         <div class="item-content">
@@ -166,7 +344,11 @@
                                                     <th>هوم سرویس</th>
                                                     <th>تاریخ ثبت</th>
                                                     <th>وضعیت</th>
-                                                    <th>عملیات</th>
+                                                    <th>جزئیات سفارش</th>
+                                                    @if(User.IsInRole("Expert") )
+                                                    {
+                                                        <th>ارائه پیشنهاد</th>
+                                                    }
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -177,86 +359,123 @@
                                                         <td>@order.HomeService.Name</td>
                                                         <td>@order.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
                                                         <td>@order.Status.GetEnumDisplayName()</td>
-                                                        <td><button class="btn btn-success">جزئیات</button></td>
-                                                    </tr>
+                                                        <td>
+                                                            <form method="get" role="form" asp-page="OrderDetails">
+                                                                <input type="hidden" name="OrderId" value="@order.Id">
+                                                                <input type="submit" value="نمایش" class="btn btn-success curve">
+                                                            </form>
+                                                        </td>
+                                                    @if(User.IsInRole("Expert") && order.Suggestions.Count==0)
+                                                        {
+                                                            
+                                                        }
+                                                        @if (User.IsInRole("Expert") && @order.Suggestions.Exists(x => x.ExpertId == Model.CurrentUser.Id))
+                                                        {
+                                                            <td>پیشنهاد ثبت شده است</td>
+                                                        }
+                                                        else if(User.IsInRole("Expert"))
+                                                        {
+                                                           <td >
+                                                               <a data-toggle="modal" style="color:white" data-target="#createSuggest" Order-Id-Suggedtion="@order.Id" Expert-Id="@Model.CurrentUser.Id"  class="btn btn-primary curve">ارائه پیشنهاد</a>
+                                                            </td> 
+                                                        }
+                                                            </tr>
                                                     <tr>
 
-
-
-                                                            
-                                                        @if(order.Status!=OrderStatusEnum.WaitingExpertAdvice)
+                                                        @if (order.Status != OrderStatusEnum.WaitingExpertAdvice)
                                                         {
-                                                              <td colspan="5">
-                                                            <div class="faq-box-layout1">
-                                                                <div id="accordion" class="accordion-box">
-                                                                    <div class="card">
-                                                                        <div class="card-header">
-                                                                            <a class="heading-title collapsed" data-toggle="collapse" href="@("#Order"+order.Id)" role="button" aria-expanded="false">
-                                                                                پیشنهاد های ارائه شده
-                                                                            </a>
-                                                                        </div>
-                                                                        <div id="@("Order"+order.Id)" class="collapse" data-parent="#accordion">
-                                                                            <div class="card-body">
-                                                                                <table class="table table-bordered table-striped table-hover">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>شناسه</th>
-                                                                                            <th>کارشناس</th>
-                                                                                            <th>قیمت پیشنهادی </th>
-                                                                                            <th>تاریخ پیشنهاد </th>
-                                                                                            <th>تاریخ اتمام کار</th>
-                                                                                            <th>عملیات</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        @if (order.Suggestions.Count>0)
-                                                                                        {
-                                                                                            @foreach (var item in order.Suggestions)
+                                                            <td colspan="6">
+                                                                <div class="faq-box-layout1">
+                                                                    <div id="accordion" class="accordion-box">
+                                                                        <div class="card">
+                                                                            <div class="card-header">
+                                                                                <a class="heading-title collapsed" data-toggle="collapse" href="@("#Order"+order.Id)" role="button" aria-expanded="false">
+                                                                                    پیشنهاد های ارائه شده
+                                                                                </a>
+                                                                            </div>
+                                                                            <div id="@("Order"+order.Id)" class="collapse" data-parent="#accordion">
+                                                                                <div class="card-body">
+                                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>شناسه</th>
+                                                                                                <th>کارشناس</th>
+                                                                                                <th>قیمت پیشنهادی </th>
+                                                                                                <th>تاریخ پیشنهاد </th>
+                                                                                                <th>تاریخ اتمام کار</th>
+                                                                                                <th>عملیات</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            @if (order.Suggestions.Count > 0)
                                                                                             {
-                                                                                                    <tr>
+                                                                                                @foreach (var item in order.Suggestions)
+                                                                                                {
+                                                                                                    if(User.IsInRole("Expert") && @item.ExpertId==@Model.CurrentUser.Id)
+                                                                                                    {
+                                                                                                        <tr>
                                                                                                         <td>@item.Id</td>
                                                                                                         <td>@item.Expert.FirstName @item.Expert.LastName</td>
                                                                                                         <td style="color:red">@item.SuggestedPrice.ToString("C", CultureInfo.CurrentCulture= new CultureInfo("fa-Ir",false))</td>
                                                                                                         <td>@item.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
                                                                                                         <td>@item.DurationOfWork.ToPersianString("yyyy/MM/dd")</td>
                                                                                                         <td>
-                                                                                                            @if(item.IsAccept==true)
-                                                                                                        {
-                                                                                                            
-                                                                                                             <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-success curve">پذیرفته شده</button>
-                                                                                                        }
-                                                                                                        else
-                                                                                                        {
-                                                                                                            @if(@order.Status==OrderStatusEnum.WaitingExpertAdvice || @order.Status==OrderStatusEnum.WaitingSpecialistSelection)
+                                                                                                            @if (item.IsAccept == true)
                                                                                                             {
-                                                                                                                <button data-toggle="modal" data-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+
+                                                                                                                <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-success curve">پذیرفته شده</button>
                                                                                                             }
                                                                                                             else
                                                                                                             {
-                                                                                                              <button type="submit" class="btn btn-warning" disabled>جزئیات پیشنهاد</button>
+                                                                                                                    <button data-toggle="modal" data-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
                                                                                                             }
-                                                                                                        }
                                                                                                         </td>
-                                                                                                    </tr>
+                                                                                                        </tr>
+                                                                                                    }
+                                                                                                    else if(User.IsInRole("Admin") ||User.IsInRole("Customer"))
+                                                                                                    {
+                                                                                                        <tr>
+                                                                                                        <td>@item.Id</td>
+                                                                                                        <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                                                                                                        <td style="color:red">@item.SuggestedPrice.ToString("C", CultureInfo.CurrentCulture= new CultureInfo("fa-Ir",false))</td>
+                                                                                                        <td>@item.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>@item.DurationOfWork.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>
+                                                                                                            @if (item.IsAccept == true  )
+                                                                                                            {
+                                                                                                                    <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-success curve">پذیرفته شده</button>
+                                                                                                                }
+                                                                                                                else if(order.Status==OrderStatusEnum.WaitingSpecialistComeToYourPlace)
+                                                                                                                {
+                                                                                                                  <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                  <button data-toggle="modal" data-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+                                                                                                                }
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    }
+                                                                                                }
+
                                                                                             }
-                                                                                          }
-                                                                                          else
-                                                                                          {
-                                                                                              <tr>
-                                                                                                  <td colspan="7">پیشنهادی ارائه نشده است</td>
-                                                                                              </tr>
-                                                                                          }
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                            else
+                                                                                            {
+                                                                                                <tr>
+                                                                                                    <td colspan="7">پیشنهادی ارائه نشده است</td>
+                                                                                                </tr>
+                                                                                            }
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
 
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
+                                                            </td>
                                                         }
-                                                      
+
                                                     </tr>
                                                 }
                                             </tbody>
@@ -285,27 +504,27 @@
                 <form method="post" asp-page-handler="Accept">
                     <input id="SuggId" name="SuggId" type="hidden" />
 
-                        <label>شماره سفارش</label>
-                        <div class="input-group">
-                            <input name="OrderId" id="OrderId" type="text" class="form-control round" readonly>
-                        </div>
+                    <label>شماره سفارش</label>
+                    <div class="input-group">
+                        <input name="OrderId" id="OrderId" type="text" class="form-control round" readonly>
+                    </div>
 
-                        <label>کارشناس</label>
-                        <div class="input-group">
-                            <input name="Customer" id="Customer" type="text" class="form-control round" disabled>
-                        </div>
+                    <label>کارشناس</label>
+                    <div class="input-group">
+                        <input name="Customer" id="Customer" type="text" class="form-control round" disabled>
+                    </div>
 
-                        <label>هوم سرویس سفارش</label>
-                        <div class="input-group">
-                            <input name="HomeService" id="HomeService" type="text" class="form-control round" disabled>
-                        </div>
+                    <label>هوم سرویس سفارش</label>
+                    <div class="input-group">
+                        <input name="HomeService" id="HomeService" type="text" class="form-control round" disabled>
+                    </div>
 
-                        <label>توضیحات</label>
-                        <div class="input-group round">
-                            <textarea id="Description" name="Description" class="form-control" rows="4" disabled></textarea>
-                        </div>
+                    <label>توضیحات</label>
+                    <div class="input-group round">
+                        <textarea id="Description" name="Description" class="form-control" rows="4" disabled></textarea>
+                    </div>
 
-                        <hr />
+                    <hr />
 
                 </form>
             </div>
@@ -326,31 +545,35 @@
                 <form method="post" asp-page-handler="Accept">
                     <input id="SuggId2" name="SuggId" type="hidden" />
 
-                        <label>شماره سفارش</label>
-                        <div class="input-group">
-                            <input name="OrderId" id="OrderId2" type="text" class="form-control round" readonly>
-                        </div>
+                    <label>شماره سفارش</label>
+                    <div class="input-group">
+                        <input name="OrderId" id="OrderId2" type="text" class="form-control round" readonly>
+                    </div>
 
-                        <label>کارشناس</label>
-                        <div class="input-group">
-                            <input name="Customer" id="Customer2" type="text" class="form-control round" disabled>
-                        </div>
+                    <label>کارشناس</label>
+                    <div class="input-group">
+                        <input name="Customer" id="Customer2" type="text" class="form-control round" disabled>
+                    </div>
 
-                        <label>هوم سرویس سفارش</label>
-                        <div class="input-group">
-                            <input name="HomeService" id="HomeService2" type="text" class="form-control round" disabled>
-                        </div>
+                    <label>هوم سرویس سفارش</label>
+                    <div class="input-group">
+                        <input name="HomeService" id="HomeService2" type="text" class="form-control round" disabled>
+                    </div>
 
-                        <label>توضیحات</label>
-                        <div class="input-group round">
-                            <textarea id="Description2" name="Description" class="form-control" rows="4" disabled></textarea>
-                        </div>
+                    <label>توضیحات</label>
+                    <div class="input-group round">
+                        <textarea id="Description2" name="Description" class="form-control" rows="4" disabled></textarea>
+                    </div>
 
-                        <hr />
-                        <br />
+                    <hr />
+                    <br />
+                    @if(User.IsInRole("Admin") || User.IsInRole("Customer")) 
+                    {
                     <div style="float:left;">
                         <button type="submit" class="btn btn-success curve">قبول پیشنهاد<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
-                    </div>
+                    </div>     
+                    }
+
                 </form>
             </div>
         </div>
@@ -359,9 +582,86 @@
 
 
 
+<div class="modal fade" id="createSuggest" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">ارائه پیشنهاد </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="CreateSuggest">
+                    <input type="hidden" id="OrderIdSuggestion" name="OrderId" />
+                    <input type="hidden" id="ExpertId" name="ExpertId" />
+
+                    <div class="form-group">
+                        <label>قیمت پیشنهادی (ریال)</label>
+                            <input type="text"  style="border: 0.5px solid;border-color:grey"  pattern="[0-9.,]+" required data-type="number" name="SuggestedPrice"  id="SuggestedPrice" type="number" step="0.01" class="form-control round" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تاریخ تحویل</label>
+                            <input name="DurationOfWork"  style="border: 0.5px solid;border-color:grey"  type="text" class="form-control round" id="kama-datepicker" placeholder="تاریخ تحویل" value="@DateTime.Now.ToPersianString("yyyy/MM/dd")">
+                        </div>
+
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                            <textarea name="Description"  style="border: 0.5px solid;border-color:grey"  class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-info curve">ثبت پیشنهاد<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+<script src="~/assets/plugins/select2/dist/js/i18n/fa.js"></script>
+<script src="~/assets/js/pages/select2.js"></script>
+
+
 
 @section masterjs
     {
+
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('profileImage');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $(".table a").on("click", function() {
+                var OrderId = $(this).attr("Order-Id");
+                var OrderIdSuggestion = $(this).attr("Order-Id-Suggedtion");
+                var ExpertId = $(this).attr("Expert-Id");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#OrderId").val(OrderId);
+                $("#ExpertId").val(ExpertId);
+                $("#Customer").val(Customer);
+                $("#HomeService").val(HomeService);
+                $("#OrderIdDelete").val(OrderId);
+                $("#OrderIdSuggestion").val(OrderIdSuggestion);
+
+
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $(".table button").on("click", function() {
@@ -375,11 +675,13 @@
                 $("#Customer").val(Customer);
                 $("#HomeService").val(HomeService);
                 $("#OrderId").val(OrderId);
+                $("#OrderIdSuggestion").val(OrderId);
+                
             });
         });
     </script>
 
-        <script>
+    <script>
         $(document).ready(function() {
             $(".table button").on("click", function() {
                 var SuggId = $(this).attr("SuggId");
@@ -395,4 +697,22 @@
             });
         });
     </script>
+
+    
+    <script>
+        $('#SuggestedPrice').keydown(function(e) {
+            setTimeout(() => {
+                let parts = $(this).val().split(".");
+                let v = parts[0].replace(/\D/g, ""),
+                    dec = parts[1]
+                let calc_num = Number((dec !== undefined ? v + "." + dec : v));
+                // use this for numeric calculations
+                console.log('number for calculations: ', calc_num);
+                let n = new Intl.NumberFormat('ir-fa').format(v);
+                n = dec !== undefined ? n + "." + dec : n;
+                $(this).val(n);
+            })
+        })
+    </script>
+
 }

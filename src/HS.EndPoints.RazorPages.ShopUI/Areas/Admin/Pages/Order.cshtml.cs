@@ -46,7 +46,6 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         {
 
             HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-            var roles = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(User.Identity!.Name));
             Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
             if (User.IsInRole("Expert"))
                 UserId = await _expertApplicationService.GetExpertId();
