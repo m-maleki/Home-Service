@@ -20,13 +20,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public async Task<List<HomeServiceDto>> GetAll()
             => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
                 .AsNoTracking()
+                .Include(x=>x.HomeServiceSubCategory)
                 .ToListAsync());
 
         public async Task<List<HomeServiceDto>> GetAll(int subCategoryId)
            => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
                .AsNoTracking()
                .Include(x=>x.HomeServiceSubCategory)
-               .Where(x=>x.HomeServiceSubCategoryId== subCategoryId)
+               .Where(x=>x.HomeServiceSubCategoryId== subCategoryId && x.IsDeleted==false)
                
                .ToListAsync());
 
@@ -55,6 +56,24 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public Task<List<HomeServiceDto>> GetAll(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task Active(int id)
+        {
+            var record = await _context.HomeServices
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            record.IsDeleted = false;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeActive(int id)
+        {
+            var record = await _context.HomeServices
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            record.IsDeleted = true;
+            await _context.SaveChangesAsync();
         }
     }
 }

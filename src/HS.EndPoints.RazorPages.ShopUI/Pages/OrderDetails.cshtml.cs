@@ -38,6 +38,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
 
         public async Task OnGet(int OrderId)
         {
+            
             _mapper.Map(await _orderApplicationService.GetBy(OrderId), Order);
             _mapper.Map(await _suggestionApplicationService.GetAll(OrderId), suggestions);
             _mapper.Map(await _orderFileApplicationService.GetAll(OrderId), orderFiles);

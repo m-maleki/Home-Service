@@ -11,5 +11,7 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<List<HomeServiceDto>> GetAll(Guid id);
         Task Create(HomeServiceDto entity);
         Task Update(HomeServiceDto entity);
+        Task Active(int id);
+        Task DeActive(int id);
     }
 }

@@ -1,0 +1,155 @@
+﻿@page
+@model HS.EndPoints.RazorPages.UI.Areas.Admin.Pages.HomeServicesModel
+@{
+    ViewData["Title"] = "مدیریت هوم سرویس ها";
+}
+    <a class="btn btn-success curve " style="float:right" data-bs-toggle="modal" data-bs-target="#create">هوم سرویس جدید</a>
+<br /><br />
+<table class="table table-bordered table-striped table-hover" id="data-table">
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>تصویر</th>
+            <th>نام</th>
+            <th>دسته بندی</th>
+            <th>قیمت پایه</th>
+            <th>توضیحات</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.HomeServices != null)
+        {
+            @foreach (var homeService in Model.HomeServices)
+            {
+                <tr>
+                    <td>@homeService.Id</td>
+                        <td>
+                            <center>
+                        <img id="profileImage" style="width:100px;border-radius: 10%;" src="~/Images/HomeService/@homeService.ImgSrc" alt="عکس پروفایل" class="img-responsive">
+                            </center>   
+                    </td>
+                    <td>@homeService.Name</td>
+                    <td>@homeService.HomeServiceSubCategory.Name</td>
+                    <td>@homeService.BasePrice</td>
+                    <td>@homeService.Description</td>
+                    <td>
+                        
+                        @if(@homeService.IsDeleted==true)
+                        {
+                            <form method="post"  asp-page-handler="Active">
+                                <input type="hidden" name="id" value="@homeService.Id">
+                                <button class="btn btn-success" type="submit">فعال کردن</button>
+                            </form>
+                        }
+                        else
+                        {
+                             <form method="post"  asp-page-handler="DeActive">
+                                 <input type="hidden" name="id" value="@homeService.Id">
+                                 <button class="btn btn-danger" type="submit">غیرفعال کردن</button>
+                             </form>
+                        }
+                       
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createBrandLabel">ثبت درخواست سرویس جدید</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data" asp-page-handler="Create">
+                    <div class="form-group">
+                        <label>نام هوم سرویس</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-wrench"></i>
+                            </span>
+                            <input name="name" id="name" type="text" class="form-control round" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>دسته بندی</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            <select name="HomeServiceSubCategoryId" name="HomeServiceSubCategoryId" class="form-control round" asp-items="Model.homeServiceSubCategories" required></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>قیمت پایه</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-clock"></i>
+                            </span>
+                            <input name="BasePrice"  id="BasePrice" type="text" class="form-control round" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <textarea name="Description" id="Description" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group relative">
+                        <input name="ImgFile" id="ImgFile" class="form-control" type="file" placeholder="برای آپلود کلیک کنید"  />
+                        <div class="input-group round">
+                            <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info">
+                                        <i class="icon-picture"></i>
+                                        آپلود عکس
+                                        <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                    </button>
+                                </span>
+                        </div><!-- /.input-group -->
+                        <div class="help-block"></div>
+                    </div>
+                    <div style="float:left;">
+                        <button type="submit" class="btn btn-info curve">ذخیره<div class="paper-ripple"><div class="paper-ripple__background" style="opacity: 0.00616;"></div><div class="paper-ripple__waves"></div></div></button>
+                        <button type="button" class="btn btn-danger curve " data-bs-dismiss="modal">بازگشت</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section masterjs
+    {
+    <script>
+        $(document).ready(function() {
+            $(".table a").on("click", function() {
+                var OrderId = $(this).attr("Order-Id");
+                var OrderIdSuggestion = $(this).attr("Order-Id-Suggedtion");
+                var ExpertId = $(this).attr("Expert-Id");
+                var Customer = $(this).attr("Customer");
+                var HomeService = $(this).attr("HomeService");
+                $("#OrderId").val(OrderId);
+                $("#ExpertId").val(ExpertId);
+                $("#Customer").val(Customer);
+                $("#HomeService").val(HomeService);
+                $("#OrderIdDelete").val(OrderId);
+                $("#OrderIdSuggestion").val(OrderIdSuggestion);
+            });
+        });
+    </script>
+}

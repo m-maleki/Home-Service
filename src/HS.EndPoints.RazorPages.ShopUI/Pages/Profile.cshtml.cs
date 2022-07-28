@@ -91,8 +91,31 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         {
 
             await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()));
-            return LocalRedirect("/Admin/Order");
+            return LocalRedirect("/Profile");
         }
+
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()));
+                if (result.Succeeded)
+                {
+                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
+                    return LocalRedirect("~/Profile");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, item.Description);
+                        return default;
+                    }
+                }
+            }
+            return default;
+        }
+
 
     }
 }

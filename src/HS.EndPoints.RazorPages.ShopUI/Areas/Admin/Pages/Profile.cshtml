@@ -31,7 +31,7 @@
                 <input type="hidden" name="Id" value="@Model.UserViewModel.Id" />
                 <input type="hidden" name="ApplicationUserId" value="@Model.UserViewModel.ApplicationUserId" />
                 <div class="form-group relative mt-3 mb-4">
-                    <input name="ProfileImgFile" onchange="loadFile(event)" type="file" class="form-control">
+                    <input name="ProfileImgFile" onchange="loadFile(event)" accept="image/png, image/jpeg" type="file" class="form-control">
                     <div class="input-group round">
                         <input name="ProfileImgUrl" value="@Model.UserViewModel.ProfileImgUrl" type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
                         <span class="input-group-btn">

@@ -26,9 +26,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#accout-detail" role="tab" aria-selected="false">جزئیات حساب</a>
                             </li>
+                            @if(User.IsInRole("Expert"))
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#my-listing" role="tab" aria-selected="false">درخواست ها</a>
+                            </li>
+                            }
+                            else
+                            {
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#my-listing" role="tab" aria-selected="false">سفارشات من</a>
                             </li>
+                            }
+
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#payment" role="tab" aria-selected="false">پرداخت ها</a>
                             </li>
@@ -65,22 +75,37 @@
                                                 </form>
                                             </div>
                                         </div>
+
                                         <div class="col-lg-6">
                                             <div class="form-box registration-form">
-                                                <h3 class="item-title">ثبت نام</h3>
-                                                <form action="#">
+                                                <form id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+                                                  <div asp-validation-summary="All" class="text-danger"> </div>
+                                                 <h3 class="item-title">ثبت نام</h3>
+
                                                     <div class="form-group">
-                                                        <label>نام کاربری *</label>
-                                                        <input type="text" class="form-control" name="registration-username" id="registration-username">
+                                                        <label>آدرس ایمیل</label>
+                                                        <input type="email" class="form-control" name="email" id="email">
+                                                        <span asp-validation="Email"></span>
                                                     </div>
+
                                                     <div class="form-group">
-                                                        <label>آدرس ایمیل *</label>
-                                                        <input type="email" class="form-control" name="registration-email" id="registration-email">
+                                                        <label>رمز عبور</label>
+                                                        <input type="password" class="form-control" name="password" id="password">
+                                                        <span asp-validation="password"></span>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>رمز عبور *</label>
-                                                        <input type="text" class="form-control" name="registration-password" id="registration-password">
+                                                     <div class="form-group">
+                                                        <label>تکرار رمز عبور</label>
+                                                        <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword">
+                                                        <span asp-validation="ConfirmPassword"></span>
                                                     </div>
+                                                         <div class="form-group">
+                                                        <label>نوع کاربر</label>
+                                                        <select class="form-control" style="height:45px" name="Role">
+                                                            <option value="Customer" >مشتری</option>
+                                                            <option value="Expert">کارشناس</option>
+                                                        </select>
+                                                    </div>
+
                                                     <div class="form-group">
                                                         <input type="submit" class="submit-btn" value="ثبت نام">
                                                     </div>
@@ -207,7 +232,7 @@
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
                                                                         <label for="slc-province">استان</label>
-                                                                        <select name="CityId" asp-for="@Model.CurrentUser.CityId" style="border: 0.5px solid;border-color:grey;height:40px;" class="form-control" asp-items="@(new SelectList(Model.CurrentUser.Cities, "Id", "Name"))">
+                                                                        <select name="CityId" asp-for="@Model.CurrentUser.CityId" style="border: 0.5px solid;border-color:grey;height:40px;height:60px;" class="form-control" asp-items="@(new SelectList(Model.CurrentUser.Cities, "Id", "Name"))">
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -275,10 +300,6 @@
                             </div>
                         </div>
                     }
-
-
-
-
 
                     @if (User.Identity.IsAuthenticated)
                     {

@@ -1,4 +1,5 @@
 ﻿using HS.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace HS.Domain.Core.Dtos
 {
@@ -12,7 +13,8 @@ namespace HS.Domain.Core.Dtos
         public double Price { get; set; }
         public int? HomeServiceSubCategoryId { get; set; }
         public double BasePrice { get; set; }
-
+        public bool IsDeleted { get; set; }
+        public IFormFile? ImgFile { get; set; }
 
         #endregion Properties
         #region Navigation properties

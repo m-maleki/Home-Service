@@ -29,6 +29,7 @@ namespace HS.EndPoints.RazorPages.UI.Model
             CreateMap<UserDto, CustomerDto>();
             CreateMap<UserDto, UserViewModel>();
             CreateMap<ExpertDto, UserDto>();
+            CreateMap<HomeServiceDto, HomeServiceViewModel>().ReverseMap();
         }
     }
 }

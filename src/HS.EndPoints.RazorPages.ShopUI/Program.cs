@@ -63,6 +63,11 @@ builder.Services.AddScoped<IHomeServiceApplicationService, HomeServiceApplicatio
 builder.Services.AddScoped<IHomeServiceRepository, HomeServiceRepository>();
 builder.Services.AddScoped<IHomeServiceService, HomeServiceService>();
 
+builder.Services.AddScoped<IHomeServiceSubCategoryApplicationService, HomeServiceSubCategoryApplicationService>();
+builder.Services.AddScoped<IHomeServiceSubCategoryRepository, HomeServiceSubCategoryRepository>();
+builder.Services.AddScoped<IHomeServiceSubCategoryService, HomeServiceSubCategoryService>();
+
+
 builder.Services.AddScoped<ICustomerApplicationService, CustomerApplicationService>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
@@ -88,6 +93,7 @@ builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
 builder.Services.AddScoped<IHomeServiceCategoryRepository, HomeServiceCategoryRepository>();
+
 
 
 var app = builder.Build();

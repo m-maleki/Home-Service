@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.Entity;
+using System.Web;
 
 namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
 {
@@ -44,9 +45,11 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<IActionResult> OnPostLogin(LoginViewModel model)
+        public async Task<IActionResult> OnPostLogin(LoginViewModel model )
         {
-            if(ModelState.IsValid)
+           
+
+            if (ModelState.IsValid)
             {
                 var result =  await _applicationUserApplicationService.Login(_mapper.Map(model, new ApplicationUserDto()));
                 if (result.Succeeded)

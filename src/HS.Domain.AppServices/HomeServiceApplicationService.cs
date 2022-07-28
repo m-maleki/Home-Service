@@ -14,8 +14,28 @@ namespace HS.Domain.ApplicationServices
             _homeService = homeService;
         }
 
+        public async Task Active(int id)
+        {
+            await _homeService.Active(id);
+        }
+
+        public async Task Create(HomeServiceDto homeServiceDto)
+        {
+            homeServiceDto.ImgSrc =await _homeService.UploadImageProfile(homeServiceDto.ImgFile);
+            await _homeService.Create(homeServiceDto);
+            
+        }
+
+        public async Task DeActive(int id)
+        {
+            await _homeService.DeActive(id);
+        }
+
         public async Task<List<HomeServiceDto>> Get()
-            =>await _homeService.Get();
+        {
+            var result = await _homeService.Get();
+            return result;
+        }
 
         public async Task<HomeServiceDto> Get(int id)
            => await _homeService.Get(id);

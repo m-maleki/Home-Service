@@ -12,7 +12,8 @@ namespace HS.EndPoints.RazorPages.UI.Model
         public double Price { get; set; }
         public int? HomeServiceSubCategoryId { get; set; }
         public double BasePrice { get; set; }
-
+        public bool IsDeleted { get; set; }
+        public IFormFile? ImgFile { get; set; }
 
         #endregion Properties
         #region Navigation properties
