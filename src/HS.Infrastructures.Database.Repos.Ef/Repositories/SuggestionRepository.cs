@@ -20,6 +20,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public async Task<List<SuggestionDto>> GetAll()
             => _mapper.Map<List<SuggestionDto>>(await _context.Suggestions
                 .AsNoTracking()
+                .Include(x=>x.Expert)
+                .Include(x=>x.Order)
+                .ThenInclude(x=>x.HomeService)
                 .ToListAsync());
         public async Task<SuggestionDto> GetBy(int id)
             => await _mapper.ProjectTo<SuggestionDto>(_context.Suggestions)

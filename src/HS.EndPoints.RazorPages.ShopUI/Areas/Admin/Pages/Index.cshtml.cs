@@ -1,3 +1,4 @@
+using AutoMapper;
 using HS.Domain.Core.Contracts.ApplicationService;
 using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -13,17 +14,23 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
         private readonly ICustomerApplicationService _customerApplicationService;
         private readonly IOrderApplicationService _orderApplicationService;
         private readonly ISuggestionApplicationService _suggestionApplicationService;
-        public DashboardViewModel dashboardViewModel { get; set; } = new DashboardViewModel();
 
+        private readonly IMapper _mapper;
+
+        public DashboardViewModel dashboardViewModel { get; set; } = new DashboardViewModel();
+        public ICollection<OrderViewModel>? Orders = new List<OrderViewModel>();
+        public ICollection<SuggestionViewModel> suggestions = new List<SuggestionViewModel>();
         public IndexModel(IExpertApplicationService expertApplicationService,
             ICustomerApplicationService customerApplicationService,
             IOrderApplicationService orderApplicationService,
-            ISuggestionApplicationService suggestionApplicationService)
+            ISuggestionApplicationService suggestionApplicationService,
+            IMapper mapper)
         {
             _expertApplicationService = expertApplicationService;
             _customerApplicationService = customerApplicationService;
             _orderApplicationService = orderApplicationService;
             _suggestionApplicationService = suggestionApplicationService;
+            _mapper = mapper;
         }
 
         public async Task OnGet()
@@ -32,6 +39,9 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             dashboardViewModel.CountCustomer = await _customerApplicationService.Count();
             dashboardViewModel.CountOrder = await _orderApplicationService.Count();
             dashboardViewModel.CountSuggestion = await _suggestionApplicationService.Count();
+            Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
+            suggestions = _mapper.Map(await _suggestionApplicationService.Get(),new List<SuggestionViewModel>());
+
         }
     }
 }

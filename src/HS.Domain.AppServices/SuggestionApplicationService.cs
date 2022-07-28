@@ -73,9 +73,9 @@ namespace HS.Domain.ApplicationServices
             throw new NotImplementedException();
         }
 
-        public Task<List<SuggestionDto>> Get()
+        public async Task<List<SuggestionDto>> Get()
         {
-            throw new NotImplementedException();
+            return await _suggestionService.Get();
         }
 
         public async Task<List<SuggestionDto>> GetAll(int orderId)

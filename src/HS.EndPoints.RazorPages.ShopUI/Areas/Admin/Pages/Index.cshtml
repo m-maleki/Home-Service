@@ -1,10 +1,14 @@
 ﻿@page
+@using Framework.Utilities
 @model HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages.IndexModel
 
 @{
     ViewData["Title"] = "داشبرد مدیریت";
 }
-<div class="col-md-12">
+
+@if(@User.IsInRole("Admin"))
+{
+    <div class="col-md-12">
 <div class="row">
     <div class="col-lg-3 col-6">
         <div class="stat-box bg-cyan shadow">
@@ -60,3 +64,74 @@
     </div><!-- /.col-lg-3 -->
 </div>
 </div>
+<div class="row col-lg-12">
+    <div class="table-responsive col-lg-6">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th><i class="icon-energy"></i></th>
+                <th>سفارش دهنده</th>
+                <th>هوم سرویس</th>
+                <th>تاریخ ثبت</th>
+                <th>جزئیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in @Model.Orders)
+            {
+               <tr>
+                 <td>@order.Id</td>
+                <td>@order.Customer.FirstName @order.Customer.LastName</td>
+                <td>@order.HomeService.Name</td>
+                <td>@order.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                <td class="text-center">
+                   <form method="get" role="form" asp-page="OrderDetails">
+                       <input type="hidden" name="OrderId" value="@order.Id">
+                       <input type="submit" value="نمایش" class="btn btn-success curve">
+                   </form>
+                </td>
+            </tr>       
+            }
+
+            آخرین سفارشات
+        </tbody>
+    </table>
+</div>
+
+<div class="table-responsive  col-lg-6">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th><i class="icon-energy"></i></th>
+                <th>هوم سرویس</th>
+                <th>کارشناس</th>
+                <th>قیمت پیشنهادی</th>
+                <th>تاریخ پیشنهاد</th>
+                <th>سفارش</th>
+            </tr>
+        </thead>
+        <tbody>
+         @foreach (var suggestion in @Model.suggestions)
+         {
+              <tr>
+                <td>@suggestion.Id</td>
+                <td>@suggestion.Order.HomeService.Name</td>
+                <td>@suggestion.Expert.FirstName @suggestion.Expert.LastName</td>
+                <td>@suggestion.SuggestedPrice</td>
+                <td>@suggestion.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                <td class="text-center">
+                   <form method="get" role="form" asp-page="OrderDetails">
+                       <input type="hidden" name="OrderId" value="@suggestion.OrderId">
+                       <input type="submit" value="نمایش" class="btn btn-success curve">
+                   </form>
+                </td>
+            </tr>    
+         }
+                    
+            آخرین پیشنهادها
+        </tbody>
+    </table>
+</div>
+</div>
+}
+

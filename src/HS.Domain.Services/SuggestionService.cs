@@ -54,9 +54,9 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<SuggestionDto>> Get()
+        public async Task<List<SuggestionDto>> Get()
         {
-            throw new NotImplementedException();
+            return await _suggestionRepository.GetAll();
         }
 
         public async Task<Guid> GetAcceptSuggestionExpertId(int orderId)
