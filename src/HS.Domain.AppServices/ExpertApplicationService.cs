@@ -22,6 +22,11 @@ namespace HS.Domain.ApplicationServices
             _homeServiceService = homeServiceService;
         }
 
+        public async Task<int> Count()
+        {
+            return await _expertService.Count();
+        }
+
         public Task Delete(Guid id)
         {
             throw new NotImplementedException();

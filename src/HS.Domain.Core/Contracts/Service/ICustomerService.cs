@@ -24,5 +24,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task<string> UploadImageProfile(IFormFile FormFile);
         Task<Guid> GetCustomerId(Guid CustomerIdentityId);
         Task<List<OrderDto>> GetAllBy(Guid customerId);
+        Task<int> Count();
     }
 }

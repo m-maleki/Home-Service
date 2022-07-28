@@ -17,6 +17,7 @@ namespace HS.Domain.Core.Contracts.Repository
         Task SoftDelete(int orderId);
         Task HardDelete(int orderId);
         Task SoftRecover(int orderId);
+        Task<int> Count();
 
     }
 }

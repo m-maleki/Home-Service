@@ -29,6 +29,11 @@ namespace HS.Domain.ApplicationServices
             _applicationUserService = applicationUserService;
         }
 
+        public async Task<int> Count()
+        {
+            return await _orderService.Count();
+        }
+
         public async Task Create(OrderDto entity, List<IFormFile> FormFile)
         {
             entity.CustomerId= await _customerService.GetCustomerId(_applicationUserService.GetUserId());

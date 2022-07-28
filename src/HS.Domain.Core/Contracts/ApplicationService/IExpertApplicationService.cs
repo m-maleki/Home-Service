@@ -12,5 +12,6 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<Guid> GetExpertId();
         Task Delete(Guid id);
         Task<List<OrderDto>> GetAllBy(Guid expertId);
+        Task<int> Count();
     }
 }

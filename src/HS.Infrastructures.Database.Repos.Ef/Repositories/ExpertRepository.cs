@@ -13,11 +13,18 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         private readonly HSDbContext _context;
         private readonly IMapper _mapper;
 
+         
         public ExpertRepository(HSDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
+
+        public async Task<int> Count()
+        {
+            return await _context.Experts.AsNoTracking().CountAsync();
+        }
+
         public async Task<List<ExpertDto>> GetAll()
           => _mapper.Map<List<ExpertDto>>(await _context.Experts
               .AsNoTracking()

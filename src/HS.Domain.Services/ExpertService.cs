@@ -128,5 +128,10 @@ namespace HS.Domain.Services
 
             return _mapper.Map<List<OrderDto>>(result);
         }
+
+        public async Task<int> Count()
+        {
+            return await _expertRepository.Count();
+        }
     }
 }

@@ -24,6 +24,11 @@ namespace HS.Domain.Services
             await _suggestionRepository.Accept(suggestionId);
         }
 
+        public async Task<int> Count()
+        {
+            return await _suggestionRepository.Count();
+        }
+
         public async Task Create(SuggestionDto entity)
         {
             await _suggestionRepository.Create(entity);

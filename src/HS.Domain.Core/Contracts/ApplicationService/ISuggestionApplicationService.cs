@@ -19,5 +19,6 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<int> GetCount(int orderId);
         Task<bool> EnsureExistSuggestion(int orderId);
         Task Accept(int suggestionId , int orderId);
+        Task<int> Count();
     }
 }

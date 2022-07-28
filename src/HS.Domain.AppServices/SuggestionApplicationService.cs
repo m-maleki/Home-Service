@@ -34,6 +34,11 @@ namespace HS.Domain.ApplicationServices
             await _orderService.SetOrderStatusEnum(orderId, OrderStatusEnum.WaitingSpecialistComeToYourPlace);
         }
 
+        public async Task<int> Count()
+        {
+            return await _suggestionService.Count();
+        }
+
         public async Task Create(SuggestionDto entity)
         {
             PersianCalendar pc = new PersianCalendar();

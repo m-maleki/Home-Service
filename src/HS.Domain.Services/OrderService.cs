@@ -21,6 +21,11 @@ namespace HS.Domain.Services
             _orderRepository = orderRepository;
         }
 
+        public async Task<int> Count()
+        {
+            return await _orderRepository.Count();
+        }
+
         public async Task<int> Create(OrderDto entity)
         {
           return await _orderRepository.Create(entity);

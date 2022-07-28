@@ -62,6 +62,11 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .ToListAsync();
             return _mapper.Map<List<OrderDto>>(records);
         }
+
+        public async Task<int> Count()
+        {
+            return await _context.Customers.AsNoTracking().CountAsync();
+        }
     }
 }
 

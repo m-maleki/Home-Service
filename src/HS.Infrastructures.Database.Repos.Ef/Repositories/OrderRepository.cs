@@ -122,6 +122,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             await _context.SaveChangesAsync();
         }
 
-
+        public async Task<int> Count()
+        {
+           return await _context.Orders.AsNoTracking().CountAsync();
+        }
     }
 }

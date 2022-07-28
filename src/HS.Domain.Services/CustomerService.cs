@@ -30,6 +30,11 @@ namespace HS.Domain.Services
             _userManager = userManager;
         }
 
+        public async Task<int> Count()
+        {
+            return await _customerRepository.Count();
+        }
+
         public Task Create(CustomerDto entity)
         {
             throw new NotImplementedException();

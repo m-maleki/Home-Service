@@ -13,5 +13,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task<bool> EnsureExistSuggestion(int orderId);
         Task Accept(int suggestionId);
         Task<Guid> GetAcceptSuggestionExpertId(int orderId);
+        Task<int> Count();
     }
 }

@@ -12,5 +12,6 @@ namespace HS.Domain.Core.Contracts.Repository
         Task Update(CustomerDto entity);
         Task<Guid> GetCustomerId(Guid CustomerIdentityId);
         Task<List<OrderDto>> GetAllBy(Guid customerId);
+        Task<int> Count();
     }
 }

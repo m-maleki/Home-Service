@@ -17,5 +17,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task<string> UploadImageProfile(IFormFile FormFile);
         Task<ExpertDto> AssignHomeService(ExpertDto entity);
         Task<List<OrderDto>> GetAllBy(Guid expertId);
+        Task<int> Count();
     }
 }

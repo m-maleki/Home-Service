@@ -75,5 +75,10 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Where(x=>x.OrderId== orderId && x.IsAccept==true)
                 .Select(x=>x.ExpertId)
                 .FirstOrDefaultAsync();
+
+        public async Task<int> Count()
+        {
+            return await _context.Suggestions.AsNoTracking().CountAsync();
+        }
     }
 }

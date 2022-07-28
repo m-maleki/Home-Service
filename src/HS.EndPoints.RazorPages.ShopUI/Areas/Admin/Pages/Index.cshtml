@@ -1,5 +1,62 @@
 ﻿@page
 @model HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages.IndexModel
+
 @{
-        ViewData["Title"] = "Home Service - Dashboard";
+    ViewData["Title"] = "داشبرد مدیریت";
 }
+<div class="col-md-12">
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <div class="stat-box bg-cyan shadow">
+            <a asp-page="./User/Index" >
+                <div class="stat">
+                    <div class="counter-down">@Model.dashboardViewModel.CountCustomer</div>
+                    <div class="h3">تعداد مشتری ها</div>
+                </div><!-- /.stat -->
+                <div class="visual">
+                    <i class="icon-user"></i>
+                </div><!-- /.visual -->
+            </a>
+        </div><!-- /.stat-box -->
+    </div><!-- /.col-lg-3 -->
+    <div class="col-lg-3 col-6">
+        <div class="stat-box bg-blue shadow">
+            <a asp-page="./Device/Index">
+                <div class="stat">
+                    <div class="counter-down" >@Model.dashboardViewModel.CountExpert</div>
+                    <div class="h3">تعداد کارشناس ها</div>
+                </div><!-- /.stat -->
+                <div class="visual">
+                    <i class="icon-wrench"></i>
+                </div><!-- /.visual -->
+            </a>
+        </div><!-- /.stat-box -->
+    </div><!-- /.col-lg-3 -->
+    <div class="col-lg-3 col-6">
+        <div class="stat-box bg-orange shadow">
+            <a asp-page="./Event/Index">
+                <div class="stat">
+                    <div class="counter-down" >@Model.dashboardViewModel.CountOrder</div>
+                    <div class="h3">تعداد سفارشات</div>
+                </div><!-- /.stat -->
+                <div class="visual">
+                    <i class="icon-docs"></i>
+                </div><!-- /.visual -->
+            </a>
+        </div><!-- /.stat-box -->
+    </div><!-- /.col-lg-3 -->
+    <div class="col-lg-3 col-6">
+        <div class="stat-box bg-red shadow">
+            <a asp-page="./Device/Index">
+                <div class="stat">
+                    <div class="counter-down">@Model.dashboardViewModel.CountSuggestion</div>
+                    <div class="h3">تعداد پیشنهاد ها</div>
+                </div><!-- /.stat -->
+                <div class="visual">
+                    <i class="icon-tag"></i>
+                </div><!-- /.visual -->
+            </a>
+        </div><!-- /.stat-box -->
+    </div><!-- /.col-lg-3 -->
+</div>
+</div>

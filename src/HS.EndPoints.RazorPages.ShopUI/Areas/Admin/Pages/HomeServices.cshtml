@@ -39,14 +39,14 @@
                         {
                             <form method="post"  asp-page-handler="Active">
                                 <input type="hidden" name="id" value="@homeService.Id">
-                                <button class="btn btn-success" type="submit">فعال کردن</button>
+                                <button class="btn btn-success round" type="submit">فعال کردن</button>
                             </form>
                         }
                         else
                         {
                              <form method="post"  asp-page-handler="DeActive">
                                  <input type="hidden" name="id" value="@homeService.Id">
-                                 <button class="btn btn-danger" type="submit">غیرفعال کردن</button>
+                                 <button class="btn btn-warning round" type="submit">غیرفعال کردن</button>
                              </form>
                         }
                        

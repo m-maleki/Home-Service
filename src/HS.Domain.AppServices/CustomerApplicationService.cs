@@ -29,6 +29,11 @@ namespace HS.Domain.ApplicationServices
             _cityService = cityService;
         }
 
+        public async Task<int> Count()
+        {
+            return await _customerService.Count();
+        }
+
         public Task Delete(Guid id)
         {
             throw new NotImplementedException();
