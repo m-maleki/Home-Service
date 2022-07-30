@@ -5,6 +5,7 @@ using HS.Domain.Core.Dtos.ApplicationUsers;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 using HS.EndPoints.RazorPages.UI.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -22,7 +23,8 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IApplicationUserApplicationService _applicationUserApplicationService;
         private readonly IApplicationUserApplicationService _userApplicationService;
-
+        public LoginViewModel loginModel;
+        public RegisterViewModel registerModel;
         private readonly IMapper _mapper;
         public UserViewModel CurrentUser = new UserViewModel();
         public ICollection<OrderViewModel>? Orders = new List<OrderViewModel>();
@@ -61,15 +63,19 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             await _userApplicationService.Update(_mapper.Map(model, new UserDto()));
             return LocalRedirect("/Profile");
         }
-        public async Task<IActionResult> OnPostLogin(LoginViewModel model)
+        public async Task<IActionResult> OnPostLogin(LoginViewModel loginModel)
         {
             if (ModelState.IsValid)
             {
-                var result = await _applicationUserApplicationService.Login(_mapper.Map(model, new ApplicationUserDto()));
+                var result = await _applicationUserApplicationService.Login(_mapper.Map(loginModel, new ApplicationUserDto()));
                 if(result.Succeeded)
-                return LocalRedirect("/Profile");
+                {
+                    return LocalRedirect("/Profile");
+                }
                 else
-                ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است *");
+                {
+                    ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است *");
+                }
             }
             return default;
         }
@@ -94,14 +100,14 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             return LocalRedirect("/Profile");
         }
 
-        public async Task<IActionResult> OnPostCreate(RegisterViewModel model)
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel registerModel)
         {
             if (ModelState.IsValid)
             {
-                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()));
+                var result = await _applicationUserApplicationService.Create(_mapper.Map(registerModel, new ApplicationUserDto()));
                 if (result.Succeeded)
                 {
-                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
+                    await _signInManager.PasswordSignInAsync(registerModel.Email, registerModel.Password, true, false);
                     return LocalRedirect("~/Profile");
                 }
                 else
@@ -115,7 +121,5 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             }
             return default;
         }
-
-
     }
 }

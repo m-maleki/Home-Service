@@ -36,7 +36,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
         options.Password.RequireUppercase = false;
 
         options.Password.RequireDigit=false;
-        options.Password.RequiredLength = 8;
+        options.Password.RequiredLength = 4;
         options.Password.RequireNonAlphanumeric = false;
 
     }

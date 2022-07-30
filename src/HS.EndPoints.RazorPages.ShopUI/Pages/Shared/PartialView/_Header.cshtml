@@ -1,6 +1,11 @@
 ﻿        <!--=====================================-->
         <!--=            Header Start           =-->
         <!--=====================================-->
+@using HS.Domain.Core.Entities
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
         <header class="header">
             <div id="rt-sticky-placeholder"></div>
             <div id="header-menu" class="header-menu menu-layout2">
@@ -63,8 +68,8 @@
 
 
                                     <li class="header-btn">
-                                        <a href="/Admin" class="item-btn"><i class="fas fa-service"></i>پنل کارشناسان</a>
-                                    </li>
+                                        <a href="/Admin" class="item-btn"><i class="fas fa-service"></i>@User.Claims.First(c => c.Type == "UserID").Value;</a>
+                                    </li>0
                                 </ul>
                             </div>
                         </div>

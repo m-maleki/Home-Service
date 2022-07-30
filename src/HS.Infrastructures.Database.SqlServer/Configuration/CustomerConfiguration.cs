@@ -18,7 +18,8 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
 
             builder.HasMany(x => x.Orders)
                 .WithOne(x => x.Customer)
-                .HasForeignKey(x => x.CustomerId);
+                .HasForeignKey(x => x.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.ApplicationUser).WithOne(x => x.Customer);
         }
