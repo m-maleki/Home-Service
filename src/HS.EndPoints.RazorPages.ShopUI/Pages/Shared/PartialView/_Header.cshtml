@@ -55,7 +55,11 @@
                                         <a  asp-page="/Profile" class="color-primary" data-toggle="tooltip" data-placement="top" title="ثبت نام/ورود">
                                             <i class="far fa-user"></i>
                                         </a>
-                                </li>
+                                        </li>
+                                     <li class="header-btn">
+                                        <a href="/Profile" class="item-btn"><i class="fas fa-service"></i>ورود به سایت</a>
+                                    </li>
+
                             }
                             else
                             {
@@ -63,13 +67,13 @@
                                         <a  asp-page="/Profile" class="color-primary" data-toggle="tooltip" data-placement="top" title="@User.Identity.Name">
                                             <i style="color:green" class="far fa-user"></i>
                                         </a>
+                                        </li>
+                                      <li class="header-btn">
+                                        <a href="/Profile" class="item-btn"><i class="fas fa-service"></i>@User.Identity.Name.Substring(0,@User.Identity.Name.IndexOf('@')) خوش آمدید</a>
                                     </li>
                             }
 
 
-                                    <li class="header-btn">
-                                        <a href="/Admin" class="item-btn"><i class="fas fa-service"></i>@User.Claims.First(c => c.Type == "UserID").Value;</a>
-                                    </li>0
                                 </ul>
                             </div>
                         </div>

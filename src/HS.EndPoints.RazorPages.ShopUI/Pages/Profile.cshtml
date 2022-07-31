@@ -14,6 +14,7 @@
             <div class="col-lg-3 sidebar-break-sm sidebar-widget-area mt-0">
                 <div class="widget-bottom-margin widget-account-menu widget-light-bg">
                     <h3 class="widget-border-title">منو</h3>
+                    <section id="section-A">
                     <ul class="nav nav-tabs flex-column" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#logout" role="tab" aria-selected="true">حساب کاربری</a>
@@ -45,6 +46,7 @@
 
                         }
                     </ul>
+                    </section>
                 </div>
             </div>
             <div class="col-lg-9">
@@ -171,7 +173,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <form enctype="multipart/form-data" id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Create" method="post">
+                                                    <form enctype="multipart/form-data" id="form" class="m-t-30 m-b-30" role="form" asp-page-handler="Update" method="post">
                                                         <input type="hidden" name="Id" value="@Model.CurrentUser.Id" />
                                                         <input type="hidden" name="ApplicationUserId" value="@Model.CurrentUser.ApplicationUserId" />
                                                         <div class="form-group relative mt-3 mb-4">
@@ -273,11 +275,6 @@
                                                                 </div>
 
                                                             }
-
-
-
-
-
                                                             <div class="form-group">
                                                                 <label>آدرس</label>
                                                                 <div class="input-group round">
@@ -738,5 +735,12 @@
             })
         })
     </script>
-
+    <script>
+        $(document).ready(function() {
+      $('#section-A a').click(function(e) {
+        e.preventDefault();
+        $('a[href="' + $(this).attr('href') + '"]').tab('show');
+      })
+    });
+    </script>
 }

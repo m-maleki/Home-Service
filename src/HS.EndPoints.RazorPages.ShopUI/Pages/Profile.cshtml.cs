@@ -58,8 +58,9 @@ namespace HS.EndPoints.RazorPages.UI.Pages
                 Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
             }
         }
-        public async Task<IActionResult> OnPost(UserViewModel model)
+        public async Task<IActionResult> OnPostUpdate(UserViewModel model)
         {
+            if (ModelState.IsValid)
             await _userApplicationService.Update(_mapper.Map(model, new UserDto()));
             return LocalRedirect("/Profile");
         }

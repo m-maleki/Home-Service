@@ -8,7 +8,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
     public class UserViewModel
     {
         public Guid Id { get; set; }
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? UserName { get; set; }
@@ -29,9 +29,9 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
         public IFormFile? ProfileImgFile { get; set; }
         public List<HomeServiceViewModel>? HomeServices { get; set; } = new List<HomeServiceViewModel>();
         public List<int>? HomeServicesIds { get; set; }
-        public List<City> Cities { get; set; }
-        public List<HomeServiceViewModel> SelectHomeServices { get; set; }
-        public ICollection<HomeService> HomeServicesUser { get; set; }
+        public List<City>? Cities { get; set; }
+        public List<HomeServiceViewModel>? SelectHomeServices { get; set; }
+        public ICollection<HomeService>? HomeServicesUser { get; set; }
 
 
     }
