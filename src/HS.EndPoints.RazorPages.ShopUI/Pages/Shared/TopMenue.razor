@@ -1,0 +1,62 @@
+﻿@using HS.Domain.ApplicationServices
+@using HS.Domain.Core.Contracts.ApplicationService
+@using HS.Domain.Core.Contracts.Repository
+@using HS.Domain.Core.Dtos
+@inject  IHomeServiceApplicationService _homeServiceApplicationService ;
+@inject  IHomeServiceSubCategoryApplicationService _homeServiceSubApplicationService ;
+@inject  IHomeServiceCategoryRepository _homeServiceCategoryRepository;
+
+<div class="col-lg-7 d-flex justify-content-end">
+    <nav id="dropdown" class="template-main-menu">
+        <ul>
+            <li>
+                <a href="/" class="has-dropdown">خانه</a>
+            </li>
+            <li>
+                <a href="#" class="has-dropdown">دسته بندی ها</a>
+                    <li>
+                    <ul class="sub-menu">
+                        @foreach (var category in homeServiceCategory)
+                        {
+                                <li> 
+                                    <a href="/HomeServiceCategory?id=@category.Id" >@category.Name</a>
+                                </li>  
+                        }
+                    </ul>
+                    </li>
+            </li>
+
+            <li>
+                <a href="/" class="has-dropdown">صفحات</a>
+            </li>
+            <li>
+                <a href="/" class="has-dropdown">فروشگاه ها</a>
+
+            </li>
+            <li>
+                <a href="/" class="has-dropdown">بلاگ</a>
+
+            </li>
+            <li>
+                <a href="/">تماس</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@code {
+    private List<HomeServiceSubCategoryDto> homeServiceSubCategory = new List<HomeServiceSubCategoryDto>();
+    private List<HomeServiceCategoryDto> homeServiceCategory = new List<HomeServiceCategoryDto>();
+
+    public async Task GetAll()
+    {
+        homeServiceCategory = await this._homeServiceCategoryRepository.GetAll();
+        homeServiceSubCategory = await this._homeServiceSubApplicationService.GetAll();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+      await GetAll();
+    }
+
+}

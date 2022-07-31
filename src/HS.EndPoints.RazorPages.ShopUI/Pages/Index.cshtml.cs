@@ -1,3 +1,4 @@
+using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Dtos;
 using HS.Infrastructures.Database.Repos.Ef.Repositories;
@@ -11,17 +12,19 @@ namespace HS.EndPoints.RazorPages.ShopUI.Pages
     public class IndexModel : PageModel
     {
 
-        private readonly IHomeServiceCategoryRepository _homeServiceCategory;
+        private readonly IHomeServiceCategoryApplicationService _homeServiceCategoryApplicationService;
+
+        public IndexModel(IHomeServiceCategoryApplicationService homeServiceCategoryApplicationService)
+        {
+            _homeServiceCategoryApplicationService = homeServiceCategoryApplicationService;
+        }
 
         public List<HomeServiceCategoryDto> homeServiceCategories;
-        public IndexModel(IHomeServiceCategoryRepository homeServiceCategory)
-        {
-            _homeServiceCategory = homeServiceCategory;
-        }
+
 
         public async Task OnGet()
         {
-            homeServiceCategories = await _homeServiceCategory.GetAll();
+            homeServiceCategories = await _homeServiceCategoryApplicationService.GetAll();
         }
     }
 }

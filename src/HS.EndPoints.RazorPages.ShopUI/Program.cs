@@ -47,6 +47,8 @@ builder.Services.AddRazorPages()
      .AddRazorRuntimeCompilation();
 builder.Services.AddMvc()
     .AddSessionStateTempDataProvider();
+builder.Services.AddServerSideBlazor();
+
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<SeedIdentityData, SeedIdentityData>();
@@ -92,7 +94,10 @@ builder.Services.AddScoped<IApplicationUserApplicationService, ApplicationUserAp
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
+builder.Services.AddScoped<IHomeServiceCategoryApplicationService, HomeServiceCategoryApplicationService>();
 builder.Services.AddScoped<IHomeServiceCategoryRepository, HomeServiceCategoryRepository>();
+builder.Services.AddScoped<IHomeServiceCategoryService, HomeServiceCategoryService>();
+
 
 
 
@@ -115,6 +120,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapBlazorHub();
 
 
- app.Run();
+app.Run();

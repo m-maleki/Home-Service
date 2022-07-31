@@ -1,0 +1,43 @@
+﻿@page
+@model HS.EndPoints.RazorPages.UI.Pages.HomeServiceCategoryModel
+@{
+    Layout = "_Layout";
+}
+@if (@Model.homeServiceSubCategory.Count == 0)
+{
+    <section class="section-padding-top-heading bg-accent">
+        <div class="container">
+            <div class="row gutters-20">
+                <div class="col-xl-12 col-lg-8">
+                   <center>
+                     <h2 class="heading-title">خدماتی یافت نشد</h2>
+                   </center>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="section-padding-top-heading">
+            <div class="container">
+                <div class="heading-layout1">
+                    <h2 class="heading-title">خدمات دسته بندی : @Model.homeServiceSubCategory.First().HomeServiceCategory.Name</h2>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model.homeServiceSubCategory)
+                    {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="category-box-layout1">
+                            <a asp-page="/HomeServices" asp-route-id="@item.Id">
+                                <div class="item-content">
+                                    <h3 class="item-title">@item.Name</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </section>
+}

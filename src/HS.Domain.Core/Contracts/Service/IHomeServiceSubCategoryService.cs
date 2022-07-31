@@ -14,5 +14,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task<List<HomeServiceSubCategoryDto>> GetAll();
         Task Create(HomeServiceSubCategoryDto entity);
         Task Update(HomeServiceSubCategoryDto entity);
+        Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId);
     }
 }

@@ -2,6 +2,7 @@
         <!--=            Header Start           =-->
         <!--=====================================-->
 @using HS.Domain.Core.Entities
+@using HS.EndPoints.RazorPages.UI.Pages.Shared
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -18,34 +19,12 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-lg-7 d-flex justify-content-end">
-                            <nav id="dropdown" class="template-main-menu">
-                                <ul>
-                                    <li>
-                                        <a href="/" class="has-dropdown">خانه</a>
-   
-                                    </li>
-                                    <li>
-                                        <a href="about.html" class="has-dropdown">دسته بندی ها</a>
+                     
 
-                                    </li>
-                                    <li>
-                                        <a href="/" class="has-dropdown">صفحات</a>
-                                    </li>
-                                    <li>
-                                        <a href="/" class="has-dropdown">فروشگاه ها</a>
 
-                                    </li>
-                                    <li>
-                                        <a href="/" class="has-dropdown">بلاگ</a>
+                        <component type="typeof(TopMenue)" render-mode="ServerPrerendered" />
 
-                                    </li>
-                                    <li>
-                                        <a href="/">تماس</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+
                         <div class="col-lg-3 d-flex justify-content-end">
                             <div class="header-action-layout1">
                                 <ul>

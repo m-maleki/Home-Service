@@ -13,5 +13,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task<string> UploadImageProfile(IFormFile FormFile);
         Task Active(int id);
         Task DeActive(int id);
+        
     }
 }

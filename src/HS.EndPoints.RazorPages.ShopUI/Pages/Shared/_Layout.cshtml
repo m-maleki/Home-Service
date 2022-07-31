@@ -50,15 +50,10 @@
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper">
-
-            @Html.Partial("./PartialView/_Header")
+             @Html.Partial("./PartialView/_Header")
             @Html.Partial("./PartialView/_Banner")
             @RenderBody()
             @Html.Partial("./PartialView/_Footer")
-
-
-
- 
 
     </div>
     <!-- Jquery Js -->
@@ -104,7 +99,7 @@
 
 @section Scripts{
 }
-
+ <script src="_framework/blazor.server.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 @RenderSection("masterjs", required: false)
 

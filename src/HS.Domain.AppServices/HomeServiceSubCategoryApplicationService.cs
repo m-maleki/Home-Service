@@ -28,6 +28,11 @@ namespace HS.Domain.ApplicationServices
             return await _homeServiceSubCategoryService.GetAll();
         }
 
+        public async Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId)
+        {
+           return await (_homeServiceSubCategoryService.GetAllBy(homeServiceCategoryId));
+        }
+
         public Task<HomeServiceSubCategoryDto> GetBy(int id)
         {
             throw new NotImplementedException();
