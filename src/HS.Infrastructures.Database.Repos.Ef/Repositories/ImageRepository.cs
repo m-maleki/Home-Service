@@ -17,24 +17,24 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _mapper = mapper;
             _context = context;
         }
-        public async Task<List<ImageDto>> GetBy(int orderId)
+        public async Task<List<ImageDto>> GetBy(int orderId, CancellationToken cancellationToken)
             => _mapper.Map<List<ImageDto>>(await _context.Images
                 .AsNoTracking()
                 .Where(x => x.OrderId == orderId)
-                .ToListAsync());
-        public async Task Create(ImageDto entity)
+                .ToListAsync(cancellationToken));
+        public async Task Create(ImageDto entity, CancellationToken cancellationToken)
         {
             var record = _mapper.Map<Image>(entity);
             await _context.Images.AddAsync(record);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
-        public async Task Update(ImageDto entity)
+        public async Task Update(ImageDto entity, CancellationToken cancellationToken)
         {
             var record = await _mapper.ProjectTo<ImageDto>(_context.Set<ImageDto>())
                  .Where(x => x.Id == entity.Id)
                  .FirstOrDefaultAsync();
             _mapper.Map(entity, record);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

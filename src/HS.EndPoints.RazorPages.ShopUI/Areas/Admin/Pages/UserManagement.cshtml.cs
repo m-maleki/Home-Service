@@ -34,9 +34,9 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
         }
 
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken )
         {
-            users= _mapper.Map(await _applicationUserApplicationService.GetAll(), users);
+            users= _mapper.Map(await _applicationUserApplicationService.GetAll(cancellationToken), users);
         }
 
         public async Task<IActionResult> OnPostDelete(Guid id)
@@ -46,11 +46,11 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             return LocalRedirect("/Admin/UserManagement");
         }
 
-        public async Task<IActionResult> OnPostCreate(RegisterViewModel model)
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel model,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()));
+                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()), cancellationToken);
                 if (result.Succeeded)
                 {
                     return LocalRedirect("/Admin/UserManagement");

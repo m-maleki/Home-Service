@@ -14,7 +14,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
         }
 
-        public async Task<List<City>> GetAll()
-        => await _context.Cities.AsNoTracking().ToListAsync();
+        public async Task<List<City>> GetAll(CancellationToken cancellationToken)
+        => await _context.Cities.AsNoTracking().ToListAsync(cancellationToken);
     }
 }

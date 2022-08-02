@@ -5,14 +5,14 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface IHomeServiceService
     {
-        Task<List<HomeServiceDto>> Get();
-        Task<HomeServiceDto> Get(int id);
-        Task<List<HomeServiceDto>> Get(Guid id);
-        Task<List<HomeServiceDto>> GetAll(int subCategoryId);
-        Task Create(HomeServiceDto homeServiceDto);
-        Task<string> UploadImageProfile(IFormFile FormFile);
-        Task Active(int id);
-        Task DeActive(int id);
+        Task<List<HomeServiceDto>> Get(CancellationToken cancellationToken);
+        Task<HomeServiceDto> Get(int id, CancellationToken cancellationToken);
+        Task<List<HomeServiceDto>> Get(Guid id, CancellationToken cancellationToken);
+        Task<List<HomeServiceDto>> GetAll(int subCategoryId, CancellationToken cancellationToken);
+        Task Create(HomeServiceDto homeServiceDto,CancellationToken cancellationToken);
+        Task<string> UploadImageProfile(IFormFile FormFile,CancellationToken cancellationToken);
+        Task Active(int id, CancellationToken cancellationToken);
+        Task DeActive(int id, CancellationToken cancellationToken);
         
     }
 }

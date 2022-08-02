@@ -45,13 +45,13 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<IActionResult> OnPostLogin(LoginViewModel model )
+        public async Task<IActionResult> OnPostLogin(LoginViewModel model,CancellationToken cancellationToken )
         {
            
 
             if (ModelState.IsValid)
             {
-                var result =  await _applicationUserApplicationService.Login(_mapper.Map(model, new ApplicationUserDto()));
+                var result =  await _applicationUserApplicationService.Login(_mapper.Map(model, new ApplicationUserDto()),cancellationToken);
                 if (result.Succeeded)
                 {
                     return LocalRedirect("~/Admin/");

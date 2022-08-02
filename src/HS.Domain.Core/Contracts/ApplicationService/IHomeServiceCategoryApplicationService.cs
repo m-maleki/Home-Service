@@ -9,6 +9,6 @@ namespace HS.Domain.Core.Contracts.ApplicationService
 {
     public interface IHomeServiceCategoryApplicationService
     {
-        Task<List<HomeServiceCategoryDto>> GetAll();
+        Task<List<HomeServiceCategoryDto>> GetAll(CancellationToken cancellationToken);
     }
 }

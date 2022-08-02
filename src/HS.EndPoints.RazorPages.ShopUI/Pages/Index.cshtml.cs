@@ -22,9 +22,9 @@ namespace HS.EndPoints.RazorPages.ShopUI.Pages
         public List<HomeServiceCategoryDto> homeServiceCategories;
 
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            homeServiceCategories = await _homeServiceCategoryApplicationService.GetAll();
+            homeServiceCategories = await _homeServiceCategoryApplicationService.GetAll(cancellationToken);
         }
     }
 }

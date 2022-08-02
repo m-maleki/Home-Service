@@ -23,11 +23,11 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
             _applicationUserApplicationService = applicationUserApplicationService;
         }
 
-        public async Task<IActionResult> OnPostCreate(RegisterViewModel model)
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel model,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()));
+                var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()), cancellationToken);
                 if (result.Succeeded)
                 {
                     return LocalRedirect("~/Account/Login");

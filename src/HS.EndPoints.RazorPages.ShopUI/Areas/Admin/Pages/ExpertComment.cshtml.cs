@@ -21,9 +21,9 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             _mapper = mapper;
         }
 
-        public async Task OnGet(Guid ExpertId)
+        public async Task OnGet(Guid ExpertId,CancellationToken cancellationToken)
         {
-            var result = await _commentApplicationService.GetBy(ExpertId);
+            var result = await _commentApplicationService.GetBy(ExpertId, cancellationToken);
             comments =  _mapper.Map(result, comments);
             
         }

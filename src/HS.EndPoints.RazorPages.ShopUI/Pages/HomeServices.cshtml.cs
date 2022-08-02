@@ -24,14 +24,14 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             _mapper = mapper;
         }
 
-        public async Task OnGet(int id)
+        public async Task OnGet(int id,CancellationToken cancellationToken)
         {
-            homeServices = _mapper.Map(await _homeServiceApplicationService.GetAll(id), new List<HomeServiceViewModel>());
+            homeServices = _mapper.Map(await _homeServiceApplicationService.GetAll(id, cancellationToken), new List<HomeServiceViewModel>());
         }
 
-        public async Task<IActionResult> OnPostCreate(OrderViewModel model)
+        public async Task<IActionResult> OnPostCreate(OrderViewModel model,CancellationToken cancellationToken)
         {
-            await _orderApplicationService.Create(_mapper.Map(model, new OrderDto()), model.FormFile);
+            await _orderApplicationService.Create(_mapper.Map(model, new OrderDto()), model.FormFile, cancellationToken);
             return LocalRedirect("/");
         }
     }

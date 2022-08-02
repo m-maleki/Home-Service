@@ -1,5 +1,6 @@
 ﻿@page
 @using Framework.Utilities
+@using System.Globalization
 @model HS.EndPoints.RazorPages.UI.Pages.HomeServicesModel
 @{
     Layout = "_Layout";
@@ -46,7 +47,7 @@ else
                                     @homeService.Description
                                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.لورم ایپسوم متن  …
                                 </p>
-                                <div class="item-price">قیمت پایه سرویس : @homeService.BasePrice</div>
+                                <div class="item-price">قیمت پایه سرویس : @homeService.BasePrice.ToString("C", CultureInfo.CurrentCulture= new CultureInfo("fa-Ir",false))</div>
                                 <br>
                                 <table class="table">
                                     <tbody>

@@ -20,38 +20,38 @@ namespace HS.Domain.Services
             _homeServiceRepository = homeServiceRepository;
         }
 
-        public async Task Active(int id)
+        public async Task Active(int id, CancellationToken cancellationToken)
         {
-           await _homeServiceRepository.Active(id);
+           await _homeServiceRepository.Active(id, cancellationToken);
         }
 
-        public async Task Create(HomeServiceDto homeServiceDto)
+        public async Task Create(HomeServiceDto homeServiceDto, CancellationToken cancellationToken)
         {
-          await _homeServiceRepository.Create(homeServiceDto);
+          await _homeServiceRepository.Create(homeServiceDto, cancellationToken);
         }
 
-        public async Task DeActive(int id)
+        public async Task DeActive(int id, CancellationToken cancellationToken)
         {
-            await _homeServiceRepository.DeActive(id);
+            await _homeServiceRepository.DeActive(id, cancellationToken);
         }
 
-        public async Task<HomeServiceDto> Get(int id)
-            => await _homeServiceRepository.GetBy(id);
-        public async Task<List<HomeServiceDto>> Get()
-         => await  _homeServiceRepository.GetAll();
+        public async Task<HomeServiceDto> Get(int id, CancellationToken cancellationToken)
+            => await _homeServiceRepository.GetBy(id, cancellationToken);
+        public async Task<List<HomeServiceDto>> Get(CancellationToken cancellationToken)
+         => await  _homeServiceRepository.GetAll(cancellationToken);
 
-        public async Task<List<HomeServiceDto>> Get(Guid id)
+        public async Task<List<HomeServiceDto>> Get(Guid id, CancellationToken cancellationToken)
         {
 
-            return await _homeServiceRepository.GetAll(id);
+            return await _homeServiceRepository.GetAll(id, cancellationToken);
         }
 
-        public async Task<List<HomeServiceDto>> GetAll(int subCategoryId)
+        public async Task<List<HomeServiceDto>> GetAll(int subCategoryId, CancellationToken cancellationToken)
         {
-           return await _homeServiceRepository.GetAll(subCategoryId);
+           return await _homeServiceRepository.GetAll(subCategoryId, cancellationToken);
         }
 
-        public async Task<string> UploadImageProfile(IFormFile FormFile)
+        public async Task<string> UploadImageProfile(IFormFile FormFile, CancellationToken cancellationToken)
         {
             string filePath;
             string fileName;

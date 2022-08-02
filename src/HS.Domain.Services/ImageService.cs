@@ -18,32 +18,32 @@ namespace HS.Domain.Services
             _imageRepository = imageRepository;
         }
 
-        public Task Create(ImageDto entity)
+        public Task Create(ImageDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task EnsureDoesNotExist(int Id)
+        public Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task EnsureExists(int Id)
+        public Task EnsureExists(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ImageDto> Get(int Id)
+        public Task<ImageDto> Get(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ImageDto>> GetBy(int orderId)
+        public Task<List<ImageDto>> GetBy(int orderId, CancellationToken cancellationToken)
         {
-            return _imageRepository.GetBy(orderId);
+            return _imageRepository.GetBy(orderId, cancellationToken);
         }
 
-        public Task Update(ImageDto entity)
+        public Task Update(ImageDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

@@ -18,16 +18,16 @@ namespace HS.Domain.ApplicationServices
             _orderFileService = orderFileService;
         }
 
-        public async Task DeleteFile(int fileId)
+        public async Task DeleteFile(int fileId, CancellationToken cancellationToken)
         {
-            var fileName = await _orderFileService.Get(fileId);
+            var fileName = await _orderFileService.Get(fileId, cancellationToken);
             await _orderFileService.DeleteFromHardDisk(fileName.Name);
-            await _orderFileService.DeleteFile(fileId);
+            await _orderFileService.DeleteFile(fileId, cancellationToken);
         }
 
-        public async Task<List<OrderFileDto>> GetAll(int orderId)
+        public async Task<List<OrderFileDto>> GetAll(int orderId, CancellationToken cancellationToken)
         {
-            return await _orderFileService.GetAll(orderId);
+            return await _orderFileService.GetAll(orderId, cancellationToken);
         }
     }
 }

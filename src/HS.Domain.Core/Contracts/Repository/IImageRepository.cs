@@ -5,8 +5,8 @@ namespace HS.Domain.Core.Contracts.Repository
 {
     public interface IImageRepository 
     {
-        Task<List<ImageDto>> GetBy(int orderId);
-        Task Create(ImageDto entity);
-        Task Update(ImageDto entity);
+        Task<List<ImageDto>> GetBy(int orderId, CancellationToken cancellationToken);
+        Task Create(ImageDto entity, CancellationToken cancellationToken);
+        Task Update(ImageDto entity, CancellationToken cancellationToken);
     }
 }

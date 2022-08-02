@@ -21,16 +21,16 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             _mapper = mapper;
         }
 
-        public async Task OnGet(int orderId)
+        public async Task OnGet(int orderId,CancellationToken cancellationToken)
         {
             if(ModelState.IsValid)
-            _mapper.Map(await _suggestionApplicationService.GetAll(orderId),suggestions);
+            _mapper.Map(await _suggestionApplicationService.GetAll(orderId, cancellationToken),suggestions);
         }
 
-        public async Task<IActionResult> OnPostAccept(int SuggId , int OrderId)
+        public async Task<IActionResult> OnPostAccept(int SuggId , int OrderId, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
-                await _suggestionApplicationService.Accept(SuggId, OrderId);
+                await _suggestionApplicationService.Accept(SuggId, OrderId, cancellationToken);
             return LocalRedirect("/Admin/Order/");
         }
 

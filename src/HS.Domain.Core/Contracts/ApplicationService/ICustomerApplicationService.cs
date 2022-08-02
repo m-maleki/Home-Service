@@ -9,14 +9,14 @@ namespace HS.Domain.Core.Contracts.ApplicationService
 {
     public interface ICustomerApplicationService
     {
-        Task<List<CustomerDto>> GetAll();
-        Task Set(CustomerDto dto);
-        Task<CustomerDto> Get();
-        Task<CustomerDto> Get(string email);
-        Task Update(CustomerDto dto);
-        Task Delete(Guid id);
-        Task<Guid> GetCustomerId(Guid CustomerIdentityId);
-        Task<List<OrderDto>> GetAllBy(Guid customerId);
-        Task<int> Count();
+        Task<List<CustomerDto>> GetAll(CancellationToken cancellationToken);
+        Task Set(CustomerDto dto, CancellationToken cancellationToken);
+        Task<CustomerDto> Get(CancellationToken cancellationToken);
+        Task<CustomerDto> Get(string email, CancellationToken cancellationToken);
+        Task Update(CustomerDto dto, CancellationToken cancellationToken);
+        Task Delete(Guid id, CancellationToken cancellationToken);
+        Task<Guid> GetCustomerId(Guid CustomerIdentityId, CancellationToken cancellationToken);
+        Task<List<OrderDto>> GetAllBy(Guid customerId, CancellationToken cancellationToken);
+        Task<int> Count(CancellationToken cancellationToken);
     }
 }

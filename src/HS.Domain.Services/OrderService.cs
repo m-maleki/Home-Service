@@ -21,70 +21,70 @@ namespace HS.Domain.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task<int> Count()
+        public async Task<int> Count(CancellationToken cancellationToken)
         {
-            return await _orderRepository.Count();
+            return await _orderRepository.Count(cancellationToken);
         }
 
-        public async Task<int> Create(OrderDto entity)
+        public async Task<int> Create(OrderDto entity, CancellationToken cancellationToken)
         {
-          return await _orderRepository.Create(entity);
+          return await _orderRepository.Create(entity, cancellationToken);
         }
 
-        public Task EnsureDoesNotExist(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task EnsureExists(int Id)
+        public Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<OrderDto> Get(int Id)
-          => await _orderRepository.GetBy(Id);
-
-        public async Task<List<OrderDto>> Get()
+        public Task EnsureExists(int Id, CancellationToken cancellationToken)
         {
-            return await _orderRepository.GetAll();
+            throw new NotImplementedException();
         }
 
-        public async Task<OrderDto> GetBy(int orderId)
+        public async Task<OrderDto> Get(int Id, CancellationToken cancellationToken)
+          => await _orderRepository.GetBy(Id, cancellationToken);
+
+        public async Task<List<OrderDto>> Get(CancellationToken cancellationToken)
         {
-            return await _orderRepository.GetBy(orderId);
+            return await _orderRepository.GetAll(cancellationToken);
         }
 
-        public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId)
+        public async Task<OrderDto> GetBy(int orderId, CancellationToken cancellationToken)
         {
-            return await _orderRepository.GetOrderStatusEnum(orderId);
+            return await _orderRepository.GetBy(orderId, cancellationToken);
         }
 
-        public async Task HardDelete(int orderId)
+        public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId, CancellationToken cancellationToken)
         {
-            await _orderRepository.HardDelete(orderId);
+            return await _orderRepository.GetOrderStatusEnum(orderId, cancellationToken);
         }
 
-        public async Task SetOrderFiles(List<OrderFileDto> dto, int orderId)
+        public async Task HardDelete(int orderId, CancellationToken cancellationToken)
         {
-           await _orderRepository.addOrderFiles(dto, orderId);
+            await _orderRepository.HardDelete(orderId, cancellationToken);
         }
 
-        public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum)
+        public async Task SetOrderFiles(List<OrderFileDto> dto, int orderId, CancellationToken cancellationToken)
         {
-            await _orderRepository.SetOrderStatusEnum(orderId, orderStatusEnum);
+           await _orderRepository.addOrderFiles(dto, orderId, cancellationToken);
         }
 
-        public async Task SoftDelete(int orderId)
+        public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum,CancellationToken cancellationToken)
         {
-            await _orderRepository.SoftDelete(orderId);
+            await _orderRepository.SetOrderStatusEnum(orderId, orderStatusEnum, cancellationToken);
         }
 
-        public async Task SoftRecover(int orderId)
+        public async Task SoftDelete(int orderId, CancellationToken cancellationToken)
         {
-            await _orderRepository.SoftRecover(orderId);
+            await _orderRepository.SoftDelete(orderId, cancellationToken);
         }
 
-        public Task Update(OrderDto entity)
+        public async Task SoftRecover(int orderId, CancellationToken cancellationToken)
+        {
+            await _orderRepository.SoftRecover(orderId, cancellationToken);
+        }
+
+        public Task Update(OrderDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

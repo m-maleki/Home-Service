@@ -5,6 +5,6 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface ICityService
     {
-        Task<List<City>> Get();
+        Task<List<City>> Get(CancellationToken cancellationToken);
     }
 }

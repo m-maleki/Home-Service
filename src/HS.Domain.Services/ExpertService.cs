@@ -34,43 +34,43 @@ namespace HS.Domain.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task Create(ExpertDto entity)
+        public async Task Create(ExpertDto entity, CancellationToken cancellationToken)
         {
-            await _expertRepository.Create(entity);
+            await _expertRepository.Create(entity, cancellationToken);
         }
 
-        public async Task EnsureDoesNotExist(Guid id)
+        public async Task EnsureDoesNotExist(Guid id, CancellationToken cancellationToken)
         {
-            if (await _expertRepository.GetBy(id) != null)
+            if (await _expertRepository.GetBy(id, cancellationToken) != null)
                 throw new Exception($"Expert Id : {id} Exists!");
         }
 
-        public async Task EnsureExists(Guid id)
+        public async Task EnsureExists(Guid id, CancellationToken cancellationToken)
         {
-            if (await _expertRepository.GetBy(id) == null)
+            if (await _expertRepository.GetBy(id, cancellationToken) == null)
                 throw new Exception($"Expert Id : {id} Doesn't Exists!");
         }
 
-        public async Task<ExpertDto> Get(Guid id)
-            => await _expertRepository.GetBy(id);
+        public async Task<ExpertDto> Get(Guid id, CancellationToken cancellationToken)
+            => await _expertRepository.GetBy(id, cancellationToken);
 
-        public async Task<List<ExpertDto>> Get()
-            => await _expertRepository.GetAll();
+        public async Task<List<ExpertDto>> Get(CancellationToken cancellationToken)
+            => await _expertRepository.GetAll(cancellationToken);
 
-        public async Task Update(ExpertDto entity)
+        public async Task Update(ExpertDto entity, CancellationToken cancellationToken)
         {
-            await _expertRepository.Update(entity);
+            await _expertRepository.Update(entity, cancellationToken);
         }
 
-        public async Task<ExpertDto> Get(string email)
+        public async Task<ExpertDto> Get(string email, CancellationToken cancellationToken)
         {
             var user = await _userManager.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Email == email);
-            return await _expertRepository.GetBy(user!.Id);
+            return await _expertRepository.GetBy(user!.Id, cancellationToken);
         }
 
-        public async Task<string> UploadImageProfile(IFormFile FormFile)
+        public async Task<string> UploadImageProfile(IFormFile FormFile, CancellationToken cancellationToken)
         {
             string filePath;
             string fileName;
@@ -97,11 +97,11 @@ namespace HS.Domain.Services
             return fileName;
         }
 
-        public async Task<ExpertDto> AssignHomeService(ExpertDto entity)
+        public async Task<ExpertDto> AssignHomeService(ExpertDto entity, CancellationToken cancellationToken)
         {
             foreach (var homeServiceId in entity.HomeServicesIds)
             {
-                var record = await _homeServiceRepository.GetBy(homeServiceId);
+                var record = await _homeServiceRepository.GetBy(homeServiceId, cancellationToken);
                 var homeService = new HomeService();
 
                 _mapper.Map(record, homeService);
@@ -110,14 +110,14 @@ namespace HS.Domain.Services
             return entity;
         }
 
-        public Task<Guid> GetExpertId(Guid expertIdentityId)
-          =>_expertRepository.GetExpertId(expertIdentityId);
+        public Task<Guid> GetExpertId(Guid expertIdentityId, CancellationToken cancellationToken)
+          =>_expertRepository.GetExpertId(expertIdentityId, cancellationToken);
 
-        public async Task<List<OrderDto>> GetAllBy(Guid expertId)
+        public async Task<List<OrderDto>> GetAllBy(Guid expertId, CancellationToken cancellationToken)
         {
             List<Order> result = new();
-            var expertHomeService = await _expertRepository.GetBy(expertId);
-            var orders = _mapper.Map<List<Order>>(await _orderRepository.GetAll());
+            var expertHomeService = await _expertRepository.GetBy(expertId, cancellationToken);
+            var orders = _mapper.Map<List<Order>>(await _orderRepository.GetAll(cancellationToken));
            
             foreach (var expertService in expertHomeService.HomeServices)
                 foreach (var order in orders)
@@ -129,9 +129,9 @@ namespace HS.Domain.Services
             return _mapper.Map<List<OrderDto>>(result);
         }
 
-        public async Task<int> Count()
+        public async Task<int> Count(CancellationToken cancellationToken)
         {
-            return await _expertRepository.Count();
+            return await _expertRepository.Count(cancellationToken);
         }
     }
 }

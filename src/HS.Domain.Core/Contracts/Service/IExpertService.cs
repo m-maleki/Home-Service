@@ -6,17 +6,17 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface IExpertService
     {
-        Task<ExpertDto> Get(Guid id);
-        Task<ExpertDto> Get(string email);
-        Task<List<ExpertDto>> Get();
-        Task Create(ExpertDto entity);
-        Task Update(ExpertDto entity);
-        Task EnsureExists(Guid id);
-        Task EnsureDoesNotExist(Guid id);
-        Task<Guid> GetExpertId(Guid expertIdentityId);
-        Task<string> UploadImageProfile(IFormFile FormFile);
-        Task<ExpertDto> AssignHomeService(ExpertDto entity);
-        Task<List<OrderDto>> GetAllBy(Guid expertId);
-        Task<int> Count();
+        Task<ExpertDto> Get(Guid id, CancellationToken cancellationToken);
+        Task<ExpertDto> Get(string email, CancellationToken cancellationToken);
+        Task<List<ExpertDto>> Get(CancellationToken cancellationToken);
+        Task Create(ExpertDto entity, CancellationToken cancellationToken);
+        Task Update(ExpertDto entity, CancellationToken cancellationToken);
+        Task EnsureExists(Guid id, CancellationToken cancellationToken);
+        Task EnsureDoesNotExist(Guid id, CancellationToken cancellationToken);
+        Task<Guid> GetExpertId(Guid expertIdentityId, CancellationToken cancellationToken);
+        Task<string> UploadImageProfile(IFormFile FormFile, CancellationToken cancellationToken);
+        Task<ExpertDto> AssignHomeService(ExpertDto entity, CancellationToken cancellationToken);
+        Task<List<OrderDto>> GetAllBy(Guid expertId, CancellationToken cancellationToken);
+        Task<int> Count(CancellationToken cancellationToken);
     }
 }

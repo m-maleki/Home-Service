@@ -21,24 +21,24 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             _mapper = mapper;
         }
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
 
-            var records = await _commentApplicationService.GetAll();
+            var records = await _commentApplicationService.GetAll(cancellationToken);
             comments = _mapper.Map(records, comments);
         }
 
-        public async Task<IActionResult> OnPostActive(int commentId)
+        public async Task<IActionResult> OnPostActive(int commentId,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
-                await _commentApplicationService.Active(commentId);
+                await _commentApplicationService.Active(commentId, cancellationToken);
                 return LocalRedirect("/Admin/comment");
         }
 
-        public async Task<IActionResult> OnPostDeActive(int commentId)
+        public async Task<IActionResult> OnPostDeActive(int commentId,CancellationToken cancellationToken)
         {
             if(ModelState.IsValid)
-            await _commentApplicationService.DeActive(commentId);
+            await _commentApplicationService.DeActive(commentId,cancellationToken);
             return LocalRedirect("/Admin/comment");
         }
     }

@@ -14,7 +14,7 @@ namespace HS.Domain.ApplicationServices
             _cityService = cityService;
         }
 
-        public async Task<List<City>> Get()
-         =>  await _cityService.Get();
+        public async Task<List<City>> Get(CancellationToken cancellationToken)
+         =>  await _cityService.Get(cancellationToken);
     }
 }

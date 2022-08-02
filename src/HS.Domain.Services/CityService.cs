@@ -21,8 +21,8 @@ namespace HS.Domain.Services
             _cityRepository = cityRepository;
         }
 
-        public async Task<List<City>> Get()
-         =>  await _cityRepository.GetAll();
+        public async Task<List<City>> Get(CancellationToken cancellationToken)
+         =>  await _cityRepository.GetAll(cancellationToken);
 
     }
 }

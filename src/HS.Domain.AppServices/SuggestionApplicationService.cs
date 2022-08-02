@@ -28,67 +28,67 @@ namespace HS.Domain.ApplicationServices
             _userApplicationService = userApplicationService;
         }
 
-        public async Task Accept(int suggestionId, int orderId)
+        public async Task Accept(int suggestionId, int orderId, CancellationToken cancellationToken)
         {
-            await _suggestionService.Accept(suggestionId);
-            await _orderService.SetOrderStatusEnum(orderId, OrderStatusEnum.WaitingSpecialistComeToYourPlace);
+            await _suggestionService.Accept(suggestionId, cancellationToken);
+            await _orderService.SetOrderStatusEnum(orderId, OrderStatusEnum.WaitingSpecialistComeToYourPlace, cancellationToken);
         }
 
-        public async Task<int> Count()
+        public async Task<int> Count(CancellationToken cancellationToken)
         {
-            return await _suggestionService.Count();
+            return await _suggestionService.Count(cancellationToken);
         }
 
-        public async Task Create(SuggestionDto entity)
+        public async Task Create(SuggestionDto entity, CancellationToken cancellationToken)
         {
             PersianCalendar pc = new PersianCalendar();
             entity.DurationOfWork = new DateTime(entity.DurationOfWork.Year, entity.DurationOfWork.Month, entity.DurationOfWork.Day, pc);
             entity.RegisterDate = DateTime.Now;
-            entity.ExpertId =  await _expertService.GetExpertId(_userApplicationService.GetUserId());
-            await _suggestionService.Create(entity);
-            var suggestionCount = await _suggestionService.GetCount(entity.OrderId);
+            entity.ExpertId =  await _expertService.GetExpertId(_userApplicationService.GetUserId(cancellationToken), cancellationToken);
+            await _suggestionService.Create(entity, cancellationToken);
+            var suggestionCount = await _suggestionService.GetCount(entity.OrderId, cancellationToken);
             if (suggestionCount == 1)
             {
-                await _orderService.SetOrderStatusEnum(entity.OrderId, OrderStatusEnum.WaitingSpecialistSelection);
+                await _orderService.SetOrderStatusEnum(entity.OrderId, OrderStatusEnum.WaitingSpecialistSelection, cancellationToken);
             }
         }
 
-        public Task EnsureDoesNotExist(int Id)
+        public Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken)
         {
-            return _suggestionService.EnsureDoesNotExist(Id);
+            return _suggestionService.EnsureDoesNotExist(Id, cancellationToken);
         }
 
-        public Task EnsureExists(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> EnsureExistSuggestion(int orderId)
+        public Task EnsureExists(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<SuggestionDto> Get(int Id)
+        public Task<bool> EnsureExistSuggestion(int orderId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<SuggestionDto>> Get()
+        public Task<SuggestionDto> Get(int Id, CancellationToken cancellationToken)
         {
-            return await _suggestionService.Get();
+            throw new NotImplementedException();
         }
 
-        public async Task<List<SuggestionDto>> GetAll(int orderId)
+        public async Task<List<SuggestionDto>> Get(CancellationToken cancellationToken)
         {
-            return await _suggestionService.GetAll(orderId);
+            return await _suggestionService.Get(cancellationToken);
         }
 
-        public async Task<int> GetCount(int orderId)
+        public async Task<List<SuggestionDto>> GetAll(int orderId, CancellationToken cancellationToken)
         {
-            return await _suggestionService.GetCount(orderId);
+            return await _suggestionService.GetAll(orderId, cancellationToken);
         }
 
-        public Task Update(SuggestionDto entity)
+        public async Task<int> GetCount(int orderId, CancellationToken cancellationToken)
+        {
+            return await _suggestionService.GetCount(orderId, cancellationToken);
+        }
+
+        public Task Update(SuggestionDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

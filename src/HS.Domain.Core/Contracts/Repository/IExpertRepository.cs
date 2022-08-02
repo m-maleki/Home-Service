@@ -5,14 +5,14 @@ namespace HS.Domain.Core.Contracts.Repository
 {
     public interface IExpertRepository 
     {
-        Task<ExpertDto> GetBy(Guid id);
-        Task<List<ExpertDto>> GetAll();
-        Task Create(ExpertDto entity);
-        Task Update(ExpertDto entity);
-        Task<Guid> GetExpertId(Guid expertIdentityId);
-        Task<List<OrderDto>> GetAllBy(Guid expertId);
-        Task<List<ExpertDto>> GetAll(Guid id);
-        Task<int> Count();
+        Task<ExpertDto> GetBy(Guid id, CancellationToken cancellationToken);
+        Task<List<ExpertDto>> GetAll(CancellationToken cancellationToken);
+        Task Create(ExpertDto entity, CancellationToken cancellationToken);
+        Task Update(ExpertDto entity, CancellationToken cancellationToken);
+        Task<Guid> GetExpertId(Guid expertIdentityId, CancellationToken cancellationToken);
+        Task<List<OrderDto>> GetAllBy(Guid expertId, CancellationToken cancellationToken);
+        Task<List<ExpertDto>> GetAll(Guid id, CancellationToken cancellationToken);
+        Task<int> Count(CancellationToken cancellationToken);
 
 
     }

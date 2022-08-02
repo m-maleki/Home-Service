@@ -28,15 +28,15 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             _userApplicationService = userApplicationService;
         }
 
-        public async Task<IActionResult> OnPost(UserViewModel model)
+        public async Task<IActionResult> OnPost(UserViewModel model,CancellationToken cancellationToken)
         {
-            await _userApplicationService.Update(_mapper.Map(model, new UserDto()));
+            await _userApplicationService.Update(_mapper.Map(model, new UserDto()), cancellationToken);
             return LocalRedirect("/Admin/Profile/");
         }
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            UserViewModel = _mapper.Map(await _userApplicationService.Get(), UserViewModel);
+            UserViewModel = _mapper.Map(await _userApplicationService.Get(cancellationToken), UserViewModel);
         }
     }
 }

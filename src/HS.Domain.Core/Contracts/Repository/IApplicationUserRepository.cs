@@ -5,8 +5,8 @@ namespace HS.Domain.Core.Contracts.Repository
 {
     public interface IApplicationUserRepository
     {
-        Task<IdentityResult> Create(ApplicationUserDto command);
-        Task<SignInResult> Login(ApplicationUserDto command);
-        Task<List<ApplicationUserDto>> GetAll();
+        Task<IdentityResult> Create(ApplicationUserDto command,CancellationToken cancellationToken);
+        Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken);
+        Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken);
     }
 }

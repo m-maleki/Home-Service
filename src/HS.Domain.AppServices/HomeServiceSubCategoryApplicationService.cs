@@ -18,32 +18,32 @@ namespace HS.Domain.ApplicationServices
             _homeServiceSubCategoryService = homeServiceSubCategoryService;
         }
 
-        public Task Create(HomeServiceSubCategoryDto entity)
+        public Task Create(HomeServiceSubCategoryDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<HomeServiceSubCategoryDto>> GetAll()
+        public async Task<List<HomeServiceSubCategoryDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _homeServiceSubCategoryService.GetAll();
+            return await _homeServiceSubCategoryService.GetAll(cancellationToken);
         }
 
-        public async Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId)
+        public async Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId, CancellationToken cancellationToken)
         {
-           return await (_homeServiceSubCategoryService.GetAllBy(homeServiceCategoryId));
+           return await (_homeServiceSubCategoryService.GetAllBy(homeServiceCategoryId, cancellationToken));
         }
 
-        public Task<HomeServiceSubCategoryDto> GetBy(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<HomeServiceSubCategoryDto> GetBy(string name)
+        public Task<HomeServiceSubCategoryDto> GetBy(int id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(HomeServiceSubCategoryDto entity)
+        public Task<HomeServiceSubCategoryDto> GetBy(string name, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Update(HomeServiceSubCategoryDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

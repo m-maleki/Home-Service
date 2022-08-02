@@ -18,9 +18,9 @@ namespace HS.Domain.Services
             _orderFileRepository = orderFileRepository;
         }
 
-        public async Task DeleteFile(int fileId)
+        public async Task DeleteFile(int fileId, CancellationToken cancellationToken)
         {
-            await _orderFileRepository.DeleteFile(fileId);
+            await _orderFileRepository.DeleteFile(fileId, cancellationToken);
         }
 
         public async Task DeleteFromHardDisk(string fileName)
@@ -28,14 +28,14 @@ namespace HS.Domain.Services
             // delet file from hard disk ...
         }
 
-        public async Task<OrderFileDto> Get(int fileId)
+        public async Task<OrderFileDto> Get(int fileId, CancellationToken cancellationToken)
         {
-            return await _orderFileRepository.Get(fileId);
+            return await _orderFileRepository.Get(fileId, cancellationToken);
         }
 
-        public async Task<List<OrderFileDto>> GetAll(int orderId)
+        public async Task<List<OrderFileDto>> GetAll(int orderId, CancellationToken cancellationToken)
         {
-            return await _orderFileRepository.GetAll(orderId);
+            return await _orderFileRepository.GetAll(orderId, cancellationToken);
         }
     }
 }

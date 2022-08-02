@@ -17,38 +17,38 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task<List<HomeServiceSubCategoryDto>> GetAll()
+        public async Task<List<HomeServiceSubCategoryDto>> GetAll(CancellationToken cancellationToken)
             => _mapper.Map<List<HomeServiceSubCategoryDto>>(await _context.HomeServiceSubCategories
                 .AsNoTracking()
-                .ToListAsync());
+                .ToListAsync(cancellationToken));
 
-        public async Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId)
+        public async Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId, CancellationToken cancellationToken)
         => await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.HomeServiceSubCategories
         .Include(x=>x.HomeServices))
         .Where(x => x.HomeServiceCategoryId == homeServiceCategoryId)
-        .ToListAsync();
+        .ToListAsync(cancellationToken);
 
-        public async Task<HomeServiceSubCategoryDto> GetBy(int id)
+        public async Task<HomeServiceSubCategoryDto> GetBy(int id, CancellationToken cancellationToken)
             => await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.HomeServiceSubCategories)
             .Where(x => x.Id == id)
-            .FirstOrDefaultAsync();
-        public async Task Create(HomeServiceSubCategoryDto entity)
+            .FirstOrDefaultAsync(cancellationToken);
+        public async Task Create(HomeServiceSubCategoryDto entity, CancellationToken cancellationToken)
         {
             var record = _mapper.Map<HomeServiceSubCategory>(entity);
             await _context.HomeServiceSubCategories.AddAsync(record);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
-        public async Task Update(HomeServiceSubCategoryDto entity)
+        public async Task Update(HomeServiceSubCategoryDto entity, CancellationToken cancellationToken)
         {
             var record = await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.Set<HomeServiceSubCategoryDto>())
                  .Where(x => x.Id == entity.Id).SingleOrDefaultAsync();
             _mapper.Map(entity, record);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
-        public async Task<HomeServiceSubCategoryDto> GetBy(string name)
+        public async Task<HomeServiceSubCategoryDto> GetBy(string name, CancellationToken cancellationToken)
             => await _mapper.ProjectTo<HomeServiceSubCategoryDto>(_context.HomeServiceSubCategories)
             .AsNoTracking()
             .Where(x => x.Name == name)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken);
     }
 }

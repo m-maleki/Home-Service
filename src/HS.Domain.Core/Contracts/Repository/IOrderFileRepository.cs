@@ -9,8 +9,8 @@ namespace HS.Domain.Core.Contracts.Repository
 {
     public interface IOrderFileRepository
     {
-        Task<List<OrderFileDto>> GetAll(int orderId);
-        Task<OrderFileDto> Get(int fileId);
-        Task DeleteFile(int fileId);
+        Task<List<OrderFileDto>> GetAll(int orderId, CancellationToken cancellationToken);
+        Task<OrderFileDto> Get(int fileId, CancellationToken cancellationToken);
+        Task DeleteFile(int fileId, CancellationToken cancellationToken);
     }
 }

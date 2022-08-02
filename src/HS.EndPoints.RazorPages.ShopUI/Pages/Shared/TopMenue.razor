@@ -47,11 +47,12 @@
 @code {
     private List<HomeServiceSubCategoryDto> homeServiceSubCategory = new List<HomeServiceSubCategoryDto>();
     private List<HomeServiceCategoryDto> homeServiceCategory = new List<HomeServiceCategoryDto>();
+    private CancellationTokenSource cancellationToken = new CancellationTokenSource();
 
     public async Task GetAll()
     {
-        homeServiceCategory = await this._homeServiceCategoryRepository.GetAll();
-        homeServiceSubCategory = await this._homeServiceSubApplicationService.GetAll();
+        homeServiceCategory = await this._homeServiceCategoryRepository.GetAll(cancellationToken.Token);
+        homeServiceSubCategory = await this._homeServiceSubApplicationService.GetAll(cancellationToken.Token);
     }
 
     protected override async Task OnInitializedAsync()

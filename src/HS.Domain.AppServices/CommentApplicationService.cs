@@ -21,38 +21,38 @@ namespace HS.Domain.ApplicationServices
             _suggestionService = suggestionService;
         }
 
-        public async Task Active(int commentId)
+        public async Task Active(int commentId, CancellationToken cancellationToken)
         {
-            await _commentService.Active(commentId);
+            await _commentService.Active(commentId, cancellationToken);
         }
 
         public async Task Create(string comment,int orderId,CancellationToken cancellationToken)
         {
-            var expertId =await _suggestionService.GetAcceptSuggestionExpertId(orderId);
+            var expertId =await _suggestionService.GetAcceptSuggestionExpertId(orderId, cancellationToken);
             await _commentService.Create(comment,expertId,cancellationToken);
         }
 
-        public async Task DeActive(int commentId)
+        public async Task DeActive(int commentId, CancellationToken cancellationToken)
         {
-            await _commentService.DeActive(commentId);
+            await _commentService.DeActive(commentId, cancellationToken);
         }
 
-        public async Task<List<CommentDto>> GetAll()
+        public async Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
         {
-            return await _commentService.GetAll();
+            return await _commentService.GetAll(cancellationToken);
         }
 
-        public Task<CommentDto> GetBy(int id)
+        public Task<CommentDto> GetBy(int id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<CommentDto>> GetBy(Guid expertId)
+        public async Task<List<CommentDto>> GetBy(Guid expertId, CancellationToken cancellationToken)
         {
-            return await _commentService.GetBy(expertId);
+            return await _commentService.GetBy(expertId, cancellationToken);
         }
 
-        public Task Update(CommentDto entity)
+        public Task Update(CommentDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

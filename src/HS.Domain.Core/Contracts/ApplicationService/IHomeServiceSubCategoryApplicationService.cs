@@ -9,11 +9,11 @@ namespace HS.Domain.Core.Contracts.ApplicationService
 {
     public interface IHomeServiceSubCategoryApplicationService
     {
-        Task<HomeServiceSubCategoryDto> GetBy(int id);
-        Task<HomeServiceSubCategoryDto> GetBy(string name);
-        Task<List<HomeServiceSubCategoryDto>> GetAll();
-        Task Create(HomeServiceSubCategoryDto entity);
-        Task Update(HomeServiceSubCategoryDto entity);
-        Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId);
+        Task<HomeServiceSubCategoryDto> GetBy(int id, CancellationToken cancellationToken);
+        Task<HomeServiceSubCategoryDto> GetBy(string name, CancellationToken cancellationToken);
+        Task<List<HomeServiceSubCategoryDto>> GetAll(CancellationToken cancellationToken);
+        Task Create(HomeServiceSubCategoryDto entity, CancellationToken cancellationToken);
+        Task Update(HomeServiceSubCategoryDto entity, CancellationToken cancellationToken);
+        Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId, CancellationToken cancellationToken);
     }
 }

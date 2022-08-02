@@ -19,9 +19,9 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             _mapper = mapper;
         }
 
-        public async Task OnGet(int id)
+        public async Task OnGet(int id,CancellationToken cancellationToken)
         {
-            homeServiceSubCategory = _mapper.Map(await _homeServiceSubCategoryApplicationService.GetAllBy(id),
+            homeServiceSubCategory = _mapper.Map(await _homeServiceSubCategoryApplicationService.GetAllBy(id, cancellationToken),
                 new List<HomeServiceSubCategoryViewModel>());
         }
     }

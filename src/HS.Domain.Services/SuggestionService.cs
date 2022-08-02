@@ -19,62 +19,62 @@ namespace HS.Domain.Services
             _suggestionRepository = suggestionRepository;
         }
 
-        public async Task Accept(int suggestionId)
+        public async Task Accept(int suggestionId, CancellationToken cancellationToken)
         {
-            await _suggestionRepository.Accept(suggestionId);
+            await _suggestionRepository.Accept(suggestionId, cancellationToken);
         }
 
-        public async Task<int> Count()
+        public async Task<int> Count(CancellationToken cancellationToken)
         {
-            return await _suggestionRepository.Count();
+            return await _suggestionRepository.Count(cancellationToken);
         }
 
-        public async Task Create(SuggestionDto entity)
+        public async Task Create(SuggestionDto entity, CancellationToken cancellationToken)
         {
-            await _suggestionRepository.Create(entity);
+            await _suggestionRepository.Create(entity, cancellationToken);
         }
 
-        public Task EnsureDoesNotExist(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task EnsureExists(int Id)
+        public Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> EnsureExistSuggestion(int orderId)
-        {
-            return await _suggestionRepository.EnsureExistSuggestion(orderId);
-        }
-
-        public Task<SuggestionDto> Get(int Id)
+        public Task EnsureExists(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<SuggestionDto>> Get()
+        public async Task<bool> EnsureExistSuggestion(int orderId, CancellationToken cancellationToken)
         {
-            return await _suggestionRepository.GetAll();
+            return await _suggestionRepository.EnsureExistSuggestion(orderId, cancellationToken);
         }
 
-        public async Task<Guid> GetAcceptSuggestionExpertId(int orderId)
+        public Task<SuggestionDto> Get(int Id, CancellationToken cancellationToken)
         {
-          return  await _suggestionRepository.GetAcceptSuggestionExpertId(orderId);
+            throw new NotImplementedException();
         }
 
-        public async Task<List<SuggestionDto>> GetAll(int orderId)
+        public async Task<List<SuggestionDto>> Get(CancellationToken cancellationToken)
         {
-            return await _suggestionRepository.GetAll(orderId);
+            return await _suggestionRepository.GetAll(cancellationToken);
         }
 
-        public async Task<int> GetCount(int orderId)
+        public async Task<Guid> GetAcceptSuggestionExpertId(int orderId, CancellationToken cancellationToken)
         {
-            return await _suggestionRepository.GetCount(orderId);
+          return  await _suggestionRepository.GetAcceptSuggestionExpertId(orderId, cancellationToken);
         }
 
-        public Task Update(SuggestionDto entity)
+        public async Task<List<SuggestionDto>> GetAll(int orderId, CancellationToken cancellationToken)
+        {
+            return await _suggestionRepository.GetAll(orderId, cancellationToken);
+        }
+
+        public async Task<int> GetCount(int orderId, CancellationToken cancellationToken)
+        {
+            return await _suggestionRepository.GetCount(orderId, cancellationToken);
+        }
+
+        public Task Update(SuggestionDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

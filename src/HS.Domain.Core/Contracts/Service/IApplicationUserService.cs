@@ -10,11 +10,11 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface IApplicationUserService
     {
-        Task<IdentityResult> Create(ApplicationUserDto command);
-        Task<SignInResult> Login(ApplicationUserDto command);
-        Task<List<ApplicationUserDto>> GetAll();
-        public Guid GetUserId();
-        Task<string> getRole();
+        Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken);
+        Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken);
+        Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken);
+        public Guid GetUserId(CancellationToken cancellationToken);
+        Task<string> getRole(CancellationToken cancellationToken);
         bool IsInRole(string role);
 
 

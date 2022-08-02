@@ -27,7 +27,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _mapper = mapper;
         }
 
-        public async Task<IdentityResult> Create(ApplicationUserDto command)
+        public async Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken)
         {
             var user = new ApplicationUser();
             if (command.Role=="Customer")
@@ -58,7 +58,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             return result;
         }
 
-        public async Task<List<ApplicationUserDto>> GetAll()
+        public async Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken)
         {
            var users = _mapper.Map<List<ApplicationUserDto>>(await _userManager.Users
               .AsNoTracking()
@@ -72,7 +72,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             return users;
         }
 
-        public async Task<SignInResult> Login(ApplicationUserDto command)
+        public async Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
            =>  await _signInManager.PasswordSignInAsync(command.Email, command.Password, true, false);
     }
 }

@@ -5,6 +5,6 @@ namespace HS.Domain.Core.Contracts.Repository
 {
     public interface ICityRepository
     {
-        Task<List<City>> GetAll();
+        Task<List<City>> GetAll( CancellationToken cancellationToken);
     }
 }

@@ -29,26 +29,26 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
         public SelectList  homeServiceSubCategories { get; set; }
 
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            HomeServices = _mapper.Map(await _homeServiceApplicationService.Get() , new List<HomeServiceViewModel>()) ;
-            homeServiceSubCategories = new SelectList(await _homeServiceSubCategoryApplicationService.GetAll(), "Id", "Name");
+            HomeServices = _mapper.Map(await _homeServiceApplicationService.Get(cancellationToken) , new List<HomeServiceViewModel>()) ;
+            homeServiceSubCategories = new SelectList(await _homeServiceSubCategoryApplicationService.GetAll(cancellationToken), "Id", "Name");
         }
 
-        public async Task<IActionResult> OnPostCreate(HomeServiceViewModel model)
+        public async Task<IActionResult> OnPostCreate(HomeServiceViewModel model,CancellationToken cancellationToken)
         {
-            await _homeServiceApplicationService.Create(_mapper.Map(model,new HomeServiceDto()));
+            await _homeServiceApplicationService.Create(_mapper.Map(model,new HomeServiceDto()), cancellationToken);
             return LocalRedirect("/Admin/HomeServices");
         }
 
-        public async Task<IActionResult> OnPostActive(int id)
+        public async Task<IActionResult> OnPostActive(int id,CancellationToken cancellationToken)
         {
-            await _homeServiceApplicationService.Active(id);
+            await _homeServiceApplicationService.Active(id, cancellationToken);
             return LocalRedirect("/Admin/HomeServices");
         }
-        public async Task<IActionResult> OnPostDeActive(int id)
+        public async Task<IActionResult> OnPostDeActive(int id,CancellationToken cancellationToken)
         {
-            await _homeServiceApplicationService.DeActive(id);
+            await _homeServiceApplicationService.DeActive(id, cancellationToken);
             return LocalRedirect("/Admin/HomeServices");
         }
     }

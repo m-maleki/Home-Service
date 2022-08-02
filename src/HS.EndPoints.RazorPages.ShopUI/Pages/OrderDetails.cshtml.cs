@@ -36,14 +36,34 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             _mapper = mapper;
         }
 
-        public async Task OnGet(int OrderId)
+        public async Task OnGet(int OrderId,CancellationToken cancellationToken)
         {
             
-            _mapper.Map(await _orderApplicationService.GetBy(OrderId), Order);
-            _mapper.Map(await _suggestionApplicationService.GetAll(OrderId), suggestions);
-            _mapper.Map(await _orderFileApplicationService.GetAll(OrderId), orderFiles);
+            _mapper.Map(await _orderApplicationService.GetBy(OrderId, cancellationToken), Order);
+            _mapper.Map(await _suggestionApplicationService.GetAll(OrderId, cancellationToken), suggestions);
+            _mapper.Map(await _orderFileApplicationService.GetAll(OrderId, cancellationToken), orderFiles);
             if (User.IsInRole("Expert"))
-                UserId = await _expertApplicationService.GetExpertId();
+                UserId = await _expertApplicationService.GetExpertId(cancellationToken);
+        }
+        public async Task<IActionResult> OnPostDeleteImage(int imageId, int orderIdDelete,CancellationToken cancellationToken)
+        {
+            if (ModelState.IsValid)
+                await _orderFileApplicationService.DeleteFile(imageId, cancellationToken);
+            return RedirectToPage("/OrderDetails", new { OrderId = orderIdDelete });
+
+        }
+
+        public async Task<IActionResult> OnPostComment(string Comment, int OrderId, CancellationToken cancellationToken)
+        {
+            await _commentApplicationService.Create(Comment, OrderId, cancellationToken);
+            return RedirectToPage("/OrderDetails", new { OrderId });
+        }
+
+        public async Task<IActionResult> OnPostAccept(int SuggId, int OrderId,CancellationToken cancellationToken)
+        {
+            if (ModelState.IsValid)
+                await _suggestionApplicationService.Accept(SuggId, OrderId, cancellationToken);
+            return LocalRedirect("/Admin/Order/");
         }
     }
 }

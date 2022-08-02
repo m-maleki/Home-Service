@@ -11,12 +11,12 @@ namespace HS.Domain.Core.Contracts.ApplicationService
 {
     public interface IApplicationUserApplicationService
     {
-        Task<IdentityResult> Create(ApplicationUserDto command);
-        Task<SignInResult> Login(ApplicationUserDto command);
-        Task<List<ApplicationUserDto>> GetAll();
-        public Guid GetUserId();
-        Task Update(UserDto dto);
-        Task<UserDto> Get();
+        Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken);
+        Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken);
+        Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken);
+        public Guid GetUserId(CancellationToken cancellationToken);
+        Task Update(UserDto dto, CancellationToken cancellationToken);
+        Task<UserDto> Get(CancellationToken cancellationToken);
 
     }
 }

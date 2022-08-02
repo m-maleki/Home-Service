@@ -33,57 +33,57 @@ namespace HS.Domain.ApplicationServices
             _homeServiceService = homeServiceService;
         }
 
-        public async Task<IdentityResult> Create(ApplicationUserDto command)
-            =>await _applicationUserService.Create(command);
+        public async Task<IdentityResult> Create(ApplicationUserDto command,CancellationToken cancellationToken)
+            =>await _applicationUserService.Create(command, cancellationToken);
 
-        public async Task<UserDto> Get()
+        public async Task<UserDto> Get(CancellationToken cancellationToken)
         {
             if (_applicationUserService.IsInRole("Expert"))
             {
-                var expertId = await _expertService.GetExpertId(_applicationUserService.GetUserId());
-                var result = await _expertService.Get(expertId);
-                result.Cities = await _cityService.Get();
-                result.SelectHomeServices = await _homeServiceService.Get();
+                var expertId = await _expertService.GetExpertId(_applicationUserService.GetUserId(cancellationToken), cancellationToken);
+                var result = await _expertService.Get(expertId, cancellationToken);
+                result.Cities = await _cityService.Get(cancellationToken);
+                result.SelectHomeServices = await _homeServiceService.Get(cancellationToken);
                 result.HomeServicesUser = result.HomeServices;
                 return _mapper.Map(result,new UserDto());
             }
             if (_applicationUserService.IsInRole("Customer"))
             {
-                var customer = await _customerService.GetCustomerId(_applicationUserService.GetUserId());
-                var result = await _customerService.Get(customer);
-                result.Cities = await _cityService.Get();
+                var customer = await _customerService.GetCustomerId(_applicationUserService.GetUserId(cancellationToken), cancellationToken);
+                var result = await _customerService.Get(customer, cancellationToken);
+                result.Cities = await _cityService.Get(cancellationToken);
                 return _mapper.Map(result, new UserDto());
             }
             return default;
         }
 
-        public Task<List<ApplicationUserDto>> GetAll()
-        => _applicationUserService.GetAll();
+        public Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken)
+        => _applicationUserService.GetAll(cancellationToken);
 
-        public Guid GetUserId()
+        public Guid GetUserId(CancellationToken cancellationToken)
         {
-            return _applicationUserService.GetUserId();
+            return _applicationUserService.GetUserId(cancellationToken);
         }
 
-        public Task<SignInResult> Login(ApplicationUserDto command)
-        => _applicationUserService.Login(command);
+        public Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
+        => _applicationUserService.Login(command, cancellationToken);
 
-        public async Task Update(UserDto dto)
+        public async Task Update(UserDto dto, CancellationToken cancellationToken)
         {
             if(_applicationUserService.IsInRole("Expert"))
             {
                 _mapper.Map(dto, new ExpertDto());
                 if (dto.ProfileImgFile != null)
-                    dto.ProfileImgUrl = await _expertService.UploadImageProfile(dto.ProfileImgFile);
-                await _expertService.AssignHomeService(_mapper.Map(dto, new ExpertDto()));
-                await _expertService.Update(_mapper.Map(dto, new ExpertDto()));
+                    dto.ProfileImgUrl = await _expertService.UploadImageProfile(dto.ProfileImgFile, cancellationToken);
+                await _expertService.AssignHomeService(_mapper.Map(dto, new ExpertDto()), cancellationToken);
+                await _expertService.Update(_mapper.Map(dto, new ExpertDto()), cancellationToken);
             }
             if (_applicationUserService.IsInRole("Customer"))
             {
                 _mapper.Map(dto, new CustomerDto());
                 if (dto.ProfileImgFile != null)
-                    dto.ProfileImgUrl = await _customerService.UploadImageProfile(dto.ProfileImgFile);
-                await _customerService.Update(_mapper.Map(dto, new CustomerDto()));
+                    dto.ProfileImgUrl = await _customerService.UploadImageProfile(dto.ProfileImgFile, cancellationToken);
+                await _customerService.Update(_mapper.Map(dto, new CustomerDto()), cancellationToken);
 
             }
         }

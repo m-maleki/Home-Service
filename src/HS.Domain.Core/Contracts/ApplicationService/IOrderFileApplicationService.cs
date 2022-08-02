@@ -9,7 +9,7 @@ namespace HS.Domain.Core.Contracts.ApplicationService
 {
     public interface IOrderFileApplicationService
     {
-        Task<List<OrderFileDto>> GetAll(int orderId);
-        Task DeleteFile(int fileId);
+        Task<List<OrderFileDto>> GetAll(int orderId, CancellationToken cancellationToken);
+        Task DeleteFile(int fileId, CancellationToken cancellationToken);
     }
 }

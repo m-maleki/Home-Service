@@ -42,39 +42,39 @@ namespace HS.EndPoints.RazorPages.UI.Areas.Admin.Pages
             _expertApplicationService = expertApplicationService;
         }
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
 
-            HomeServices = new SelectList(await _homeServiceApplicationService.Get(), "Id", "Name");
-            Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
+            HomeServices = new SelectList(await _homeServiceApplicationService.Get(cancellationToken), "Id", "Name");
+            Orders = _mapper.Map(await _orderApplicationService.GetAll(cancellationToken), Orders);
             if (User.IsInRole("Expert"))
-                UserId = await _expertApplicationService.GetExpertId();
+                UserId = await _expertApplicationService.GetExpertId(cancellationToken);
         }
 
-        public async Task<IActionResult> OnPostCreate(OrderViewModel model)
+        public async Task<IActionResult> OnPostCreate(OrderViewModel model,CancellationToken cancellationToken)
         {
-                await _orderApplicationService.Create(_mapper.Map(model, new OrderDto()), model.FormFile);
+                await _orderApplicationService.Create(_mapper.Map(model, new OrderDto()), model.FormFile, cancellationToken);
                 return LocalRedirect("/Admin/Order");
         }
 
-        public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model)
+        public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model,CancellationToken cancellationToken)
         {
 
-                await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()));
+                await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()), cancellationToken);
             return LocalRedirect("/Admin/Order");
         }
 
-        public async Task<IActionResult> OnPostDeleteOrder(int OrderIdDelete)
+        public async Task<IActionResult> OnPostDeleteOrder(int OrderIdDelete,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
-                await _orderApplicationService.SoftDelete(OrderIdDelete);
+                await _orderApplicationService.SoftDelete(OrderIdDelete, cancellationToken);
             return LocalRedirect("/Admin/Order");
         }
 
-        public async Task<IActionResult> OnPostRecover(int OrderId)
+        public async Task<IActionResult> OnPostRecover(int OrderId,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
-                await _orderApplicationService.SoftRecover(OrderId);
+                await _orderApplicationService.SoftRecover(OrderId, cancellationToken);
             return LocalRedirect("/Admin/Order");
         }
 

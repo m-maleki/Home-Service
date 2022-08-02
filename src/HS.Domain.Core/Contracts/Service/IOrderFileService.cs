@@ -9,9 +9,9 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface IOrderFileService
     {
-        Task<List<OrderFileDto>> GetAll(int orderId);
-        Task DeleteFile(int fileId);
+        Task<List<OrderFileDto>> GetAll(int orderId,CancellationToken cancellationToken);
+        Task DeleteFile(int fileId, CancellationToken cancellationToken);
         Task DeleteFromHardDisk(string fileName);
-        Task<OrderFileDto> Get(int fileId);
+        Task<OrderFileDto> Get(int fileId, CancellationToken cancellationToken);
     }
 }

@@ -27,25 +27,25 @@ namespace HS.Domain.Services
             _httpContext = httpContext;
             _userManager = userManager;
         }
-        public async Task<IdentityResult> Create(ApplicationUserDto command)
-            => await _applicationRepository.Create(command);
-        public async Task<List<ApplicationUserDto>> GetAll()
-            => await _applicationRepository.GetAll();
+        public async Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken)
+            => await _applicationRepository.Create(command, cancellationToken);
+        public async Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken)
+            => await _applicationRepository.GetAll(cancellationToken);
 
-        public Guid GetUserId()
+        public Guid GetUserId(CancellationToken cancellationToken)
         {
             ClaimsPrincipal currentUser = _httpContext.HttpContext.User;
             return new Guid(currentUser.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
 
-        public async Task<string> getRole()
+        public async Task<string> getRole(CancellationToken cancellationToken)
         {
             var result =  await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(_httpContext.HttpContext.User.Identity!.Name));
             return result.First();
         }
 
-        public async Task<SignInResult> Login(ApplicationUserDto command)
-        => await  _applicationRepository.Login(command);
+        public async Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
+        => await  _applicationRepository.Login(command, cancellationToken);
 
         public bool IsInRole(string role)
         {

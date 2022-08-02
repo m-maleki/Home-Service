@@ -19,9 +19,9 @@ namespace HS.Domain.Services
             _commentRepository = commentRepository;
         }
 
-        public async Task Active(int commentId)
+        public async Task Active(int commentId, CancellationToken cancellationToken)
         {
-           await _commentRepository.Active(commentId);
+           await _commentRepository.Active(commentId, cancellationToken);
         }
 
         public async Task Create(string comment, Guid expertId,CancellationToken cancellationToken)
@@ -29,42 +29,42 @@ namespace HS.Domain.Services
             await _commentRepository.Create(comment, expertId, cancellationToken);
         }
 
-        public async Task DeActive(int commentId)
+        public async Task DeActive(int commentId, CancellationToken cancellationToken)
         {
-            await _commentRepository.DeActive(commentId);
+            await _commentRepository.DeActive(commentId, cancellationToken);
         }
 
-        public Task EnsureDoesNotExist(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task EnsureExists(int Id)
+        public Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<CommentDto> Get(int Id)
+        public Task EnsureExists(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CommentDto>> Get()
+        public Task<CommentDto> Get(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<CommentDto>> GetAll()
+        public Task<List<CommentDto>> Get(CancellationToken cancellationToken)
         {
-           return await _commentRepository.GetAll();
+            throw new NotImplementedException();
         }
 
-        public async Task<List<CommentDto>> GetBy(Guid expertId)
+        public async Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
         {
-           return await _commentRepository.GetBy(expertId);
+           return await _commentRepository.GetAll(cancellationToken);
         }
 
-        public Task Update(CommentDto entity)
+        public async Task<List<CommentDto>> GetBy(Guid expertId, CancellationToken cancellationToken)
+        {
+           return await _commentRepository.GetBy(expertId, cancellationToken);
+        }
+
+        public Task Update(CommentDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

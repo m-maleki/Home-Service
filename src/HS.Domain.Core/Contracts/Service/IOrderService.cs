@@ -12,21 +12,21 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface IOrderService
     {
-        Task<OrderDto> Get(int Id);
-        Task<OrderDto> GetBy(int orderId);
-        Task<List<OrderDto>> Get();
-        Task<int> Create(OrderDto entity);
-        Task Update(OrderDto entity);
-        Task EnsureExists(int Id);
-        Task EnsureDoesNotExist(int Id);
-        Task SetOrderFiles(List<OrderFileDto> dto, int orderId);
+        Task<OrderDto> Get(int Id,CancellationToken cancellationToken);
+        Task<OrderDto> GetBy(int orderId, CancellationToken cancellationToken);
+        Task<List<OrderDto>> Get(CancellationToken cancellationToken);
+        Task<int> Create(OrderDto entity, CancellationToken cancellationToken);
+        Task Update(OrderDto entity, CancellationToken cancellationToken);
+        Task EnsureExists(int Id, CancellationToken cancellationToken);
+        Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken);
+        Task SetOrderFiles(List<OrderFileDto> dto, int orderId, CancellationToken cancellationToken);
         Task<List<OrderFileDto>> UploadFiles(List<IFormFile> FormFile, int orderId);
-        Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum);
-        Task<OrderStatusEnum> GetOrderStatusEnum(int orderId);
-        Task SoftDelete(int orderId);
-        Task HardDelete(int orderId);
-        Task SoftRecover(int orderId);
-        Task<int> Count();
+        Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum, CancellationToken cancellationToken);
+        Task<OrderStatusEnum> GetOrderStatusEnum(int orderId, CancellationToken cancellationToken);
+        Task SoftDelete(int orderId, CancellationToken cancellationToken);
+        Task HardDelete(int orderId, CancellationToken cancellationToken);
+        Task SoftRecover(int orderId, CancellationToken cancellationToken);
+        Task<int> Count(CancellationToken cancellationToken);
 
     }
 }

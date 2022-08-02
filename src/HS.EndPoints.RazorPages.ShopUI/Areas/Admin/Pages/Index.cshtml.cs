@@ -33,14 +33,14 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             _mapper = mapper;
         }
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
-            dashboardViewModel.CountExpert = await _expertApplicationService.Count();
-            dashboardViewModel.CountCustomer = await _customerApplicationService.Count();
-            dashboardViewModel.CountOrder = await _orderApplicationService.Count();
-            dashboardViewModel.CountSuggestion = await _suggestionApplicationService.Count();
-            Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
-            suggestions = _mapper.Map(await _suggestionApplicationService.Get(),new List<SuggestionViewModel>());
+            dashboardViewModel.CountExpert = await _expertApplicationService.Count(cancellationToken);
+            dashboardViewModel.CountCustomer = await _customerApplicationService.Count(cancellationToken);
+            dashboardViewModel.CountOrder = await _orderApplicationService.Count(cancellationToken);
+            dashboardViewModel.CountSuggestion = await _suggestionApplicationService.Count(cancellationToken);
+            Orders = _mapper.Map(await _orderApplicationService.GetAll(cancellationToken), Orders);
+            suggestions = _mapper.Map(await _suggestionApplicationService.Get(cancellationToken),new List<SuggestionViewModel>());
 
         }
     }

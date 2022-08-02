@@ -16,27 +16,27 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task DeleteFile(int fileId)
+        public async Task DeleteFile(int fileId, CancellationToken cancellationToken)
         {
             var record = await _context.OrderFiles
             .Where(x => x.Id == fileId)
-            .SingleAsync();
+            .SingleAsync(cancellationToken);
             _context.OrderFiles.Remove(record);
-            _context.SaveChanges();
+            _context.SaveChangesAsync(cancellationToken);
         }
-        public async Task<OrderFileDto> Get(int fileId)
+        public async Task<OrderFileDto> Get(int fileId, CancellationToken cancellationToken)
         {
               return await _mapper.ProjectTo<OrderFileDto>(_context.OrderFiles
             .AsNoTracking())
             .Where(x => x.Id == fileId)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken);
         }
-        public async Task<List<OrderFileDto>> GetAll(int orderId)
+        public async Task<List<OrderFileDto>> GetAll(int orderId, CancellationToken cancellationToken)
         {
             var records = await _context.OrderFiles
                 .AsNoTracking()
                 .Where(x => x.OrderId == orderId)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
             return _mapper.Map<List<OrderFileDto>>(records);
         }
     }

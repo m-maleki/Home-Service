@@ -50,25 +50,25 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             _userApplicationService = userApplicationService;
         }
 
-        public async Task OnGet()
+        public async Task OnGet(CancellationToken cancellationToken)
         {
             if (User.Identity.IsAuthenticated)
             {
-                CurrentUser = _mapper.Map(await _userApplicationService.Get(), CurrentUser);
-                Orders = _mapper.Map(await _orderApplicationService.GetAll(), Orders);
+                CurrentUser = _mapper.Map(await _userApplicationService.Get(cancellationToken), CurrentUser);
+                Orders = _mapper.Map(await _orderApplicationService.GetAll(cancellationToken), Orders);
             }
         }
-        public async Task<IActionResult> OnPostUpdate(UserViewModel model)
+        public async Task<IActionResult> OnPostUpdate(UserViewModel model,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
-            await _userApplicationService.Update(_mapper.Map(model, new UserDto()));
+            await _userApplicationService.Update(_mapper.Map(model, new UserDto()), cancellationToken);
             return LocalRedirect("/Profile");
         }
-        public async Task<IActionResult> OnPostLogin(LoginViewModel loginModel)
+        public async Task<IActionResult> OnPostLogin(LoginViewModel loginModel,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                var result = await _applicationUserApplicationService.Login(_mapper.Map(loginModel, new ApplicationUserDto()));
+                var result = await _applicationUserApplicationService.Login(_mapper.Map(loginModel, new ApplicationUserDto()), cancellationToken);
                 if(result.Succeeded)
                 {
                     return LocalRedirect("/Profile");
@@ -87,25 +87,25 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             return LocalRedirect("/Profile");
         }
 
-        public async Task<IActionResult> OnPostAccept(int SuggId, int OrderId)
+        public async Task<IActionResult> OnPostAccept(int SuggId, int OrderId,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
-                await _suggestionApplicationService.Accept(SuggId, OrderId);
+                await _suggestionApplicationService.Accept(SuggId, OrderId, cancellationToken);
             return LocalRedirect("/Profile");
         }
 
-        public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model)
+        public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model,CancellationToken cancellationToken)
         {
 
-            await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()));
+            await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()), cancellationToken);
             return LocalRedirect("/Profile");
         }
 
-        public async Task<IActionResult> OnPostCreate(RegisterViewModel registerModel)
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel registerModel,CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                var result = await _applicationUserApplicationService.Create(_mapper.Map(registerModel, new ApplicationUserDto()));
+                var result = await _applicationUserApplicationService.Create(_mapper.Map(registerModel, new ApplicationUserDto()), cancellationToken);
                 if (result.Succeeded)
                 {
                     await _signInManager.PasswordSignInAsync(registerModel.Email, registerModel.Password, true, false);
