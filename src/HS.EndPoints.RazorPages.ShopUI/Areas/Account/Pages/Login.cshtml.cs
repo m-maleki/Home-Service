@@ -54,7 +54,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
                 var result =  await _applicationUserApplicationService.Login(_mapper.Map(model, new ApplicationUserDto()),cancellationToken);
                 if (result.Succeeded)
                 {
-                    return LocalRedirect("~/Admin/");
+                    return LocalRedirect("/Admin/");
                 }
                 ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است *");
             }

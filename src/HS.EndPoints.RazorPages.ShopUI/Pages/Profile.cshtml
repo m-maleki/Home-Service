@@ -156,14 +156,14 @@
                                                         <div class="user-box">
                                                             @if (Model.CurrentUser.ProfileImgUrl == null)
                                                             {
-                                                                <a href="~/media/figure/avatar.jpg" target="_blank">
-                                                                    <img id="profileImage" src="~/media/figure/avatar.jpg" alt="عکس پروفایل" style="border-radius: 50%;width:200px">
+                                                                <a href="/media/figure/avatar.jpg" target="_blank">
+                                                                    <img id="profileImage" src="/media/figure/avatar.jpg" alt="عکس پروفایل" style="border-radius: 50%;width:200px">
                                                                 </a>
                                                             }
                                                             else
                                                             {
-                                                                <a href="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" target="_blank">
-                                                                    <img id="profileImage" src="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="عکس پروفایل" style="border-radius: 50%;width:200px">
+                                                                <a href="/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" target="_blank">
+                                                                    <img id="profileImage" src="/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="عکس پروفایل" style="border-radius: 50%;width:200px">
                                                                 </a>
                                                             }
 
@@ -323,7 +323,7 @@
                                         else
                                         {
                                             <div class="item-img">
-                                                <img style="width:100px;height:100px" src="~/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="avatar">
+                                                <img style="width:100px;height:100px" src="/Images/Profiles/@Model.CurrentUser.ProfileImgUrl" alt="avatar">
                                             </div>
                                         }
                                         <div class="item-content">

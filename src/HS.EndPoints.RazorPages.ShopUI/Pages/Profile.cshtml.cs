@@ -109,7 +109,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
                 if (result.Succeeded)
                 {
                     await _signInManager.PasswordSignInAsync(registerModel.Email, registerModel.Password, true, false);
-                    return LocalRedirect("~/Profile");
+                    return LocalRedirect("/Profile");
                 }
                 else
                 {

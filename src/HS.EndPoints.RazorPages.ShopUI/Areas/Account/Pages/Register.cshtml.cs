@@ -30,7 +30,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Account.Pages
                 var result = await _applicationUserApplicationService.Create(_mapper.Map(model, new ApplicationUserDto()), cancellationToken);
                 if (result.Succeeded)
                 {
-                    return LocalRedirect("~/Account/Login");
+                    return LocalRedirect("/Account/Login");
                 }
                 else
                 {

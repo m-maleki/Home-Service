@@ -10,14 +10,14 @@
                 <div class="user-box">
                     @if(Model.UserViewModel.ProfileImgUrl ==null)
                     {
-                     <a href="~/media/figure/avatar.jpg" target="_blank">
-                        <img id="profileImage" src="~/media/figure/avatar.jpg" alt="عکس پروفایل" class="img-circle img-responsive">
+                     <a href="/media/figure/avatar.jpg" target="_blank">
+                        <img id="profileImage" src="/media/figure/avatar.jpg" alt="عکس پروفایل" class="img-circle img-responsive">
                         </a>
                     }
                     else
                     {
-                     <a href="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" target="_blank">
-                        <img id="profileImage" src="~/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" alt="عکس پروفایل" class="img-circle img-responsive">
+                     <a href="/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" target="_blank">
+                        <img id="profileImage" src="/Images/Profiles/@Model.UserViewModel.ProfileImgUrl" alt="عکس پروفایل" class="img-circle img-responsive">
                     </a>
                     }
 
@@ -179,9 +179,9 @@
 
 @section masterjs
     {
-    <script src="~/assets/plugins/select2/dist/js/select2.full.min.js"></script>
-    <script src="~/assets/plugins/select2/dist/js/i18n/fa.js"></script>
-    <script src="~/assets/js/pages/select2.js"></script>
+    <script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+    <script src="/assets/plugins/select2/dist/js/i18n/fa.js"></script>
+    <script src="/assets/js/pages/select2.js"></script>
     }
 
 <script>
