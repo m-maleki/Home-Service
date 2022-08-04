@@ -5,7 +5,7 @@
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>هوم سرویس | خانه </title>
+    <title>سوون سرویس | خانه </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
@@ -51,10 +51,10 @@
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper">
 
-            @Html.Partial("./PartialView/_Header")
-            @RenderBody()
-            @Html.Partial("./PartialView/_Footer")
-
+              <partial name="./PartialView/_Header" />
+                          @RenderBody()
+              <partial name="./PartialView/_Footer" />
+    </div>
 
         <div class="modal fade modal-location" id="modal-location" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -165,13 +165,14 @@
     <script src="/js/site.js" asp-append-version="true"></script>
     <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-</body>
-
-</html>
-
-@section Scripts{
+    @section Scripts{
 }
  <script src="_framework/blazor.server.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 @RenderSection("masterjs", required: false)
+
+
+</body>
+
+</html>
 
