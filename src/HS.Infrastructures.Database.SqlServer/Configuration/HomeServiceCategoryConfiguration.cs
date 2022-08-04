@@ -17,7 +17,8 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.HasKey(x => x.Id);
 
             builder.HasMany(x => x.HomeServiceSubCategories)
-                .WithOne(x => x.HomeServiceCategory);
+                .WithOne(x => x.HomeServiceCategory)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasData(
                 new HomeServiceCategory { Id = 1, Name = "دکوراسیون ساختمان" , ImgSrc= "7c6466ad-8fe0-4b81-812f-cfb72620a681.svg" },

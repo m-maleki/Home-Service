@@ -12,7 +12,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Configuration
             builder.ToTable("Orders");
 
             builder.HasOne(x => x.HomeService)
-                .WithMany(x => x.Orders);
+                .WithMany(x => x.Orders)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Orders);

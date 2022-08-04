@@ -11,7 +11,9 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
             builder.ToTable("Cities");
             builder.HasKey(x => x.Id);
             builder.HasMany(x => x.Customers)
-                   .WithOne(x => x.City);
+                   .WithOne(x => x.City)
+                   .OnDelete(DeleteBehavior.Restrict);
+            
 
            builder.HasData(
            new City { Id=1 , Name = "آذربایجان شرقی"},

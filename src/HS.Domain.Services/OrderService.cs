@@ -96,7 +96,7 @@ namespace HS.Domain.Services
             {
                 if (formFile.Length > 0)
                 {
-                    var filename = Path.Combine("wwwroot/Images/Profiles", Guid.NewGuid().ToString() +
+                    var filename = Path.Combine("wwwroot/Images/Orders", Guid.NewGuid().ToString() +
                         ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim('"'));
                     files.Add(filename);
                     try

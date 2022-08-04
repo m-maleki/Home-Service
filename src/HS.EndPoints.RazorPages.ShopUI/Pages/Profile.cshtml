@@ -399,7 +399,19 @@
                                                         }
                                                         @if (User.IsInRole("Expert") && @order.Suggestions.Exists(x => x.ExpertId == Model.CurrentUser.Id))
                                                         {
-                                                            <td>پیشنهاد ثبت شده است</td>
+                                                            @if(@order.Suggestions.Exists(x => x.IsAccept == true && x.ExpertId != Model.CurrentUser.Id))
+                                                            {
+                                                                <td style="color:red">پیشنهاد شما رد شده است</td>
+                                                            }
+                                                            else @if(@order.Suggestions.Exists(x => x.IsAccept == true && x.ExpertId == Model.CurrentUser.Id))
+                                                            {
+                                                                <td style="color:green">پیشنهاد شما تایید شده است</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>پیشنهاد ثبت شده است</td>
+                                                            }
+                                                            
                                                         }
                                                         else if(User.IsInRole("Expert"))
                                                         {

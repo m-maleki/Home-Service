@@ -13,16 +13,19 @@ namespace HS.Infrastructures.Database.SqlServer.Configuration
 
             builder.HasMany(x => x.Comments)
                    .WithOne(x => x.Expert)
-                   .HasForeignKey(x => x.ExpertId);
+                   .HasForeignKey(x => x.ExpertId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.Suggestion)
                 .WithOne(x => x.Expert)
-                .HasForeignKey(x => x.ExpertId);
+                .HasForeignKey(x => x.ExpertId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.ApplicationUser).WithOne(x => x.Expert);
 
             builder.HasMany(d => d.HomeServices)
                 .WithMany(p => p.Experts)
+
                 .UsingEntity<Dictionary<string, object>>(
                     "ExpertHomeService",
                     l => l.HasOne<HomeService>().WithMany().HasForeignKey("HomeServicesId"),
