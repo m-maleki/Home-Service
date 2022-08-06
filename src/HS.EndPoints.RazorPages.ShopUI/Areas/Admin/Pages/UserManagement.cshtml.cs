@@ -33,6 +33,17 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             _applicationUserApplicationService = applicationUserApplicationService;
         }
 
+        public async Task<IActionResult> OnPostActiveConfirmEmail(string email)
+        {
+            await  _applicationUserApplicationService.ActiveEmailConfirm(email);
+            return LocalRedirect("/Admin/UserManagement");
+        }
+
+        public async Task<IActionResult> OnPostDeActiveConfirmEmail(string email)
+        {
+            await _applicationUserApplicationService.DeActiveEmailConfirm(email);
+            return LocalRedirect("/Admin/UserManagement");
+        }
 
         public async Task OnGet(CancellationToken cancellationToken )
         {

@@ -19,5 +19,8 @@ namespace HS.Domain.Core.Contracts.Service
         Task<Guid> SendEmailActivation(string emailAddress, CancellationToken cancellationToken);
         Task SetConfirmKey(string emailAddress, Guid confirmKey);
         Task<bool> confirmEmail(string token);
+        Task ActiveEmailConfirm(string emailAddress);
+        Task DeActiveEmailConfirm(string emailAddress);
+        Task<bool> EmailIsConfirmed(string emailAddress);
     }
 }

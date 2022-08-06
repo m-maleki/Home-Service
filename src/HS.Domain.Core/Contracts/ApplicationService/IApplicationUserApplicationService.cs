@@ -19,6 +19,10 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task<UserDto> Get(CancellationToken cancellationToken);
         Task SetConfirmKey(string emailAddress, Guid confirmKey);
         Task<bool> confirmEmail(string token);
+        Task ActiveEmailConfirm(string emailAddress);
+        Task DeActiveEmailConfirm(string emailAddress);
+        Task<bool> EmailIsConfirmed(string emailAddress);
+
 
     }
 }

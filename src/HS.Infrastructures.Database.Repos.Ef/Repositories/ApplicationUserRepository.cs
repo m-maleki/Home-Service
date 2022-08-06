@@ -30,6 +30,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             _dbContext = dbContext;
         }
 
+
+
         public async Task<bool> confirmEmail(string token)
         {
             var record = await _dbContext.Users
@@ -78,6 +80,31 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 await _userManager.AddToRoleAsync(user, command.Role);
             }
             return result;
+        }
+        public async Task ActiveEmailConfirm(string emailAddress)
+        {
+            var record = await _dbContext.Users
+              .Where(x => x.Email == emailAddress)
+             .FirstOrDefaultAsync();
+            record.EmailConfirmed = true;
+            await _dbContext.SaveChangesAsync();
+        }
+        public async Task<bool> EmailIsConfirmed(string emailAddress)
+        {
+            return await _dbContext.Users
+             .AsNoTracking()
+             .Where(x => x.Email == emailAddress)
+             .Select(x=>x.IsConfirmed)
+             .FirstOrDefaultAsync();
+        }
+
+        public async Task DeActiveEmailConfirm(string emailAddress)
+        {
+            var record = await _dbContext.Users
+              .Where(x => x.Email == emailAddress)
+             .FirstOrDefaultAsync();
+            record.EmailConfirmed = false;
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken)

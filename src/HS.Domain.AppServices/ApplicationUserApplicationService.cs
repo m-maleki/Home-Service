@@ -34,6 +34,8 @@ namespace HS.Domain.ApplicationServices
             _homeServiceService = homeServiceService;
         }
 
+
+
         public async Task<bool> confirmEmail(string token)
         {
            return await _applicationUserService.confirmEmail(token);
@@ -46,6 +48,15 @@ namespace HS.Domain.ApplicationServices
             await _applicationUserService.SetConfirmKey(command.Email, confirmKey);
             return result;
 
+        }
+        public async Task ActiveEmailConfirm(string emailAddress)
+        {
+            await _applicationUserService.ActiveEmailConfirm(emailAddress);
+        }
+
+        public async Task DeActiveEmailConfirm(string emailAddress)
+        {
+            await _applicationUserService.DeActiveEmailConfirm(emailAddress);
         }
 
         public async Task<UserDto> Get(CancellationToken cancellationToken)
@@ -103,6 +114,11 @@ namespace HS.Domain.ApplicationServices
                 await _customerService.Update(_mapper.Map(dto, new CustomerDto()), cancellationToken);
 
             }
+        }
+
+        public async Task<bool> EmailIsConfirmed(string emailAddress)
+        {
+            return await _applicationUserService.EmailIsConfirmed(emailAddress);
         }
     }
 }

@@ -10,6 +10,7 @@
         public string? Role { get; set; }
         public string? ProfileImgUrl { get; set; }
         public string? ProfileImgUrlCustomer { get; set; }
+        public bool EmailConfirmed { get; set; }
         public List<string> Roles { get; set; }
     }
 }

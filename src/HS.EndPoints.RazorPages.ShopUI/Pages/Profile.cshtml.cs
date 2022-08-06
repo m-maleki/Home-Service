@@ -23,6 +23,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IApplicationUserApplicationService _applicationUserApplicationService;
         private readonly IApplicationUserApplicationService _userApplicationService;
+        private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
         public LoginViewModel loginModel;
         public RegisterViewModel registerModel;
         private readonly IMapper _mapper;
@@ -37,7 +38,8 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             UserManager<ApplicationUser> userManager,
             IOrderApplicationService orderApplicationService,
             IMapper mapper,
-            IApplicationUserApplicationService userApplicationService)
+            IApplicationUserApplicationService userApplicationService,
+            Microsoft.AspNetCore.Identity.IPasswordHasher<ApplicationUser> passwordHasher)
         {
             _suggestionApplicationService = suggestionApplicationService;
             _customerApplicationService = customerApplicationService;
@@ -48,6 +50,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             _userManager = userManager;
             _orderApplicationService = orderApplicationService;
             _userApplicationService = userApplicationService;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task OnGet(CancellationToken cancellationToken)
@@ -68,14 +71,26 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         {
             if (ModelState.IsValid)
             {
+                var user = _userManager.Users.FirstOrDefault(x => x.Email == loginModel.Email);
+                
+ 
                 var result = await _applicationUserApplicationService.Login(_mapper.Map(loginModel, new ApplicationUserDto()), cancellationToken);
                 if(result.Succeeded)
                 {
                     return LocalRedirect("/Profile");
                 }
-                else
+                else if (user != null)
                 {
-                    ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است *");
+                    if (_passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginModel.Password) != PasswordVerificationResult.Failed
+                        && !await _applicationUserApplicationService.EmailIsConfirmed(loginModel.Email))
+                    {
+                        ModelState.AddModelError(string.Empty, "ایمیل کاربری تایید نشده است");
+                        return default;
+                    }
+                }
+                if(!result.Succeeded)
+                {
+                    ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است");
                 }
             }
             return default;

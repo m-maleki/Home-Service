@@ -74,5 +74,20 @@ namespace HS.Domain.Services
             return await _applicationRepository.confirmEmail(token);
 
         }
+
+        public async Task ActiveEmailConfirm(string emailAddress)
+        {
+            await _applicationRepository.ActiveEmailConfirm(emailAddress);
+        }
+
+        public async Task DeActiveEmailConfirm(string emailAddress)
+        {
+            await _applicationRepository.DeActiveEmailConfirm(emailAddress);
+        }
+
+        public async Task<bool> EmailIsConfirmed(string emailAddress)
+        {
+           return await _applicationRepository.EmailIsConfirmed(emailAddress);
+        }
     }
 }

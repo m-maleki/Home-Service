@@ -9,10 +9,11 @@
 <table class="table table-bordered table-striped table-hover" id="data-table">
     <thead>
         <tr>
-@*            <th>تصویر کاربر</th>*@
+            @*            <th>تصویر کاربر</th>*@
             <th>نام کاربری</th>
             <th>آدرس ایمیل</th>
             <th>نقش کاربر</th>
+            <th>تایید ایمیل</th>
             <th>عملیات</th>
         </tr>
     </thead>
@@ -22,22 +23,29 @@
             @foreach (var item in Model.users)
             {
                 <tr>
-@*                    <td>
-                        @if(@item.Role=="Expert")
-                        {
-                        <img src="/Images/Profiles/@item.ProfileImgUrl" class="img-circle" style="width:50px;height:50px" alt="Cinque Terre">
-                        }
-                         @if(@item.Role=="Customer")
-                        {
-                        <img src="/Images/Profiles/@item.ProfileImgUrlCustomer" class="img-circle" style="width:50px;height:50px" alt="Cinque Terre">
-                        }
-                    </td>*@
                     <td>@item.UserName</td>
                     <td>@item.Email</td>
                     <td>
                         @item.Role
                     </td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" value="@item.Email" name="email">
+                            @if (@item.EmailConfirmed)
+                            {
+                                <button type="submit" class="btn" asp-page-handler="DeActiveConfirmEmail">
+                                    <i style="color:green;font-size:20px;" class="icon-check icons"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit"  class="btn" asp-page-handler="ActiveConfirmEmail">
+                                    <i style="color:red;font-size:20px;" class="icon-close icons"></i>
+                                </button>
+                            }
+                        </form>
 
+                    </td>
                     <td>
                         <form method="post">
                             <div class="portlet-body">
@@ -50,7 +58,6 @@
                 </tr>
             }
         }
-
     </tbody>
 </table>
 
@@ -75,10 +82,10 @@
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                     <select class="form-control" name="Role" required>
-                        <option value="Customer" >مشتری</option>
-                        <option value="Expert">کارشناس</option>
-                    </select>
+                            <select class="form-control" name="Role" required>
+                                <option value="Customer">مشتری</option>
+                                <option value="Expert">کارشناس</option>
+                            </select>
                         </div><!-- /.input-group -->
                     </div>
 
