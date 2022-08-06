@@ -17,6 +17,8 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         public Guid GetUserId(CancellationToken cancellationToken);
         Task Update(UserDto dto, CancellationToken cancellationToken);
         Task<UserDto> Get(CancellationToken cancellationToken);
+        Task SetConfirmKey(string emailAddress, Guid confirmKey);
+        Task<bool> confirmEmail(string token);
 
     }
 }

@@ -1,4 +1,5 @@
 using HS.Domain.ApplicationServices;
+using HS.Domain.Core.ConfigurationModel;
 using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
@@ -30,7 +31,7 @@ builder.Services.AddDbContext<HSDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
     options=>
     {
-        options.SignIn.RequireConfirmedEmail = false;
+        options.SignIn.RequireConfirmedEmail = true;
         options.SignIn.RequireConfirmedPhoneNumber = false;
         options.Password.RequireLowercase = false;
         options.Password.RequireUppercase = false;
@@ -43,8 +44,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
     )
     .AddEntityFrameworkStores<HSDbContext>();
 
+builder.Services.Configure<EmailConfiguration>(builder.Configuration
+    .GetSection("EmailConfiguration"));
+
+
 builder.Services.AddRazorPages()
      .AddRazorRuntimeCompilation();
+builder.Services.AddCors();
 builder.Services.AddMvc()
     .AddSessionStateTempDataProvider();
 builder.Services.AddServerSideBlazor();
@@ -98,6 +104,7 @@ builder.Services.AddScoped<IHomeServiceCategoryApplicationService, HomeServiceCa
 builder.Services.AddScoped<IHomeServiceCategoryRepository, HomeServiceCategoryRepository>();
 builder.Services.AddScoped<IHomeServiceCategoryService, HomeServiceCategoryService>();
 
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 
 
@@ -118,6 +125,11 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 app.MapRazorPages();
 app.MapBlazorHub();

@@ -51,11 +51,18 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ConfirmationToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -468,7 +475,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کاشی و سرامیک",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4708)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9905)
                         },
                         new
                         {
@@ -479,7 +486,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "بنایی ساختمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4719)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9915)
                         },
                         new
                         {
@@ -490,7 +497,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "گچ کاری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4722)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9917)
                         },
                         new
                         {
@@ -501,7 +508,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کارگر ساده",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4724)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9919)
                         },
                         new
                         {
@@ -512,7 +519,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "بازسازی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4726)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9921)
                         },
                         new
                         {
@@ -523,7 +530,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کانال سازی و دریچه کولر",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4728)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9923)
                         },
                         new
                         {
@@ -534,7 +541,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "عایق کاری و ایزوگام",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4730)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9925)
                         },
                         new
                         {
@@ -545,7 +552,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سنگ کاری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4732)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9927)
                         },
                         new
                         {
@@ -556,7 +563,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سیمان کاری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4734)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9929)
                         },
                         new
                         {
@@ -567,7 +574,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نقاشی ساختمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4736)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9931)
                         },
                         new
                         {
@@ -578,7 +585,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کابینت",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4737)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9933)
                         },
                         new
                         {
@@ -589,7 +596,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کاغذ دیواری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4739)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9935)
                         },
                         new
                         {
@@ -600,7 +607,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نجاری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4741)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9937)
                         },
                         new
                         {
@@ -611,7 +618,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کفسابی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4744)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9939)
                         },
                         new
                         {
@@ -622,7 +629,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کفپوش",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4746)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9941)
                         },
                         new
                         {
@@ -633,7 +640,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "پارکت",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4748)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9943)
                         },
                         new
                         {
@@ -644,7 +651,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "لمینت",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4750)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9945)
                         },
                         new
                         {
@@ -655,7 +662,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "موکت",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4751)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9947)
                         },
                         new
                         {
@@ -666,7 +673,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "دوخت پرده",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4753)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9948)
                         },
                         new
                         {
@@ -677,7 +684,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "مبلمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4755)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9950)
                         },
                         new
                         {
@@ -688,7 +695,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سرویس خواب",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4757)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9952)
                         },
                         new
                         {
@@ -699,7 +706,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سقف کاذب",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4759)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9954)
                         },
                         new
                         {
@@ -710,7 +717,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نمای ساختمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4761)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9956)
                         },
                         new
                         {
@@ -721,7 +728,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تعمیر نمای ساختمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4762)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9958)
                         },
                         new
                         {
@@ -732,7 +739,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "شیشه بری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4764)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9966)
                         },
                         new
                         {
@@ -743,7 +750,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "توری پنجره",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4766)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9968)
                         },
                         new
                         {
@@ -754,7 +761,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نصب درب چوبی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4768)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9970)
                         },
                         new
                         {
@@ -765,7 +772,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "جوشکاری و آهنگری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4770)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9972)
                         },
                         new
                         {
@@ -776,7 +783,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کلید سازی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4772)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9974)
                         },
                         new
                         {
@@ -787,7 +794,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "گل و گیاه آپارتمانی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4800)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9976)
                         },
                         new
                         {
@@ -798,7 +805,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "باغبانی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4803)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9978)
                         },
                         new
                         {
@@ -809,7 +816,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کولر آبی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4805)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9980)
                         },
                         new
                         {
@@ -820,7 +827,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "کولر گازی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4808)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9981)
                         },
                         new
                         {
@@ -831,7 +838,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "پکیج",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4810)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9983)
                         },
                         new
                         {
@@ -842,7 +849,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "آبگرمکن",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4811)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9985)
                         },
                         new
                         {
@@ -853,7 +860,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "فن‌کویل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4813)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(19)
                         },
                         new
                         {
@@ -864,7 +871,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "چیلر و هواساز",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4815)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(23)
                         },
                         new
                         {
@@ -875,7 +882,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "رادیاتور شوفاژ",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4817)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(24)
                         },
                         new
                         {
@@ -886,7 +893,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "موتورخانه",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4819)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(26)
                         },
                         new
                         {
@@ -897,7 +904,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "بخاری گازی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4820)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(28)
                         },
                         new
                         {
@@ -908,7 +915,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "شومینه گازی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4822)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(30)
                         },
                         new
                         {
@@ -919,7 +926,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "لوله کشی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4824)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(32)
                         },
                         new
                         {
@@ -930,7 +937,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "شیرآلات ساختمانی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4826)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(34)
                         },
                         new
                         {
@@ -941,7 +948,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "لوله بازکنی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4828)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(41)
                         },
                         new
                         {
@@ -952,7 +959,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "توالت فرنگی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4829)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(43)
                         },
                         new
                         {
@@ -963,7 +970,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "پمپ آب",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4831)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(45)
                         },
                         new
                         {
@@ -974,7 +981,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "لوله‌ کشی گاز",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4833)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(47)
                         },
                         new
                         {
@@ -985,7 +992,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تخلیه چاه",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4835)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(49)
                         },
                         new
                         {
@@ -996,7 +1003,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "فلاش تانک",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4837)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(51)
                         },
                         new
                         {
@@ -1007,7 +1014,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "روشویی و دست‌شور",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4839)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(53)
                         },
                         new
                         {
@@ -1018,7 +1025,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سینک ظرفشویی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4840)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(55)
                         },
                         new
                         {
@@ -1029,7 +1036,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "برق کاری ساختمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4843)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(57)
                         },
                         new
                         {
@@ -1040,7 +1047,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "آیفون تصویری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4845)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(59)
                         },
                         new
                         {
@@ -1051,7 +1058,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "لوستر",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4846)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(60)
                         },
                         new
                         {
@@ -1062,7 +1069,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "دوربین مداربسته",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4848)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(62)
                         },
                         new
                         {
@@ -1073,7 +1080,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "هواکش",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4850)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(64)
                         },
                         new
                         {
@@ -1084,7 +1091,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "آنتن دیجیتال",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4852)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(66)
                         },
                         new
                         {
@@ -1095,7 +1102,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نورپردازی ساختمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4854)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(68)
                         },
                         new
                         {
@@ -1106,7 +1113,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تایمر مشاعات",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4855)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(70)
                         },
                         new
                         {
@@ -1117,7 +1124,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "جعبه فیوز",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4857)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(71)
                         },
                         new
                         {
@@ -1128,7 +1135,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "داکت کشی و ترانکینگ",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4859)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(73)
                         },
                         new
                         {
@@ -1139,7 +1146,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سیم کشی تلفن",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4861)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(75)
                         },
                         new
                         {
@@ -1150,7 +1157,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سیم کشی سانترال",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4863)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(78)
                         },
                         new
                         {
@@ -1161,7 +1168,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "صافکاری و نقاشی خودرو",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4865)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(80)
                         },
                         new
                         {
@@ -1172,7 +1179,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تعویض روغن",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4866)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(82)
                         },
                         new
                         {
@@ -1183,7 +1190,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تعمیر خودرو",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4868)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(84)
                         },
                         new
                         {
@@ -1194,7 +1201,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "برق خودرو",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4871)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(86)
                         },
                         new
                         {
@@ -1205,7 +1212,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "اسباب کشی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4872)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(87)
                         },
                         new
                         {
@@ -1216,7 +1223,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "حمل بار ",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4874)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(89)
                         },
                         new
                         {
@@ -1227,7 +1234,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "یخچال",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4876)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(91)
                         },
                         new
                         {
@@ -1238,7 +1245,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "ماشین ظرفشویی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4878)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(93)
                         },
                         new
                         {
@@ -1249,7 +1256,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "مایکروفر",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4880)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(95)
                         },
                         new
                         {
@@ -1260,7 +1267,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "اجاق برقی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4882)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(97)
                         },
                         new
                         {
@@ -1271,7 +1278,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "هود آشپزخانه",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4884)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(99)
                         },
                         new
                         {
@@ -1282,7 +1289,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "اجاق گاز",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4886)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(101)
                         },
                         new
                         {
@@ -1293,7 +1300,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "ماشین لباسشویی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4888)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(102)
                         },
                         new
                         {
@@ -1304,7 +1311,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "اتو بخار",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4889)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(104)
                         },
                         new
                         {
@@ -1315,7 +1322,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "اتو پرس",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4891)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(106)
                         },
                         new
                         {
@@ -1326,7 +1333,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "جاروبرقی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4893)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(108)
                         },
                         new
                         {
@@ -1337,7 +1344,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "جارو شارژی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4895)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(110)
                         },
                         new
                         {
@@ -1348,7 +1355,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تلویزیون",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4896)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(113)
                         },
                         new
                         {
@@ -1359,7 +1366,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سینما خانگی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4898)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(115)
                         },
                         new
                         {
@@ -1370,7 +1377,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "دستگاه کپی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4900)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(121)
                         },
                         new
                         {
@@ -1381,7 +1388,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "فکس",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4902)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(123)
                         },
                         new
                         {
@@ -1392,7 +1399,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "پرینتر",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4904)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(125)
                         },
                         new
                         {
@@ -1403,7 +1410,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "پارتیشن اداری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4905)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(127)
                         },
                         new
                         {
@@ -1414,7 +1421,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نظافت دوره ای",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4907)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(129)
                         },
                         new
                         {
@@ -1425,7 +1432,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نظافت منزل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4909)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(131)
                         },
                         new
                         {
@@ -1436,7 +1443,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نظافت ساختمان",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4911)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(133)
                         },
                         new
                         {
@@ -1447,7 +1454,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نظافت شرکت و اداره",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4955)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(134)
                         },
                         new
                         {
@@ -1458,7 +1465,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "ضدعفونی منزل و محل کار",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4958)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(136)
                         },
                         new
                         {
@@ -1469,7 +1476,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "خشکشویی آنلاین",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4960)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(140)
                         },
                         new
                         {
@@ -1480,7 +1487,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "خشکشویی پرده",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4962)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(142)
                         },
                         new
                         {
@@ -1491,7 +1498,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "قالیشویی آنلاین",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4964)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(144)
                         },
                         new
                         {
@@ -1502,7 +1509,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "مبل شویی",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4965)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(146)
                         },
                         new
                         {
@@ -1513,7 +1520,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "سمپاشی منازل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4967)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(171)
                         },
                         new
                         {
@@ -1524,7 +1531,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تعمیر موبایل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4969)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(173)
                         },
                         new
                         {
@@ -1535,7 +1542,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تعمیر لپ‌تاپ",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4971)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(175)
                         },
                         new
                         {
@@ -1546,7 +1553,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تعمیر سخت افزار کامپیوتر",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4972)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(177)
                         },
                         new
                         {
@@ -1557,7 +1564,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نصب نرم افزار",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4974)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(179)
                         },
                         new
                         {
@@ -1568,7 +1575,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نصب ویندوز در محل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4976)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(181)
                         },
                         new
                         {
@@ -1579,7 +1586,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "تعمیر مودم اینترنت",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4978)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(183)
                         },
                         new
                         {
@@ -1590,7 +1597,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "راه‌ اندازی شبکه کامپیوتری",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4979)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(184)
                         },
                         new
                         {
@@ -1601,7 +1608,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "آزمایش در محل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4981)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(186)
                         },
                         new
                         {
@@ -1612,7 +1619,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "پرستاری در منزل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4983)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(188)
                         },
                         new
                         {
@@ -1623,7 +1630,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "ویزیت پزشک در منزل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4985)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(190)
                         },
                         new
                         {
@@ -1634,7 +1641,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "نوار قلب در محل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4987)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(192)
                         },
                         new
                         {
@@ -1645,7 +1652,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             IsDeleted = false,
                             Name = "فیزیوتراپی در منزل",
                             Price = 0.0,
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4989)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 417, DateTimeKind.Local).AddTicks(194)
                         });
                 });
 
@@ -1686,7 +1693,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "7c6466ad-8fe0-4b81-812f-cfb72620a681.svg",
                             IsDeleted = false,
                             Name = "دکوراسیون ساختمان",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2888)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7879)
                         },
                         new
                         {
@@ -1694,7 +1701,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "e39bce31-df3c-4db0-859e-5bb5f344741e.svg",
                             IsDeleted = false,
                             Name = "تاسیسات ساختمان",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2926)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7908)
                         },
                         new
                         {
@@ -1702,7 +1709,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "8cd28fef-f5bb-4d95-9ac5-1ed35d23d99b.svg",
                             IsDeleted = false,
                             Name = "وسایل نقلیه",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2928)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7910)
                         },
                         new
                         {
@@ -1710,7 +1717,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "da7a1e99-d360-4b44-a851-f80d3d24489c.svg",
                             IsDeleted = false,
                             Name = "اسباب کشی و باربری",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2930)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7912)
                         },
                         new
                         {
@@ -1718,7 +1725,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "15d5e842-6ac9-4c75-98ab-204497289fac.svg",
                             IsDeleted = false,
                             Name = "لوازم خانگی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2931)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7914)
                         },
                         new
                         {
@@ -1726,7 +1733,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "5754a1ce-665c-4fa9-b8ae-206650960c1a.svg",
                             IsDeleted = false,
                             Name = "خدمات اداری",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2933)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7916)
                         },
                         new
                         {
@@ -1734,7 +1741,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "7cb97fcc-d549-4421-9a81-b4f97498121c.svg",
                             IsDeleted = false,
                             Name = "نظافت و بهداشت",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2935)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7917)
                         },
                         new
                         {
@@ -1742,7 +1749,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "3219d232-b9e0-4581-bac5-b5a13c1e2664.svg",
                             IsDeleted = false,
                             Name = "دیجیتال و نرم افزار",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2936)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7919)
                         },
                         new
                         {
@@ -1750,7 +1757,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             ImgSrc = "59e143b3-669e-431a-9a3a-306457529e4c.svg",
                             IsDeleted = false,
                             Name = "پزشکی و سلامت",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(2938)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(7921)
                         });
                 });
 
@@ -1787,7 +1794,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 1,
                             IsDeleted = false,
                             Name = "بنایی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4307)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9464)
                         },
                         new
                         {
@@ -1795,7 +1802,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 1,
                             IsDeleted = false,
                             Name = "دکوراسیون",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4320)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9475)
                         },
                         new
                         {
@@ -1803,7 +1810,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 1,
                             IsDeleted = false,
                             Name = "نقاشی ساختمان",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4322)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9478)
                         },
                         new
                         {
@@ -1811,7 +1818,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 1,
                             IsDeleted = false,
                             Name = "درب و پنجره",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4323)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9480)
                         },
                         new
                         {
@@ -1819,7 +1826,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 1,
                             IsDeleted = false,
                             Name = "آهنگری و جوشکاری",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4325)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9482)
                         },
                         new
                         {
@@ -1827,7 +1834,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 1,
                             IsDeleted = false,
                             Name = "باغبانی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4327)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9483)
                         },
                         new
                         {
@@ -1835,7 +1842,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 2,
                             IsDeleted = false,
                             Name = "سرمایش و گرمایش",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4328)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9485)
                         },
                         new
                         {
@@ -1843,7 +1850,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 2,
                             IsDeleted = false,
                             Name = "لوله کشی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4330)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9487)
                         },
                         new
                         {
@@ -1851,7 +1858,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 2,
                             IsDeleted = false,
                             Name = "برق و الکترونیک",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4331)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9488)
                         },
                         new
                         {
@@ -1859,7 +1866,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 2,
                             IsDeleted = false,
                             Name = "تلفن و سانترال",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4333)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9494)
                         },
                         new
                         {
@@ -1867,7 +1874,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 3,
                             IsDeleted = false,
                             Name = "خودرو",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4334)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9496)
                         },
                         new
                         {
@@ -1875,7 +1882,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 4,
                             IsDeleted = false,
                             Name = "اسباب کشی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4336)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9497)
                         },
                         new
                         {
@@ -1883,7 +1890,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 4,
                             IsDeleted = false,
                             Name = "حمل بار",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4338)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9499)
                         },
                         new
                         {
@@ -1891,7 +1898,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 5,
                             IsDeleted = false,
                             Name = "لوازم آشپزخانه",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4339)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9501)
                         },
                         new
                         {
@@ -1899,7 +1906,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 5,
                             IsDeleted = false,
                             Name = "لوازم شست و شو و نظافت",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4341)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9503)
                         },
                         new
                         {
@@ -1907,7 +1914,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 5,
                             IsDeleted = false,
                             Name = "لوازم صوتی و تصویری",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4342)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9505)
                         },
                         new
                         {
@@ -1915,7 +1922,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 6,
                             IsDeleted = false,
                             Name = "ماشین اداری",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4344)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9506)
                         },
                         new
                         {
@@ -1923,7 +1930,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 6,
                             IsDeleted = false,
                             Name = "مبلمان اداری",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4346)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9508)
                         },
                         new
                         {
@@ -1931,7 +1938,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 7,
                             IsDeleted = false,
                             Name = "نظافت",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4347)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9513)
                         },
                         new
                         {
@@ -1939,7 +1946,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 7,
                             IsDeleted = false,
                             Name = "خشکشویی و اتوشویی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4349)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9515)
                         },
                         new
                         {
@@ -1947,7 +1954,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 7,
                             IsDeleted = false,
                             Name = "قالیشویی و مبل شویی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4350)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9518)
                         },
                         new
                         {
@@ -1955,7 +1962,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 7,
                             IsDeleted = false,
                             Name = "سمپاشی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4353)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9519)
                         },
                         new
                         {
@@ -1963,7 +1970,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 8,
                             IsDeleted = false,
                             Name = "موبایل و تبلت",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4354)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9522)
                         },
                         new
                         {
@@ -1971,7 +1978,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 8,
                             IsDeleted = false,
                             Name = "خدمات کامپیوتری",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4356)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9524)
                         },
                         new
                         {
@@ -1979,7 +1986,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 8,
                             IsDeleted = false,
                             Name = "امنیت و شبکه",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4357)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9526)
                         },
                         new
                         {
@@ -1987,7 +1994,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                             HomeServiceCategoryId = 9,
                             IsDeleted = false,
                             Name = "پزشکی",
-                            RegisterDate = new DateTime(2022, 7, 24, 11, 33, 50, 476, DateTimeKind.Local).AddTicks(4359)
+                            RegisterDate = new DateTime(2022, 8, 6, 19, 23, 23, 416, DateTimeKind.Local).AddTicks(9528)
                         });
                 });
 
@@ -2283,7 +2290,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.HasOne("HS.Domain.Core.Entities.Expert", "Expert")
                         .WithMany("Comments")
                         .HasForeignKey("ExpertId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Expert");
@@ -2299,7 +2306,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
 
                     b.HasOne("HS.Domain.Core.Entities.City", "City")
                         .WithMany("Customers")
-                        .HasForeignKey("CityId");
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ApplicationUser");
 
@@ -2327,7 +2335,8 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                 {
                     b.HasOne("HS.Domain.Core.Entities.HomeServiceSubCategory", "HomeServiceSubCategory")
                         .WithMany("HomeServices")
-                        .HasForeignKey("HomeServiceSubCategoryId");
+                        .HasForeignKey("HomeServiceSubCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("HomeServiceSubCategory");
                 });
@@ -2337,7 +2346,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.HasOne("HS.Domain.Core.Entities.HomeServiceCategory", "HomeServiceCategory")
                         .WithMany("HomeServiceSubCategories")
                         .HasForeignKey("HomeServiceCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("HomeServiceCategory");
@@ -2359,13 +2368,13 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.HasOne("HS.Domain.Core.Entities.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HS.Domain.Core.Entities.HomeService", "HomeService")
                         .WithMany("Orders")
                         .HasForeignKey("HomeServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -2389,7 +2398,7 @@ namespace HS.Infrastructures.Database.SqlServer.Migrations
                     b.HasOne("HS.Domain.Core.Entities.Expert", "Expert")
                         .WithMany("Suggestion")
                         .HasForeignKey("ExpertId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HS.Domain.Core.Entities.Order", "Order")

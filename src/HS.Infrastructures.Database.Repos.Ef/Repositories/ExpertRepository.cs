@@ -49,14 +49,16 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             await _context.Experts.AddAsync(record);
             await _context.SaveChangesAsync(cancellationToken);
         }
+
         public async Task Update(ExpertDto entity, CancellationToken cancellationToken)
         {
             var record = await _context.Experts
                .Include(x => x.HomeServices)
                .Where(x => x.Id == entity.Id)
                .FirstOrDefaultAsync(cancellationToken);
-                record.HomeServices.Clear();
 
+                record.HomeServices.Clear();
+                
 
             foreach (var item in entity.HomeServicesIds)
                 record.HomeServices.Add(await _context.HomeServices.FirstOrDefaultAsync(x => x.Id == item));
@@ -64,6 +66,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             record = _mapper.Map(entity, record);
             await _context.SaveChangesAsync(cancellationToken);
         }
+
+
         public async Task<Guid> GetExpertId(Guid expertIdentityId, CancellationToken cancellationToken)
             => await _context.Experts
                 .Where(x => x.ApplicationUserId == expertIdentityId)

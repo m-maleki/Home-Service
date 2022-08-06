@@ -2,6 +2,7 @@
 using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Dtos.ApplicationUsers;
 using HS.Domain.Core.Entities;
+using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,14 +18,32 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMapper _mapper;
-
+        private readonly HSDbContext _dbContext;
         public ApplicationUserRepository(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IMapper mapper)
+            IMapper mapper,
+            HSDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _dbContext = dbContext;
+        }
+
+        public async Task<bool> confirmEmail(string token)
+        {
+            var record = await _dbContext.Users
+                .Where(x => x.ConfirmationToken == token)
+                .FirstOrDefaultAsync();
+
+            if(record != null)
+            {
+                record.EmailConfirmed = true;
+                record.ConfirmationToken = "";
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
         public async Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken)
@@ -32,8 +51,9 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             var user = new ApplicationUser();
             if (command.Role=="Customer")
             {
-                 user = new ApplicationUser
+                user = new ApplicationUser
                 {
+                    ConfirmationToken = "",
                     UserName = command.Email,
                     Email = command.Email,
                     Customer = new Customer()
@@ -44,6 +64,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             {
                 user = new ApplicationUser
                 {
+                    ConfirmationToken = "",
                     UserName = command.Email,
                     Email = command.Email,
                     Expert = new Expert()
@@ -51,6 +72,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             }
 
             var result = await _userManager.CreateAsync(user, command.Password);
+
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, command.Role);
@@ -74,5 +96,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 
         public async Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
            =>  await _signInManager.PasswordSignInAsync(command.Email, command.Password, true, false);
+
+        public async Task SetConfirmKey(string emailAddress,Guid confirmKey)
+        {
+            var record = await _dbContext.Users
+                  .Where(x=>x.Email==emailAddress)
+                 .FirstOrDefaultAsync();
+            record.ConfirmationToken = confirmKey.ToString();
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
         [Display(Name = "رمز عبور")]
         public string? Password { get; set; }
 
-
+        [Required(ErrorMessage = "وارد کردن {0} اجباری می باشد")]
         [Display(Name = "تکرار رمز عبور")]
         [Compare(nameof(Password), ErrorMessage = "* کلمه عبور و تکرار آن باید برابر باشند")]
         public string ConfirmPassword { get; set; }

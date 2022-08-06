@@ -18,14 +18,16 @@ namespace HS.Domain.Services
         private readonly IApplicationUserRepository _applicationRepository;
         private readonly IHttpContextAccessor _httpContext;
         private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly IEmailSender _emailSender;
         public ApplicationUserService(IApplicationUserRepository applicationRepository,
             IHttpContextAccessor httpContext,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IEmailSender emailSender)
         {
             _applicationRepository = applicationRepository;
             _httpContext = httpContext;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
         public async Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken)
             => await _applicationRepository.Create(command, cancellationToken);
@@ -50,6 +52,27 @@ namespace HS.Domain.Services
         public bool IsInRole(string role)
         {
             return _httpContext.HttpContext.User.IsInRole(role);
+        }
+
+        public async Task<Guid> SendEmailActivation(string emailAddress, CancellationToken cancellationToken)
+        {
+            var confirmKey = Guid.NewGuid();
+            var protocol = _httpContext.HttpContext.Request.Scheme;
+            string url = protocol + "://" + _httpContext.HttpContext.Request.Host.Value + "/Account/emailConfirmation";
+            string message = $"<a href={url}?confirmKey={confirmKey}>برای فعالسازی بر روی این لینک کلیک کنید </a>";
+            await _emailSender.SendEmailAsync(emailAddress, "ایمیل فعالسازی", message);
+            return confirmKey;
+        }
+
+        public async Task SetConfirmKey(string emailAddress, Guid confirmKey)
+        {
+            await _applicationRepository.SetConfirmKey(emailAddress, confirmKey);
+        }
+
+        public async Task<bool> confirmEmail(string token)
+        {
+            return await _applicationRepository.confirmEmail(token);
+
         }
     }
 }

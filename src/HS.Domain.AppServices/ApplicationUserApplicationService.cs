@@ -16,6 +16,7 @@ namespace HS.Domain.ApplicationServices
         private readonly IMapper _mapper;
         private readonly ICityService _cityService;
         private readonly IHomeServiceService _homeServiceService;
+     
 
         public ApplicationUserApplicationService(
             IApplicationUserService applicationUserService,
@@ -33,8 +34,19 @@ namespace HS.Domain.ApplicationServices
             _homeServiceService = homeServiceService;
         }
 
+        public async Task<bool> confirmEmail(string token)
+        {
+           return await _applicationUserService.confirmEmail(token);
+        }
+
         public async Task<IdentityResult> Create(ApplicationUserDto command,CancellationToken cancellationToken)
-            =>await _applicationUserService.Create(command, cancellationToken);
+        {
+            var result =  await _applicationUserService.Create(command, cancellationToken);
+            var confirmKey =  await _applicationUserService.SendEmailActivation(command.Email, cancellationToken);
+            await _applicationUserService.SetConfirmKey(command.Email, confirmKey);
+            return result;
+
+        }
 
         public async Task<UserDto> Get(CancellationToken cancellationToken)
         {
@@ -67,6 +79,11 @@ namespace HS.Domain.ApplicationServices
 
         public Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
         => _applicationUserService.Login(command, cancellationToken);
+
+        public async Task SetConfirmKey(string emailAddress, Guid confirmKey)
+        {
+            await _applicationUserService.SetConfirmKey(emailAddress, confirmKey);
+        }
 
         public async Task Update(UserDto dto, CancellationToken cancellationToken)
         {

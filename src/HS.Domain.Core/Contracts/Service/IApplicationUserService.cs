@@ -16,7 +16,8 @@ namespace HS.Domain.Core.Contracts.Service
         public Guid GetUserId(CancellationToken cancellationToken);
         Task<string> getRole(CancellationToken cancellationToken);
         bool IsInRole(string role);
-
-
+        Task<Guid> SendEmailActivation(string emailAddress, CancellationToken cancellationToken);
+        Task SetConfirmKey(string emailAddress, Guid confirmKey);
+        Task<bool> confirmEmail(string token);
     }
 }

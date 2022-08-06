@@ -1,0 +1,13 @@
+﻿@page
+@model HS.EndPoints.RazorPages.UI.Areas.Account.Pages.emailConfirmationModel
+@{
+        Layout = "_Layout";
+    ViewBag.Title = "بازیابی رمز عبور";
+}
+
+
+<div class="text-center">
+    <h3 style="color:red" >@Model.Message</h3>
+    <hr>
+    <a style="color:black" asp-page="./Profile">برای ورود به سایت کلیک کنید</a>
+</div>

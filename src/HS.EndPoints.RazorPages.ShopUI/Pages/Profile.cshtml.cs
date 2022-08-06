@@ -108,8 +108,11 @@ namespace HS.EndPoints.RazorPages.UI.Pages
                 var result = await _applicationUserApplicationService.Create(_mapper.Map(registerModel, new ApplicationUserDto()), cancellationToken);
                 if (result.Succeeded)
                 {
-                    await _signInManager.PasswordSignInAsync(registerModel.Email, registerModel.Password, true, false);
-                    return LocalRedirect("/Profile");
+                    ModelState.AddModelError(string.Empty, "ثبت نام با موفقیت انجام شد");
+                    ModelState.AddModelError(string.Empty, "ایمیل فعالسازی ارسال گردید");
+                    //await _signInManager.PasswordSignInAsync(registerModel.Email, registerModel.Password, true, false);
+                    // return LocalRedirect("/Profile");
+                    return default;
                 }
                 else
                 {
