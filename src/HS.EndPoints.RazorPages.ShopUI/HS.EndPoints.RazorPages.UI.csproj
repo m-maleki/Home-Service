@@ -58,6 +58,7 @@
     </PackageReference>
     <PackageReference Include="Postal.Mvc5" Version="1.2.0" />
     <PackageReference Include="SendGrid" Version="9.28.0" />
+    <PackageReference Include="Seq.Extensions.Logging" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
