@@ -4,6 +4,7 @@ using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 {
@@ -11,11 +12,15 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
     {
         private readonly IMapper _mapper;
         private readonly HSDbContext _context;
+        private readonly ILogger<HomeServiceRepository> _loger;
 
-        public HomeServiceRepository(HSDbContext context, IMapper mapper)
+        public HomeServiceRepository(HSDbContext context,
+            IMapper mapper,
+            ILogger<HomeServiceRepository> loger)
         {
             _context = context;
             _mapper = mapper;
+            _loger = loger;
         }
         public async Task<List<HomeServiceDto>> GetAll(CancellationToken cancellationToken)
             => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
@@ -29,7 +34,6 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                .AsNoTracking()
                .Include(x=>x.HomeServiceSubCategory)
                .Where(x=>x.HomeServiceSubCategoryId== subCategoryId && x.IsDeleted==false)
-               
                .ToListAsync(cancellationToken));
 
         public async Task<HomeServiceDto> GetBy(int id, CancellationToken cancellationToken)
@@ -40,11 +44,19 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .FirstOrDefaultAsync(cancellationToken);
             return _mapper.Map(record, new HomeServiceDto());
         }
+
         public async Task Create(HomeServiceDto entity, CancellationToken cancellationToken)
         {
             var record = _mapper.Map<HomeService>(entity);
             await _context.HomeServices.AddAsync(record);
-            await _context.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _loger.LogError("Error in add new HomeService {exception}", ex);
+            }
         }
         public async Task Update(HomeServiceDto entity, CancellationToken cancellationToken)
         {
@@ -52,7 +64,14 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                  .Where(x => x.Id == entity.Id)
                  .FirstOrDefaultAsync();
             _mapper.Map(entity, record);
-            await _context.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _loger.LogError("Error in update HomeService {exception}", ex);
+            }
         }
         public Task<List<HomeServiceDto>> GetAll(Guid id, CancellationToken cancellationToken)
         {

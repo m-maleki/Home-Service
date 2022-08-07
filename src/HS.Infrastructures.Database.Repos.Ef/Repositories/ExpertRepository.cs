@@ -5,6 +5,7 @@ using HS.Domain.Core.Entities;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Logging;
 
 namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 {
@@ -12,12 +13,13 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
     {
         private readonly HSDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogger<ExpertRepository> _loger;
 
-         
-        public ExpertRepository(HSDbContext context, IMapper mapper)
+        public ExpertRepository(HSDbContext context, IMapper mapper,ILogger<ExpertRepository> loger)
         {
             _context = context;
             _mapper = mapper;
+            _loger = loger;
         }
 
         public async Task<int> Count(CancellationToken cancellationToken )
@@ -31,23 +33,33 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
               .AsNoTracking()
               .Include(x=>x.HomeServices)
               .ToListAsync(cancellationToken));
+
         public async Task<List<ExpertDto>> GetAll(Guid id, CancellationToken cancellationToken)
          => _mapper.Map<List<ExpertDto>>(await _context.Experts
               .AsNoTracking()
               .Include(x => x.HomeServices)
               .Where(x=>x.Id==id)
               .ToListAsync(cancellationToken));
+
         public async Task<ExpertDto> GetBy(Guid id, CancellationToken cancellationToken)
           => await _mapper.ProjectTo<ExpertDto>(_context.Experts
               .AsNoTracking()
               .Include(x=>x.HomeServices))
               .Where(x => x.Id == id)
               .FirstOrDefaultAsync(cancellationToken);
+
         public async Task Create(ExpertDto entity, CancellationToken cancellationToken)
         {
             var record = _mapper.Map<Expert>(entity);
-            await _context.Experts.AddAsync(record);
-            await _context.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await _context.Experts.AddAsync(record);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            catch(Exception ex)
+            {
+                _loger.LogError("Error in add new expert {exception}", ex);
+            }
         }
 
         public async Task Update(ExpertDto entity, CancellationToken cancellationToken)
@@ -58,13 +70,20 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                .FirstOrDefaultAsync(cancellationToken);
 
                 record.HomeServices.Clear();
-                
 
-            foreach (var item in entity.HomeServicesIds)
-                record.HomeServices.Add(await _context.HomeServices.FirstOrDefaultAsync(x => x.Id == item));
+            try
+            {
+                foreach (var item in entity.HomeServicesIds)
+                    record.HomeServices.Add(await _context.HomeServices.FirstOrDefaultAsync(x => x.Id == item));
+                record = _mapper.Map(entity, record);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            catch(Exception ex)
+            {
+                _loger.LogError("Error in update expert {exception}", ex);
 
-            record = _mapper.Map(entity, record);
-            await _context.SaveChangesAsync(cancellationToken);
+            }
+
         }
 
 
@@ -73,6 +92,7 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
                 .Where(x => x.ApplicationUserId == expertIdentityId)
                 .Select(x => x.Id)
                 .FirstOrDefaultAsync(cancellationToken);
+
         public async Task<List<OrderDto>> GetAllBy(Guid expertId, CancellationToken cancellationToken)
         {
             List<Order> result = new List<Order>();

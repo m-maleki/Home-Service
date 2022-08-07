@@ -2,10 +2,16 @@
 using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
+using HS.Domain.Core.Entities;
 using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
+using StackExchange.Redis;
+using System.Text;
 
 namespace HS.EndPoints.RazorPages.ShopUI.Pages
 {
@@ -14,9 +20,15 @@ namespace HS.EndPoints.RazorPages.ShopUI.Pages
     {
 
         private readonly IHomeServiceCategoryApplicationService _homeServiceCategoryApplicationService;
-        public IndexModel(IHomeServiceCategoryApplicationService homeServiceCategoryApplicationService)
+        private readonly IDistributedCache _cache;
+        private readonly IMemoryCache _memoryCache;
+        public IndexModel(IHomeServiceCategoryApplicationService homeServiceCategoryApplicationService,
+            IDistributedCache cache,
+            IMemoryCache memoryCache)
         {
             _homeServiceCategoryApplicationService = homeServiceCategoryApplicationService;
+            _cache = cache;
+            _memoryCache = memoryCache;
         }
 
         public List<HomeServiceCategoryDto> homeServiceCategories;
@@ -24,8 +36,7 @@ namespace HS.EndPoints.RazorPages.ShopUI.Pages
 
         public async Task OnGet(CancellationToken cancellationToken)
         {
-           
-            homeServiceCategories = await _homeServiceCategoryApplicationService.GetAll(cancellationToken);
+                homeServiceCategories = await _homeServiceCategoryApplicationService.GetAll(cancellationToken);
         }
     }
 }

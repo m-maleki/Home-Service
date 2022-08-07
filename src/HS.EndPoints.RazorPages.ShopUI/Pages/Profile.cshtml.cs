@@ -24,6 +24,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         private readonly IApplicationUserApplicationService _applicationUserApplicationService;
         private readonly IApplicationUserApplicationService _userApplicationService;
         private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
+        private readonly ILogger<ProfileModel> _logger;
         public LoginViewModel loginModel;
         public RegisterViewModel registerModel;
         private readonly IMapper _mapper;

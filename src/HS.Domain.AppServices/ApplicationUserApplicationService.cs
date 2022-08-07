@@ -4,7 +4,7 @@ using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Dtos.ApplicationUsers;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.Extensions.Logging;
 
 namespace HS.Domain.ApplicationServices
 {
@@ -16,7 +16,7 @@ namespace HS.Domain.ApplicationServices
         private readonly IMapper _mapper;
         private readonly ICityService _cityService;
         private readonly IHomeServiceService _homeServiceService;
-     
+        private readonly ILogger<ApplicationUserApplicationService> _logger;
 
         public ApplicationUserApplicationService(
             IApplicationUserService applicationUserService,
@@ -24,7 +24,8 @@ namespace HS.Domain.ApplicationServices
             IExpertService expertService,
             IMapper mapper,
             ICityService cityService,
-            IHomeServiceService homeServiceService)
+            IHomeServiceService homeServiceService,
+            ILogger<ApplicationUserApplicationService> logger)
         {
             _applicationUserService = applicationUserService;
             _customerService = customerService;
@@ -32,6 +33,7 @@ namespace HS.Domain.ApplicationServices
             _mapper = mapper;
             _cityService = cityService;
             _homeServiceService = homeServiceService;
+            _logger = logger;
         }
 
 
@@ -89,10 +91,15 @@ namespace HS.Domain.ApplicationServices
         }
 
         public Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
-        => _applicationUserService.Login(command, cancellationToken);
+        {
+            _logger.LogInformation("User {emailAddress} login to website", command.Email);
+            return _applicationUserService.Login(command, cancellationToken);
+
+        }
 
         public async Task SetConfirmKey(string emailAddress, Guid confirmKey)
         {
+            _logger.LogInformation("ConfirmKey {Key} set for user {emailAddress}", confirmKey, emailAddress);
             await _applicationUserService.SetConfirmKey(emailAddress, confirmKey);
         }
 
@@ -112,13 +119,14 @@ namespace HS.Domain.ApplicationServices
                 if (dto.ProfileImgFile != null)
                     dto.ProfileImgUrl = await _customerService.UploadImageProfile(dto.ProfileImgFile, cancellationToken);
                 await _customerService.Update(_mapper.Map(dto, new CustomerDto()), cancellationToken);
-
             }
         }
 
         public async Task<bool> EmailIsConfirmed(string emailAddress)
         {
+            _logger.LogInformation("user {emailAddress} confirmed account", emailAddress);
             return await _applicationUserService.EmailIsConfirmed(emailAddress);
+
         }
     }
 }

@@ -22,6 +22,7 @@ builder.Logging.AddConsole();
 builder.Logging.AddSeq("http://185.55.226.248:5341/", "u6eA9I6VidVTRQJHCSWT");
 
 
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account";
@@ -114,7 +115,13 @@ builder.Services.AddScoped<IHomeServiceCategoryService, HomeServiceCategoryServi
 
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
+//builder.Services.AddStackExchangeRedisCache(options =>
+//{
+//    options.Configuration = "localhost:9191,password=123456";
+//    options.InstanceName = "soonService";
+//});
 
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 

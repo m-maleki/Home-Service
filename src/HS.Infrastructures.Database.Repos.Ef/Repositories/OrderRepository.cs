@@ -5,6 +5,7 @@ using HS.Domain.Core.Entities;
 using HS.Domain.Core.Enums;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HS.Infrastructures.Database.Repos.Ef.Repositories
 {
@@ -12,11 +13,15 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
     {
         private readonly IMapper _mapper;
         private readonly HSDbContext _context;
+        private readonly ILogger<OrdersRepository> _loger;
 
-        public OrdersRepository(HSDbContext context, IMapper mapper)
+        public OrdersRepository(HSDbContext context,
+            IMapper mapper,
+            ILogger<OrdersRepository> loger)
         {
             _context = context;
             _mapper = mapper;
+            _loger = loger;
         }
 
         public async Task<List<OrderDto>> GetAllForExpert(CancellationToken cancellationToken)
@@ -54,24 +59,39 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             var record = _mapper.Map<Order>(entity);
             record.RegisterDate = DateTime.Now;
             record.Status = OrderStatusEnum.WaitingExpertAdvice;
-            await _context.Orders.AddAsync(record);
-            await _context.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await _context.Orders.AddAsync(record);
+                await _context.SaveChangesAsync(cancellationToken);
+                return record.Id;
+            }
+            catch(Exception ex)
+            {
+                _loger.LogError("Error in add new Order {exception}", ex);
+            }
             return record.Id;
         }
         public async Task addOrderFiles(List<OrderFileDto> dto, int orderId, CancellationToken cancellationToken)
         {
-            foreach (var file in dto)
+            try
             {
-                OrderFile productFile = new OrderFile
+                foreach (var file in dto)
                 {
-                    OrderId=orderId,
-                    Name = file.Name,
-                    CreationDate = DateTime.Now,
-                    IsDeleted = false,
-                };
-                _context.OrderFiles.Add(productFile);
+                    OrderFile productFile = new OrderFile
+                    {
+                        OrderId = orderId,
+                        Name = file.Name,
+                        CreationDate = DateTime.Now,
+                        IsDeleted = false,
+                    };
+                    _context.OrderFiles.Add(productFile);
+                }
+                await _context.SaveChangesAsync(cancellationToken);
             }
-            await _context.SaveChangesAsync(cancellationToken);
+            catch(Exception ex)
+            {
+                _loger.LogError("Error in add Order Files {exception}", ex);
+            }
         }
         public async Task Update(OrderDto entity, CancellationToken cancellationToken)
         {
@@ -115,11 +135,20 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
         public async Task HardDelete(int orderId, CancellationToken cancellationToken)
         {
+
             var order = await _context.Orders
                 .Where(x => x.Id == orderId)
                 .FirstOrDefaultAsync(cancellationToken);
             _context.Remove(order);
-            await _context.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+
+            }
+            catch(Exception ex)
+            {
+                _loger.LogError("Error in HardDelete order {exception}", ex);
+            }
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)
