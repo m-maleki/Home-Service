@@ -46,10 +46,18 @@ namespace HS.Domain.ApplicationServices
         public async Task<IdentityResult> Create(ApplicationUserDto command,CancellationToken cancellationToken)
         {
             var result =  await _applicationUserService.Create(command, cancellationToken);
-            var confirmKey =  await _applicationUserService.SendEmailActivation(command.Email, cancellationToken);
-            await _applicationUserService.SetConfirmKey(command.Email, confirmKey);
+            if(result.Succeeded)
+            {
+                var confirmKey = await _applicationUserService.SendEmailActivation(command.Email, cancellationToken);
+                await _applicationUserService.SetConfirmKey(command.Email, confirmKey);
+                return result;
+            }
+            else
+            {
+                return result;
+            }
+            
             return result;
-
         }
         public async Task ActiveEmailConfirm(string emailAddress)
         {
