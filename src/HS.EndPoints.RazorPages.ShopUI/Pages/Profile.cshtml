@@ -219,7 +219,7 @@
                                                                     <span class="input-group-addon">
                                                                         <i class="icon-screen-smartphone"></i>
                                                                     </span>
-                                                                    <input type="text" name="PhoneNumber" value="@Model.CurrentUser.PhoneNumber" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left mobile">
+                                                                    <input type="text"  name="PhoneNumber"  placeholder="09123456789" pattern="09[0-3][0-9]-?[0-9]{3}-?[0-9]{4}" value="@Model.CurrentUser.PhoneNumber" style="border: 0.5px solid ;border-color:grey" class="form-control  text-right mobile" title="لطفا شماره همراه را با فرمت صحیح وارد کنید">
                                                                 </div>
                                                             </div>
 
@@ -229,20 +229,20 @@
                                                                     <span class="input-group-addon">
                                                                         <i class="icon-envelope"></i>
                                                                     </span>
-                                                                    <input type="email" name="Email" asp-for="@Model.CurrentUser.ApplicationUser.Email" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left" readonly>
+                                                                    <input type="email" name="Email" asp-for="@Model.CurrentUser.ApplicationUser.Email" style="border: 0.5px solid;border-color:grey" class="form-control  text-right email" readonly>
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="txt-iban">شماره شبا</label>
                                                                 <div class="input-group round">
-                                                                    <input type="text" name="ShebaNumber" value="@Model.CurrentUser.ShebaNumber" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left iban" maxlength="27">
+                                                                    <input type="text" name="ShebaNumber" value="@Model.CurrentUser.ShebaNumber" style="border: 0.5px solid;border-color:grey" class="form-control  text-right iban" maxlength="27">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="txt-card">شماره کارت</label>
                                                                 <div class="input-group round">
-                                                                    <input type="text" name="CardNumber" value="@Model.CurrentUser.CardNumber" style="border: 0.5px solid;border-color:grey" class="form-control ltr text-left card">
+                                                                    <input type="text" name="CardNumber" value="@Model.CurrentUser.CardNumber" style="border: 0.5px solid;border-color:grey" class="form-control  text-right card">
                                                                 </div>
                                                             </div>
 

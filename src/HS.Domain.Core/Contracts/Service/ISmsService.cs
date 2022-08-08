@@ -8,6 +8,6 @@ namespace HS.Domain.Core.Contracts.Service
 {
     public interface ISmsService
     {
-       void Send(string message, string phoneNumber);
+       Task Send(string message, string phoneNumber);
     }
 }

@@ -35,7 +35,9 @@ namespace HS.Domain.ApplicationServices
         {
             await _suggestionService.Accept(suggestionId, cancellationToken);
             await _orderService.SetOrderStatusEnum(orderId, OrderStatusEnum.WaitingSpecialistComeToYourPlace, cancellationToken);
-
+            var sugg =await _suggestionService.Get(suggestionId, cancellationToken);
+            if(sugg.Expert.PhoneNumber !=null)
+            await _smsService.Send($"سلام. {sugg.Expert.FirstName +" " + sugg.Expert.LastName} عزیز، پیشنهاد شما با شماره {suggestionId} توسط کارفرما تایید شد.", sugg.Expert.PhoneNumber);
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)

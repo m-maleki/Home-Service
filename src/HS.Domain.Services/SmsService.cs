@@ -1,5 +1,6 @@
 ﻿using HS.Domain.Core.ConfigurationModel;
 using HS.Domain.Core.Contracts.Service;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmsIrRestfulNetCore;
 using System;
@@ -13,14 +14,15 @@ namespace HS.Domain.Services
     public class SmsService :ISmsService
     {
         private readonly IOptions<SmsConfiguration> _smsConfiguration;
-
-        public SmsService(IOptions<SmsConfiguration> smsConfiguration)
+        private readonly ILogger<SmsService> _loger;
+        public SmsService(IOptions<SmsConfiguration> smsConfiguration, ILogger<SmsService> loger)
         {
             _smsConfiguration = smsConfiguration;
+            _loger = loger;
         }
 
 
-        public void Send(string message , string phoneNumber)
+        public async Task Send(string message , string phoneNumber)
         {
             string userApikey = _smsConfiguration.Value.UserApikey;
             string secretKey = _smsConfiguration.Value.SecretKey;
@@ -28,7 +30,7 @@ namespace HS.Domain.Services
             var token = new Token().GetToken(userApikey, secretKey);
 
             if (string.IsNullOrWhiteSpace(token))
-                throw new Exception($@"{nameof(token)} is null");
+                _loger.LogWarning($"sms api key in null. please chack configuration");
 
             var messageSendObject = new MessageSendObject()
             {
@@ -42,17 +44,18 @@ namespace HS.Domain.Services
             MessageSendResponseObject messageSendResponseObject = new MessageSend().Send(token, messageSendObject);
 
             if (messageSendResponseObject == null)
-                throw new Exception($@"{nameof(messageSendResponseObject)} is null");
+                _loger.LogInformation($"messageSendResponseObject sms in null");
 
-            //if (messageSendResponseObject.IsSuccessful)
-            //{
+            if (messageSendResponseObject.IsSuccessful)
+            {
+                _loger.LogInformation($"send sms to number {phoneNumber} width message {message} ");
 
+            }
+            else
+            {
+                _loger.LogInformation($"Error in send sms to number {phoneNumber} width message {message} ");
 
-            //}
-            //else
-            //{
-
-            //}
+            }
 
         }
 

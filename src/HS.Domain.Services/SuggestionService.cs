@@ -49,9 +49,9 @@ namespace HS.Domain.Services
             return await _suggestionRepository.EnsureExistSuggestion(orderId, cancellationToken);
         }
 
-        public Task<SuggestionDto> Get(int Id, CancellationToken cancellationToken)
+        public async Task<SuggestionDto> Get(int Id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           return await _suggestionRepository.GetBy(Id, cancellationToken);
         }
 
         public async Task<List<SuggestionDto>> Get(CancellationToken cancellationToken)
