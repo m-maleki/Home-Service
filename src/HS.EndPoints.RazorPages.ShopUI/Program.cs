@@ -11,6 +11,7 @@ using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using System.Reflection;
 
 
@@ -28,24 +29,25 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/Account";
     options.AccessDeniedPath = "/AccessDenied";
 });
+
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMapping)));
-builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMappingUi))); 
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMappingUi)));
 
 var connectionString = builder.Configuration.GetConnectionString("HSConnection") ?? throw new InvalidOperationException("Connection string 'HSConnection' not found.");
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 builder.Services.AddDbContext<HSDbContext>(options =>
-    options.UseSqlServer(connectionString)); 
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
-    options=>
+    options =>
     {
         options.SignIn.RequireConfirmedEmail = true;
         options.SignIn.RequireConfirmedPhoneNumber = false;
         options.Password.RequireLowercase = false;
         options.Password.RequireUppercase = false;
 
-        options.Password.RequireDigit=false;
+        options.Password.RequireDigit = false;
         options.Password.RequiredLength = 4;
         options.Password.RequireNonAlphanumeric = false;
 
@@ -55,6 +57,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
 
 builder.Services.Configure<EmailConfiguration>(builder.Configuration
     .GetSection("EmailConfiguration"));
+
+builder.Services.AddRecaptchaService();
 
 
 builder.Services.AddRazorPages()

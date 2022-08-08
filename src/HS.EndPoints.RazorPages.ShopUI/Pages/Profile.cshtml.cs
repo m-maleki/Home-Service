@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Griesoft.AspNetCore.ReCaptcha;
 using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Dtos.ApplicationUsers;
@@ -13,6 +14,7 @@ using System.Security.Claims;
 
 namespace HS.EndPoints.RazorPages.UI.Pages
 {
+    [ValidateRecaptcha(Action = "submit")]
     public class ProfileModel : PageModel
     {
         private readonly ICustomerApplicationService _customerApplicationService;
@@ -62,21 +64,23 @@ namespace HS.EndPoints.RazorPages.UI.Pages
                 Orders = _mapper.Map(await _orderApplicationService.GetAll(cancellationToken), Orders);
             }
         }
-        public async Task<IActionResult> OnPostUpdate(UserViewModel model,CancellationToken cancellationToken)
+        public async Task<IActionResult> OnPostUpdate(UserViewModel model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
-            await _userApplicationService.Update(_mapper.Map(model, new UserDto()), cancellationToken);
+                await _userApplicationService.Update(_mapper.Map(model, new UserDto()), cancellationToken);
             return LocalRedirect("/Profile");
         }
-        public async Task<IActionResult> OnPostLogin(LoginViewModel loginModel,CancellationToken cancellationToken)
+
+
+        public async Task<IActionResult> OnPostLogin(LoginViewModel loginModel, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
                 var user = _userManager.Users.FirstOrDefault(x => x.Email == loginModel.Email);
-                
- 
+
+
                 var result = await _applicationUserApplicationService.Login(_mapper.Map(loginModel, new ApplicationUserDto()), cancellationToken);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return LocalRedirect("/Profile");
                 }
@@ -89,7 +93,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
                         return default;
                     }
                 }
-                if(!result.Succeeded)
+                if (!result.Succeeded)
                 {
                     ModelState.AddModelError(string.Empty, "نام کاربری یا کلمه عبور اشتباه است");
                 }
@@ -103,21 +107,21 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             return LocalRedirect("/Profile");
         }
 
-        public async Task<IActionResult> OnPostAccept(int SuggId, int OrderId,CancellationToken cancellationToken)
+        public async Task<IActionResult> OnPostAccept(int SuggId, int OrderId, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
                 await _suggestionApplicationService.Accept(SuggId, OrderId, cancellationToken);
             return LocalRedirect("/Profile");
         }
 
-        public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model,CancellationToken cancellationToken)
+        public async Task<IActionResult> OnPostCreateSuggest(SuggestionViewModel model, CancellationToken cancellationToken)
         {
 
             await _suggestionApplicationService.Create(_mapper.Map(model, new SuggestionDto()), cancellationToken);
             return LocalRedirect("/Profile");
         }
 
-        public async Task<IActionResult> OnPostCreate(RegisterViewModel registerModel,CancellationToken cancellationToken)
+        public async Task<IActionResult> OnPostCreate(RegisterViewModel registerModel, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
@@ -126,8 +130,6 @@ namespace HS.EndPoints.RazorPages.UI.Pages
                 {
                     ModelState.AddModelError(string.Empty, "ثبت نام با موفقیت انجام شد");
                     ModelState.AddModelError(string.Empty, "ایمیل فعالسازی ارسال گردید");
-                    //await _signInManager.PasswordSignInAsync(registerModel.Email, registerModel.Password, true, false);
-                    // return LocalRedirect("/Profile");
                     return default;
                 }
                 else

@@ -1,12 +1,16 @@
 ﻿@page
 @using Framework.Utilities
 @using System.Globalization
+@using Griesoft.AspNetCore.ReCaptcha.Configuration
 @using HS.Domain.Core.Enums
+@using Microsoft.Extensions.Options
+
 @model HS.EndPoints.RazorPages.UI.Pages.ProfileModel
 @{
     Layout = "_LayoutProfile";
     bool isAccept = false;
 }
+@inject IOptions<RecaptchaSettings> RecaptchaSettings
 
 <section class="section-padding-equal-70">
     <div class="container">
@@ -58,13 +62,13 @@
                             <hr />
                             <br />
                                 <div class="row">
-
+                                    
                                     @if (!User.Identity.IsAuthenticated)
                                     {
                                         <div class="col-lg-6">
                                             <div class="form-box login-form">
                                                 <h3 class="item-title">ورود</h3>
-                                                <form id="formLogin" role="form" asp-page-handler="Login" method="post">
+                                                <form id="formLogin" asp-page="Profile"  asp-page-handler="Login" method="post">
                                                     <div class="form-group">
                                                         <label asp-for="loginModel.Email"></label>
                                                         <input asp-for="loginModel.Email" type="email" class="form-control"  >
@@ -76,7 +80,8 @@
                                                          @Html.ValidationMessageFor(m=> m.loginModel.Password,"",new {style="color:red" })
                                                     </div>
                                                     <div class="form-group d-flex">
-                                                        <input type="submit" class="submit-btn" value="ورود">
+                                                        <recaptcha-script>
+                                                        <recaptcha-v3 class="submit-btn" form-id="formLogin" action="submit">ورود</recaptcha-v3>
                                                     </div>
                                                 </form>
                                             </div>
@@ -112,7 +117,8 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <input type="submit" class="submit-btn" value="ثبت نام">
+                                                        <recaptcha-script>
+                                                        <recaptcha-v3 class="submit-btn" form-id="formRegister" action="submit">ثبت نام</recaptcha-v3>
                                                     </div>
                                                 </form>
                                             </div>
