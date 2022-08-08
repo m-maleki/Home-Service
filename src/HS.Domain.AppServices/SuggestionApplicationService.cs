@@ -2,6 +2,7 @@
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Enums;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -19,12 +20,14 @@ namespace HS.Domain.ApplicationServices
         private readonly IApplicationUserApplicationService _userApplicationService;
         private readonly ISmsService _smsService;
         private readonly IEmailService _emailService;
+        private readonly ILogger<SuggestionApplicationService> _logger;
         public SuggestionApplicationService(ISuggestionService suggestionService,
             IExpertService expertService,
             IOrderService orderService,
             IApplicationUserApplicationService userApplicationService,
             ISmsService smsService,
-            IEmailService emailService)
+            IEmailService emailService,
+            ILogger<SuggestionApplicationService> logger)
         {
             _suggestionService = suggestionService;
             _expertService = expertService;
@@ -32,6 +35,7 @@ namespace HS.Domain.ApplicationServices
             _userApplicationService = userApplicationService;
             _smsService = smsService;
             _emailService = emailService;
+            _logger = logger;
         }
 
         public async Task Accept(int suggestionId, int orderId, CancellationToken cancellationToken)
@@ -44,11 +48,11 @@ namespace HS.Domain.ApplicationServices
             if (sugg.Expert.PhoneNumber !=null)
             {
                 await _smsService.Send(message, sugg.Expert.PhoneNumber);
+                _logger.LogInformation("Send SMS : {message} ", message);
             }
-            if(sugg.Expert.ApplicationUser.Email !=null)
-            {
+
                await _emailService.SendEmailAsync(sugg.Expert.ApplicationUser.Email, "تایید پیشنهاد توسط کارفرما", message);
-            }
+                _logger.LogInformation("Send Email : {message} ", message);
 
         }
 
