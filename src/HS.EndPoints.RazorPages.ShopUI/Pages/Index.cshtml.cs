@@ -3,6 +3,7 @@ using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
+using HS.Domain.Services;
 using HS.Infrastructures.Database.Repos.Ef.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +23,17 @@ namespace HS.EndPoints.RazorPages.ShopUI.Pages
         private readonly IHomeServiceCategoryApplicationService _homeServiceCategoryApplicationService;
         private readonly IDistributedCache _cache;
         private readonly IMemoryCache _memoryCache;
+        private readonly ISmsService _smsService;
+
         public IndexModel(IHomeServiceCategoryApplicationService homeServiceCategoryApplicationService,
             IDistributedCache cache,
-            IMemoryCache memoryCache)
+            IMemoryCache memoryCache,
+            ISmsService smsService)
         {
             _homeServiceCategoryApplicationService = homeServiceCategoryApplicationService;
             _cache = cache;
             _memoryCache = memoryCache;
+            _smsService = smsService;
         }
 
         public List<HomeServiceCategoryDto> homeServiceCategories;

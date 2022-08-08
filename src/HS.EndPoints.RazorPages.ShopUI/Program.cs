@@ -58,6 +58,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
 builder.Services.Configure<EmailConfiguration>(builder.Configuration
     .GetSection("EmailConfiguration"));
 
+builder.Services.Configure<SmsConfiguration>(builder.Configuration
+    .GetSection("SmsSettings"));
+
+
 builder.Services.AddRecaptchaService();
 
 
@@ -117,7 +121,8 @@ builder.Services.AddScoped<IHomeServiceCategoryApplicationService, HomeServiceCa
 builder.Services.AddScoped<IHomeServiceCategoryRepository, HomeServiceCategoryRepository>();
 builder.Services.AddScoped<IHomeServiceCategoryService, HomeServiceCategoryService>();
 
-builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ISmsService, SmsService>();
 
 //builder.Services.AddStackExchangeRedisCache(options =>
 //{

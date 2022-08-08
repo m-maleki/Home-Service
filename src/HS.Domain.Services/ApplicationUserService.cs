@@ -18,11 +18,11 @@ namespace HS.Domain.Services
         private readonly IApplicationUserRepository _applicationRepository;
         private readonly IHttpContextAccessor _httpContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailSender;
         public ApplicationUserService(IApplicationUserRepository applicationRepository,
             IHttpContextAccessor httpContext,
             UserManager<ApplicationUser> userManager,
-            IEmailSender emailSender)
+            IEmailService emailSender)
         {
             _applicationRepository = applicationRepository;
             _httpContext = httpContext;

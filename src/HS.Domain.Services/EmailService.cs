@@ -7,11 +7,11 @@ using HS.Domain.Core.Contracts.Service;
 
 namespace HS.Domain.Services
 {
-    public class EmailSender: IEmailSender
+    public class EmailService: IEmailService
     {
         private readonly IOptions<EmailConfiguration> _emailConfiguration;
 
-        public EmailSender(IOptions<EmailConfiguration> emailConfiguration)
+        public EmailService(IOptions<EmailConfiguration> emailConfiguration)
         {
             _emailConfiguration = emailConfiguration;
         }

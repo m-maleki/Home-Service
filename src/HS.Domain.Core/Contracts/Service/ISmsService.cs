@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HS.Domain.Core.Contracts.Service
 {
-    public interface IEmailService
+    public interface ISmsService
     {
-        Task SendEmailAsync(string email, string subject, string message);
+       void Send(string message, string phoneNumber);
     }
 }

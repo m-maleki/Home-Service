@@ -17,21 +17,25 @@ namespace HS.Domain.ApplicationServices
         private readonly IOrderService _orderService;
         private readonly IExpertService _expertService;
         private readonly IApplicationUserApplicationService _userApplicationService;
+        private readonly ISmsService _smsService;
         public SuggestionApplicationService(ISuggestionService suggestionService,
             IExpertService expertService,
             IOrderService orderService,
-            IApplicationUserApplicationService userApplicationService)
+            IApplicationUserApplicationService userApplicationService,
+            ISmsService smsService)
         {
             _suggestionService = suggestionService;
             _expertService = expertService;
             _orderService = orderService;
             _userApplicationService = userApplicationService;
+            _smsService = smsService;
         }
 
         public async Task Accept(int suggestionId, int orderId, CancellationToken cancellationToken)
         {
             await _suggestionService.Accept(suggestionId, cancellationToken);
             await _orderService.SetOrderStatusEnum(orderId, OrderStatusEnum.WaitingSpecialistComeToYourPlace, cancellationToken);
+
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)

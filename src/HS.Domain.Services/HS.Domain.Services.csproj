@@ -10,6 +10,7 @@
     <PackageReference Include="Castle.Core" Version="5.1.0" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="MimeKit" Version="3.3.0" />
+    <PackageReference Include="SmsIrRestfulNetCore" Version="1.1.4" />
   </ItemGroup>
 
   <ItemGroup>
