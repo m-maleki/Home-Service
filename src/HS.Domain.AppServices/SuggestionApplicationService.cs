@@ -18,26 +18,38 @@ namespace HS.Domain.ApplicationServices
         private readonly IExpertService _expertService;
         private readonly IApplicationUserApplicationService _userApplicationService;
         private readonly ISmsService _smsService;
+        private readonly IEmailService _emailService;
         public SuggestionApplicationService(ISuggestionService suggestionService,
             IExpertService expertService,
             IOrderService orderService,
             IApplicationUserApplicationService userApplicationService,
-            ISmsService smsService)
+            ISmsService smsService,
+            IEmailService emailService)
         {
             _suggestionService = suggestionService;
             _expertService = expertService;
             _orderService = orderService;
             _userApplicationService = userApplicationService;
             _smsService = smsService;
+            _emailService = emailService;
         }
 
         public async Task Accept(int suggestionId, int orderId, CancellationToken cancellationToken)
         {
+            string message = "";
             await _suggestionService.Accept(suggestionId, cancellationToken);
             await _orderService.SetOrderStatusEnum(orderId, OrderStatusEnum.WaitingSpecialistComeToYourPlace, cancellationToken);
             var sugg =await _suggestionService.Get(suggestionId, cancellationToken);
-            if(sugg.Expert.PhoneNumber !=null)
-            await _smsService.Send($"سلام. {sugg.Expert.FirstName +" " + sugg.Expert.LastName} عزیز، پیشنهاد شما با شماره {suggestionId} توسط کارفرما تایید شد.", sugg.Expert.PhoneNumber);
+            message = $"سلام. {sugg.Expert.FirstName + " " + sugg.Expert.LastName} عزیز، پیشنهاد شما با شماره {suggestionId} توسط کارفرما تایید شد.";
+            if (sugg.Expert.PhoneNumber !=null)
+            {
+                await _smsService.Send(message, sugg.Expert.PhoneNumber);
+            }
+            if(sugg.Expert.ApplicationUser.Email !=null)
+            {
+               await _emailService.SendEmailAsync(sugg.Expert.ApplicationUser.Email, "تایید پیشنهاد توسط کارفرما", message);
+            }
+
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)
