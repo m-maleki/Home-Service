@@ -51,6 +51,9 @@ namespace HS.Domain.Services
            return await _homeServiceRepository.GetAll(subCategoryId, cancellationToken);
         }
 
+        public Task<List<HomeServiceDto>> Search(string keyword, CancellationToken cancellationToken)
+            =>_homeServiceRepository.Search(keyword, cancellationToken);
+
         public async Task<string> UploadImageProfile(IFormFile FormFile, CancellationToken cancellationToken)
         {
             string filePath;

@@ -12,21 +12,16 @@
                     </h1>
                     <div class="item-subtitle">جستجو بین بیش از 100 سرویس مختلف</div>
                     <div class="search-box-layout1">
-                        <form action="#">
+                        <form  method="get" asp-page="./SerachResult">
                             <div class="row no-gutters">
-                                <div class="col-lg-4 form-group">
-                                    <div class="input-search-btn search-category" data-toggle="modal" data-target="#modal-category">
-                                        <i class="fas fa-tags"></i>
-                                        <label>انتخاب دسته بندی</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-6 form-group">
                                     <div class="input-search-btn search-keyword">
                                         <i class="fas fa-text-width"></i>
-                                        <input type="text" class="form-control" placeholder="کلمه کلیدی را وارد کنید ..." name="keyword">
+                                        <input type="text" class="form-control" placeholder="کلمه کلیدی را وارد کنید ..." id="inputSearch" name="inputSearch">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-6 form-group">
+                                        <input type="hidden" id="keyword" name="keyword"/>
                                     <button type="submit" class="submit-btn"><i class="fas fa-search"></i>جستجو</button>
                                 </div>
                             </div>

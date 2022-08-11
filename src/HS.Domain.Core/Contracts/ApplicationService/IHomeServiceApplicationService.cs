@@ -15,5 +15,6 @@ namespace HS.Domain.Core.Contracts.ApplicationService
         Task Create(HomeServiceDto homeServiceDto, CancellationToken cancellationToken);
         Task Active(int id, CancellationToken cancellationToken);
         Task DeActive(int id, CancellationToken cancellationToken);
+        Task<List<HomeServiceDto>> Search(string keyword, CancellationToken cancellationToken);
     }
 }

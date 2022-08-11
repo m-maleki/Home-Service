@@ -13,6 +13,8 @@ namespace HS.Domain.Core.Contracts.Service
         Task<string> UploadImageProfile(IFormFile FormFile,CancellationToken cancellationToken);
         Task Active(int id, CancellationToken cancellationToken);
         Task DeActive(int id, CancellationToken cancellationToken);
-        
+        Task<List<HomeServiceDto>> Search(string keyword, CancellationToken cancellationToken);
+
+
     }
 }

@@ -1,12 +1,10 @@
 ﻿@page
-@using Framework.Utilities
 @using System.Globalization
-@model HS.EndPoints.RazorPages.UI.Pages.HomeServicesModel
+@using Framework.Utilities
+@model HS.EndPoints.RazorPages.UI.Pages.SerachResultModel
 @{
-    Layout = "_Layout";
+     Layout = "_Layout";
 }
-
-
 @if (@Model.homeServices.Count == 0)
 {
     <section class="section-padding-top-heading bg-accent">
@@ -15,7 +13,7 @@
                 <div class="col-xl-12 col-lg-8">
                    <center>
                       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                     <h4 class="heading-title">خدماتی یافت نشد</h4>
+                       <h4 class="heading-title">برای کلمه ی "@Model.keyworkSearch" نتیجه ای پیدا نشد</h4>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -33,7 +31,7 @@ else
             <div class="row gutters-20">
                 <div class="col-xl-12 col-lg-8">
                     <div class="heading-layout2">
-                        <h2 class="heading-title">خدمات مرتبط با @Model.homeServices.First().HomeServiceSubCategory.Name</h2>
+                        <h2 class="heading-title">نتیجه جستجوی کلمه  @Model.keyworkSearch</h2>
                     </div>
                     @foreach (var homeService in @Model.homeServices)
                     {
@@ -89,7 +87,7 @@ else
 }
 
 
-
+                                                
 <div class="form-group">
 
 
@@ -104,7 +102,7 @@ else
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" enctype="multipart/form-data" asp-page-handler="Create">
+                    <form method="post" enctype="multipart/form-data" asp-page="./HomeServices" asp-page-handler="Create">
                         <input type="hidden" id="HomeServiceId" name="HomeServiceId" />
                         <div class="form-group">
                             <label> هوم سرویس</label>

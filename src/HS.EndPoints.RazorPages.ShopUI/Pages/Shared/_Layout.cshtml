@@ -94,6 +94,13 @@
     <script src="~/assets/js/pages/clock.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
+            <script>
+        $(document).ready(function(){
+            $('#inputSearch').keyup(function(){
+                $('#keyword').val($('#inputSearch').val());
+            });
+        });
+        </script>
 
  <script src="_framework/blazor.server.js"></script>
 @*@await RenderSectionAsync("Scripts", required: false)

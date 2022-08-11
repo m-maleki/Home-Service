@@ -95,5 +95,12 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             record.IsDeleted = true;
             await _context.SaveChangesAsync(cancellationToken);
         }
+
+        public async Task<List<HomeServiceDto>> Search(string keyword,CancellationToken cancellationToken)
+             => _mapper.Map<List<HomeServiceDto>>(await _context.HomeServices
+               .AsNoTracking()
+               .Include(x => x.HomeServiceSubCategory)
+               .Where(x => x.Name.Contains(keyword))
+               .ToListAsync(cancellationToken));
     }
 }

@@ -44,5 +44,8 @@ namespace HS.Domain.ApplicationServices
         {
             return await _homeService.GetAll(subCategoryId, cancellationToken);
         }
+
+        public Task<List<HomeServiceDto>> Search(string keyword, CancellationToken cancellationToken)
+            => _homeService.Search(keyword, cancellationToken);
     }
 }
