@@ -260,7 +260,7 @@
                                                             {
                                                                 <div class="form-group">
                                                                     <label for="slc-province">مهارت ها</label>
-                                                                    <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round" style="border: 0.5px solid;border-color:grey" multiple asp-items="@(new SelectList(Model.CurrentUser.SelectHomeServices, "Id", "Name"))">
+                                                                    <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round" style="border: 0.5px solid;border-color:grey;height:40px;height:60px;" multiple asp-items="@(new SelectList(Model.CurrentUser.SelectHomeServices, "Id", "Name"))">
                                                                         @foreach (var homeService in @Model.CurrentUser.HomeServicesUser)
                                                                         {
                                                                             <option value="@homeService.Id" selected="selected">@homeService.Name</option>
