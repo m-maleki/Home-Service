@@ -1,3 +1,4 @@
+using Framework.Utilities;
 using HS.Domain.ApplicationServices;
 using HS.Domain.Core.ConfigurationModel;
 using HS.Domain.Core.Contracts.ApplicationService;
@@ -54,8 +55,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(
 
     }
     )
-    .AddEntityFrameworkStores<HSDbContext>();
-
+.AddEntityFrameworkStores<HSDbContext>()
+.AddErrorDescriber<PersianIdentityErrorDescriber>() ;
+    
 builder.Services.Configure<EmailConfiguration>(builder.Configuration
     .GetSection("EmailConfiguration"));
 
@@ -64,6 +66,7 @@ builder.Services.Configure<SmsConfiguration>(builder.Configuration
 
 
 builder.Services.AddRecaptchaService();
+
 
 
 builder.Services.AddRazorPages()
@@ -135,6 +138,7 @@ builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -146,6 +150,8 @@ app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseMiddleware<LoggingMiddleware>();
 
 app.UseRouting();
 app.UseAuthentication();
