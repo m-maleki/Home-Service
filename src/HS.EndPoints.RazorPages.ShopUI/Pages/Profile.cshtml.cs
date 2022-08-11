@@ -33,6 +33,7 @@ namespace HS.EndPoints.RazorPages.UI.Pages
         public UserViewModel CurrentUser = new UserViewModel();
         public ICollection<OrderViewModel>? Orders = new List<OrderViewModel>();
 
+
         public ProfileModel(ICustomerApplicationService customerApplicationService,
             IExpertApplicationService expertApplicationService,
             ISuggestionApplicationService suggestionApplicationService,
@@ -143,5 +144,20 @@ namespace HS.EndPoints.RazorPages.UI.Pages
             }
             return default;
         }
+
+        //public void OnPostCheckEmail(RegisterViewModel registerModel)
+        //{
+
+        //}
+
+        public async Task<JsonResult> OnGetCheckEmail(RegisterViewModel registerModel)
+        {
+            if( await _applicationUserApplicationService.IsExist(registerModel.Email) is true)
+            return new JsonResult(false);
+            else
+            return new JsonResult(true);
+
+        }
+
     }
 }

@@ -14,6 +14,7 @@ namespace HS.Domain.Core.Contracts.Repository
         Task ActiveEmailConfirm(string emailAddress);
         Task DeActiveEmailConfirm(string emailAddress);
         Task<bool> EmailIsConfirmed(string emailAddress);
+        Task<bool> IsExist(string emailAddress);
 
     }
 }

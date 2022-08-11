@@ -136,5 +136,10 @@ namespace HS.Domain.ApplicationServices
             return await _applicationUserService.EmailIsConfirmed(emailAddress);
 
         }
+
+        public async Task<bool> IsExist(string emailAddress)
+        {
+           return await _applicationUserService.IsExist(emailAddress);
+        }
     }
 }

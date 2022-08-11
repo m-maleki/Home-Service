@@ -7,6 +7,13 @@ namespace HS.EndPoints.RazorPages.ShopUI.Model
 {
     public class RegisterViewModel 
     {
+        [PageRemote(
+            ErrorMessage = "آدرس ایمیل وارد شده تکراری می باشد",
+            AdditionalFields = "__RequestVerificationToken",
+            HttpMethod = "get",
+            PageHandler = "CheckEmail"
+        )]
+        [BindProperty]
         [Required(ErrorMessage = "وارد کردن {0} اجباری می باشد")]
         [EmailAddress(ErrorMessage = "* آدرس ایمیل معتبر نمی باشد")]
         [Display(Name = "آدرس ایمیل")]

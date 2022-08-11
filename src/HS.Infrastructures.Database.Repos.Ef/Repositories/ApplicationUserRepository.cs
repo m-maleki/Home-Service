@@ -48,6 +48,17 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
             return false;
         }
 
+        public async Task<bool> IsExist(string emailAddress)
+        {
+            var record = await _dbContext.Users
+                .Where(x => x.NormalizedEmail == emailAddress.ToUpper())
+                .FirstOrDefaultAsync();
+
+            if (record is not null) return true;
+            else return false;
+
+        }
+
         public async Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken)
         {
             var user = new ApplicationUser();

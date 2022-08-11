@@ -89,5 +89,10 @@ namespace HS.Domain.Services
         {
            return await _applicationRepository.EmailIsConfirmed(emailAddress);
         }
+
+        public async Task<bool> IsExist(string emailAddress)
+        {
+           return await _applicationRepository.IsExist(emailAddress);
+        }
     }
 }

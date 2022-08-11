@@ -22,5 +22,6 @@ namespace HS.Domain.Core.Contracts.Service
         Task ActiveEmailConfirm(string emailAddress);
         Task DeActiveEmailConfirm(string emailAddress);
         Task<bool> EmailIsConfirmed(string emailAddress);
+        Task<bool> IsExist(string emailAddress);
     }
 }
