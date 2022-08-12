@@ -57,5 +57,6 @@ the expert can offer services according to his skills
 * MimeKit Email
 * SMS.IR
 * Google ReCaptcha
+* Remote Validation
 ### Web  :
 * Bootstrap

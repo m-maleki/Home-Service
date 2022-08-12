@@ -44,7 +44,7 @@ namespace HS.Domain.Services
             MessageSendResponseObject messageSendResponseObject = new MessageSend().Send(token, messageSendObject);
 
             if (messageSendResponseObject == null)
-                _loger.LogInformation($"messageSendResponseObject sms in null");
+                _loger.LogWarning($"messageSendResponseObject sms in null");
 
             if (messageSendResponseObject.IsSuccessful)
             {
@@ -53,7 +53,7 @@ namespace HS.Domain.Services
             }
             else
             {
-                _loger.LogInformation($"Error in send sms to number {phoneNumber} width message {message} ");
+                _loger.LogWarning($"Error in send sms to number {phoneNumber} width message {message} ");
 
             }
 

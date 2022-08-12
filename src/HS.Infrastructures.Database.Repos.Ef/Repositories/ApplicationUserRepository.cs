@@ -133,8 +133,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         }
 
         public async Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
-           =>  await _signInManager.PasswordSignInAsync(command.Email, command.Password, true, false);
-
+            =>  await _signInManager.PasswordSignInAsync(command.Email, command.Password, true, false);
+        
         public async Task SetConfirmKey(string emailAddress,Guid confirmKey)
         {
             var record = await _dbContext.Users

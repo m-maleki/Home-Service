@@ -27,7 +27,7 @@ public class LoggingMiddleware
         catch (Exception ex)
         {
             _logger.LogError(ex,"happend an error in the application");
-            context.Response.Redirect("/Home/Error");
+            context.Response.Redirect("/Error");
         }
     }
 }

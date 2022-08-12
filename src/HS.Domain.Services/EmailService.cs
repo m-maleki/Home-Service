@@ -4,16 +4,18 @@ using MailKit.Security;
 using HS.Domain.Core.ConfigurationModel;
 using Microsoft.Extensions.Options;
 using HS.Domain.Core.Contracts.Service;
+using Microsoft.Extensions.Logging;
 
 namespace HS.Domain.Services
 {
     public class EmailService: IEmailService
     {
         private readonly IOptions<EmailConfiguration> _emailConfiguration;
-
-        public EmailService(IOptions<EmailConfiguration> emailConfiguration)
+        private readonly ILogger<EmailService> _logger;
+        public EmailService(IOptions<EmailConfiguration> emailConfiguration, ILogger<EmailService> logger)
         {
             _emailConfiguration = emailConfiguration;
+            _logger = logger;
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
@@ -33,7 +35,14 @@ namespace HS.Domain.Services
             {
                 client.LocalDomain = _emailConfiguration.Value.Domain;
                 await client.ConnectAsync(_emailConfiguration.Value.SmtpServer, _emailConfiguration.Value.Port, SecureSocketOptions.None).ConfigureAwait(false);
-                client.Authenticate(_emailConfiguration.Value.UserName, _emailConfiguration.Value.Password);
+                try
+                {
+                    client.Authenticate(_emailConfiguration.Value.UserName, _emailConfiguration.Value.Password);
+                }
+                catch(Exception ex)
+                {
+                    _logger.LogWarning("Send email faild with error {error message}", ex);
+                }
                 await client.SendAsync(emailMessage).ConfigureAwait(false);
                 await client.DisconnectAsync(true).ConfigureAwait(false);
             }
