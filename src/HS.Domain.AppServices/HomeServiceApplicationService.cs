@@ -41,9 +41,7 @@ namespace HS.Domain.ApplicationServices
            => await _homeService.Get(id, cancellationToken);
 
         public async Task<List<HomeServiceDto>> GetAll(int subCategoryId, CancellationToken cancellationToken)
-        {
-            return await _homeService.GetAll(subCategoryId, cancellationToken);
-        }
+            => await _homeService.GetAll(subCategoryId, cancellationToken);
 
         public Task<List<HomeServiceDto>> Search(string keyword, CancellationToken cancellationToken)
             => _homeService.Search(keyword, cancellationToken);

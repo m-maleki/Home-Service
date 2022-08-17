@@ -25,14 +25,10 @@ namespace HS.Domain.Services
         }
 
         public async Task<List<HomeServiceSubCategoryDto>> GetAll(CancellationToken cancellationToken)
-        {
-            return await _homeServiceSubCategoryRepository.GetAll(cancellationToken);
-        }
+            => await _homeServiceSubCategoryRepository.GetAll(cancellationToken);
 
         public async Task<List<HomeServiceSubCategoryDto>> GetAllBy(int homeServiceCategoryId, CancellationToken cancellationToken)
-        {
-            return await (_homeServiceSubCategoryRepository.GetAllBy(homeServiceCategoryId, cancellationToken));
-        }
+            => await (_homeServiceSubCategoryRepository.GetAllBy(homeServiceCategoryId, cancellationToken));
 
         public Task<HomeServiceSubCategoryDto> GetBy(int id, CancellationToken cancellationToken)
         {

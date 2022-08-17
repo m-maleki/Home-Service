@@ -130,8 +130,6 @@ namespace HS.Domain.Services
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)
-        {
-            return await _expertRepository.Count(cancellationToken);
-        }
+            => await _expertRepository.Count(cancellationToken);
     }
 }

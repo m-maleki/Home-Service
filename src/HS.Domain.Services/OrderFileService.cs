@@ -29,13 +29,9 @@ namespace HS.Domain.Services
         }
 
         public async Task<OrderFileDto> Get(int fileId, CancellationToken cancellationToken)
-        {
-            return await _orderFileRepository.Get(fileId, cancellationToken);
-        }
+            => await _orderFileRepository.Get(fileId, cancellationToken);
 
         public async Task<List<OrderFileDto>> GetAll(int orderId, CancellationToken cancellationToken)
-        {
-            return await _orderFileRepository.GetAll(orderId, cancellationToken);
-        }
+            => await _orderFileRepository.GetAll(orderId, cancellationToken);
     }
 }

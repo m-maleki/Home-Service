@@ -5,6 +5,7 @@ namespace HS.Domain.Core.Dtos
     public class SuggestionDto
     {
         #region Properties
+
         public int Id { get; set; }
         public int OrderId { get; set; }
         public Guid ExpertId { get; set; }
@@ -14,9 +15,12 @@ namespace HS.Domain.Core.Dtos
         public DateTime RegisterDate { get; set; }
 
         #endregion Properties
+
         #region Navigation properties
+
         public Order? Order { get; set; }
         public Expert? Expert { get; set; }
+
         #endregion Navigation properties
     }
 }

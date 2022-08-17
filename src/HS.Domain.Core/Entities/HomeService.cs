@@ -3,7 +3,6 @@
     public class HomeService
     {
         #region Properties
-
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
@@ -17,9 +16,11 @@
         #endregion Properties
 
         #region Navigation properties
+
         public HomeServiceSubCategory? HomeServiceSubCategory { get; set; }
         public List<Order> Orders { get; set; }
         public List<Expert>? Experts { get; set; } = new List<Expert>();
+
         #endregion Navigation properties
     }
 }

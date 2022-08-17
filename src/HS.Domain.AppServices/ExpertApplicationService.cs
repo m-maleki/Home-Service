@@ -49,9 +49,7 @@ namespace HS.Domain.ApplicationServices
             => await _expertService.Get(cancellationToken);
 
         public async Task<List<OrderDto>> GetAllBy(Guid expertId, CancellationToken cancellationToken)
-        {
-           return await _expertService.GetAllBy(expertId, cancellationToken);
-        }
+           => await _expertService.GetAllBy(expertId, cancellationToken);
 
         public Task<Guid> GetExpertId(CancellationToken cancellationToken)
             => _expertService.GetExpertId(_userApplicationService.GetUserId(cancellationToken),cancellationToken);

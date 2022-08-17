@@ -3,6 +3,7 @@
     public class Customer 
     {
         #region Properties
+
         public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -16,12 +17,15 @@
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public DateTime Birthday { get; set; }
         public int? CityId { get; set; }
+
         #endregion Properties
 
         #region Navigation properties
+
         public ApplicationUser? ApplicationUser { get; set; }
         public List<Order>? Orders { get; set; }
         public City? City { get; set; }
+
         #endregion Navigation properties
     }
 }

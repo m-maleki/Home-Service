@@ -20,11 +20,11 @@ namespace HS.Domain.Core.Dtos
         public int Score { get; set; }
         public DateTime Birthday { get; set; }
         public Guid ApplicationUserId { get; set; }
-        public City? City { get; set; }
 
         #endregion Properties
 
         #region Navigation properties
+
         public ApplicationUser? ApplicationUser { get; set; }
         public List<HomeService>? HomeServices { get; set; } = new List<HomeService>();
         public List<Suggestion>? Suggestion { get; set; }
@@ -33,6 +33,7 @@ namespace HS.Domain.Core.Dtos
         public List<City> Cities {get; set;}
         public List<HomeServiceDto> SelectHomeServices { get; set; }
         public ICollection<HomeService> HomeServicesUser { get; set; }
+        public City? City { get; set; }
 
         #endregion Navigation properties
     }

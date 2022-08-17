@@ -60,8 +60,6 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
-     
-
         public Task<CustomerDto> Get(Guid Id, CancellationToken cancellationToken)
            => _customerRepository.GetBy(Id, cancellationToken);
 
@@ -70,7 +68,6 @@ namespace HS.Domain.Services
             throw new NotImplementedException();
         }
 
-
         public async Task<CustomerDto> Get(string email, CancellationToken cancellationToken)
         {
             var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
@@ -78,9 +75,7 @@ namespace HS.Domain.Services
         }
 
         public async Task<List<OrderDto>> GetAllBy(Guid customerId, CancellationToken cancellationToken)
-        {
-           return await _customerRepository.GetAllBy(customerId, cancellationToken);
-        }
+          => await _customerRepository.GetAllBy(customerId, cancellationToken);
 
         public async Task<Guid> GetCustomerId(Guid CustomerIdentityId, CancellationToken cancellationToken)
           => await _customerRepository.GetCustomerId(CustomerIdentityId, cancellationToken);

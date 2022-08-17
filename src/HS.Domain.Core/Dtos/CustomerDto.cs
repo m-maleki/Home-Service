@@ -6,6 +6,7 @@ namespace HS.Domain.Core.Dtos
     public class CustomerDto
     {
         #region Properties
+
         public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -18,15 +19,18 @@ namespace HS.Domain.Core.Dtos
         public string? Address { get; set; }
         public DateTime Birthday { get; set; }
         public Guid IdentityId { get; set; }
+
         #endregion Properties
 
         #region Navigation properties
+
         public Guid ApplicationUserId { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
         public List<Order>? Orders { get; set; }
         public int CityId { get; set; }
         public City? City { get; set; }
         public List<City> Cities { get; set; }
+
         #endregion Navigation properties
     }
 }

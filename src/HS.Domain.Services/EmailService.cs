@@ -28,8 +28,9 @@ namespace HS.Domain.Services
             
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = message;
-            bodyBuilder.TextBody = "لینک فعال سازی";
-           
+            bodyBuilder.TextBody = subject;
+
+
             emailMessage.Body= bodyBuilder.ToMessageBody();
             using (var client = new SmtpClient())
             {

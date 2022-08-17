@@ -26,8 +26,6 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<List<OrderFileDto>> GetAll(int orderId, CancellationToken cancellationToken)
-        {
-            return await _orderFileService.GetAll(orderId, cancellationToken);
-        }
+            => await _orderFileService.GetAll(orderId, cancellationToken);
     }
 }

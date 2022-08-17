@@ -34,6 +34,16 @@ namespace HS.Domain.Services
             await _commentRepository.DeActive(commentId, cancellationToken);
         }
 
+        public async Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
+           => await _commentRepository.GetAll(cancellationToken);
+
+        public async Task<List<CommentDto>> GetBy(Guid expertId, CancellationToken cancellationToken)
+           => await _commentRepository.GetBy(expertId, cancellationToken);
+
+        public Task Update(CommentDto entity, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
         public Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
@@ -50,21 +60,6 @@ namespace HS.Domain.Services
         }
 
         public Task<List<CommentDto>> Get(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
-        {
-           return await _commentRepository.GetAll(cancellationToken);
-        }
-
-        public async Task<List<CommentDto>> GetBy(Guid expertId, CancellationToken cancellationToken)
-        {
-           return await _commentRepository.GetBy(expertId, cancellationToken);
-        }
-
-        public Task Update(CommentDto entity, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

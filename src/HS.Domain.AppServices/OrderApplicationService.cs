@@ -79,14 +79,10 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<OrderDto> GetBy(int orderId, CancellationToken cancellationToken)
-        {
-           return await _orderService.GetBy(orderId, cancellationToken);
-        }
+           => await _orderService.GetBy(orderId, cancellationToken);
 
         public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId, CancellationToken cancellationToken)
-        {
-            return await _orderService.GetOrderStatusEnum(orderId, cancellationToken);
-        }
+            => await _orderService.GetOrderStatusEnum(orderId, cancellationToken);
 
         public async Task HardDelete(int orderId, CancellationToken cancellationToken)
         {
@@ -94,19 +90,13 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task SetOrderStatusEnum(int orderId, OrderStatusEnum orderStatusEnum, CancellationToken cancellationToken)
-        {
-            await _orderService.SetOrderStatusEnum(orderId, orderStatusEnum, cancellationToken);
-        }
+           => await _orderService.SetOrderStatusEnum(orderId, orderStatusEnum, cancellationToken);
 
         public async Task SoftDelete(int orderId, CancellationToken cancellationToken)
-        {
-            await _orderService.SoftDelete(orderId, cancellationToken);
-        }
+           => await _orderService.SoftDelete(orderId, cancellationToken);
 
         public async Task SoftRecover(int orderId, CancellationToken cancellationToken)
-        {
-            await _orderService.SoftRecover(orderId, cancellationToken);
-        }
+            => await _orderService.SoftRecover(orderId, cancellationToken);
 
         public Task Update(OrderDto entity, CancellationToken cancellationToken)
         {

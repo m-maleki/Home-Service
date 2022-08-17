@@ -17,15 +17,18 @@
         public Guid ApplicationUserId { get; set; }
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         public int? CityId { get; set; }
+
         #endregion Properties
 
         #region Navigation properties
+
         public DateTime Birthday { get; set; }
         public List<HomeService>? HomeServices { get; set; } = new List<HomeService>();
         public List<Suggestion>? Suggestion { get; set; }=new List<Suggestion>();
         public List<Comment>? Comments { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
         public City? City { get; set; }
+
         #endregion Navigation properties
     }
 }

@@ -1,12 +1,12 @@
-﻿
-
-namespace HS.Domain.Core.Dtos.ApplicationUsers
+﻿namespace HS.Domain.Core.Dtos
 {
     public class ApplicationUserDto
     {
+        #region Properties
+
         public Guid Id { get; set; }
-        public string? Email { get; set; }=string.Empty;
-        public string? UserName { get; set; }=string.Empty;
+        public string? Email { get; set; } = string.Empty;
+        public string? UserName { get; set; } = string.Empty;
         public string? Password { get; set; } = string.Empty;
         public string? ConfirmPassword { get; set; } = string.Empty;
         public string? Role { get; set; }
@@ -14,5 +14,7 @@ namespace HS.Domain.Core.Dtos.ApplicationUsers
         public string? ProfileImgUrlCustomer { get; set; }
         public bool EmailConfirmed { get; set; }
         public List<string> Roles { get; set; }
+
+        #endregion Properties
     }
 }

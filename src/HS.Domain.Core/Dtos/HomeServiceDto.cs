@@ -6,6 +6,7 @@ namespace HS.Domain.Core.Dtos
     public class HomeServiceDto
     {
         #region Properties
+
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
@@ -17,11 +18,13 @@ namespace HS.Domain.Core.Dtos
         public IFormFile? ImgFile { get; set; }
 
         #endregion Properties
+
         #region Navigation properties
+
         public HomeServiceCategory? HomeServiceCategory { get; set; }
         public HomeServiceSubCategory? HomeServiceSubCategory { get; set; }
-
         public Order? Orders { get; set; }
+
         #endregion Navigation properties
     }
 }

@@ -38,19 +38,13 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
-        {
-            return await _commentService.GetAll(cancellationToken);
-        }
+            => await _commentService.GetAll(cancellationToken);
 
         public Task<CommentDto> GetBy(int id, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+            => new NotImplementedException();
 
         public async Task<List<CommentDto>> GetBy(Guid expertId, CancellationToken cancellationToken)
-        {
-            return await _commentService.GetBy(expertId, cancellationToken);
-        }
+            => await _commentService.GetBy(expertId, cancellationToken);
 
         public Task Update(CommentDto entity, CancellationToken cancellationToken)
         {

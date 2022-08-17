@@ -19,8 +19,6 @@ namespace HS.Domain.Services
         }
 
         public async Task<List<HomeServiceCategoryDto>> GetAll(CancellationToken cancellationToken)
-        {
-            return await _homeServiceCategoryRepository.GetAll(cancellationToken);
-        }
+            => await _homeServiceCategoryRepository.GetAll(cancellationToken);
     }
 }

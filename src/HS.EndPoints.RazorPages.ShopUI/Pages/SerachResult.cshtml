@@ -5,7 +5,7 @@
 @{
      Layout = "_Layout";
 }
-@if (@Model.homeServices.Count == 0)
+@if (@Model.homeServices ==null || @Model.homeServices.Count == 0)
 {
     <section class="section-padding-top-heading bg-accent">
         <div class="container">

@@ -1,6 +1,6 @@
 ﻿using HS.Domain.Core.Contracts.Repository;
 using HS.Domain.Core.Contracts.Service;
-using HS.Domain.Core.Dtos.ApplicationUsers;
+using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -29,10 +29,7 @@ namespace HS.Domain.Services
             _userManager = userManager;
             _emailSender = emailSender;
         }
-        public async Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken)
-            => await _applicationRepository.Create(command, cancellationToken);
-        public async Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken)
-            => await _applicationRepository.GetAll(cancellationToken);
+
 
         public Guid GetUserId(CancellationToken cancellationToken)
         {
@@ -40,19 +37,34 @@ namespace HS.Domain.Services
             return new Guid(currentUser.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
 
-        public async Task<string> getRole(CancellationToken cancellationToken)
-        {
-            var result =  await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(_httpContext.HttpContext.User.Identity!.Name));
-            return result.First();
-        }
+        public async Task<IdentityResult> Create(ApplicationUserDto command, CancellationToken cancellationToken)
+          => await _applicationRepository.Create(command, cancellationToken);
 
         public async Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
-        => await  _applicationRepository.Login(command, cancellationToken);
+         => await _applicationRepository.Login(command, cancellationToken);
 
+        public async Task<List<ApplicationUserDto>> GetAll(CancellationToken cancellationToken)
+          => await _applicationRepository.GetAll(cancellationToken);
+
+        public async Task SetConfirmKey(string emailAddress, Guid confirmKey)
+          => await _applicationRepository.SetConfirmKey(emailAddress, confirmKey);
+
+        public async Task ActiveEmailConfirm(string emailAddress)
+          => await _applicationRepository.ActiveEmailConfirm(emailAddress);
+
+        public async Task<bool> EmailIsConfirmed(string emailAddress)
+         => await _applicationRepository.EmailIsConfirmed(emailAddress);
+
+        public async Task DeActiveEmailConfirm(string emailAddress)
+           => await _applicationRepository.DeActiveEmailConfirm(emailAddress);
+
+        public async Task<bool> IsExist(string emailAddress)
+         => await _applicationRepository.IsExist(emailAddress);
+
+        public async Task<bool> confirmEmail(string token)
+         => await _applicationRepository.confirmEmail(token);
         public bool IsInRole(string role)
-        {
-            return _httpContext.HttpContext.User.IsInRole(role);
-        }
+         => _httpContext.HttpContext.User.IsInRole(role);
 
         public async Task<Guid> SendEmailActivation(string emailAddress, CancellationToken cancellationToken)
         {
@@ -64,35 +76,11 @@ namespace HS.Domain.Services
             return confirmKey;
         }
 
-        public async Task SetConfirmKey(string emailAddress, Guid confirmKey)
+        public async Task<string> getRole(CancellationToken cancellationToken)
         {
-            await _applicationRepository.SetConfirmKey(emailAddress, confirmKey);
+            var result = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(_httpContext.HttpContext.User.Identity!.Name));
+            return result.First();
         }
 
-        public async Task<bool> confirmEmail(string token)
-        {
-            return await _applicationRepository.confirmEmail(token);
-
-        }
-
-        public async Task ActiveEmailConfirm(string emailAddress)
-        {
-            await _applicationRepository.ActiveEmailConfirm(emailAddress);
-        }
-
-        public async Task DeActiveEmailConfirm(string emailAddress)
-        {
-            await _applicationRepository.DeActiveEmailConfirm(emailAddress);
-        }
-
-        public async Task<bool> EmailIsConfirmed(string emailAddress)
-        {
-           return await _applicationRepository.EmailIsConfirmed(emailAddress);
-        }
-
-        public async Task<bool> IsExist(string emailAddress)
-        {
-           return await _applicationRepository.IsExist(emailAddress);
-        }
     }
 }

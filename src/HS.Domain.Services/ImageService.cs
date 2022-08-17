@@ -39,9 +39,7 @@ namespace HS.Domain.Services
         }
 
         public Task<List<ImageDto>> GetBy(int orderId, CancellationToken cancellationToken)
-        {
-            return _imageRepository.GetBy(orderId, cancellationToken);
-        }
+            => _imageRepository.GetBy(orderId, cancellationToken);
 
         public Task Update(ImageDto entity, CancellationToken cancellationToken)
         {

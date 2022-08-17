@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HS.Domain.Core.Dtos;
-using HS.Domain.Core.Dtos.ApplicationUsers;
 using HS.Domain.Core.Entities;
 using HS.EndPoints.RazorPages.ShopUI.Model;
 

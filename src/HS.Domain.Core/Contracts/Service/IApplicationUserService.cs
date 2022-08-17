@@ -1,4 +1,4 @@
-﻿using HS.Domain.Core.Dtos.ApplicationUsers;
+﻿using HS.Domain.Core.Dtos;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

@@ -30,9 +30,7 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)
-        {
-            return await _customerService.Count(cancellationToken);
-        }
+            => await _customerService.Count(cancellationToken);
 
         public Task Delete(Guid id, CancellationToken cancellationToken)
         {
@@ -46,7 +44,6 @@ namespace HS.Domain.ApplicationServices
             result.Cities =await _cityService.Get(cancellationToken);
             return result;
         }
-          
 
         public Task<CustomerDto> Get(string email, CancellationToken cancellationToken)
             => _customerService.Get(email, cancellationToken);
@@ -57,9 +54,7 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<List<OrderDto>> GetAllBy(Guid customerId, CancellationToken cancellationToken)
-        {
-            return await _customerService.GetAllBy(customerId, cancellationToken);
-        }
+            => await _customerService.GetAllBy(customerId, cancellationToken);
 
         public Task<Guid> GetCustomerId(Guid CustomerIdentityId, CancellationToken cancellationToken)
             => _customerService.GetCustomerId(CustomerIdentityId, cancellationToken);
@@ -72,7 +67,6 @@ namespace HS.Domain.ApplicationServices
 
         public async Task Update(CustomerDto dto, CancellationToken cancellationToken)
         {
-           // await _customerService.EnsureExists(dto.ApplicationUserId);
             if (dto.ProfileImgFile != null)
                 dto.ProfileImgUrl = await _customerService.UploadImageProfile(dto.ProfileImgFile, cancellationToken);
             await _customerService.Update(dto, cancellationToken);

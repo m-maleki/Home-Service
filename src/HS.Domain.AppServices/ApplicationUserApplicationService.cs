@@ -2,7 +2,6 @@
 using HS.Domain.Core.Contracts.ApplicationService;
 using HS.Domain.Core.Contracts.Service;
 using HS.Domain.Core.Dtos;
-using HS.Domain.Core.Dtos.ApplicationUsers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
@@ -94,9 +93,7 @@ namespace HS.Domain.ApplicationServices
         => _applicationUserService.GetAll(cancellationToken);
 
         public Guid GetUserId(CancellationToken cancellationToken)
-        {
-            return _applicationUserService.GetUserId(cancellationToken);
-        }
+            => _applicationUserService.GetUserId(cancellationToken);
 
         public Task<SignInResult> Login(ApplicationUserDto command, CancellationToken cancellationToken)
         {
@@ -138,8 +135,6 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<bool> IsExist(string emailAddress)
-        {
-           return await _applicationUserService.IsExist(emailAddress);
-        }
+           => await _applicationUserService.IsExist(emailAddress);
     }
 }

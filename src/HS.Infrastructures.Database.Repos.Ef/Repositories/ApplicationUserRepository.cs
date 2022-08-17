@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HS.Domain.Core.Contracts.Repository;
-using HS.Domain.Core.Dtos.ApplicationUsers;
+using HS.Domain.Core.Dtos;
 using HS.Domain.Core.Entities;
 using HS.Infrastructures.Database.SqlServer.Common;
 using Microsoft.AspNetCore.Identity;

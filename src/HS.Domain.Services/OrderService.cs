@@ -22,20 +22,15 @@ namespace HS.Domain.Services
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)
-        {
-            return await _orderRepository.Count(cancellationToken);
-        }
+            => await _orderRepository.Count(cancellationToken);
 
         public async Task<int> Create(OrderDto entity, CancellationToken cancellationToken)
-        {
-          return await _orderRepository.Create(entity, cancellationToken);
-        }
+          => await _orderRepository.Create(entity, cancellationToken);
 
         public Task EnsureDoesNotExist(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
-
         public Task EnsureExists(int Id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
@@ -45,19 +40,13 @@ namespace HS.Domain.Services
           => await _orderRepository.GetBy(Id, cancellationToken);
 
         public async Task<List<OrderDto>> Get(CancellationToken cancellationToken)
-        {
-            return await _orderRepository.GetAll(cancellationToken);
-        }
+            => await _orderRepository.GetAll(cancellationToken);
 
         public async Task<OrderDto> GetBy(int orderId, CancellationToken cancellationToken)
-        {
-            return await _orderRepository.GetBy(orderId, cancellationToken);
-        }
+            => await _orderRepository.GetBy(orderId, cancellationToken);
 
         public async Task<OrderStatusEnum> GetOrderStatusEnum(int orderId, CancellationToken cancellationToken)
-        {
-            return await _orderRepository.GetOrderStatusEnum(orderId, cancellationToken);
-        }
+            => await _orderRepository.GetOrderStatusEnum(orderId, cancellationToken);
 
         public async Task HardDelete(int orderId, CancellationToken cancellationToken)
         {

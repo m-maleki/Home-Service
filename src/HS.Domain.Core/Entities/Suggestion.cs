@@ -3,6 +3,7 @@
     public class Suggestion
     {
         #region Properties
+
         public int Id { get; set; }
         public int OrderId { get; set; }
         public string? Description { get; set; }
@@ -14,9 +15,12 @@
         public bool IsDeleted { get; set; } = false;
 
         #endregion Properties
+
         #region Navigation properties
+
         public Order? Order { get; set; }
         public Expert? Expert { get; set; }
+
         #endregion Navigation properties
     }
 }

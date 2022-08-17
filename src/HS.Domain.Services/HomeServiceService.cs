@@ -36,23 +36,19 @@ namespace HS.Domain.Services
         }
 
         public async Task<HomeServiceDto> Get(int id, CancellationToken cancellationToken)
-            => await _homeServiceRepository.GetBy(id, cancellationToken);
+           => await _homeServiceRepository.GetBy(id, cancellationToken);
+
         public async Task<List<HomeServiceDto>> Get(CancellationToken cancellationToken)
          => await  _homeServiceRepository.GetAll(cancellationToken);
 
         public async Task<List<HomeServiceDto>> Get(Guid id, CancellationToken cancellationToken)
-        {
-
-            return await _homeServiceRepository.GetAll(id, cancellationToken);
-        }
+            => await _homeServiceRepository.GetAll(id, cancellationToken);
 
         public async Task<List<HomeServiceDto>> GetAll(int subCategoryId, CancellationToken cancellationToken)
-        {
-           return await _homeServiceRepository.GetAll(subCategoryId, cancellationToken);
-        }
+            => await _homeServiceRepository.GetAll(subCategoryId, cancellationToken);
 
         public Task<List<HomeServiceDto>> Search(string keyword, CancellationToken cancellationToken)
-            =>_homeServiceRepository.Search(keyword, cancellationToken);
+            => _homeServiceRepository.Search(keyword, cancellationToken);
 
         public async Task<string> UploadImageProfile(IFormFile FormFile, CancellationToken cancellationToken)
         {

@@ -57,9 +57,7 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<int> Count(CancellationToken cancellationToken)
-        {
-            return await _suggestionService.Count(cancellationToken);
-        }
+            => await _suggestionService.Count(cancellationToken);
 
         public async Task Create(SuggestionDto entity, CancellationToken cancellationToken)
         {
@@ -96,19 +94,13 @@ namespace HS.Domain.ApplicationServices
         }
 
         public async Task<List<SuggestionDto>> Get(CancellationToken cancellationToken)
-        {
-            return await _suggestionService.Get(cancellationToken);
-        }
+            => await _suggestionService.Get(cancellationToken);
 
         public async Task<List<SuggestionDto>> GetAll(int orderId, CancellationToken cancellationToken)
-        {
-            return await _suggestionService.GetAll(orderId, cancellationToken);
-        }
+            => await _suggestionService.GetAll(orderId, cancellationToken);
 
         public async Task<int> GetCount(int orderId, CancellationToken cancellationToken)
-        {
-            return await _suggestionService.GetCount(orderId, cancellationToken);
-        }
+            => await _suggestionService.GetCount(orderId, cancellationToken);
 
         public Task Update(SuggestionDto entity, CancellationToken cancellationToken)
         {
