@@ -63,8 +63,8 @@ namespace HS.Domain.ApplicationServices
 
             if (role=="Expert")
             {
-                var expertCustomerid = await _expertService.GetExpertId(_applicationUserService.GetUserId(cancellationToken), cancellationToken);
-                return await _expertService.GetAllBy(expertCustomerid, cancellationToken);
+                var expertid = await _expertService.GetExpertId(_applicationUserService.GetUserId(cancellationToken), cancellationToken);
+                return await _expertService.GetAllBy(expertid, cancellationToken);
             }
             else if(role == "Customer")
             {

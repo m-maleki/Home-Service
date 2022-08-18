@@ -258,9 +258,11 @@
 
                                                             @if (User.IsInRole("Expert"))
                                                             {
+                                                                <div class="row">
+                                                                <div class="col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="slc-province">مهارت ها</label>
-                                                                    <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round" style="border: 0.5px solid;border-color:grey;height:40px;height:60px;" multiple asp-items="@(new SelectList(Model.CurrentUser.SelectHomeServices, "Id", "Name"))">
+                                                                    <select name="HomeServicesIds" name="HomeServicesIds" class="form-control select2 round" style="border: 0.5px solid;border-color:grey;width:575px;height:60px" multiple asp-items="@(new SelectList(Model.CurrentUser.SelectHomeServices, "Id", "Name"))">
                                                                         @foreach (var homeService in @Model.CurrentUser.HomeServicesUser)
                                                                         {
                                                                             <option value="@homeService.Id" selected="selected">@homeService.Name</option>
@@ -268,7 +270,8 @@
 
                                                                     </select>
                                                                 </div>
-
+                                                                </div>
+                                                                </div>
 
                                                                 <div class="form-group">
                                                                     <label>بیوگرافی</label>
@@ -388,6 +391,9 @@
                                             <tbody>
                                                 @foreach (var order in @Model.Orders)
                                                 {
+                                                    if((order.Status == OrderStatusEnum.WaitingExpertAdvice || order.Status==OrderStatusEnum.WaitingSpecialistSelection)
+                                                    ||( order.Suggestions.Count>0 && @order.Suggestions.Exists(x => x.ExpertId == Model.CurrentUser.Id)) )
+                                                    {
                                                     <tr>
                                                         <td>@order.Id</td>
                                                         <td>@order.HomeService.Name</td>
@@ -522,7 +528,147 @@
                                                             </td>
                                                         }
 
-                                                    </tr>
+                                                        </tr>
+                                                    }
+                                                    else if(User.IsInRole("Customer"))
+                                                    {
+                                                    <tr>
+                                                        <td>@order.Id</td>
+                                                        <td>@order.HomeService.Name</td>
+                                                        <td>@order.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                                                        <td>@order.Status.GetEnumDisplayName()</td>
+                                                        <td>
+                                                            <form method="get" role="form" asp-page="OrderDetails">
+                                                                <input type="hidden" name="OrderId" value="@order.Id">
+                                                                <input type="submit" value="نمایش" class="btn btn-success curve">
+                                                            </form>
+                                                        </td>
+                                                    @if(User.IsInRole("Expert") && order.Suggestions.Count==0)
+                                                        {
+                                                            
+                                                        }
+                                                        @if (User.IsInRole("Expert") && @order.Suggestions.Exists(x => x.ExpertId == Model.CurrentUser.Id))
+                                                        {
+                                                            @if(@order.Suggestions.Exists(x => x.IsAccept == true && x.ExpertId != Model.CurrentUser.Id))
+                                                            {
+                                                                <td style="color:red">پیشنهاد شما رد شده است</td>
+                                                            }
+                                                            else @if(@order.Suggestions.Exists(x => x.IsAccept == true && x.ExpertId == Model.CurrentUser.Id))
+                                                            {
+                                                                <td style="color:green">پیشنهاد شما تایید شده است</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>پیشنهاد ثبت شده است</td>
+                                                            }
+                                                            
+                                                        }
+                                                        else if(User.IsInRole("Expert"))
+                                                        {
+                                                           <td >
+                                                               <a data-toggle="modal" style="color:white" data-target="#createSuggest" Order-Id-Suggedtion="@order.Id" Expert-Id="@Model.CurrentUser.Id"  class="btn btn-primary curve">ارائه پیشنهاد</a>
+                                                            </td> 
+                                                        }
+                                                            </tr>
+                                                    <tr>
+
+                                                        @if (order.Status != OrderStatusEnum.WaitingExpertAdvice)
+                                                        {
+                                                            <td colspan="6">
+                                                                <div class="faq-box-layout1">
+                                                                    <div id="accordion" class="accordion-box">
+                                                                        <div class="card">
+                                                                            <div class="card-header">
+                                                                                <a class="heading-title collapsed" data-toggle="collapse" href="@("#Order"+order.Id)" role="button" aria-expanded="false">
+                                                                                    پیشنهاد های ارائه شده
+                                                                                </a>
+                                                                            </div>
+                                                                            <div id="@("Order"+order.Id)" class="collapse" data-parent="#accordion">
+                                                                                <div class="card-body">
+                                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>شناسه</th>
+                                                                                                <th>کارشناس</th>
+                                                                                                <th>قیمت پیشنهادی </th>
+                                                                                                <th>تاریخ پیشنهاد </th>
+                                                                                                <th>تاریخ اتمام کار</th>
+                                                                                                <th>عملیات</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            @if (order.Suggestions.Count > 0)
+                                                                                            {
+                                                                                                @foreach (var item in order.Suggestions)
+                                                                                                {
+                                                                                                    if(User.IsInRole("Expert") && @item.ExpertId==@Model.CurrentUser.Id)
+                                                                                                    {
+                                                                                                        <tr>
+                                                                                                        <td>@item.Id</td>
+                                                                                                        <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                                                                                                        <td style="color:red">@item.SuggestedPrice.ToString("C", CultureInfo.CurrentCulture= new CultureInfo("fa-Ir",false))</td>
+                                                                                                        <td>@item.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>@item.DurationOfWork.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>
+                                                                                                            @if (item.IsAccept == true)
+                                                                                                            {
+
+                                                                                                                <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-success curve">پذیرفته شده</button>
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                                    <button data-toggle="modal" data-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+                                                                                                            }
+                                                                                                        </td>
+                                                                                                        </tr>
+                                                                                                    }
+                                                                                                    else if(User.IsInRole("Admin") ||User.IsInRole("Customer"))
+                                                                                                    {
+                                                                                                        <tr>
+                                                                                                        <td>@item.Id</td>
+                                                                                                        <td>@item.Expert.FirstName @item.Expert.LastName</td>
+                                                                                                        <td style="color:red">@item.SuggestedPrice.ToString("C", CultureInfo.CurrentCulture= new CultureInfo("fa-Ir",false))</td>
+                                                                                                        <td>@item.RegisterDate.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>@item.DurationOfWork.ToPersianString("yyyy/MM/dd")</td>
+                                                                                                        <td>
+                                                                                                            @if (item.IsAccept == true  )
+                                                                                                            {
+                                                                                                                    <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-success curve">پذیرفته شده</button>
+                                                                                                                }
+                                                                                                                else if(order.Status==OrderStatusEnum.WaitingSpecialistComeToYourPlace)
+                                                                                                                {
+                                                                                                                  <button data-toggle="modal" data-target="#AcceptSuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                  <button data-toggle="modal" data-target="#SuggestionDetailsModal" HomeService="@item.Order.HomeService.Name" Order-Id="@item.Order.Id" Customer="@item.Expert.FirstName @item.Expert.LastName" Description="@item.Description" SuggId="@item.Id" class="btn btn-warning curve">جزئیات پیشنهاد</button>
+                                                                                                                }
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    }
+                                                                                                }
+
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <tr>
+                                                                                                    <td colspan="7">پیشنهادی ارائه نشده است</td>
+                                                                                                </tr>
+                                                                                            }
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        }
+
+                                                        </tr>
+                                                    }
+
                                                 }
                                             </tbody>
 

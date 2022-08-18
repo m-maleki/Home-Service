@@ -4,6 +4,7 @@ using HS.EndPoints.RazorPages.UI.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
 {
@@ -14,23 +15,28 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
         private readonly ICustomerApplicationService _customerApplicationService;
         private readonly IOrderApplicationService _orderApplicationService;
         private readonly ISuggestionApplicationService _suggestionApplicationService;
+        private readonly IMemoryCache _memoryCache;
+
 
         private readonly IMapper _mapper;
 
         public DashboardViewModel dashboardViewModel { get; set; } = new DashboardViewModel();
         public ICollection<OrderViewModel>? Orders = new List<OrderViewModel>();
         public ICollection<SuggestionViewModel> suggestions = new List<SuggestionViewModel>();
+        public int onlineUser;
         public IndexModel(IExpertApplicationService expertApplicationService,
             ICustomerApplicationService customerApplicationService,
             IOrderApplicationService orderApplicationService,
             ISuggestionApplicationService suggestionApplicationService,
-            IMapper mapper)
+            IMapper mapper,
+            IMemoryCache memoryCache)
         {
             _expertApplicationService = expertApplicationService;
             _customerApplicationService = customerApplicationService;
             _orderApplicationService = orderApplicationService;
             _suggestionApplicationService = suggestionApplicationService;
             _mapper = mapper;
+            _memoryCache = memoryCache;
         }
 
         public async Task OnGet(CancellationToken cancellationToken)
@@ -41,7 +47,6 @@ namespace HS.EndPoints.RazorPages.ShopUI.Areas.Admin.Pages
             dashboardViewModel.CountSuggestion = await _suggestionApplicationService.Count(cancellationToken);
             Orders = _mapper.Map(await _orderApplicationService.GetAll(cancellationToken), Orders);
             suggestions = _mapper.Map(await _suggestionApplicationService.Get(cancellationToken),new List<SuggestionViewModel>());
-
         }
     }
 }

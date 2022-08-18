@@ -41,7 +41,9 @@ namespace HS.Domain.ApplicationServices
             => await _commentService.GetAll(cancellationToken);
 
         public Task<CommentDto> GetBy(int id, CancellationToken cancellationToken)
-            => new NotImplementedException();
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<List<CommentDto>> GetBy(Guid expertId, CancellationToken cancellationToken)
             => await _commentService.GetBy(expertId, cancellationToken);

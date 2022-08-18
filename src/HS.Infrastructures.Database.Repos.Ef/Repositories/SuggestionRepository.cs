@@ -33,7 +33,8 @@ namespace HS.Infrastructures.Database.Repos.Ef.Repositories
         public async Task<SuggestionDto> GetBy(int id, CancellationToken cancellationToken)
             => await _mapper.ProjectTo<SuggestionDto>(_context.Suggestions
             .AsNoTracking()
-            .Include(x=>x.Expert))
+            .Include(x=>x.Expert)
+            .ThenInclude(x=>x.ApplicationUser))
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync(cancellationToken);
 
